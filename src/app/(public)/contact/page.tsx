@@ -2,7 +2,7 @@
 "use client";
 import { MarkEmailReadRounded, PhoneCallbackRounded, SendRounded, TravelExploreRounded } from "@mui/icons-material";
 import { Box, Button, FormControl, FormHelperText, Grid, Input, Paper, TextField, Typography } from "@mui/material";
-import contactBanner from "../../../public/images/contactBanner.jpg";
+import contactBanner from "../../../../public/images/contactBanner.jpg";
 import { useForm, SubmitHandler } from "react-hook-form";
 import Image from "next/image";
 import * as React from "react";

@@ -3,13 +3,13 @@ import React from "react";
 import Image from "next/image";
 import { Box, Button, Card, CardActions, CardContent, CardMedia, Container, FormHelperText, Grid, Link, Typography } from "@mui/material";
 import { ReadMoreRounded } from "@mui/icons-material";
-import cloudServer from "../../../public/images/cloudServer.png";
-import cloudCamera from "../../../public/images/cloudCamera.png";
-import backupDR from "../../../public/images/backupDR.png";
-import ScalablePrivateClound from "../../../public/images/ScalablePrivateCloud.png";
-import CloudCameraDiagram from "../../../public/images/CloudCameraDiagram.jpg";
-import CloudBackupRecovery from "../../../public/images/CloudBackupRecovery.png";
-import UnifiedCloudStorage from "../../../public/images/UnifiedCloudStorage.png";
+import cloudServer from "../../../../public/images/cloudServer.png";
+import cloudCamera from "../../../../public/images/cloudCamera.png";
+import backupDR from "../../../../public/images/backupDR.png";
+import ScalablePrivateClound from "../../../../public/images/ScalablePrivateCloud.png";
+import CloudCameraDiagram from "../../../../public/images/CloudCameraDiagram.jpg";
+import CloudBackupRecovery from "../../../../public/images/CloudBackupRecovery.png";
+import UnifiedCloudStorage from "../../../../public/images/UnifiedCloudStorage.png";
 
 export const metadata = () => {
   return {

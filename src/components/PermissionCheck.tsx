@@ -1,5 +1,6 @@
 import useHasAccess from "@/hooks/useHasAccess";
 
+
 const PermissionCheck = ({
 	permission,
 	children,
