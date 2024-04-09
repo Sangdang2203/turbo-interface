@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import { Close, MenuRounded, KeyboardArrowDownRounded } from "@mui/icons-material";
 import logoTurbo from "../../public/images/logoTurbo.png";
 import Image from "next/image";
-import { Box, Button, Menu, MenuItem, Typography } from "@mui/material";
+import { Box, Button, FormControl, Menu, MenuItem, Select, SelectChangeEvent, Typography } from "@mui/material";
 
 const navLinks = [
   { path: "/home", name: "trang chủ" },
@@ -14,6 +14,7 @@ const navLinks = [
   { path: "/our-services", name: "dịch vụ" },
   { path: "/software", name: "phần mềm" },
   { path: "/recruitment", name: "tuyển dụng" },
+  { path: "/news", name: "tin tức" },
   { path: "/contact", name: "liên hệ" },
 ];
 const subServicesLinks = [
@@ -52,16 +53,22 @@ export default function TheHeader() {
     setAnchorE2(null);
   };
 
+  const [language, setLanguage] = React.useState('');
+
+  const handleChange = (event: SelectChangeEvent) => {
+    setLanguage(event.target.value as string);
+  };
+
 
   return (
     <header className="w-full fixed top-0 left-0 z-30 bg-white shadow-lg">
-      <nav className="h-[10vh] flex justify-between items-center p-4">
+      <nav className="h-[10vh] flex justify-between items-center p-4 ">
         <div className="uppercase font-bold text-3xl text-amber-400 hover:text-amber-200">
           <Link href="/"><Image src={logoTurbo} className="w-28 h-10" alt="logo_turbo_solutions" /></Link>
         </div>
         {/* nav pc */}
         <div className="hidden text-[1rem] lg:flex justify-between items-center uppercase">
-          <Button><Link href="/home" className="uppercase p-3 hover:text-[#378CE7]">trang chủ</Link></Button>
+          {/* <Button><Link href="/home" className="uppercase p-3 hover:text-[#378CE7]">trang chủ</Link></Button> */}
           <Button><Link href="/about-us" className="uppercase p-3 hover:text-[#378CE7]">giới thiệu</Link></Button>
 
           <Button onClick={handleClickService} endIcon={<KeyboardArrowDownRounded />} className="uppercase p-3 hover:text-[#378CE7]">dịch vụ</Button>
@@ -87,7 +94,16 @@ export default function TheHeader() {
           </Menu>
 
           <Button><Link href="/recruitment" className="uppercase p-3 hover:text-[#378CE7]">tuyển dụng</Link></Button>
+          <Button><Link href="/news" className="uppercase p-3 hover:text-[#378CE7]">tin tức</Link></Button>
           <Button><Link href="/contact" className="uppercase p-3 hover:text-[#378CE7]">liên hệ</Link></Button>
+          <Box sx={{ minWidth: 120 }}>
+            <FormControl fullWidth>
+              <Select value={language} label="Language" onChange={handleChange} >Language
+                <MenuItem value="English">English</MenuItem>
+                <MenuItem value="Vietnam">Vietnam</MenuItem>
+              </Select>
+            </FormControl>
+          </Box>
         </div>
 
         {/* Handle the menu icon */}

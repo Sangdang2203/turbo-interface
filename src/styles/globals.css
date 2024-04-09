@@ -5,7 +5,19 @@
 body {
 	scrollbar-width: 2px;
 }
-
+.elementor-wrapper {
+	--video-aspect-ratio: 1;
+	aspect-ratio: var(--video-aspect-ratio);
+	filter: brightness(100%) contrast(100%) saturate(100%) blur(0)
+		hue-rotate(0deg);
+}
+.elementor-widget-video .e-hosted-video .elementor-video {
+	-o-object-fit: cover;
+	object-fit: cover;
+}
+.elementor-widget-video {
+	aspect-ratio: var(--video-aspect-ratio);
+}
 .dropdown-content {
 	display: none;
 	position: relative;
@@ -92,6 +104,29 @@ body {
 	transition-duration: 500ms;
 }
 
+/* backgroundColor */
+
+.background-header {
+	background-color: #74a1eb;
+	background-image: linear-gradient(
+		135deg,
+		#74a1eb 1%,
+		#f2f2f4 38%,
+		#ffffff 100%
+	);
+}
+.background-body {
+	background-color: #ffffff;
+	background-image: linear-gradient(
+		110deg,
+		#ffffff 0%,
+		#deecff 53%,
+		#ffffff 100%
+	);
+
+	margin-top: 10vh;
+	padding: 1.5rem 0 1.5rem 0;
+}
 @media (min-width: 48rem) {
 	.footer_links {
 		display: none;
