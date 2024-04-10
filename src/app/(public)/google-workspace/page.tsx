@@ -4,18 +4,18 @@ import * as React from "react";
 
 export const metadata = () => {
   return {
-    title: "Cloud Server"
+    title: "Google Workspace"
   }
 }
 
-const CloudServerPage = () => {
+const GoogleWorkspace = () => {
   return (
     <>
       <Box>
-        <Typography>CloudServerPage is OK</Typography>
+        <Typography>GoogleWorkspace is OK</Typography>
       </Box>
     </>
   )
 }
 
-export default CloudServerPage;
+export default GoogleWorkspace;

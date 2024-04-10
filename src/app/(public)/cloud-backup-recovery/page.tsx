@@ -4,18 +4,18 @@ import * as React from "react";
 
 export const metadata = () => {
   return {
-    title: "Contact"
+    title: "Cloud Backup & Recovery"
   }
 }
 
-const ServicePage = () => {
+const CloudBackupPage = () => {
   return (
     <>
       <Box>
-        <Typography>ServicePage is OK</Typography>
+        <Typography>Cloud Backup & Recovery Page is OK</Typography>
       </Box>
     </>
   )
 }
 
-export default ServicePage;
+export default CloudBackupPage;

@@ -41,7 +41,7 @@ export interface NewsItem {
 	employeeId: number;
 	createdAt: string;
 	updatedAt: string;
-	status: number;
+	status: boolean;
 }
 
 export interface CustomerMessage {
@@ -60,6 +60,7 @@ export interface CreateEmployeeRequest {
 	phone: string;
 	address: string;
 	roleId: number;
+	status: boolean;
 }
 
 export interface CreatePermissionRequest {
@@ -70,9 +71,20 @@ export interface CreateRoleRequest {
 	id: number;
 	name: string;
 	roleHasPermissions: string[];
-	status: true;
+	status: boolean;
 }
 
 export interface CreatePermission {
 	name: string;
+}
+
+export interface CreateBlog {
+	id: number;
+	title: string;
+	slug: string;
+	description: string;
+	content: string;
+	employeeId: number;
+	employeeName: string;
+	status: boolean;
 }
