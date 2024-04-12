@@ -2,29 +2,10 @@
 
 import React from 'react';
 import { CKEditor } from "@ckeditor/ckeditor5-react";
-//@ts-ignore
-import Editor from "ckeditor5-custom-build";
+import Editor from "ckeditor5-custom-build"
 
 const editorConfiguration = {
-  toolbar: [
-    'heading',
-    '|',
-    'bold',
-    'italic',
-    'link',
-    'bulletedList',
-    'numberedList',
-    '|',
-    'outdent',
-    'indent',
-    '|',
-    'imageUpload',
-    'blockQuote',
-    'insertTable',
-    'mediaEmbed',
-    'undo',
-    'redo'
-  ]
+
 };
 
 function CustomEditor(props: any) {

@@ -1,30 +1,15 @@
 'use client'
-import Toolbar from '@mui/material/Toolbar'
-import Divider from '@mui/material/Divider'
-import List from '@mui/material/List'
+import { Divider, List, Toolbar } from '@mui/material'
 import {
 	AccountBoxOutlined,
+	AddCircleOutlineOutlined,
 	AppsOutlined,
+	ArticleOutlined,
 	BadgeOutlined,
-	BusinessOutlined,
-	DomainAddOutlined,
-	DomainOutlined,
-	DriveFileRenameOutlineOutlined,
-	FactCheckOutlined,
-	FormatListBulletedOutlined,
-	GroupOutlined,
-	Inventory2Outlined,
-	LanOutlined,
-	LocalAtmOutlined,
-	LocationOnOutlined,
+	EditNoteOutlined,
 	ManageAccountsOutlined,
-	MoveToInboxOutlined,
-	NoteAddOutlined,
-	OutboxOutlined,
-	PaidOutlined,
+	NewspaperOutlined,
 	PasswordOutlined,
-	TypeSpecimenOutlined,
-	WorkHistoryOutlined,
 } from "@mui/icons-material";
 import * as React from "react";
 import { OverridableComponent } from "@mui/material/OverridableComponent";
@@ -45,49 +30,28 @@ function createMenu(
 
 export default function DrawerMenu() {
 	const menu = [
-		createMenu("Dashboard", AppsOutlined, "/app", "app.view"),
-		createMenu('Create Package', NoteAddOutlined, '/app/create-package', 'package.create'),
-		createMenu('Packages', Inventory2Outlined, '/app/packages', 'package.view'),
-		createMenu('Branches', DomainOutlined, '/app/branches', 'branch.view'),
-		createMenu('Service', FactCheckOutlined, '/app/Services', 'service.view', [
-			createMenu('Service Type', TypeSpecimenOutlined, '/app/ServiceType', 'service.view'),
-			createMenu('Services Manager', LanOutlined, '/app/Services', 'service.view')
-		]),
-		createMenu('Locations', LocationOnOutlined, '/app/Locations', 'locations.view'),
-		createMenu('Check Fee', PaidOutlined, '/app/Feecustom/checkfee', 'checkFee.view'),
-		createMenu('Fee Custom', PaidOutlined, '/app/Feecustom', 'fee.view', [
-			createMenu('List Fee', FormatListBulletedOutlined, '/app/Feecustom', 'fee.view'),
-			createMenu('Manager Fee', LocalAtmOutlined, '/app/Feecustom/Manager', 'fee.create')
-		]),
-		createMenu('Profile', AccountBoxOutlined, '/app/user', 'user.view'),
-		createMenu('Change Password', PasswordOutlined, '/app/user/change-password', 'password.change'),
-		createMenu("Profile", AccountBoxOutlined, "/app/employee", "profile.view"),
-		createMenu("Service", FactCheckOutlined, "/app/Services", "emp.view", [
-			createMenu("Service Type", TypeSpecimenOutlined, "/app/ServiceType", "servicetype.view"),
-			createMenu("Services Manager", LanOutlined, "/app/Services", "servicetype.view"),
-		]),
-		createMenu("Locations", LocationOnOutlined, "/app/Locations", "locations.view"),
-		createMenu("Check Fee", PaidOutlined, "/app/Feecustom/checkfee", "checkFee.view"),
-		createMenu("Fee Custom", PaidOutlined, "/app/Feecustom", "feecustom", [
-			createMenu("List Fee", FormatListBulletedOutlined, "/app/Feecustom", "fee.view"),
-			createMenu("Manager Fee", LocalAtmOutlined, "/app/Feecustom/Manager", "fee.create"),
+		createMenu("Trang Quản Trị", AppsOutlined, "/dashboard", "app.view"),
+
+		createMenu("Thông Tin Cá Nhân", AccountBoxOutlined, "/dashboard/employee", "profile.view"),
+
+		createMenu("Nhân Viên", BadgeOutlined, "/dashboard/employees", "emp.view", [
+			createMenu('Thêm mới', AddCircleOutlineOutlined, '/dashboard/employees/create', 'post.create'),
+			createMenu('Cập nhật', EditNoteOutlined, '/dashboard/employees/edit', 'post.update')
 		]),
 
-		createMenu("User Management", GroupOutlined, "/app/users", "emp.view"),
-		createMenu("Employee Management", BadgeOutlined, "/app/employees", "emp.view"),
-		createMenu("Updated Requests", DriveFileRenameOutlineOutlined, "/app/requests", "request.view"),
-		createMenu("Role Management", ManageAccountsOutlined, "/app/roles", "role.view"),
+		createMenu("Vai Trò", ManageAccountsOutlined, "/dashboard/roles", "role.view"),
 
-		createMenu("HistoryLogs", WorkHistoryOutlined, "/app/historylogs", ""),
-		createMenu("Change Password", PasswordOutlined, "/app/user/change-password", "password.change"),
-		createMenu("Addresses", BusinessOutlined, "/app/user/addresses", "addresses.view", [
-			createMenu("Sender", OutboxOutlined, "/app/user/addresses/sender", "addresses.view"),
-			createMenu("Receiver", MoveToInboxOutlined, "/app/user/addresses/receiver", "addresses.view"),
-			createMenu("Add Address", DomainAddOutlined, "/app/user/add-address", "address.create"),
+		createMenu('Bài Viết', ArticleOutlined, '/dashboard/post-management', 'post.view', [
+			createMenu('Thêm mới', AddCircleOutlineOutlined, '/dashboard/post-management/create', 'post.create'),
+			createMenu('Cập nhật', EditNoteOutlined, '/dashboard/post-management/edit', 'post.update')
 		]),
 
-		createMenu('News Management', NoteAddOutlined, '/app/news-management', 'new.create'),
-		createMenu('General Settings', PasswordOutlined, '/app/general-settings', 'emp.create'),
+		createMenu('Tuyển Dụng', NewspaperOutlined, '/dashboard/recruitment', 'recruitment.view', [
+			createMenu('Thêm mới', AddCircleOutlineOutlined, '/dashboard/recruitment/create', 'recruitment.create'),
+			createMenu('Cập nhật', EditNoteOutlined, '/dashboard/recruitment/edit', 'recruitment.update')
+		]),
+
+		createMenu('Cài đặt', PasswordOutlined, '/dashboard/general-settings', 'setting.view'),
 	]
 
 	return (
@@ -96,11 +60,12 @@ export default function DrawerMenu() {
 			<Divider />
 			<List>
 				{menu.map((item, index) => (
-					<PermissionCheck
-						permission={item.permission}
-						key={index}>
-						<MenuGroup item={item}></MenuGroup>
-					</PermissionCheck>
+					// <PermissionCheck
+					// 	permission={item.permission}
+					// 	key={index}>
+
+					// </PermissionCheck>
+					<MenuGroup key={index} item={item}></MenuGroup>
 				))}
 			</List>
 		</div>

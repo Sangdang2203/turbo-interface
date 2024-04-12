@@ -1,13 +1,8 @@
+"use client"
 
 import { Box, Typography } from "@mui/material";
 import dynamic from 'next/dynamic';
 import * as React from "react";
-
-export const metadata = () => {
-  return {
-    title: "News"
-  }
-}
 
 const Editor = dynamic(() => {
   return import('../../../components/CustomEditor');

@@ -8,6 +8,17 @@ import '@/styles/globals.css'
 import SessionProvider from '@/contexts/SessionProvider'
 // import {SiteProvider} from '@/contexts/SiteContext'
 
+export const metadata = {
+  title: {
+    // absolute: "",
+    default: "Turbo AI Solution",
+    template: "%s | Turbo AI Solution",
+  },
+  description:
+    "More than 10 years of experience, Turbo Solutions specializes in providing leading cloud computing solutions and applications in Vietnam.",
+};
+
+
 export default function RootLayout(props: { children: React.ReactNode }) {
   return (
     <html lang='en'>

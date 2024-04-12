@@ -9,7 +9,7 @@ import DrawerMenu from "@/components/DrawerMenu";
 import MenuContext from "@/contexts/MenuContext";
 
 const AppLayout = (props: { children: React.ReactNode; window?: Window }) => {
-	const drawerWidth = 250;
+	const drawerWidth = 280;
 	const [mobileOpen, setMobileOpen] = React.useState(false);
 	const [isClosing, setIsClosing] = React.useState(false);
 
