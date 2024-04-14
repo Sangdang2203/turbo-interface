@@ -9,8 +9,8 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { toast } from "sonner";
 import React from "react";
 import { red } from "@mui/material/colors";
-import { fetchRolesWithPermission, fetchPermissions } from "@/app/data/method";
-import { Role, Permission, CreateRoleRequest, CreatePermissionRequest, CreatePermission, ApiResponse } from "@/types/interfaces";
+import { fetchRolesWithPermission, fetchPermissions } from "app/methods/method";
+import { Role, Permission, CreateRoleRequest, CreatePermissionRequest, CreatePermission, ApiResponse } from "types/interfaces";
 
 
 export default function RoleManagement() {

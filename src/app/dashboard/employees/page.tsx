@@ -5,11 +5,10 @@ import { toast } from "sonner";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useSession } from "next-auth/react";
 import Loading from "@/components/Loading";
-import { fetchEmployees, fetchChangeStatus, fetchRolesWithPermission } from "@/app/data/method";
-import { ApiResponse, Employee, CreateEmployeeRequest, Role } from "@/types/interfaces";
-
 import { Box, Button, IconButton, Dialog, DialogContent, DialogTitle, Grid, Paper, Switch, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, TextField, Tooltip } from "@mui/material";
 import { CloseOutlined, DriveFileRenameOutline, SearchOutlined, VisibilityOffOutlined, VisibilityOutlined } from "@mui/icons-material";
+import { fetchEmployees, fetchRolesWithPermission, fetchChangeStatus } from "app/methods/method";
+import { Employee, Role, CreateEmployeeRequest, ApiResponse } from "types/interfaces";
 
 
 

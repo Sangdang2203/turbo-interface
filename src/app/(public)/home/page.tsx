@@ -34,7 +34,7 @@ const HomePage = () => {
         <Button href="/contact" variant="contained" className="btn-astro hover:duration-700 hover:opacity-80" >Kết nối ngay với chúng tôi</Button>
       </Box>
 
-      <Box className="container grid lg:grid-cols-4 gap-x-6 gap-y-6">
+      <Box className="container grid lg:grid-cols-4 gap-x-6 gap-y-6 my-5">
         <Card className="relative px-1 rounded-md hover:shadow-lg cursor-pointer hover:scale-105 hover:duration-700">
           <Image src={ScalablePrivateClound} className="w-full h-auto mt-3" alt="ScalablePrivateClound" />
           <CardContent>
@@ -89,7 +89,7 @@ const HomePage = () => {
       </Box>
 
 
-      <Typography className="text-[1.75rem] font-light w-2/3 text-center mx-auto my-10">
+      <Typography className="text-[1.75rem] font-light w-2/3 text-center mx-auto my-20">
         Công ty Turbo Solutions cung cấp dịch vụ điện toán đám mây đa dạng và các ứng dụng số phù hợp nhiều lĩnh vực.
       </Typography>
       <Box className="container grid sm:grid-cols-3 gap-x-6 gap-y-6 mb-10">

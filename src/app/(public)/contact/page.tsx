@@ -2,8 +2,8 @@
 
 import { Box, Button, Container, FormControl, FormHelperText, Grid, Paper, TextField, Typography } from "@mui/material";
 import { ArrowRightRounded, SendRounded } from "@mui/icons-material";
-import { CustomerMessage } from "@/types/interfaces";
 import contactBanner from "../../../../public/images/contactBanner.jpg";
+import { CustomerMessage } from "types/interfaces";
 import { useForm, SubmitHandler } from "react-hook-form";
 import Image from "next/image";
 import * as React from "react";

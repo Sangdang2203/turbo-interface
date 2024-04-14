@@ -31,19 +31,6 @@ export interface Permission {
 	name: string;
 }
 
-export interface NewsItem {
-	id: number;
-	title: string;
-	slug: string;
-	content: string;
-	author: string;
-	category: number;
-	employeeId: number;
-	createdAt: string;
-	updatedAt: string;
-	status: boolean;
-}
-
 export interface CustomerMessage {
 	name: string;
 	email: string;
@@ -63,6 +50,15 @@ export interface CreateEmployeeRequest {
 	status: boolean;
 }
 
+export interface UpdateEmployeeRequest {
+	fullname: string;
+	gender: boolean;
+	email: string;
+	phone: string;
+	address: string;
+	roleId: number;
+}
+
 export interface CreatePermissionRequest {
 	permissionNames: string[];
 }
@@ -78,10 +74,11 @@ export interface CreatePermission {
 	name: string;
 }
 
-export interface CreateBlog {
+export interface Post {
 	id: number;
 	title: string;
 	slug: string;
+	image: string;
 	description: string;
 	content: string;
 	employeeId: number;

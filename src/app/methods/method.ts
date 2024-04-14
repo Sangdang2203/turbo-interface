@@ -1,4 +1,4 @@
-import { ApiResponse } from "@/types/interfaces";
+import { ApiResponse } from "types/interfaces";
 
 export const fetchEmployees = async () => {
 	const response = await fetch("/api/employees", {

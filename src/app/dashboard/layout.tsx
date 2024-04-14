@@ -6,7 +6,7 @@ import { AppBar, Box, Container, Drawer, IconButton, Toolbar } from "@mui/materi
 import { Menu } from "@mui/icons-material";
 import AvatarMenu from "@/components/AvatarMenu";
 import DrawerMenu from "@/components/DrawerMenu";
-import MenuContext from "@/contexts/MenuContext";
+import MenuContext from "contexts/MenuContext";
 
 const AppLayout = (props: { children: React.ReactNode; window?: Window }) => {
 	const drawerWidth = 280;

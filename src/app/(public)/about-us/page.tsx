@@ -69,8 +69,6 @@ const AboutPage = () => {
             src="https://www.youtube.com/embed/LdPqO124iE0?feature=oembed?autoplay=1"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             allowFullScreen></iframe>
-
-
         </Grid>
         <Grid item xs={12} md={6} lg={6} xl={6} className="flex justify-center items-center flex-col text-center" >
           <Typography className="text-[2rem] font-extralight">Ứng dụng của trí tuệ nhân tạo <br /> trong đời sống thực tế.</Typography>

@@ -2,12 +2,13 @@
 
 import { Box, Button, Grid, Paper, Switch, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, Tooltip } from '@mui/material'
 import { SearchOutlined, DriveFileRenameOutline, DeleteOutlineOutlined } from '@mui/icons-material'
-import { ApiResponse, NewsItem } from '@/types/interfaces'
+
 import { useRouter } from 'next/navigation'
 import Loading from '@/components/Loading'
 import Link from 'next/link'
 import { toast } from 'sonner'
 import * as React from 'react'
+import { ApiResponse, NewsItem } from 'types/interfaces'
 
 export default function Page() {
   const [page, setPage] = React.useState(0)
