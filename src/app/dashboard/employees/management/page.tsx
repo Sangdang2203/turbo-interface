@@ -13,7 +13,7 @@ import { Employee, Role, CreateEmployeeRequest, ApiResponse } from "types/interf
 
 
 export default function EmployeeManagement() {
-  const [loading, setLoading] = React.useState(true);
+  const [loading, setLoading] = React.useState(false);
   const [employees, setEmployees] = React.useState<Employee[]>([]);
   const [employee, setEmployee] = React.useState<Employee>();
   const [roles, setRoles] = React.useState<Role[]>([]);
@@ -187,8 +187,8 @@ export default function EmployeeManagement() {
           <Paper elevation={6} sx={{ borderRadius: "10px", boxSizing: "border-box" }}>
             <Grid container>
               <Grid item xs={12} sm={6} className="flex justify-between items-center p-3">
-                <Button variant="contained" color="primary" onClick={() => setOpenAddForm(true)}>
-                  + Add
+                <Button variant="contained" color="primary" className="text-white" href="/dashboard/employees/create">
+                  Tạo mới
                 </Button>
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -198,11 +198,11 @@ export default function EmployeeManagement() {
                   className="flex justify-end items-center my-3 relative">
                   <TextField
                     size="small" type="text" name="search" id="searchInput"
-                    sx={{ mr: 3, px: 2, fontSize: "14px", borderRadius: "8px", minWidth: "300px", minHeight: "40px", cursor: "pointer" }}
+                    className="border shadow-md text-sm rounded-lg min-w-[300px] min-h-[40px] cursor-pointer mr-3 p-2"
                     placeholder="Enter name to search"
                   />
                   <div className="absolute inset-y-0 right-0 flex items-center">
-                    <IconButton sx={{ position: "relative", mr: 3 }}>
+                    <IconButton className="relative mr-5">
                       <SearchOutlined color="success" fontSize="small" />
                     </IconButton>
                   </div>

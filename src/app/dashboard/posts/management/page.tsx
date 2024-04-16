@@ -1,6 +1,6 @@
 'use client'
 
-import { Box, Button, Grid, Paper, Switch, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, Tooltip } from '@mui/material'
+import { Box, Button, Grid, IconButton, Paper, Switch, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, TextField, Tooltip } from '@mui/material'
 import { SearchOutlined, DriveFileRenameOutline, DeleteOutlineOutlined } from '@mui/icons-material'
 
 import { useRouter } from 'next/navigation'
@@ -8,73 +8,75 @@ import Loading from '@/components/Loading'
 import Link from 'next/link'
 import { toast } from 'sonner'
 import * as React from 'react'
-import { ApiResponse, NewsItem } from 'types/interfaces'
+import { ApiResponse, Post } from 'types/interfaces'
 
-export default function Page() {
-  const [page, setPage] = React.useState(0)
-  const [rowsPerPage, setRowsPerPage] = React.useState(5)
-  const [data, setData] = React.useState<NewsItem[]>([])
+export default function PostManagement() {
   const [loading, setLoading] = React.useState(true);
+  const [posts, setPosts] = React.useState<Post[]>([])
+  const [page, setPage] = React.useState(0)
+  const [rowsPerPage, setRowsPerPage] = React.useState(10)
   const router = useRouter()
 
-  const handleItemClick = (id: any) => {
-    // navigate to the update page with the id as a URL parameter
-    router.push(`/app/news-management/update/${id}`)
-  }
+  React.useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const res = await fetch("/api/posts");
+        console.log(res);
+        if (!res.ok) {
+          throw new Error("Request failed with status: " + res.status);
+        }
+        const data = await res.json();
+        setPosts(data.data);
+      } catch (error) {
+        console.error("Error fetching posts:", error);
+        // Handle the error state or display an error message
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchPosts();
+  }, []);
 
-  const handleDelete = async (id: any) => {
-    const loadingId = toast.loading("Loading...");
-    const response = await fetch(`/api/news-management/${id}`, {
-      method: 'DELETE',
-    })
-    const payload = await response.json() as ApiResponse;
-    if (payload.ok) {
-      setData(pre => pre.filter(item => item.id !== id));
-      toast.success(payload.message)
+  function handleSearch(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const nameInput = document.getElementById(
+      "searchInput"
+    ) as HTMLInputElement;
+    const name = nameInput.value.trim();
+
+    if (name === "") {
+      const fetchPosts = async () => {
+        const res = await fetch("/api/posts")
+        const data = await res.json();
+        setPosts(data.data)
+      }
+      fetchPosts();
     } else {
-      toast.error(payload.message)
+      const filterPosts = posts.filter(
+        post =>
+          post.title.toLowerCase().includes(name.toLowerCase()) ||
+          post.employeeName.toLowerCase().includes(name.toLowerCase())
+      );
+
+      setPosts(filterPosts);
     }
-    toast.dismiss(loadingId);
   }
 
 
-  // Avoid a layout jump when reaching the last page with empty rows.
 
   const handleChangePage = (
     event: React.MouseEvent<HTMLButtonElement> | null,
     newPage: number
   ) => {
-    setPage(newPage)
-  }
+    setPage(newPage);
+  };
 
   const handleChangeRowsPerPage = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    setRowsPerPage(parseInt(event.target.value, 10))
-    setPage(0)
-  }
-
-  //fetch data into table
-  React.useEffect(() => {
-    const fetchData = async () => {
-      const response = await fetch('/api/news-management')
-      const data = await response.json()
-      setData(data.data)
-    }
-    fetchData()
-    setLoading(false);
-  }, [])
-
-  //delete news
-  React.useEffect(() => {
-    //fetch data into table
-    const fetchData = async () => {
-      const response = await fetch('/api/news-management');
-      const data = await response.json();
-      setData(data.data);
-    }
-    fetchData()
-  }, [])
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+  };
 
   return (
     <>
@@ -86,19 +88,24 @@ export default function Page() {
             sx={{ borderRadius: "10px", boxSizing: "border-box" }}>
             <Grid container>
               <Grid item xs={12} sm={6} className="flex justify-between items-center p-3">
-                <Link href="/dashboard/posts-management/create">
-                  <Button variant="contained" color="primary">+ Add News</Button>
-                </Link>
+                <Button variant="contained" color="primary" className="text-white" href="/dashboard/posts/create">
+                  Tạo mới
+                </Button>
               </Grid>
               <Grid item xs={12} sm={6}>
-                <form method="post" className="flex justify-end items-center my-3 relative">
-                  <input type="text" name="search" id="searchInput"
-                    className="mr-3 px-2 text-[14px] rounded-md min-w-[300px] min-h-[40px] cursor-pointer"
-                    placeholder="Enter name to search" />
+                <form
+                  onSubmit={handleSearch}
+                  method="post"
+                  className="flex justify-end items-center my-3 relative">
+                  <TextField
+                    size="small" type="text" name="search" id="searchInput"
+                    className="border shadow-md text-sm rounded-lg min-w-[300px] min-h-[40px] cursor-pointer mr-3 p-2"
+                    placeholder="Enter name to search"
+                  />
                   <div className="absolute inset-y-0 right-0 flex items-center">
-                    <Button color="success" variant="text" size="small" className="rounded-full">
-                      <SearchOutlined fontSize="small" />
-                    </Button>
+                    <IconButton className="relative mr-5">
+                      <SearchOutlined color="success" fontSize="small" />
+                    </IconButton>
                   </div>
                 </form>
               </Grid>
@@ -113,55 +120,56 @@ export default function Page() {
                 <TableHead >
                   <TableRow>
                     <TableCell align="center" className="text-white text-sm">Title</TableCell>
-                    <TableCell align="center" className="text-white text-sm">Slug</TableCell>
                     <TableCell align="center" className="text-white text-sm">Content</TableCell>
-                    <TableCell align="center" className="text-white text-sm">Author</TableCell>
+                    {/* <TableCell align="center" className="text-white text-sm">Author</TableCell>*/}
                     <TableCell align="center" className="text-white text-sm">Category</TableCell>
                     <TableCell align="center" className="text-white text-sm">Status</TableCell>
                     <TableCell align="center" className="text-white text-sm">Actions</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {data.length == null && (
+                  {posts.length == null && (
                     <TableRow>
                       <TableCell colSpan={7} align="center" className="text-sm">
                         No Data
                       </TableCell>
                     </TableRow>
                   )}
-                  {data
+                  {posts
                     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                    .map(item => (
-                      <TableRow key={item.id} sx={{ "&:last-child td, &:last-child th": { border: 0 }, }}>
+                    .map(post => (
+                      <TableRow key={post.id} sx={{ "&:last-child td, &:last-child th": { border: 0 }, }}>
                         <TableCell align="center">
-                          {item?.title.length > 30 ? item?.title.substring(0, 30) + ' ...' : item?.title}
+                          {post?.title.length > 30 ? post?.title.substring(0, 30) + ' ...' : post?.title}
                         </TableCell>
-                        <TableCell align="center">{item?.slug} </TableCell>
                         <TableCell align="center">
-                          {item?.content.length > 30 ? item?.content.substring(0, 30) + ' ...' : item?.content}
+                          {post?.description.length > 30 ? post?.description.substring(0, 30) + ' ...' : post?.description}
                         </TableCell>
-                        <TableCell align="center">{item?.author}</TableCell>
-                        <TableCell align="center">{item?.category ? 'Guide' : 'Promotion'}</TableCell>
+                        <TableCell align="center">
+                          {post?.content.length > 30 ? post?.content.substring(0, 30) + ' ...' : post?.content}
+                        </TableCell>
+                        {/* <TableCell align="center">{post?.author}</TableCell> 
+                        <TableCell align="center">{post?.categories ? 'Guide' : 'Promotion'}</TableCell> */}
                         <TableCell align="center">
                           <Switch size="small" color="success" className="cursor-pointer"
-                            checked={item.status === true ? true : false}
+                            checked={post.status === "ACTIVE" ? true : false}
                           />
                         </TableCell>
 
                         <TableCell align="center">
                           <Tooltip title="Edit">
                             <Button type="button" size='small' variant="text" color="success"
-                              onClick={() => handleItemClick(item.id)}>
+                              href={`/dashboard/posts/edit/${post.slug}`}>
                               <DriveFileRenameOutline fontSize="small" />
                             </Button>
                           </Tooltip>
 
-                          <Tooltip title="Remove">
+                          {/* <Tooltip title="Remove">
                             <Button type="button" size='small' variant="text" color="error"
                               onClick={() => handleDelete(item.id)}>
                               <DeleteOutlineOutlined fontSize="small" />
                             </Button>
-                          </Tooltip>
+                          </Tooltip> */}
                         </TableCell>
                       </TableRow>
                     ))}
@@ -170,7 +178,7 @@ export default function Page() {
             </TableContainer>
             <TablePagination
               component="div"
-              count={data.length || 0}
+              count={posts.length || 0}
               page={page}
               onPageChange={handleChangePage}
               rowsPerPage={rowsPerPage}

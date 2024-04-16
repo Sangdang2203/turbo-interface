@@ -44,7 +44,7 @@ const UpdateEmployeeForm = () => {
               <Box className="relative">
                 <TextField
                   value={employee?.code}
-                  className="min-w-[500px] border rounded-md p-[10px] cursor-pointer shadow-lg"
+                  className="min-w-[500px] border rounded-md p-[10px] cursor-pointer shadow-lg w-full"
                   disabled
                 />
               </Box>
@@ -55,7 +55,7 @@ const UpdateEmployeeForm = () => {
                 id="demo-simple-select" size="small" value={employee?.roleName}
                 onChange={handleChange}
                 label="Vui lòng chọn quyền"
-                className="min-w-[300px] h-[45px] border rounded-md cursor-pointer shadow-lg"
+                className="min-w-[300px] h-[45px] border rounded-md cursor-pointer shadow-lg w-full"
               >
                 {roles.map(role => (
                   <MenuItem key={role.id} value={role.id}>{role.name}</MenuItem>
@@ -75,7 +75,7 @@ const UpdateEmployeeForm = () => {
               })}
               type="text"
               value={employee?.fullname}
-              className="min-w-[300px] border rounded-md p-[10px] cursor-pointer shadow-lg"
+              className="min-w-[300px] border rounded-md p-[10px] cursor-pointer shadow-lg w-full"
               placeholder="Nhập họ tên"
             />
             <FormHelperText className="text-red-700 ml-2 ">{errors.fullname?.message}</FormHelperText>
@@ -90,7 +90,7 @@ const UpdateEmployeeForm = () => {
               })}
               type="text"
               value={employee?.email}
-              className="min-w-[300px] border rounded-md p-[10px] cursor-pointer shadow-lg"
+              className="min-w-[300px] border rounded-md p-[10px] cursor-pointer shadow-lg w-full"
               placeholder="Nhập địa chỉ email"
             />
             <FormHelperText className="text-red-700 ml-2 ">{errors.email?.message}</FormHelperText>
@@ -105,7 +105,7 @@ const UpdateEmployeeForm = () => {
               })}
               type="number"
               value={employee?.phone}
-              className="min-w-[300px] border rounded-md p-[10px] cursor-pointer shadow-lg"
+              className="min-w-[300px] border rounded-md p-[10px] cursor-pointer shadow-lg w-full"
               placeholder="Nhập số điện thoại"
             />
             <FormHelperText className="text-red-700 ml-2 ">{errors.phone?.message}</FormHelperText>
@@ -117,7 +117,7 @@ const UpdateEmployeeForm = () => {
               {...register("address", { required: "Nhập đầy đủ thông tin.", })}
               type="text"
               value={employee?.address}
-              className="min-w-[300px] border rounded-md p-[10px] cursor-pointer shadow-lg"
+              className="min-w-[300px] border rounded-md p-[10px] cursor-pointer shadow-lg w-full"
               placeholder="Nhập địa chỉ liên hệ" />
             <FormHelperText className="text-red-700 ml-2 ">{errors.address?.message}</FormHelperText>
           </Box>

@@ -7,6 +7,21 @@ export const fetchEmployees = async () => {
 	return response.json() as Promise<ApiResponse>;
 };
 
+export const fetchPosts = async () => {
+	const response = await fetch("/api/posts", {
+		method: "GET",
+	});
+	console.log(response);
+	return response.json() as Promise<ApiResponse>;
+};
+
+export const fetchAuthorities = async () => {
+	const response = await fetch("/api/roles", {
+		method: "GET",
+	});
+	return response.json() as Promise<ApiResponse>;
+};
+
 export const fetchRolesWithPermission = async () => {
 	const res = await fetch("/api/roles/permissions", {
 		method: "GET",

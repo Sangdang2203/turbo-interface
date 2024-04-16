@@ -83,5 +83,5 @@ export interface Post {
 	content: string;
 	employeeId: number;
 	employeeName: string;
-	status: boolean;
+	status: string;
 }

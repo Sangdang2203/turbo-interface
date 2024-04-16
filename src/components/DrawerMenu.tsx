@@ -8,6 +8,7 @@ import {
 	BadgeOutlined,
 	EditNoteOutlined,
 	ManageAccountsOutlined,
+	ManageSearchRounded,
 	NewspaperOutlined,
 	PasswordOutlined,
 } from "@mui/icons-material";
@@ -35,21 +36,24 @@ export default function DrawerMenu() {
 		createMenu("Thông Tin Cá Nhân", AccountBoxOutlined, "/dashboard/employee", "profile.view"),
 
 		createMenu("Nhân Viên", BadgeOutlined, "/dashboard/employees", "emp.view", [
-			createMenu('Thêm mới', AddCircleOutlineOutlined, '/dashboard/employees/create', 'post.create'),
+			createMenu('Quản lý', ManageSearchRounded, '/dashboard/employees/management', 'emp.view'),
+			createMenu('Tạo mới', AddCircleOutlineOutlined, '/dashboard/employees/create', 'post.create'),
 			createMenu('Cập nhật', EditNoteOutlined, '/dashboard/employees/edit', 'post.update')
 		]),
 
-		createMenu("Vai Trò", ManageAccountsOutlined, "/dashboard/roles", "role.view"),
-
-		createMenu('Bài Viết', ArticleOutlined, '/dashboard/post-management', 'post.view', [
-			createMenu('Thêm mới', AddCircleOutlineOutlined, '/dashboard/post-management/create', 'post.create'),
-			createMenu('Cập nhật', EditNoteOutlined, '/dashboard/post-management/edit', 'post.update')
+		createMenu('Bài Viết', ArticleOutlined, '/dashboard/posts', 'post.view', [
+			createMenu('Quản lý', ManageSearchRounded, '/dashboard/posts/management', 'post.view'),
+			createMenu('Tạo mới', AddCircleOutlineOutlined, '/dashboard/posts/create', 'post.create'),
+			createMenu('Cập nhật', EditNoteOutlined, '/dashboard/posts/edit', 'post.update')
 		]),
 
 		createMenu('Tuyển Dụng', NewspaperOutlined, '/dashboard/recruitment', 'recruitment.view', [
-			createMenu('Thêm mới', AddCircleOutlineOutlined, '/dashboard/recruitment/create', 'recruitment.create'),
+			createMenu('Quản lý', ManageSearchRounded, '/dashboard/recruitment/management', 'recruitment.view'),
+			createMenu('Tạo mới', AddCircleOutlineOutlined, '/dashboard/recruitment/create', 'recruitment.create'),
 			createMenu('Cập nhật', EditNoteOutlined, '/dashboard/recruitment/edit', 'recruitment.update')
 		]),
+
+		createMenu("Vai Trò", ManageAccountsOutlined, "/dashboard/roles", "role.view"),
 
 		createMenu('Cài đặt', PasswordOutlined, '/dashboard/general-settings', 'setting.view'),
 	]

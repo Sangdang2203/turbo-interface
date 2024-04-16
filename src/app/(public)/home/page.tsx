@@ -11,6 +11,7 @@ import ScalablePrivateClound from "../../../../public/images/ScalablePrivateClou
 import CloudCameraDiagram from "../../../../public/images/CloudCameraDiagram.jpg";
 import CloudBackupRecovery from "../../../../public/images/CloudBackupRecovery.png";
 import UnifiedCloudStorage from "../../../../public/images/UnifiedCloudStorage.png";
+import opennebula_cloud_dash from "../../../../public/images/opennebula_cloud_dash.png";
 
 export const metadata = () => {
   return {
@@ -23,15 +24,11 @@ const HomePage = () => {
   return (
     <Container >
       <Box textAlign="center" my={5}>
-        <Typography id="typing" className="text-[2.5rem]">Ứng dụng | Dịch vụ | Giải pháp</Typography>
+        <Typography id="typing" className="text-[2.5rem] text-blue-900 font-semibold">Ứng dụng | Dịch vụ | Giải pháp</Typography>
         <Typography className="text-[2rem] font-extralight">điện toán đám mây chất lượng hàng đầu.</Typography>
-      </Box>
-
-      <Box textAlign="center">
-        <Typography className="text-center text-[1.75rem] font-light w-2/3 mx-auto">
+        <Typography className="text-center text-[1.75rem] font-light w-2/3 mx-auto my-5">
           Công ty Turbo Solutions chung tay cùng quý doanh nghiệp thực hiện chuyển đổi số bằng cách tích hợp các công nghệ thông minh 4.0, cùng đạt mục tiêu thắng lợi.
         </Typography>
-        <Button href="/contact" variant="contained" className="btn-astro hover:duration-700 hover:opacity-80" >Kết nối ngay với chúng tôi</Button>
       </Box>
 
       <Box className="container grid lg:grid-cols-4 gap-x-6 gap-y-6 my-5">
@@ -88,10 +85,19 @@ const HomePage = () => {
         </Card>
       </Box>
 
+      <Box sx={{ position: "relative", textAlign: "center", my: 10 }} >
+        <Image src={opennebula_cloud_dash} className="w-full h-auto rounded-lg" alt="opennebula_cloud_dash" />
+        <Box width="100%" sx={{ position: "absolute", bottom: "4px", marginX: "auto", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", textAlign: "center" }}>
+          <Button href="/contact" variant="contained" className="btn-astro rounded-full hover:duration-700 hover:opacity-80" >Kết nối ngay với chúng tôi</Button>
+        </Box>
+      </Box>
 
-      <Typography className="text-[1.75rem] font-light w-2/3 text-center mx-auto my-20">
-        Công ty Turbo Solutions cung cấp dịch vụ điện toán đám mây đa dạng và các ứng dụng số phù hợp nhiều lĩnh vực.
-      </Typography>
+      <Box my={10} sx={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", textAlign: "center" }}>
+        <Typography className="py-3 px-5 bg-sky-50 text-sky-700 uppercase w-fit rounded-full">dịch vụ điện toán đám mây</Typography>
+        <Typography className="text-[1.75rem] font-light w-2/3 text-center mx-auto">
+          Công ty Turbo Solutions cung cấp dịch vụ điện toán đám mây đa dạng và các ứng dụng số phù hợp nhiều lĩnh vực.
+        </Typography>
+      </Box>
       <Box className="container grid sm:grid-cols-3 gap-x-6 gap-y-6 mb-10">
         <Card className="relative px-1 rounded-md hover:shadow-lg cursor-pointer">
           <Image src={cloudServer} className="w-full h-auto" alt="cloudServer" />
@@ -102,7 +108,7 @@ const HomePage = () => {
             </Box>
           </CardContent>
           <CardActions className="absolute bottom-1 left-1">
-            <Button className="hover:border-blue-400 p-3  border" variant="outlined" size="small" endIcon={<ReadMoreRounded />}>Tìm hiểu thêm </Button>
+            <Button href="https://ecocloud.vn/bang-gia-cloud-server/" className="hover:border-blue-400 p-3  border" variant="outlined" size="small" endIcon={<ReadMoreRounded />}>Tìm hiểu thêm </Button>
           </CardActions>
         </Card>
 
@@ -115,7 +121,7 @@ const HomePage = () => {
             </Box>
           </CardContent>
           <CardActions className="absolute bottom-1 left-1">
-            <Button className="hover:border-blue-400 p-3  border" variant="outlined" size="small" endIcon={<ReadMoreRounded />}>Tìm hiểu thêm </Button>
+            <Button href="https://baas.ecocloud.vn/" className="hover:border-blue-400 p-3  border" variant="outlined" size="small" endIcon={<ReadMoreRounded />}>Tìm hiểu thêm </Button>
           </CardActions>
         </Card>
 
@@ -128,10 +134,11 @@ const HomePage = () => {
             </Box>
           </CardContent>
           <CardActions className="absolute bottom-1 left-1">
-            <Button className="hover:border-blue-400 p-3  border" variant="outlined" size="small" endIcon={<ReadMoreRounded />}>Tìm hiểu thêm </Button>
+            <Button href="/smart-cloud-camera" className="hover:border-blue-400 p-3  border" variant="outlined" size="small" endIcon={<ReadMoreRounded />}>Tìm hiểu thêm </Button>
           </CardActions>
         </Card>
       </Box>
+
     </Container >
   )
 }

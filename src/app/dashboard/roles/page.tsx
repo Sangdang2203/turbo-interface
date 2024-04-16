@@ -9,12 +9,12 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { toast } from "sonner";
 import React from "react";
 import { red } from "@mui/material/colors";
-import { fetchRolesWithPermission, fetchPermissions } from "app/methods/method";
+import { fetchRolesWithPermission, fetchPermissions, fetchAuthorities } from "app/methods/method";
 import { Role, Permission, CreateRoleRequest, CreatePermissionRequest, CreatePermission, ApiResponse } from "types/interfaces";
 
 
 export default function RoleManagement() {
-  const [loading, setLoading] = React.useState(true);
+  const [loading, setLoading] = React.useState(false);
   const [open, setOpen] = React.useState(false);
   const [selectedRoleId, setSelectedRoleId] = React.useState<Number>(0);
   const [roles, setRoles] = React.useState<Role[]>([]);
@@ -56,10 +56,10 @@ export default function RoleManagement() {
 
   // fetch data
   React.useEffect(() => {
-    Promise.all([fetchRolesWithPermission(), fetchPermissions()]).then(data => {
-      const [rolesRes, permissionRes] = data;
-      if (rolesRes.ok) {
-        setRoles(rolesRes.data);
+    Promise.all([fetchAuthorities(), fetchPermissions()]).then(data => {
+      const [authRes, permissionRes] = data;
+      if (authRes.ok) {
+        setRoles(authRes.data);
       }
       if (permissionRes.ok) {
         setPermissions(permissionRes.data);

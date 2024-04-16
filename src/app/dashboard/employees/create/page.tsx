@@ -80,7 +80,7 @@ const CreateEmployee = () => {
                   {...register("code", {
                     required: "Bấm Generate để khởi tạo mã.",
                   })}
-                  className="min-w-[500px] border rounded-md p-[10px] cursor-pointer shadow-lg"
+                  className="min-w-[500px] border rounded-md p-[10px] cursor-pointer shadow-lg w-full"
                   disabled
                   placeholder="EMP-000001"
                 />
@@ -99,7 +99,7 @@ const CreateEmployee = () => {
                 id="demo-simple-select" size="small"
                 onChange={handleChange}
                 label="Vui lòng chọn quyền"
-                className="min-w-[300px] h-[45px] border rounded-md cursor-pointer shadow-lg"
+                className="min-w-[300px] h-[45px] border rounded-md cursor-pointer shadow-lg w-full"
               >
                 {roles.map(role => (
                   <MenuItem key={role.id} value={role.id}>{role.name}</MenuItem>
@@ -118,7 +118,7 @@ const CreateEmployee = () => {
                 maxLength: { value: 50, message: "Tối đa 50 ký tự.", },
               })}
               type="text"
-              className="min-w-[300px] border rounded-md p-[10px] cursor-pointer shadow-lg"
+              className="min-w-[300px] border rounded-md p-[10px] cursor-pointer shadow-lg w-full"
               placeholder="Nhập họ tên"
             />
             <FormHelperText className="text-red-700 ml-2 ">{errors.fullname?.message}</FormHelperText>
@@ -132,7 +132,7 @@ const CreateEmployee = () => {
                 pattern: { value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i, message: "Phải đúng định dạng email.", },
               })}
               type="text"
-              className="min-w-[300px] border rounded-md p-[10px] cursor-pointer shadow-lg"
+              className="min-w-[300px] border rounded-md p-[10px] cursor-pointer shadow-lg w-full"
               placeholder="Nhập địa chỉ email"
             />
             <FormHelperText className="text-red-700 ml-2 ">{errors.email?.message}</FormHelperText>
@@ -159,7 +159,7 @@ const CreateEmployee = () => {
                   </InputAdornment>
                 }
                 type={showPassword ? "text" : "password"}
-                className="min-w-[300px] border rounded-md p-[10px] cursor-pointer shadow-lg"
+                className="min-w-[300px] border rounded-md p-[10px] cursor-pointer shadow-lg w-full"
                 placeholder="Nhập mật khẩu"
               />
             </Box>
@@ -173,7 +173,7 @@ const CreateEmployee = () => {
                 pattern: { value: /^\d{10}$/, message: "Số điện thoại gồm 10 số.", },
               })}
               type="number"
-              className="min-w-[300px] border rounded-md p-[10px] cursor-pointer shadow-lg"
+              className="min-w-[300px] border rounded-md p-[10px] cursor-pointer shadow-lg w-full"
               placeholder="Nhập số điện thoại"
             />
             <FormHelperText className="text-red-700 ml-2 ">{errors.phone?.message}</FormHelperText>
@@ -184,7 +184,7 @@ const CreateEmployee = () => {
             <TextField
               {...register("address", { required: "Nhập đầy đủ thông tin.", })}
               type="text"
-              className="min-w-[300px] border rounded-md p-[10px] cursor-pointer shadow-lg"
+              className="min-w-[300px] border rounded-md p-[10px] cursor-pointer shadow-lg w-full"
               placeholder="Nhập địa chỉ liên hệ" />
             <FormHelperText className="text-red-700 ml-2 ">{errors.address?.message}</FormHelperText>
           </Box>

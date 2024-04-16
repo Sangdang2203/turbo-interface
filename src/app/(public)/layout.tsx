@@ -9,6 +9,7 @@ import { Toaster } from 'sonner'
 import '@/styles/globals.css'
 import TheHeader from '@/components/TheHeader';
 import TheFooter from '@/components/TheFooter';
+import SpeedDial from '@/components/SpeedDial'
 
 export const metadata = {
   title: {
@@ -28,8 +29,9 @@ export default function RootLayout(props: { children: React.ReactNode }) {
           <ThemeProvider theme={theme}>
             <CssBaseline />
             <header><TheHeader /></header>
-            <main className="background-body">{props.children}</main>
-            <footer className='background-footer'><TheFooter /></footer>
+            <main className="background-body"> {props.children} <SpeedDial /> </main>
+            <div>  </div>
+            <footer className='background-footer'> <TheFooter /> </footer>
           </ThemeProvider>
         </AppRouterCacheProvider>
         <Toaster
