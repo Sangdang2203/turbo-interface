@@ -5,32 +5,6 @@ export interface ApiResponse {
 	data: any;
 }
 
-export interface Employee {
-	id: number;
-	code: string;
-	fullname: string;
-	gender: boolean;
-	email: string;
-	password: string;
-	phone: string;
-	address: string;
-	roleId: number;
-	roleName: string;
-	status: boolean;
-}
-
-export interface Role {
-	id: number;
-	name: string;
-	roleHasPermissions: string[];
-	status: boolean;
-}
-
-export interface Permission {
-	id: number;
-	name: string;
-}
-
 export interface CustomerMessage {
 	name: string;
 	email: string;
@@ -38,50 +12,89 @@ export interface CustomerMessage {
 	message: string;
 }
 
-export interface CreateEmployeeRequest {
-	code: string;
-	fullname: string;
-	gender: boolean;
+export interface User {
+	id: string;
+	login: string;
+	firstName: string;
+	lastName: string;
 	email: string;
-	password: string;
-	phone: string;
-	address: string;
-	roleId: number;
-	status: boolean;
+	authority: string;
+	activated: boolean;
 }
 
-export interface UpdateEmployeeRequest {
-	fullname: string;
-	gender: boolean;
+export interface CreateUserRequest {
+	login: string;
+	firstName: string;
+	lastName: string;
 	email: string;
-	phone: string;
-	address: string;
-	roleId: number;
+	imageUrl: string;
+	authority: string;
+	activated: string;
 }
 
-export interface CreatePermissionRequest {
-	permissionNames: string[];
+export interface UpdateUserRequest {
+	firstName: string;
+	lastName: string;
+	email: string;
 }
 
-export interface CreateRoleRequest {
-	id: number;
+export interface Authority {
 	name: string;
-	roleHasPermissions: string[];
-	status: boolean;
 }
 
-export interface CreatePermission {
+export interface Role {
+	name: string;
+}
+
+// export interface Permission {
+// 	id: number;
+// 	name: string;
+// }
+
+// export interface CreatePermissionRequest {
+// 	permissionNames: string[];
+// }
+
+// export interface CreateRoleRequest {
+// 	id: string;
+// 	name: string;
+// 	roleHasPermissions: string[];
+// 	status: boolean;
+// }
+
+// export interface CreatePermission {
+// 	name: string;
+// }
+
+export interface Category {
+	id: string;
 	name: string;
 }
 
 export interface Post {
-	id: number;
+	id: string;
 	title: string;
+	category: string;
+	user: string;
 	slug: string;
 	image: string;
 	description: string;
 	content: string;
-	employeeId: number;
-	employeeName: string;
 	status: string;
+}
+
+export interface CreatePostRequest {
+	title: string;
+	category: string;
+	user: string;
+	description: string;
+	content: string;
+	status: string;
+}
+
+export interface UpdatedPostRequest {
+	id: string;
+	title: string;
+	description: string;
+	content: string;
 }

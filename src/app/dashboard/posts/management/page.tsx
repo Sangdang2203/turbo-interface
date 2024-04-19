@@ -9,33 +9,14 @@ import Link from 'next/link'
 import { toast } from 'sonner'
 import * as React from 'react'
 import { ApiResponse, Post } from 'types/interfaces'
+import { fetchPosts } from 'app/methods/method'
 
 export default function PostManagement() {
-  const [loading, setLoading] = React.useState(true);
+  const [loading, setLoading] = React.useState(false);
   const [posts, setPosts] = React.useState<Post[]>([])
   const [page, setPage] = React.useState(0)
   const [rowsPerPage, setRowsPerPage] = React.useState(10)
   const router = useRouter()
-
-  React.useEffect(() => {
-    const fetchPosts = async () => {
-      try {
-        const res = await fetch("/api/posts");
-        console.log(res);
-        if (!res.ok) {
-          throw new Error("Request failed with status: " + res.status);
-        }
-        const data = await res.json();
-        setPosts(data.data);
-      } catch (error) {
-        console.error("Error fetching posts:", error);
-        // Handle the error state or display an error message
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchPosts();
-  }, []);
 
   function handleSearch(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -45,23 +26,17 @@ export default function PostManagement() {
     const name = nameInput.value.trim();
 
     if (name === "") {
-      const fetchPosts = async () => {
-        const res = await fetch("/api/posts")
-        const data = await res.json();
-        setPosts(data.data)
-      }
-      fetchPosts();
+      fetchPosts().then(res => setPosts(res.data));
     } else {
       const filterPosts = posts.filter(
         post =>
           post.title.toLowerCase().includes(name.toLowerCase()) ||
-          post.employeeName.toLowerCase().includes(name.toLowerCase())
+          post.user.toLowerCase().includes(name.toLowerCase())
       );
 
       setPosts(filterPosts);
     }
   }
-
 
 
   const handleChangePage = (
@@ -78,6 +53,17 @@ export default function PostManagement() {
     setPage(0);
   };
 
+  React.useEffect(() => {
+    Promise.all([fetchPosts()])
+      .then(data => {
+        const [resPost] = data;
+        if (resPost.ok) {
+          setPosts(resPost.data.reverse());
+        }
+      })
+    setLoading(false);
+  }, []);
+
   return (
     <>
       {loading ? (<Loading />)
@@ -87,7 +73,7 @@ export default function PostManagement() {
             elevation={6}
             sx={{ borderRadius: "10px", boxSizing: "border-box" }}>
             <Grid container>
-              <Grid item xs={12} sm={6} className="flex justify-between items-center p-3">
+              <Grid item xs={12} sm={6} className="flex justify-between items-center px-3">
                 <Button variant="contained" color="primary" className="text-white" href="/dashboard/posts/create">
                   Tạo mới
                 </Button>
@@ -117,68 +103,62 @@ export default function PostManagement() {
             sx={{ my: 3, borderRadius: "10px", boxSizing: "border-box" }}>
             <TableContainer sx={{ width: "100%", overflow: "hidden" }}>
               <Table className="mt-3" sx={{ minWidth: 650 }} size="small">
-                <TableHead >
+                <TableHead className='bg-slate-300'>
                   <TableRow>
-                    <TableCell align="center" className="text-white text-sm">Title</TableCell>
-                    <TableCell align="center" className="text-white text-sm">Content</TableCell>
-                    {/* <TableCell align="center" className="text-white text-sm">Author</TableCell>*/}
-                    <TableCell align="center" className="text-white text-sm">Category</TableCell>
-                    <TableCell align="center" className="text-white text-sm">Status</TableCell>
-                    <TableCell align="center" className="text-white text-sm">Actions</TableCell>
+                    <TableCell align="center" className="text-sm">Tiêu đề</TableCell>
+                    <TableCell align="center" className="text-sm">Mô tả</TableCell>
+                    <TableCell align="center" className="text-sm">Tác giả</TableCell>
+                    <TableCell align="center" className="text-sm">Thể loại</TableCell>
+                    <TableCell align="center" className="text-sm">Tình trạng</TableCell>
+                    <TableCell align="center" className="text-sm">Thao tác</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {posts.length == null && (
-                    <TableRow>
-                      <TableCell colSpan={7} align="center" className="text-sm">
-                        No Data
-                      </TableCell>
-                    </TableRow>
-                  )}
-                  {posts
-                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                    .map(post => (
-                      <TableRow key={post.id} sx={{ "&:last-child td, &:last-child th": { border: 0 }, }}>
-                        <TableCell align="center">
-                          {post?.title.length > 30 ? post?.title.substring(0, 30) + ' ...' : post?.title}
-                        </TableCell>
-                        <TableCell align="center">
-                          {post?.description.length > 30 ? post?.description.substring(0, 30) + ' ...' : post?.description}
-                        </TableCell>
-                        <TableCell align="center">
-                          {post?.content.length > 30 ? post?.content.substring(0, 30) + ' ...' : post?.content}
-                        </TableCell>
-                        {/* <TableCell align="center">{post?.author}</TableCell> 
-                        <TableCell align="center">{post?.categories ? 'Guide' : 'Promotion'}</TableCell> */}
-                        <TableCell align="center">
-                          <Switch size="small" color="success" className="cursor-pointer"
-                            checked={post.status === "ACTIVE" ? true : false}
-                          />
-                        </TableCell>
+                  <TableRow>
+                    {posts && posts.length > 0 ?
+                      (
+                        posts
+                          .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                          .map(post => (
+                            <TableRow key={post.id} sx={{ "&:last-child td, &:last-child th": { border: 0 }, }}>
+                              <TableCell align="center">
+                                {post?.title.length > 30 ? post?.title.substring(0, 30) + ' ...' : post?.title}
+                              </TableCell>
+                              <TableCell align="center">
+                                {post?.description.length > 30 ? post?.description.substring(0, 30) + ' ...' : post?.description}
+                              </TableCell>
+                              <TableCell align="center">
+                                {post?.content.length > 30 ? post?.content.substring(0, 30) + ' ...' : post?.content}
+                              </TableCell>
+                              <TableCell align="center">{post?.user}</TableCell>
+                              <TableCell align="center">{post?.category}</TableCell>
+                              <TableCell align="center">
+                                <Switch size="small" color="success" className="cursor-pointer"
+                                  checked={post.status === "ACTIVE" ? true : false}
+                                />
+                              </TableCell>
 
-                        <TableCell align="center">
-                          <Tooltip title="Edit">
-                            <Button type="button" size='small' variant="text" color="success"
-                              href={`/dashboard/posts/edit/${post.slug}`}>
-                              <DriveFileRenameOutline fontSize="small" />
-                            </Button>
-                          </Tooltip>
-
-                          {/* <Tooltip title="Remove">
-                            <Button type="button" size='small' variant="text" color="error"
-                              onClick={() => handleDelete(item.id)}>
-                              <DeleteOutlineOutlined fontSize="small" />
-                            </Button>
-                          </Tooltip> */}
-                        </TableCell>
-                      </TableRow>
-                    ))}
+                              <TableCell align="center">
+                                <Tooltip title="Edit">
+                                  <Button type="button" size='small' variant="text" color="success"
+                                    href={`/dashboard/posts/edit/${post.slug}`}>
+                                    <DriveFileRenameOutline fontSize="small" />
+                                  </Button>
+                                </Tooltip>
+                              </TableCell>
+                            </TableRow>
+                          ))
+                      )
+                      :
+                      (<TableCell colSpan={7} align="center" className="text-sm"> No Data </TableCell>)
+                    }
+                  </TableRow>
                 </TableBody>
               </Table>
             </TableContainer>
             <TablePagination
               component="div"
-              count={posts.length || 0}
+              count={posts ? posts.length : 0}
               page={page}
               onPageChange={handleChangePage}
               rowsPerPage={rowsPerPage}

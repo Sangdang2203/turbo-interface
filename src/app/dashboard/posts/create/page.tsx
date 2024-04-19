@@ -2,27 +2,24 @@
 
 import * as React from "react";
 import { toast } from "sonner";
-import { useForm, Controller } from "react-hook-form";
+import { useForm, SubmitHandler } from "react-hook-form";
 import dynamic from "next/dynamic";
-import { Post } from "types/interfaces";
-import generateSlug from "../../../methods/generateSlug";
+import { Post, Category, CreatePostRequest, ApiResponse, User } from "types/interfaces";
 import { DoneRounded, RotateLeftRounded } from "@mui/icons-material";
 import { Box, Button, FormHelperText, Paper, TextField } from "@mui/material";
 import useS3 from "hooks/useS3";
 import Image from "next/image";
-
-
-
+import { fetchCategories, fetchUsers } from "app/methods/method";
 
 const CustomEditor = dynamic(() => {
   return import("@/components/CustomEditor");
 }, { ssr: false });
 
-
-
-const CreatePost = () => {
+export default function CreatePost() {
   const [loading, setLoading] = React.useState(true);
   const [post, setPost] = React.useState<Post>();
+  const [categories, setCategories] = React.useState<Category[]>([]);
+  const [users, setUsers] = React.useState<User[]>([]);
 
   const {
     register,
@@ -33,6 +30,8 @@ const CreatePost = () => {
     watch,
   } = useForm<Post>();
 
+  const category = watch("category");
+
   const { handleFileUpload, ButtonUpload, preview } = useS3();
   const previewUrl = React.useMemo(() => {
     if (preview) {
@@ -40,9 +39,42 @@ const CreatePost = () => {
     }
   }, [preview]);
 
-  const AddNewPost = () => {
+  async function AddNewPost(post: CreatePostRequest) {
+    const message = toast.loading("Loading...");
+    try {
+      const res = await fetch("/api/posts", {
+        method: "POST",
+        body: JSON.stringify(post),
+      })
 
+      const payload = (await res.json()) as ApiResponse;
+
+      if (payload.ok) {
+        toast.success(payload.message);
+      }
+      toast.error(payload.message);
+
+    } catch (error) {
+      console.log(error);
+    }
+    toast.dismiss(message);
   }
+
+  React.useEffect(() => {
+    Promise.all([fetchCategories(), fetchUsers()])
+      .then(data => {
+        const [resCate, resUser] = data;
+
+        if (resCate.ok) {
+          setCategories(resCate.data);
+        }
+
+        if (resUser.ok) {
+          setUsers(resUser.data)
+        }
+      })
+    setLoading(false);
+  }, [])
 
   return (
     <>
@@ -62,10 +94,47 @@ const CreatePost = () => {
               className="min-w-[300px] w-full border rounded-md p-[10px] cursor-pointer shadow-lg"
               placeholder="Nhập tiêu đề bài viết "
             />
-            <FormHelperText className="text-red-700 ml-2">{errors.title?.message}</FormHelperText>
+            <FormHelperText className="text-red-700 px-2 mt-2">{errors.title?.message}</FormHelperText>
           </Box>
 
-          <Box className="my-3 flex items-center justify-between">
+          <Box className="my-3 flex justify-between">
+            <Box>
+              <label className="font-semibold">Loại bài viết:</label>
+              <select
+                {...register("category")}
+                className="min-w-[300px] w-full border rounded-md p-[10px] cursor-pointer shadow-lg"
+                id="category">
+                <option value="">Vui lòng bấm chọn</option>
+                {categories && categories.map(category => (
+                  <option
+                    key={category.id}
+                    value={category.name}>
+                    {category.name}
+                  </option>
+                ))}
+              </select>
+              <FormHelperText className="text-red-700 px-2 mt-2">{errors.category?.message}</FormHelperText>
+            </Box>
+            <Box>
+              <label className="font-semibold">Tác giả:</label>
+              <select
+                {...register("user")}
+                className="min-w-[300px] w-full border rounded-md p-[10px] cursor-pointer shadow-lg"
+                id="user">
+                <option value="">Vui lòng bấm chọn</option>
+                {users && users.map(user => (
+                  <option
+                    key={user.id}
+                    value={user.lastName + " " + user.firstName}>
+                    {user.lastName + " " + user.firstName}
+                  </option>
+                ))}
+              </select>
+              <FormHelperText className="text-red-700 px-2 mt-2">{errors.user?.message}</FormHelperText>
+            </Box>
+          </Box>
+
+          {/* <Box className="my-3 flex items-center justify-between">
             <Box>
               {preview ?
                 <Image src={`${previewUrl}`}
@@ -87,17 +156,7 @@ const CreatePost = () => {
               }
             </Box>
             <Box><ButtonUpload /></Box>
-          </Box>
-
-          <Box className="my-3">
-            <label className="font-semibold">Slug:</label>
-            <TextField
-              id="slug"
-              {...register("slug")}
-              className="min-w-[300px] w-full border rounded-md p-[10px] cursor-pointer shadow-lg"
-              value={generateSlug(register("title"))}
-            />
-          </Box>
+          </Box> */}
 
           <Box className="my-3">
             <label className="font-semibold">Mô tả ngắn:</label>
@@ -106,15 +165,16 @@ const CreatePost = () => {
               className="min-w-[300px] w-full border rounded-md p-[10px] cursor-pointer shadow-lg"
               placeholder="Nhập mô tả ngắn"
             />
-            <FormHelperText className="text-red-700 ml-2 ">{errors.description?.message}</FormHelperText>
+            <FormHelperText className="text-red-700 px-2 mt-2 ">{errors.description?.message}</FormHelperText>
           </Box>
 
           <Box className="my-3">
             <label className="font-semibold">Nội dung bài viết:</label>
-            <CustomEditor
+            <TextField
               {...register("content", { required: "Vui lòng điền thông tin." })}
+              className="min-w-[300px] w-full border rounded-md p-[10px] cursor-pointer shadow-lg"
             />
-            <FormHelperText className="text-red-700 ml-2 ">{register("content") == null ? errors.content?.message : ""}</FormHelperText>
+            <FormHelperText className="text-red-700 px-2 mt-2 ">{register("content") == null ? errors.content?.message : ""}</FormHelperText>
           </Box>
 
           <Box className="flex justify-around mb-2 mt-10 w-1/2 mx-auto">
@@ -132,5 +192,3 @@ const CreatePost = () => {
     </>
   )
 }
-
-export default CreatePost;

@@ -56,11 +56,11 @@ const EditRecruitment = () => {
               className="min-w-[300px] border rounded-md p-[10px] cursor-pointer shadow-lg w-full"
               placeholder="Nhập tiêu đề bài viết "
             />
-            <FormHelperText className="text-red-700 ml-2">{errors.title?.message}</FormHelperText>
+            <FormHelperText className="text-red-700 px-2 mt-2">{errors.title?.message}</FormHelperText>
           </Box>
 
           {/* Upload and display post photo */}
-          <Box className="my-3 flex justify-between items-center">
+          {/* <Box className="my-3 flex justify-between items-center">
             <Box>
               {preview ?
                 <Image src={`${previewUrl}`}
@@ -85,7 +85,7 @@ const EditRecruitment = () => {
               }
             </Box>
             <Box><ButtonUpload /></Box>
-          </Box>
+          </Box> */}
 
           <Box className="my-3">
             <label className="font-semibold">Mô tả ngắn:</label>
@@ -96,7 +96,7 @@ const EditRecruitment = () => {
               className="min-w-[300px] border rounded-md p-[10px] cursor-pointer shadow-lg w-full"
               placeholder="Nhập mô tả ngắn"
             />
-            <FormHelperText className="text-red-700 ml-2 ">{errors.description?.message}</FormHelperText>
+            <FormHelperText className="text-red-700 px-2 mt-2 ">{errors.description?.message}</FormHelperText>
           </Box>
 
           <Box className="my-3">
@@ -108,7 +108,7 @@ const EditRecruitment = () => {
               initialData={post?.content}
               placeholder="Nhập nội dung bài viết"
             />
-            <FormHelperText className="text-red-700 ml-2 ">{post?.content.length === 0 ? errors.content?.message : ""}</FormHelperText>
+            <FormHelperText className="text-red-700 px-2 mt-2 ">{post?.content.length === 0 ? errors.content?.message : ""}</FormHelperText>
           </Box>
 
           <Box className="flex justify-around mb-2 mt-10 w-1/2 mx-auto">

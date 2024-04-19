@@ -62,10 +62,10 @@ const CreateRecruiment = () => {
               className="min-w-[300px] w-full border rounded-md p-[10px] cursor-pointer shadow-lg"
               placeholder="Nhập tiêu đề bài viết "
             />
-            <FormHelperText className="text-red-700 ml-2">{errors.title?.message}</FormHelperText>
+            <FormHelperText className="text-red-700 px-2 mt-2">{errors.title?.message}</FormHelperText>
           </Box>
 
-          <Box className="my-3 flex items-center justify-between">
+          {/* <Box className="my-3 flex items-center justify-between">
             <Box>
               {preview ?
                 <Image src={`${previewUrl}`}
@@ -87,17 +87,7 @@ const CreateRecruiment = () => {
               }
             </Box>
             <Box><ButtonUpload /></Box>
-          </Box>
-
-          <Box className="my-3">
-            <label className="font-semibold">Slug:</label>
-            <TextField
-              id="slug"
-              {...register("slug")}
-              className="min-w-[300px] w-full border rounded-md p-[10px] cursor-pointer shadow-lg"
-              value={generateSlug(register("title"))}
-            />
-          </Box>
+          </Box> */}
 
           <Box className="my-3">
             <label className="font-semibold">Mô tả ngắn:</label>
@@ -106,7 +96,7 @@ const CreateRecruiment = () => {
               className="min-w-[300px] w-full border rounded-md p-[10px] cursor-pointer shadow-lg"
               placeholder="Nhập mô tả ngắn"
             />
-            <FormHelperText className="text-red-700 ml-2 ">{errors.description?.message}</FormHelperText>
+            <FormHelperText className="text-red-700 px-2 mt-2 ">{errors.description?.message}</FormHelperText>
           </Box>
 
           <Box className="my-3">
@@ -114,7 +104,7 @@ const CreateRecruiment = () => {
             <CustomEditor
               {...register("content", { required: "Vui lòng điền thông tin." })}
             />
-            <FormHelperText className="text-red-700 ml-2 ">{register("content") == null ? errors.content?.message : ""}</FormHelperText>
+            <FormHelperText className="text-red-700 px-2 mt-2 ">{register("content") == null ? errors.content?.message : ""}</FormHelperText>
           </Box>
 
           <Box className="flex justify-around mb-2 mt-10 w-1/2 mx-auto">

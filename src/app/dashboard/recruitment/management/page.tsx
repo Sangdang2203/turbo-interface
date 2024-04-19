@@ -13,9 +13,9 @@ import { fetchPosts } from 'app/methods/method'
 
 export default function RecruitmentPage() {
   const [loading, setLoading] = React.useState(false);
-  const [posts, setPosts] = React.useState<Post[]>([])
+  const [jobs, setJobs] = React.useState<Post[]>([])
   const [page, setPage] = React.useState(10)
-  const [rowsPerPage, setRowsPerPage] = React.useState(5)
+  const [rowsPerPage, setRowsPerPage] = React.useState(10)
   const router = useRouter()
 
   function handleSearch(event: React.FormEvent<HTMLFormElement>) {
@@ -28,17 +28,16 @@ export default function RecruitmentPage() {
     if (name === "") {
       fetchPosts().then(data => {
         if (data.ok) {
-          setPosts(data.data.reverse());
+          setJobs(data.data.reverse());
         }
       });
     } else {
-      const filterPosts = posts.filter(
-        post =>
-          post.title.toLowerCase().includes(name.toLowerCase()) ||
-          post.employeeName.toLowerCase().includes(name.toLowerCase())
+      const filterJobs = jobs.filter(
+        job =>
+          job.title.toLowerCase().includes(name.toLowerCase())
       );
 
-      setPosts(filterPosts);
+      setJobs(filterJobs);
     }
   }
 
@@ -118,67 +117,53 @@ export default function RecruitmentPage() {
             sx={{ my: 3, borderRadius: "10px", boxSizing: "border-box" }}>
             <TableContainer sx={{ width: "100%", overflow: "hidden" }}>
               <Table className="mt-3" sx={{ minWidth: 650 }} size="small">
-                <TableHead >
+                <TableHead className="bg-slate-300">
                   <TableRow>
-                    <TableCell align="center" className="text-white text-sm">Title</TableCell>
-                    <TableCell align="center" className="text-white text-sm">Slug</TableCell>
-                    <TableCell align="center" className="text-white text-sm">Content</TableCell>
-                    {/* <TableCell align="center" className="text-white text-sm">Author</TableCell>
-                    <TableCell align="center" className="text-white text-sm">Category</TableCell> */}
-                    <TableCell align="center" className="text-white text-sm">Status</TableCell>
-                    <TableCell align="center" className="text-white text-sm">Actions</TableCell>
+                    <TableCell align="center" className="text-sm">Title</TableCell>
+                    <TableCell align="center" className="text-sm">Content</TableCell>
+                    <TableCell align="center" className="text-sm">Status</TableCell>
+                    <TableCell align="center" className="text-sm">Actions</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {posts.length == null && (
-                    <TableRow>
-                      <TableCell colSpan={7} align="center" className="text-sm">
-                        No Data
-                      </TableCell>
-                    </TableRow>
-                  )}
-                  {posts
-                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                    .map(post => (
-                      <TableRow key={post.id} sx={{ "&:last-child td, &:last-child th": { border: 0 }, }}>
-                        <TableCell align="center">
-                          {post?.title.length > 30 ? post?.title.substring(0, 30) + ' ...' : post?.title}
-                        </TableCell>
-                        <TableCell align="center">{post?.slug} </TableCell>
-                        <TableCell align="center">
-                          {post?.content.length > 30 ? post?.content.substring(0, 30) + ' ...' : post?.content}
-                        </TableCell>
-                        {/* <TableCell align="center">{post?.author}</TableCell>
-                        <TableCell align="center">{post?.category ? 'Guide' : 'Promotion'}</TableCell> */}
-                        <TableCell align="center">
-                          <Switch size="small" color="success" className="cursor-pointer"
-                            checked={post.status === true ? true : false}
-                          />
-                        </TableCell>
+                  {jobs && jobs.length > 0 ?
+                    (
+                      jobs
+                        .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                        .map(job => (
+                          <TableRow key={job.id} sx={{ "&:last-child td, &:last-child th": { border: 0 }, }}>
+                            <TableCell align="center">
+                              {job?.title.length > 30 ? job?.title.substring(0, 30) + ' ...' : job?.title}
+                            </TableCell>
+                            <TableCell align="center">
+                              {job?.content.length > 30 ? job?.content.substring(0, 30) + ' ...' : job?.content}
+                            </TableCell>
+                            <TableCell align="center">
+                              <Switch size="small" color="success" className="cursor-pointer"
+                                checked={job.status === "ACTIVE" ? true : false}
+                              />
+                            </TableCell>
 
-                        <TableCell align="center">
-                          <Tooltip title="Edit">
-                            <Button type="button" size='small' variant="text" color="success"
-                              href={`/dashboard/posts/edit/${post.slug}`}>
-                              <DriveFileRenameOutline fontSize="small" />
-                            </Button>
-                          </Tooltip>
-
-                          {/* <Tooltip title="Remove">
-                            <Button type="button" size='small' variant="text" color="error"
-                              onClick={() => handleDelete(item.id)}>
-                              <DeleteOutlineOutlined fontSize="small" />
-                            </Button>
-                          </Tooltip> */}
-                        </TableCell>
-                      </TableRow>
-                    ))}
+                            <TableCell align="center">
+                              <Tooltip title="Edit">
+                                <Button type="button" size='small' variant="text" color="success"
+                                  href={`/dashboard/posts/edit/${job.slug}`}>
+                                  <DriveFileRenameOutline fontSize="small" />
+                                </Button>
+                              </Tooltip>
+                            </TableCell>
+                          </TableRow>
+                        ))
+                    )
+                    :
+                    (<TableCell colSpan={4} align="center" className="text-sm"> No Data </TableCell>)
+                  }
                 </TableBody>
               </Table>
             </TableContainer>
             <TablePagination
               component="div"
-              count={posts.length || 0}
+              count={jobs ? jobs.length : 0}
               page={page}
               onPageChange={handleChangePage}
               rowsPerPage={rowsPerPage}

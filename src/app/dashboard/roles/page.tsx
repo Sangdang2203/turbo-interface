@@ -9,67 +9,40 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { toast } from "sonner";
 import React from "react";
 import { red } from "@mui/material/colors";
-import { fetchRolesWithPermission, fetchPermissions, fetchAuthorities } from "app/methods/method";
-import { Role, Permission, CreateRoleRequest, CreatePermissionRequest, CreatePermission, ApiResponse } from "types/interfaces";
+import { fetchAuthorities } from "app/methods/method";
+import { Role, ApiResponse } from "types/interfaces";
 
 
 export default function RoleManagement() {
   const [loading, setLoading] = React.useState(false);
+  const [roles, setRoles] = React.useState(false);
   const [open, setOpen] = React.useState(false);
   const [selectedRoleId, setSelectedRoleId] = React.useState<Number>(0);
-  const [roles, setRoles] = React.useState<Role[]>([]);
-  const [permissions, setPermissions] = React.useState<Permission[]>([]);
 
   const [openAddPermisson, setOpenAddPermisson] = React.useState(false);
   const [openAddRole, setOpenAddRole] = React.useState(false);
   const [createPermission, setCreatePermission] = React.useState(false);
-  const [selectedRole, setSelectedRole] = React.useState<Role | null>(null);
 
   const {
     register: roleRegister,
     handleSubmit: roleHandleSubmit,
     formState: { errors: roleErrors },
-  } = useForm<CreateRoleRequest>();
+  } = useForm<Role>();
 
-  const {
-    register: permissionRegister,
-    handleSubmit: permissionHandleSubmit,
-    formState: { errors: permissionErrors },
-    setValue,
-  } = useForm<CreatePermissionRequest>();
-
-  const {
-    register,
-    handleSubmit,
-    formState: { errors: errors },
-  } = useForm<CreatePermission>();
-
-  const handlePermissionChange = (
-    event: any,
-    value: { name: any }[]
-  ) => {
-    setValue(
-      "permissionNames",
-      value.map((v: { name: any }) => v.name)
-    );
-  };
 
   // fetch data
   React.useEffect(() => {
-    Promise.all([fetchAuthorities(), fetchPermissions()]).then(data => {
-      const [authRes, permissionRes] = data;
+    Promise.all([fetchAuthorities()]).then(data => {
+      const [authRes] = data;
       if (authRes.ok) {
         setRoles(authRes.data);
-      }
-      if (permissionRes.ok) {
-        setPermissions(permissionRes.data);
       }
       setLoading(false);
     });
   }, []);
   // Add new role
-  async function AddRole(role: CreateRoleRequest) {
-    const loadingId = toast.loading("Loading...");
+  async function AddRole(role: Role) {
+    const message = toast.loading("Loading...");
     try {
       const res = await fetch("/api/roles/", {
         method: "POST",
@@ -79,7 +52,7 @@ export default function RoleManagement() {
       const payload = (await res.json()) as ApiResponse;
 
       if (payload.ok) {
-        const response = await fetchRolesWithPermission();
+        const response = await fetchAuthorities();
         setRoles(await response.data);
         setOpenAddRole(false);
         toast.success(payload.message);
@@ -89,103 +62,27 @@ export default function RoleManagement() {
     } catch (error) {
       console.log(error);
     }
-    toast.dismiss(loadingId);
+    toast.dismiss(message);
   }
   // Remove role
-  const handleDeleteRole = async (roleId: number) => {
-    const loadingId = toast.loading("Loading...");
-    const response = await fetch(`/api/roles/${roleId}`, {
-      method: "DELETE",
-    });
+  // const handleDeleteRole = async (roleId: number) => {
+  //   const loadingId = toast.loading("Loading...");
+  //   const response = await fetch(`/api/roles/${roleId}`, {
+  //     method: "DELETE",
+  //   });
 
-    const payload = (await response.json()) as ApiResponse;
+  //   const payload = (await response.json()) as ApiResponse;
 
-    if (roleId <= 4 && payload.ok) {
-      toast.error("Failed to delete! The role is one of system roles.");
-    } else if (roleId > 4 && payload.ok) {
-      setRoles(pre => pre.filter(role => role.id !== roleId));
-      toast.success(payload.message);
-    } else {
-      toast.error(payload.message);
-    }
-    toast.dismiss(loadingId);
-  };
-  //Create permission
-  async function createOnePermission(formData: CreatePermission) {
-    const loadingId = toast.loading("Loading...");
-    const res = await fetch(`/api/permissions`, {
-      method: "POST",
-      body: JSON.stringify(formData),
-    });
-
-    const payload = (await res.json()) as ApiResponse;
-
-    if (payload.ok) {
-      const response = await fetchPermissions();
-      setPermissions(await response.data);
-      setCreatePermission(false);
-      toast.success(payload.message);
-    } else {
-      toast.error(payload.message);
-    }
-    toast.dismiss(loadingId);
-  }
-  // Add permissions into role
-  async function AddPermission(formData: CreatePermissionRequest) {
-    const loadingId = toast.loading("Loading...");
-    const res = await fetch(`/api/roles/${selectedRole?.id}/permission`, {
-      method: "POST",
-      body: JSON.stringify(formData),
-    });
-
-    const payload = (await res.json()) as ApiResponse;
-
-    if (payload.ok) {
-      setRoles(pre => {
-        return pre.map(role => {
-          if (role.id === payload.data.id) {
-            return payload.data;
-          }
-          return role;
-        });
-      });
-      setOpenAddPermisson(false);
-      toast.success(payload.message);
-    } else {
-      toast.error(payload.message);
-    }
-    toast.dismiss(loadingId);
-  }
-  // Remove permission from role
-  const handleDelete = async (roleId: number, permissionName: string) => {
-    const loadingId = toast.loading("Loading...");
-    const res = await fetch(
-      `/api/roles/${roleId}/permission/${permissionName}`,
-      {
-        method: "DELETE",
-      }
-    );
-
-    const payload = (await res.json()) as ApiResponse;
-
-    if (payload.ok) {
-      setRoles(pre =>
-        pre.map(role => {
-          if (role.id === roleId) {
-            const index = role.roleHasPermissions.findIndex(
-              rhp => rhp === permissionName
-            );
-            role.roleHasPermissions.splice(index, 1);
-          }
-          return role;
-        })
-      );
-      toast.success(payload.message);
-    } else {
-      toast.error(payload.message);
-    }
-    toast.dismiss(loadingId);
-  };
+  //   if (roleId <= 4 && payload.ok) {
+  //     toast.error("Failed to delete! The role is one of system roles.");
+  //   } else if (roleId > 4 && payload.ok) {
+  //     setRoles(pre => pre.filter(role => role.id !== roleId));
+  //     toast.success(payload.message);
+  //   } else {
+  //     toast.error(payload.message);
+  //   }
+  //   toast.dismiss(loadingId);
+  // };
 
   return (
     <>
@@ -194,10 +91,9 @@ export default function RoleManagement() {
       ) : (
         <Box>
           <Box className="flex justify-between items-center">
-            <Button color="primary" variant="contained" size="small" sx={{ my: 2 }}
-              onClick={() => setOpenAddRole(true)} >
-              <Tooltip title="Add Role">
-                <Typography>+ Add</Typography>
+            <Button onClick={() => setOpenAddRole(true)} variant="contained" color="primary" className="text-white" href="/dashboard/recruitment/create">
+              <Tooltip title="Thêm mới">
+                <Typography>Tạo mới</Typography>
               </Tooltip>
             </Button>
           </Box>
@@ -205,7 +101,7 @@ export default function RoleManagement() {
 
           {/* Role card */}
           <Container className="grid sm:grid-cols-3 gap-x-3 gap-y-6 mx-3">
-            {roles.map(role => (
+            {roles && roles.map(role => (
               <Card key={role.id} className="relative px-1 rounded-md hover:shadow-lg cursor-pointer">
                 <CardContent className="relative mb-3">
                   <Box className="w-full h-full flex items-center">
@@ -219,27 +115,6 @@ export default function RoleManagement() {
                         }>{role.name}
                       </Typography>
                     </Box>
-                  </Box>
-
-                  <Box className="my-2">
-                    {role.roleHasPermissions.length == 0 && (<p className="text-xs">The role has no permission.</p>)}
-                    {role.roleHasPermissions.length > 0 && role.roleHasPermissions.slice(0, 4).map(permission => (
-                      <Chip
-                        key={permission} label={permission} color="default" variant="outlined" size="small" className="text-xs mr-1 my-1"
-                        onDelete={() => {
-                          handleDelete(role.id, permission);
-                        }}
-                      />
-                    ))}
-                    {role.roleHasPermissions.length > 4 ?
-                      (
-                        <Box sx={{ mb: 2 }}>
-                          <p className="text-xs"> and {(role.roleHasPermissions.length - 4)} others</p>
-                          <Button variant="text" size="small" onClick={() => setSelectedRole(role)}>... see all</Button>
-                        </Box>
-                      )
-                      : ""
-                    }
                   </Box>
 
                   {selectedRole &&
@@ -305,43 +180,7 @@ export default function RoleManagement() {
           </Container>
 
           {/* Form add new role */}
-          <Dialog
-            open={openAddRole}
-            onClose={() => setOpenAddRole(false)}
-            className="max-w-[500px] mx-auto"
-          >
-            <Tooltip title="Close">
-              <CloseOutlined
-                onClick={() => setOpenAddRole(false)}
-                color="error"
-                className="text-md absolute top-1 right-1 rounded-full hover:opacity-80 hover:bg-red-200 cursor-pointer"
-              />
-            </Tooltip>
 
-            <DialogTitle className="text-center mt-2">Add New Role</DialogTitle>
-            <Divider />
-
-            <DialogContent>
-              <form
-                onSubmit={roleHandleSubmit(AddRole)} className="text-xs">
-                <Box sx={{ my: 3 }}>
-                  <TextField
-                    label="Name" autoFocus color="info" sx={{ maxWidth: 300 }}
-                    placeholder="Enter role name"
-                    {...roleRegister("name", {
-                      required: "Role name is required.",
-                    })}
-                  />
-                </Box>
-
-                <FormHelperText sx={{ color: red[500] }}>{roleErrors.name?.message}</FormHelperText>
-
-                <Box className="flex justify-around my-3">
-                  <Button fullWidth color="success" variant="contained" size="medium" type="submit">+ Add New</Button>
-                </Box>
-              </form>
-            </DialogContent>
-          </Dialog>
 
           {/* Form add permissions into role */}
           <Dialog

@@ -5,7 +5,7 @@ import { toast } from "sonner";
 import Image from "next/image";
 import { useForm, SubmitHandler } from "react-hook-form";
 import dynamic from "next/dynamic";
-import { Post } from "types/interfaces";
+import { ApiResponse, Post, UpdatedPostRequest } from "types/interfaces";
 import { DoneRounded, RotateLeftRounded } from "@mui/icons-material";
 import { Box, Button, FormHelperText, Paper, TextField } from "@mui/material";
 import useS3 from "hooks/useS3";
@@ -15,9 +15,7 @@ const CustomEditor = dynamic(() => {
   return import("@/components/CustomEditor");
 }, { ssr: false });
 
-
-
-const CreatePost = () => {
+export default function EditPost() {
   const [loading, setLoading] = React.useState(true);
   const [post, setPost] = React.useState<Post>();
 
@@ -36,14 +34,31 @@ const CreatePost = () => {
     }
   }, [preview]);
 
-  const AddNewPost = () => {
+  async function UpdatePost(updatedPost: UpdatedPostRequest) {
+    const message = toast.loading("Loading...")
+    try {
+      const res = await fetch(`/api/posts/${post?.id}`, {
+        method: "PUT",
+        body: JSON.stringify(updatedPost)
+      })
 
+      const payload = (await res.json()) as ApiResponse;
+
+      if (payload.ok) {
+        toast.success(payload.message)
+      }
+      toast.error(payload.message)
+
+    } catch (error) {
+      console.log(error);
+    }
+    toast.dismiss(message);
   }
   return (
     <>
       <Paper sx={{ p: 5 }}>
         <form
-          onSubmit={handleSubmit(AddNewPost)}>
+          onSubmit={handleSubmit(UpdatePost)}>
           <Box className="my-3">
             <label className="font-semibold">Tiêu đề bài viết:</label>
             <TextField
@@ -56,11 +71,30 @@ const CreatePost = () => {
               className="min-w-[300px] border rounded-md p-[10px] cursor-pointer shadow-lg w-full"
               placeholder="Nhập tiêu đề bài viết "
             />
-            <FormHelperText className="text-red-700 ml-2">{errors.title?.message}</FormHelperText>
+            <FormHelperText className="text-red-700 px-2 mt-2">{errors.title?.message}</FormHelperText>
+          </Box>
+
+          <Box className="my-3 flex justify-between">
+            <Box>
+              <label className="font-semibold">Loại bài viết:</label>
+              <TextField
+                disabled
+                defaultValue={post?.category}
+                className="min-w-[300px] border rounded-md p-[10px] cursor-pointer shadow-lg w-full"
+              />
+            </Box>
+            <Box>
+              <label className="font-semibold">Tác giả:</label>
+              <TextField
+                disabled
+                defaultValue={post?.user}
+                className="min-w-[300px] border rounded-md p-[10px] cursor-pointer shadow-lg w-full"
+              />
+            </Box>
           </Box>
 
           {/* Upload and display post photo */}
-          <Box className="my-3 flex justify-between items-center">
+          {/* <Box className="my-3 flex justify-between items-center">
             <Box>
               {preview ?
                 <Image src={`${previewUrl}`}
@@ -85,7 +119,7 @@ const CreatePost = () => {
               }
             </Box>
             <Box><ButtonUpload /></Box>
-          </Box>
+          </Box> */}
 
           <Box className="my-3">
             <label className="font-semibold">Mô tả ngắn:</label>
@@ -96,25 +130,26 @@ const CreatePost = () => {
               className="min-w-[300px] border rounded-md p-[10px] cursor-pointer shadow-lg w-full"
               placeholder="Nhập mô tả ngắn"
             />
-            <FormHelperText className="text-red-700 ml-2 ">{errors.description?.message}</FormHelperText>
+            <FormHelperText className="text-red-700 px-2 mt-2 ">{errors.description?.message}</FormHelperText>
           </Box>
 
           <Box className="my-3">
             <label className="font-semibold">Nội dung bài viết:</label>
-            <CustomEditor
+            <TextField
               {...register("content", {
                 required: "Vui lòng điền thông tin."
               })}
-              initialData={post?.content}
+              className="min-w-[300px] border rounded-md p-[10px] cursor-pointer shadow-lg w-full"
+              value={post?.content}
               placeholder="Nhập nội dung bài viết"
             />
-            <FormHelperText className="text-red-700 ml-2 ">{post?.content.length === 0 ? errors.content?.message : ""}</FormHelperText>
+            <FormHelperText className="text-red-700 px-2 mt-2 ">{post?.content.length === 0 ? errors.content?.message : ""}</FormHelperText>
           </Box>
 
           <Box className="flex justify-around mb-2 mt-10 w-1/2 mx-auto">
             <Button
               type="submit" variant="contained" size="medium" className="w-full mx-1 p-2 text-white bg-[#008200] hover:opacity-85"
-              startIcon={<DoneRounded fontSize='medium' />} >Thêm bài viết
+              startIcon={<DoneRounded fontSize='medium' />} >Cập nhật
             </Button>
             <Button
               type="reset" variant="contained" size="medium" className="w-full mx-1 p-2 text-white bg-[#0C2340] hover:opacity-85"
@@ -126,5 +161,3 @@ const CreatePost = () => {
     </>
   )
 }
-
-export default CreatePost;

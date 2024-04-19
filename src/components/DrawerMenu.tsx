@@ -33,13 +33,13 @@ export default function DrawerMenu() {
 	const menu = [
 		createMenu("Trang Quản Trị", AppsOutlined, "/dashboard", "app.view"),
 
-		createMenu("Thông Tin Cá Nhân", AccountBoxOutlined, "/dashboard/employee", "profile.view"),
+		createMenu("Thông Tin Cá Nhân", AccountBoxOutlined, "/dashboard/user", "profile.view"),
 
-		createMenu("Nhân Viên", BadgeOutlined, "/dashboard/employees", "emp.view", [
-			createMenu('Quản lý', ManageSearchRounded, '/dashboard/employees/management', 'emp.view'),
-			createMenu('Tạo mới', AddCircleOutlineOutlined, '/dashboard/employees/create', 'post.create'),
-			createMenu('Cập nhật', EditNoteOutlined, '/dashboard/employees/edit', 'post.update')
-		]),
+		createMenu("Nhân Viên", BadgeOutlined, "/dashboard/users", "emp.view",
+			// createMenu('Quản lý', ManageSearchRounded, '/dashboard/users/management', 'emp.view'),
+			// createMenu('Tạo mới', AddCircleOutlineOutlined, '/dashboard/users/create', 'post.create'),
+			// createMenu('Cập nhật', EditNoteOutlined, '/dashboard/users/edit', 'post.update')
+		),
 
 		createMenu('Bài Viết', ArticleOutlined, '/dashboard/posts', 'post.view', [
 			createMenu('Quản lý', ManageSearchRounded, '/dashboard/posts/management', 'post.view'),
@@ -53,7 +53,7 @@ export default function DrawerMenu() {
 			createMenu('Cập nhật', EditNoteOutlined, '/dashboard/recruitment/edit', 'recruitment.update')
 		]),
 
-		createMenu("Vai Trò", ManageAccountsOutlined, "/dashboard/roles", "role.view"),
+		//createMenu("Vai Trò", ManageAccountsOutlined, "/dashboard/roles", "role.view"),
 
 		createMenu('Cài đặt', PasswordOutlined, '/dashboard/general-settings', 'setting.view'),
 	]

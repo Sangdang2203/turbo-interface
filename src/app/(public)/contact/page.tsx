@@ -24,18 +24,16 @@ const ContactPage = () => {
 
 
   return (
-    <Box textAlign="center">
+    <Box>
       <Image src={contactBanner ? contactBanner : ""} alt="cloudBanner" className="w-full max-h-[35rem] opacity-80 -mt-6 "></Image>
 
       <Grid xs={12} md={12} lg={12} xl={12} className=" mt-6 py-10 w-1/2 mx-auto">
         <Paper className="p-10">
-          <Box className="mb-10">
+          <Box className="mb-10 text-center">
             <Typography className="text-[2rem] font-extralight">Liên hệ với chúng tôi</Typography>
             <Typography paragraph>Luôn lắng nghe những ý kiến đóng góp từ quý khách hàng.</Typography>
           </Box>
-          <form
-            // onSubmit={handleSubmit(AddEmployee)}
-            className="text-sm font-medium">
+          <form className="text-sm font-medium">
 
             <Box className="my-3">
               <TextField
@@ -50,7 +48,7 @@ const ContactPage = () => {
                     message: "Điền tối đa 50 ký tự.",
                   },
                 })}
-                className="max-w-[650px] border rounded-md p-[10px] cursor-pointer border-slate-500 w-full hover:shadow-lg duration-500"
+                className="max-w-[650px] shadow-lg rounded-md p-[10px] cursor-pointer border-slate-500 w-full hover:shadow-lg duration-500"
                 placeholder="Họ tên..."
               />
               <FormHelperText className="text-danger ">
@@ -67,7 +65,7 @@ const ContactPage = () => {
                     message: "Email sai định dạng.",
                   },
                 })}
-                className="max-w-[650px] border rounded-md p-[10px] cursor-pointer border-slate-500 w-full hover:shadow-lg duration-500"
+                className="max-w-[650px] shadow-lg rounded-md p-[10px] cursor-pointer border-slate-500 w-full hover:shadow-lg duration-500"
                 placeholder="Email..."
               />
               <FormHelperText className="text-danger ">
@@ -84,7 +82,7 @@ const ContactPage = () => {
                     message: "Điền đủ 10 số.",
                   },
                 })}
-                className="max-w-[650px] border rounded-md p-[10px] cursor-pointer border-slate-500 w-full hover:shadow-lg duration-500"
+                className="max-w-[650px] shadow-lg rounded-md p-[10px] cursor-pointer border-slate-500 w-full hover:shadow-lg duration-500"
                 placeholder="Số điện thoại..."
               />
               <FormHelperText className="text-danger ">
@@ -98,7 +96,7 @@ const ContactPage = () => {
                   required: "Vui lòng điền thông tin.",
                 })}
                 rows={5}
-                className="max-w-[650px] border rounded-md p-[10px] cursor-pointer border-slate-500 w-full hover:shadow-lg duration-500"
+                className="max-w-[650px] h-[100px] shadow-lg rounded-md p-[10px] cursor-pointer border-slate-500 w-full hover:shadow-lg duration-500"
                 placeholder="Vui lòng để lại tin nhắn..."></textarea>
               <FormHelperText className="text-danger ">
                 {errors.message?.message}
@@ -115,7 +113,7 @@ const ContactPage = () => {
         </Paper>
       </Grid>
 
-      <Container>
+      {/* <Box>
         <Grid container>
           <Grid item xs={12} md={6} className="text-center">
             <h1 className="text-[2.5rem] font-serif" >Make what life needs next</h1>
@@ -126,7 +124,7 @@ const ContactPage = () => {
             </Button>
           </Grid>
           <Grid item xs={12} md={6} className="">
-            {/* <Image src={logoTurbo} alt="" className="w-auto h-full float-end"></Image> */}
+            
             <div className="e-hosted-video elementor-wrapper elementor-open-inline">
               <video
                 className="elementor-video"
@@ -175,7 +173,8 @@ const ContactPage = () => {
             className="mt-4 hover:text-[#FFC72C] duration-500">Explore our services
           </Button>
         </Grid>
-      </Container >
+      </Box > */}
+
     </Box>
   )
 }

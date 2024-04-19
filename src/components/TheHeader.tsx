@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import { Close, MenuRounded, KeyboardArrowDownRounded } from "@mui/icons-material";
 import logoTurbo from "../../public/images/logoTurbo.png";
 import Image from "next/image";
-import { Box, Button, FormControl, Menu, MenuItem, Select, SelectChangeEvent, Typography } from "@mui/material";
+import { Box, Button, Menu, MenuItem, Select, SelectChangeEvent, Typography } from "@mui/material";
 
 const navLinks = [
   { path: "/home", name: "trang chủ" },
@@ -104,7 +104,7 @@ export default function TheHeader() {
             {subSolutonLinks.map((sub) => {
               return (
                 <MenuItem key={sub.path}>
-                  <Link href={sub.path} className="capitalize" target="_blank">{sub.name}</Link>
+                  <Link href={sub.path} className="capitalize" >{sub.name}</Link>
                 </MenuItem>
               )
             })}
