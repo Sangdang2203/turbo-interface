@@ -1,39 +1,41 @@
-import { ApiResponse } from "types/interfaces";
+import { ApiResponse, Post } from "types/interfaces";
 
-export const fetchUsers = async () => {
+export const fetchUsers = async (token: string) => {
 	const response = await fetch("/api/users", {
 		method: "GET",
+		headers: {
+			Authorization: `Bearer ${token}`,
+		},
 	});
 	return response.json() as Promise<ApiResponse>;
 };
 
-export const fetchAuthorities = async () => {
+export const fetchAuthorities = async (token: string) => {
 	const response = await fetch("/api/roles", {
 		method: "GET",
+		headers: {
+			Authorization: `Bearer ${token}`,
+		},
 	});
 	return response.json() as Promise<ApiResponse>;
 };
 
-export const fetchCategories = async () => {
+export const fetchCategories = async (token: string) => {
 	const response = await fetch("/api/categories", {
 		method: "GET",
+		headers: {
+			Authorization: `Bearer ${token}`,
+		},
 	});
 	return response.json() as Promise<ApiResponse>;
 };
 
-export const fetchPosts = async () => {
+export const fetchPosts = async (token: string) => {
 	const response = await fetch("/api/posts", {
 		method: "GET",
+		headers: {
+			Authorization: `Bearer ${token}`,
+		},
 	});
 	return response.json() as Promise<ApiResponse>;
 };
-
-// export const fetchChangeStatus = async (employeeId: number) => {
-// 	const response = await fetch(
-// 		process.env.NEXT_PUBLIC_API_URL + `/Employee/${employeeId}/ChangeStatus`,
-// 		{
-// 			method: "PUT",
-// 			cache: "no-cache",
-// 		}
-// 	);
-// };

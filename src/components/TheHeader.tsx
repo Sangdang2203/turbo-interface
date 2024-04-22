@@ -30,11 +30,15 @@ const subSoftwareLinks = [
 ]
 
 const subSolutonLinks = [
-  { path: "/private-cloud", name: "private cloud" },
-  { path: "/cloud-backup-recovery", name: "backup & recovery" },
-  { path: "/ai-smart-warning", name: "AI smart warning" },
-  { path: "/ai-video-analytics", name: "AI video analytics" },
-  { path: "/smart-cloud-camera", name: "smart cloud camera" }
+  { path: "https://v2.aivisionviet.vn/ai-video-search", name: "AI - Video Search" },
+  { path: "https://v2.aivisionviet.vn/nhan-dien-khuon-mat", name: "AI - Nhận Diện Khuôn Mặt" },
+  { path: "https://v2.aivisionviet.vn/nhan-dien-bien-so", name: "AI - Nhận Dạng Biển Số" },
+  { path: "https://v2.aivisionviet.vn/nhan-dang-vat-the", name: "AI - Nhận Dạng Vật Thể" },
+  { path: "https://v2.aivisionviet.vn/kiem-soat-luu-luong", name: "AI - Kiểm Soát Lưu Lượng" },
+  { path: "https://v2.aivisionviet.vn/phat-hien-bat-thuong", name: "AI - Nhận Diện Bất Thường" },
+  { path: "https://aivisionviet.vn/vaidio-command-center", name: "AI - Quản Lý Tập Trung" },
+  { path: "https://aivisionviet.vn/vaidio-data", name: "AI - Quản Lý Dữ Liệu" }
+
 ]
 
 export default function TheHeader() {
@@ -85,34 +89,34 @@ export default function TheHeader() {
         </div>
         {/* nav pc */}
         <Box className="hidden text-[1rem] lg:flex justify-between items-center uppercase">
-          <Button><Link href="/home" className="uppercase p-3 hover:text-[#378CE7]">trang chủ</Link></Button>
-          <Button><Link href="/about-us" className="uppercase p-3 hover:text-[#378CE7]">giới thiệu</Link></Button>
+          <Button href="/home" className="uppercase no-underline p-3 hover:text-[#378CE7]"> trang chủ </Button>
+          <Button href="/about-us" className="uppercase no-underline p-3 hover:text-[#378CE7]"> giới thiệu </Button>
 
-          <Button onClick={handleClickService} endIcon={<KeyboardArrowDownRounded />} className="uppercase p-3 hover:text-[#378CE7]">dịch vụ</Button>
+          <Button onClick={handleClickService} endIcon={<KeyboardArrowDownRounded />} className="uppercase p-3 hover:text-[#378CE7]"> dịch vụ </Button>
           <Menu id="services" anchorEl={anchorEl} open={openService} onClose={handleCloseService} MenuListProps={{ 'aria-labelledby': 'basic-button', }} >
             {subServicesLinks.map((sub) => {
               return (
                 <MenuItem key={sub.path}>
-                  <Link href={sub.path} className="capitalize" target="_blank">{sub.name}</Link>
+                  <Link href={sub.path} className="capitalize no-underline" target="_blank">{sub.name}</Link>
                 </MenuItem>
               )
             })}
           </Menu>
 
-          <Button onClick={handleClickSolution} endIcon={<KeyboardArrowDownRounded />} className="uppercase p-3 hover:text-[#378CE7]">giải pháp</Button>
+          <Button onClick={handleClickSolution} endIcon={<KeyboardArrowDownRounded />} className="uppercase no-underline p-3 hover:text-[#378CE7]">giải pháp</Button>
           <Menu id="services" anchorEl={anchorE3} open={openSolution} onClose={handleCloseSolution} MenuListProps={{ 'aria-labelledby': 'basic-button', }} >
             {subSolutonLinks.map((sub) => {
               return (
                 <MenuItem key={sub.path}>
-                  <Link href={sub.path} className="capitalize" >{sub.name}</Link>
+                  <Link href={sub.path} className="capitalize no-underline" >{sub.name}</Link>
                 </MenuItem>
               )
             })}
           </Menu>
 
-          <Button><Link href="/recruitment" className="uppercase p-3 hover:text-[#378CE7]">tuyển dụng</Link></Button>
-          <Button><Link href="/news" className="uppercase p-3 hover:text-[#378CE7]">tin tức</Link></Button>
-          <Button><Link href="/contact" className="uppercase p-3 hover:text-[#378CE7]">liên hệ</Link></Button>
+          <Button href="/recruitment" className="uppercase no-underline p-3 hover:text-[#378CE7]"> tuyển dụng </Button>
+          <Button href="/news" className="uppercase no-underline p-3 hover:text-[#378CE7]"> tin tức </Button>
+          <Button href="/contact" className="uppercase no-underline p-3 hover:text-[#378CE7]">  liên hệ </Button>
 
         </Box>
 

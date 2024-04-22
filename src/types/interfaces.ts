@@ -80,6 +80,8 @@ export interface Post {
 	image: string;
 	description: string;
 	content: string;
+	createAt: string;
+	updateAt: string;
 	status: string;
 }
 

@@ -3,16 +3,19 @@
 import React from "react";
 import { useSession } from "next-auth/react";
 import Loading from "@/components/Loading";
-import { Box, Button, IconButton, Grid, Paper, Switch, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, TextField, Tooltip, Dialog, DialogContent, DialogTitle, FormHelperText, Divider } from "@mui/material";
+import Select, { SelectChangeEvent } from '@mui/material/Select';
+import { Box, Button, IconButton, Grid, Paper, Switch, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, TextField, Tooltip, Dialog, DialogContent, DialogTitle, FormHelperText, Divider, Chip, FormControl, InputLabel, MenuItem, OutlinedInput } from "@mui/material";
 import { CloseOutlined, DoneRounded, DriveFileRenameOutline, RotateLeftRounded, SearchOutlined } from "@mui/icons-material";
-import { fetchUsers } from "app/methods/method";
+import { fetchAuthorities, fetchUsers } from "app/methods/method";
 import { ApiResponse, Authority, CreateUserRequest, UpdateUserRequest, User } from "types/interfaces";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
+import theme from "theme";
 
 export default function UserManagement() {
-  const [loading, setLoading] = React.useState(false);
+  const [loading, setLoading] = React.useState(true);
   const [users, setUsers] = React.useState<User[]>([]);
+  //const [authority, setAuthority] = React.useState<string[]>([]);
   const [authorities, setAuthorities] = React.useState<Authority[]>([]);
   const [user, setUser] = React.useState<User>();
   const [modalAdd, setModalAdd] = React.useState(false)
@@ -52,79 +55,110 @@ export default function UserManagement() {
 
   // Handle Search
   function handleSearch(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    const nameInput = document.getElementById(
-      "searchInput"
-    ) as HTMLInputElement;
-    const name = nameInput.value.trim();
+    if (session) {
+      event.preventDefault();
+      const nameInput = document.getElementById(
+        "searchInput"
+      ) as HTMLInputElement;
+      const name = nameInput.value.trim();
 
-    if (name === "") {
-      fetchUsers().then(data => {
-        if (data.ok) {
-          setUsers(data.data.reverse());
-        }
-      });
-    } else {
-      const filterEmployees = users.filter(
-        user =>
-          user.lastName.toLowerCase().includes(name.toLowerCase()) ||
-          user.firstName.toLowerCase().includes(name.toLowerCase()) ||
-          user.email.toLowerCase().includes(name.toLowerCase()) ||
-          user.authority.includes(name)
-      );
+      if (name === "") {
+        fetchUsers(session.user.id_token).then(data => {
+          if (data.ok) {
+            setUsers(data.data.reverse());
+          }
+        });
+      } else {
+        const filterEmployees = users.filter(
+          user =>
+            user.lastName.includes(name) ||
+            user.firstName.includes(name) ||
+            user.email.includes(name)
+        );
 
-      setUsers(filterEmployees);
+        setUsers(filterEmployees);
+      }
     }
   }
 
   async function AddUser(user: CreateUserRequest) {
-    try {
-      const message = toast.loading("Loading ...");
-      const res = await fetch("/api/users", {
-        method: "POST",
-        body: JSON.stringify(user),
-      });
+    if (session) {
+      try {
+        // user.authority = authority;
+        const message = toast.loading("Loading ...");
+        const res = await fetch("/api/users", {
+          method: "POST",
+          body: JSON.stringify(user),
+          headers: {
+            Authorization: `Bearer ${session.user.id_token}`,
+            "Content-Type": "application/json",
+          },
+        });
 
-      const payload = (await res.json()) as ApiResponse;
+        const payload = (await res.json()) as ApiResponse;
 
-      if (payload.ok) {
-        const response = await fetchUsers();
-        setUsers(await response.data.reverse());
-        setModalAdd(false);
-        toast.success(payload.message);
-      } else {
-        toast.error(payload.message);
+        if (payload.ok) {
+          const response = await fetchUsers(session.user.id_token);
+          setUsers(await response.data.reverse());
+          setModalAdd(false);
+          toast.success(payload.message);
+        } else {
+          toast.error(payload.message);
+        }
+        toast.dismiss(message);
+
+      } catch (error) {
+        console.log("Error add user: ", error);
+        toast.error("Oops! Error while trying to add user.");
       }
-      toast.dismiss(message);
-
-    } catch (error) {
-      console.log("Error add user: ", error);
-      toast.error("Oops! Error while trying to add user.");
     }
   }
 
+  const ITEM_HEIGHT = 48;
+  const ITEM_PADDING_TOP = 8;
+  const MenuProps = {
+    PaperProps: {
+      style: {
+        maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+        width: 250,
+      },
+    },
+  };
+
+  // const handleChange = (event: SelectChangeEvent<typeof authority>) => {
+  //   const {
+  //     target: { value },
+  //   } = event;
+  //   setAuthority(
+  //     // On autofill we get a stringified value.
+  //     typeof value === 'string' ? value.split(',') : value,
+  //   );
+  // };
+
   async function UpdateUser(updatedUser: UpdateUserRequest) {
-    const message = toast.loading("Loading...")
-    try {
-      const res = await fetch(`/api/posts/${user?.id}`, {
-        method: "PUT",
-        body: JSON.stringify(updatedUser)
-      })
+    if (session) {
+      const message = toast.loading("Loading...")
+      try {
+        const res = await fetch(`/api/posts/${user?.id}`, {
+          method: "PUT",
+          body: JSON.stringify(updatedUser)
+        })
 
-      const payload = (await res.json()) as ApiResponse;
+        const payload = (await res.json()) as ApiResponse;
 
-      if (payload.ok) {
-        const response = await fetchUsers();
-        setUsers(await response.data.reverse());
-        setModalUpdate(false);
-        toast.success(payload.message);
+        if (payload.ok) {
+          const response = await fetchUsers(session.user.id_token);
+          setUsers(await response.data.reverse());
+          setModalUpdate(false);
+          toast.success(payload.message);
+        }
+        toast.error(payload.message)
+
+      } catch (error) {
+        console.log(error);
       }
-      toast.error(payload.message)
-
-    } catch (error) {
-      console.log(error);
+      toast.dismiss(message);
     }
-    toast.dismiss(message);
   }
   // Handle Change Status
   // function handleChangeStatus(id: string) {
@@ -155,16 +189,26 @@ export default function UserManagement() {
 
   // fetch data
   React.useEffect(() => {
-    Promise.all([fetchUsers()]).then(data => {
-      const [resUser] = data;
+    if (session) {
+      Promise.all([
+        fetchUsers(session.user.id_token),
+        fetchAuthorities(session.user.id_token)
+      ])
+        .then(data => {
+          const [resUser, resAuth] = data;
 
-      if (resUser.ok) {
-        setUsers(resUser.data.reverse());
-      }
+          if (resUser.ok) {
+            setUsers(resUser.data.reverse());
+          }
 
-      setLoading(false);
-    });
-  }, []);
+          if (resAuth.ok) {
+            setAuthorities(resAuth.data);
+          }
+
+          setLoading(false);
+        });
+    }
+  }, [session]);
 
   return (
     <Box>
@@ -178,9 +222,6 @@ export default function UserManagement() {
                 <Button variant="contained" className="uppercase py-2 px-3 text-white bg-blue-500 hover:opacity-85" onClick={() => setModalAdd(true)}>
                   + Add
                 </Button>
-                <Button variant="contained" className="uppercase py-2 px-3 text-white bg-blue-500 hover:opacity-85" onClick={() => setModalUpdate(true)}>
-                  Update
-                </Button>
               </Grid>
               <Grid item xs={12} sm={6}>
                 <form
@@ -189,8 +230,8 @@ export default function UserManagement() {
                   className="flex justify-end items-center my-3 relative">
                   <TextField
                     size="small" type="text" name="search" id="searchInput"
-                    className="border shadow-md text-sm rounded-lg min-w-[300px] min-h-[40px] cursor-pointer mr-3 p-2"
-                    placeholder="Enter name to search"
+                    className="shadow-md text-sm rounded-lg min-w-[300px] min-h-[40px] cursor-pointer mr-3"
+                    placeholder="Enter email | name to search"
                   />
                   <div className="absolute inset-y-0 right-0 flex items-center">
                     <IconButton className="relative mr-5">
@@ -209,7 +250,6 @@ export default function UserManagement() {
               <Table className="mt-3" sx={{ minWidth: 650 }} size="small">
                 <TableHead className="bg-slate-300">
                   <TableRow>
-                    <TableCell align="center" className="text-sm"> # </TableCell>
                     <TableCell align="center" className="text-sm"> Họ tên </TableCell>
                     <TableCell align="center" className="text-sm"> Email </TableCell>
                     <TableCell align="center" className="text-sm"> Vai trò </TableCell>
@@ -224,24 +264,24 @@ export default function UserManagement() {
                       users
                         .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                         .map(user => (
-                          <TableRow key={user.id} sx={{ "&:last-child td, &:last-child th": { border: 0 }, }}>
-                            <TableCell align="center"> {user.id} </TableCell>
+                          <TableRow key={user.id} className="hover:bg-slate-100 cursor-pointer" sx={{ "&:last-child td, &:last-child th": { border: 0 }, }}>
                             <TableCell align="center"> {user.lastName + " " + user.firstName} </TableCell>
-                            <TableCell align="center">{user.email}</TableCell>
+                            <TableCell align="center"> {user.email} </TableCell>
+                            <TableCell align="center"> {user.authority} </TableCell>
                             <TableCell align="center">
-                              <Switch
-                                size="small" color="success" className="cursor-pointer"
-                                checked={user.activated === true ? true : false}
-                                disabled={user.authority === "ROLE_ADMIN" ? true : false}
-                              />
+                              <Tooltip placement="right-start" title={user.activated === true ? "Disable" : "Active"}>
+                                <Switch
+                                  size="small" color="success" className="cursor-pointer"
+                                  checked={user.activated === true ? true : false}
+                                  disabled={user.authority === "ROLE_ADMIN" ? true : false}
+                                />
+                              </Tooltip>
                             </TableCell>
                             <TableCell align="center">
-                              <Tooltip title="Edit">
-                                <Button
-                                  type="button" variant="text" color="success"
-                                  endIcon={<DriveFileRenameOutline fontSize="medium" />}
-                                  onClick={() => { setUser(user), setModalUpdate(true) }}
-                                ></Button>
+                              <Tooltip title="Edit" placement="right-start">
+                                <IconButton color="success" onClick={() => { setUser(user), setModalUpdate(true) }}>
+                                  <DriveFileRenameOutline fontSize="small" />
+                                </IconButton>
                               </Tooltip>
                             </TableCell>
                           </TableRow>
@@ -289,8 +329,7 @@ export default function UserManagement() {
             onSubmit={handleUpdate(UpdateUser)}>
             <Box className="my-3">
               <TextField
-                disabled
-                className="min-w-[300px] border rounded-md p-[10px] cursor-pointer shadow-lg w-full"
+                className="min-w-[300px] rounded-md  cursor-pointer shadow-lg w-full"
                 defaultValue={user?.login}
               />
             </Box>
@@ -304,7 +343,7 @@ export default function UserManagement() {
                 })}
                 type="text"
                 value={user?.lastName}
-                className="min-w-[300px] border rounded-md p-[10px] cursor-pointer shadow-lg w-full"
+                className="min-w-[300px] rounded-md  cursor-pointer shadow-lg w-full"
                 placeholder="Nhập họ"
               />
               <FormHelperText className="text-red-700 px-2 mt-2 ">{errorsUpdate.lastName?.message}</FormHelperText>
@@ -318,19 +357,19 @@ export default function UserManagement() {
                 })}
                 type="text"
                 value={user?.firstName}
-                className="min-w-[300px] border rounded-md p-[10px] cursor-pointer shadow-lg w-full"
+                className="min-w-[300px] rounded-md  cursor-pointer shadow-lg w-full"
                 placeholder="Nhập tên"
               />
               <FormHelperText className="text-red-700 px-2 mt-2 ">{errorsUpdate.firstName?.message}</FormHelperText>
             </Box>
 
-            <Box>
+            {/* <Box>
               <TextField
                 disabled
                 value={user?.authority}
-                className="min-w-[300px] border rounded-md p-[10px] cursor-pointer shadow-lg w-full"
+                className="min-w-[300px] rounded-md  cursor-pointer shadow-lg w-full"
               />
-            </Box>
+            </Box> */}
 
             <Box className="my-3">
               <TextField
@@ -340,8 +379,7 @@ export default function UserManagement() {
                 })}
                 type="text"
                 value={user?.email}
-                // value="aaaa"
-                className="min-w-[300px] border rounded-md p-[10px] cursor-pointer shadow-lg w-full"
+                className="min-w-[300px] rounded-md  cursor-pointer shadow-lg w-full"
                 placeholder="Nhập địa chỉ email"
               />
               <FormHelperText className="text-red-700 px-2 mt-2 ">{errorsUpdate.email?.message}</FormHelperText>
@@ -368,8 +406,8 @@ export default function UserManagement() {
                     minLength: { value: 8, message: "Tối thiểu 8 ký tự.", },
                     maxLength: { value: 50, message: "Tối đa 50 ký tự.", },
                   })}
-                  type="text"
-                  className="min-w-[300px] border rounded-md p-[10px] cursor-pointer shadow-lg w-full"
+                  type="text" size="small" color="primary"
+                  className="min-w-[300px] rounded-md  cursor-pointer shadow-lg w-full"
                   placeholder="Nhập tên đăng nhập"
                 />
                 <FormHelperText className="text-red-700 px-2 mt-2 ">{errors.login?.message}</FormHelperText>
@@ -382,8 +420,8 @@ export default function UserManagement() {
                     minLength: { value: 2, message: "Tối thiểu 2 ký tự.", },
                     maxLength: { value: 10, message: "Tối đa 10 ký tự.", },
                   })}
-                  type="text"
-                  className="min-w-[300px] border rounded-md p-[10px] cursor-pointer shadow-lg w-full"
+                  type="text" size="small" color="primary"
+                  className="min-w-[300px] rounded-md  cursor-pointer shadow-lg w-full"
                   placeholder="Nhập họ"
                 />
                 <FormHelperText className="text-red-700 px-2 mt-2 ">{errors.lastName?.message}</FormHelperText>
@@ -396,23 +434,52 @@ export default function UserManagement() {
                     minLength: { value: 8, message: "Tối thiểu 8 ký tự.", },
                     maxLength: { value: 50, message: "Tối đa 50 ký tự.", },
                   })}
-                  type="text"
-                  className="min-w-[300px] border rounded-md p-[10px] cursor-pointer shadow-lg w-full"
+                  type="text" size="small" color="primary"
+                  className="min-w-[300px] cursor-pointer shadow-lg w-full"
                   placeholder="Nhập tên"
                 />
                 <FormHelperText className="text-red-700 px-2 mt-2 ">{errors.firstName?.message}</FormHelperText>
               </Box>
               <Box>
+                {/* <FormControl sx={{ m: 1, width: 300 }}>
+                  <InputLabel id="demo-multiple-chip-label">Quyền</InputLabel>
+                  <Select
+                    className="min-w-[300px]"
+                    labelId="demo-multiple-chip-label"
+                    id="demo-multiple-chip"
+                    multiple
+                    value={authority}
+                    onChange={handleChange}
+                    input={<OutlinedInput id="select-multiple-chip" label="Chip" />}
+                    renderValue={(selected) => (
+                      <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
+                        {selected.map((value) => (
+                          <Chip key={value} label={value} />
+                        ))}
+                      </Box>
+                    )}
+                    MenuProps={MenuProps}
+                  >
+                    {authorities.map((item) => (
+                      <MenuItem
+                        key={item.name}
+                        value={item.name}
+                      >
+                        {item.name}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl> */}
                 <select
                   {...register("authority")}
-                  className="min-w-[300px] w-full border rounded-md p-[10px] cursor-pointer shadow-lg"
+                  className="min-w-[300px] w-full p-[12px] rounded-md cursor-pointer shadow-lg"
                   id="authority">
                   <option value="">Vui lòng bấm chọn</option>
-                  {authorities && authorities.filter(pre => pre.name != "ROLE_ADMIN").map(authority => (
+                  {authorities && authorities.filter(pre => pre.name !== "ROLE_ADMIN").map(item => (
                     <option
-                      key={authority.name}
-                      value={authority.name}>
-                      {authority.name}
+                      key={item.name}
+                      value={item.name}>
+                      {item.name}
                     </option>
                   ))}
                 </select>
@@ -425,8 +492,8 @@ export default function UserManagement() {
                     required: "Nhập đầy đủ thông tin.",
                     pattern: { value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i, message: "Phải đúng định dạng email.", },
                   })}
-                  type="text"
-                  className="min-w-[300px] border rounded-md p-[10px] cursor-pointer shadow-lg w-full"
+                  type="text" size="small" color="primary"
+                  className="min-w-[300px] rounded-md cursor-pointer shadow-lg w-full"
                   placeholder="Nhập địa chỉ email"
                 />
                 <FormHelperText className="text-red-700 px-2 mt-2 ">{errors.email?.message}</FormHelperText>

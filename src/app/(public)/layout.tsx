@@ -30,7 +30,6 @@ export default function RootLayout(props: { children: React.ReactNode }) {
             <CssBaseline />
             <header><TheHeader /></header>
             <main className="background-body"> {props.children} <SpeedDial /> </main>
-            <div>  </div>
             <footer className='background-footer'> <TheFooter /> </footer>
           </ThemeProvider>
         </AppRouterCacheProvider>

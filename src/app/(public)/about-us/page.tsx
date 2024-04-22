@@ -36,13 +36,13 @@ const images = [
 const AboutPage = () => {
 
   return (
-    <Container >
-      <Box my={5} textAlign="center">
+    <Box >
+      <Container className="text-center">
         <Link href="/" className="text-[4rem] font-extrabold text-blue-900">Turbo</Link>
         <Typography className="text-[2rem] font-extralight">chuyên cung cấp các dịch vụ, giải pháp AI (trí tuệ nhân tạo),<br /> điện toán đám mây hàng đầu Việt Nam.</Typography>
-      </Box>
+      </Container>
 
-      <Box sx={{ width: "100%" }}>
+      <Container sx={{ width: "100%", my: 5 }}>
         <ImageList variant="masonry" cols={3} gap={8}>
           {images.map((item) => (
             <ImageListItem key={item.img}>
@@ -56,6 +56,10 @@ const AboutPage = () => {
             </ImageListItem>
           ))}
         </ImageList>
+      </Container>
+
+      <Box className='__theme h-[500px]'>
+        <p>aaaa</p>
       </Box>
 
 
@@ -75,7 +79,7 @@ const AboutPage = () => {
           <Button className="btn-grad w-1/3 my-3 hover:opacity-80" href="https://www.youtube.com/@turbosolutions506" target="_blank" endIcon={<OndemandVideoRounded />}>Xem thêm tại đây</Button>
         </Grid>
       </Grid>
-    </Container >
+    </Box >
   )
 }
 

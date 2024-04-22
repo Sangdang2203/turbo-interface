@@ -7,39 +7,18 @@ declare module "next-auth" {
 	 */
 	interface Session {
 		user: {
-			id: number;
-			fullname: string;
-			email: string;
-			token: string;
-			role: {
-				name: string;
-				permissions: string[];
-			};
+			id_token: string;
 		};
 	}
 
 	interface User {
-		id: number;
-		fullname: string;
-		email: string;
-		token: string;
-		role: {
-			name: string;
-			permissions: string[];
-		};
+		id_token: string;
 	}
 }
 
 declare module "next-auth/jwt" {
 	interface JWT {
 		/** This is an example. You can find me in types/next-auth.d.ts */
-		id: number;
-		fullname: string;
-		email: string;
-		token: string;
-		role: {
-			name: string;
-			permissions: string[];
-		};
+		id_token: string;
 	}
 }

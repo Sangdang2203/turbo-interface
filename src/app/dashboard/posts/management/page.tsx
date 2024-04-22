@@ -10,31 +10,32 @@ import { toast } from 'sonner'
 import * as React from 'react'
 import { ApiResponse, Post } from 'types/interfaces'
 import { fetchPosts } from 'app/methods/method'
+import { useSession } from 'next-auth/react'
 
 export default function PostManagement() {
   const [loading, setLoading] = React.useState(false);
   const [posts, setPosts] = React.useState<Post[]>([])
   const [page, setPage] = React.useState(0)
   const [rowsPerPage, setRowsPerPage] = React.useState(10)
-  const router = useRouter()
+  const { data: session } = useSession();
 
   function handleSearch(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    const nameInput = document.getElementById(
-      "searchInput"
-    ) as HTMLInputElement;
-    const name = nameInput.value.trim();
+    if (session) {
+      event.preventDefault();
+      const nameInput = document.getElementById(
+        "searchInput"
+      ) as HTMLInputElement;
+      const name = nameInput.value.trim();
 
-    if (name === "") {
-      fetchPosts().then(res => setPosts(res.data));
-    } else {
-      const filterPosts = posts.filter(
-        post =>
-          post.title.toLowerCase().includes(name.toLowerCase()) ||
-          post.user.toLowerCase().includes(name.toLowerCase())
-      );
+      if (name === "") {
+        fetchPosts(session.user.id_token).then(res => setPosts(res.data));
+      } else {
+        const filterPosts = posts.filter(
+          post => post.title.includes(name)
+        );
 
-      setPosts(filterPosts);
+        setPosts(filterPosts);
+      }
     }
   }
 
@@ -54,15 +55,17 @@ export default function PostManagement() {
   };
 
   React.useEffect(() => {
-    Promise.all([fetchPosts()])
-      .then(data => {
-        const [resPost] = data;
-        if (resPost.ok) {
-          setPosts(resPost.data.reverse());
-        }
-      })
-    setLoading(false);
-  }, []);
+    if (session) {
+      Promise.all([fetchPosts(session.user.id_token)])
+        .then(data => {
+          const [resPost] = data;
+          if (resPost.ok) {
+            setPosts(resPost.data.reverse());
+          }
+        })
+      setLoading(false);
+    }
+  }, [session]);
 
   return (
     <>
@@ -82,11 +85,11 @@ export default function PostManagement() {
                 <form
                   onSubmit={handleSearch}
                   method="post"
-                  className="flex justify-end items-center my-3 relative">
+                  className="flex justify-end items-center my-3 relative ">
                   <TextField
                     size="small" type="text" name="search" id="searchInput"
-                    className="border shadow-md text-sm rounded-lg min-w-[300px] min-h-[40px] cursor-pointer mr-3 p-2"
-                    placeholder="Enter name to search"
+                    className="cursor-pointer shadow-md text-sm rounded-lg min-w-[300px] mr-3"
+                    placeholder="Enter title to search"
                   />
                   <div className="absolute inset-y-0 right-0 flex items-center">
                     <IconButton className="relative mr-5">
@@ -107,52 +110,43 @@ export default function PostManagement() {
                   <TableRow>
                     <TableCell align="center" className="text-sm">Tiêu đề</TableCell>
                     <TableCell align="center" className="text-sm">Mô tả</TableCell>
-                    <TableCell align="center" className="text-sm">Tác giả</TableCell>
-                    <TableCell align="center" className="text-sm">Thể loại</TableCell>
+                    <TableCell align="center" className="text-sm">Content</TableCell>
                     <TableCell align="center" className="text-sm">Tình trạng</TableCell>
                     <TableCell align="center" className="text-sm">Thao tác</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  <TableRow>
-                    {posts && posts.length > 0 ?
-                      (
-                        posts
-                          .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                          .map(post => (
-                            <TableRow key={post.id} sx={{ "&:last-child td, &:last-child th": { border: 0 }, }}>
-                              <TableCell align="center">
-                                {post?.title.length > 30 ? post?.title.substring(0, 30) + ' ...' : post?.title}
-                              </TableCell>
-                              <TableCell align="center">
-                                {post?.description.length > 30 ? post?.description.substring(0, 30) + ' ...' : post?.description}
-                              </TableCell>
-                              <TableCell align="center">
-                                {post?.content.length > 30 ? post?.content.substring(0, 30) + ' ...' : post?.content}
-                              </TableCell>
-                              <TableCell align="center">{post?.user}</TableCell>
-                              <TableCell align="center">{post?.category}</TableCell>
-                              <TableCell align="center">
+                  {posts && posts.length > 0 ?
+                    (
+                      posts
+                        .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                        .map(post => (
+                          <TableRow key={post.id} className='hover:bg-slate-100 cursor-pointer' sx={{ "&:last-child td, &:last-child th": { border: 0 }, }}>
+                            <TableCell align="center"> {post?.title} </TableCell>
+                            <TableCell align="center"> {post?.description} </TableCell>
+                            <TableCell align="center"> {post?.content} </TableCell>
+                            <TableCell align="center">
+                              <Tooltip title={post.status === "ACTIVE" ? "Disable" : "Active"} placement='right-start'>
                                 <Switch size="small" color="success" className="cursor-pointer"
                                   checked={post.status === "ACTIVE" ? true : false}
                                 />
-                              </TableCell>
+                              </Tooltip>
+                            </TableCell>
 
-                              <TableCell align="center">
-                                <Tooltip title="Edit">
-                                  <Button type="button" size='small' variant="text" color="success"
-                                    href={`/dashboard/posts/edit/${post.slug}`}>
-                                    <DriveFileRenameOutline fontSize="small" />
-                                  </Button>
-                                </Tooltip>
-                              </TableCell>
-                            </TableRow>
-                          ))
-                      )
-                      :
-                      (<TableCell colSpan={7} align="center" className="text-sm"> No Data </TableCell>)
-                    }
-                  </TableRow>
+                            <TableCell align="center">
+                              <Tooltip title="Edit">
+                                <Button type="button" size='small' variant="text" color="success"
+                                  href={`/dashboard/posts/edit/${post.slug}`}>
+                                  <DriveFileRenameOutline fontSize="small" />
+                                </Button>
+                              </Tooltip>
+                            </TableCell>
+                          </TableRow>
+                        ))
+                    )
+                    :
+                    (<TableRow><TableCell colSpan={7} align="center" className="text-sm"> No Data </TableCell></TableRow>)
+                  }
                 </TableBody>
               </Table>
             </TableContainer>

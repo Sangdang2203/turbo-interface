@@ -1,17 +1,17 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
-export async function GET() {
+export async function GET(req: NextRequest) {
 	try {
 		const response = await fetch(
 			process.env.NEXT_PUBLIC_API_URL + "/authorities",
 			{
-				method: "GET",
+				headers: req.headers,
+				method: req.method,
 				cache: "no-cache",
 			}
 		);
 
-		const data = response.json();
-		console.log("Authorities List: ", data);
+		const data = await response.json();
 
 		if (response.ok) {
 			return NextResponse.json({

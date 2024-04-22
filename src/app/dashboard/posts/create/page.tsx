@@ -10,6 +10,7 @@ import { Box, Button, FormHelperText, Paper, TextField } from "@mui/material";
 import useS3 from "hooks/useS3";
 import Image from "next/image";
 import { fetchCategories, fetchUsers } from "app/methods/method";
+import { useSession } from "next-auth/react";
 
 const CustomEditor = dynamic(() => {
   return import("@/components/CustomEditor");
@@ -21,6 +22,8 @@ export default function CreatePost() {
   const [categories, setCategories] = React.useState<Category[]>([]);
   const [users, setUsers] = React.useState<User[]>([]);
 
+  const { data: session } = useSession();
+
   const {
     register,
     handleSubmit,
@@ -30,8 +33,6 @@ export default function CreatePost() {
     watch,
   } = useForm<Post>();
 
-  const category = watch("category");
-
   const { handleFileUpload, ButtonUpload, preview } = useS3();
   const previewUrl = React.useMemo(() => {
     if (preview) {
@@ -40,41 +41,54 @@ export default function CreatePost() {
   }, [preview]);
 
   async function AddNewPost(post: CreatePostRequest) {
-    const message = toast.loading("Loading...");
-    try {
-      const res = await fetch("/api/posts", {
-        method: "POST",
-        body: JSON.stringify(post),
-      })
+    if (session) {
+      const message = toast.loading("Loading...");
+      try {
+        const res = await fetch("/api/posts", {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${session?.user.id_token}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(post),
+        })
 
-      const payload = (await res.json()) as ApiResponse;
+        console.log(res);
 
-      if (payload.ok) {
-        toast.success(payload.message);
+        const payload = (await res.json()) as ApiResponse;
+
+        if (payload.ok) {
+          toast.success(payload.message);
+        }
+        toast.error(payload.message);
+
+      } catch (error) {
+        console.log(error);
       }
-      toast.error(payload.message);
-
-    } catch (error) {
-      console.log(error);
+      toast.dismiss(message);
     }
-    toast.dismiss(message);
   }
 
   React.useEffect(() => {
-    Promise.all([fetchCategories(), fetchUsers()])
-      .then(data => {
-        const [resCate, resUser] = data;
+    if (session) {
+      Promise.all([
+        fetchCategories(session.user.id_token),
+        fetchUsers(session.user.id_token)
+      ])
+        .then(data => {
+          const [resCate, resUser] = data;
 
-        if (resCate.ok) {
-          setCategories(resCate.data);
-        }
+          if (resCate.ok) {
+            setCategories(resCate.data);
+          }
 
-        if (resUser.ok) {
-          setUsers(resUser.data)
-        }
-      })
-    setLoading(false);
-  }, [])
+          if (resUser.ok) {
+            setUsers(resUser.data)
+          }
+        })
+      setLoading(false);
+    }
+  }, [session])
 
   return (
     <>
@@ -90,8 +104,8 @@ export default function CreatePost() {
                 minLength: { value: 10, message: "Tối thiểu 10 ký tự.", },
                 maxLength: { value: 100, message: "Tối thiểu 100 ký tự.", },
               })}
-              type="text"
-              className="min-w-[300px] w-full border rounded-md p-[10px] cursor-pointer shadow-lg"
+              type="text" size="small" variant="outlined"
+              className="min-w-[300px] w-full rounded-md cursor-pointer shadow-lg"
               placeholder="Nhập tiêu đề bài viết "
             />
             <FormHelperText className="text-red-700 px-2 mt-2">{errors.title?.message}</FormHelperText>
@@ -102,14 +116,14 @@ export default function CreatePost() {
               <label className="font-semibold">Loại bài viết:</label>
               <select
                 {...register("category")}
-                className="min-w-[300px] w-full border rounded-md p-[10px] cursor-pointer shadow-lg"
-                id="category">
+                className="min-w-[300px] w-full p-[12px] rounded-md cursor-pointer shadow-lg"
+                id="authority">
                 <option value="">Vui lòng bấm chọn</option>
-                {categories && categories.map(category => (
+                {categories && categories.map(item => (
                   <option
-                    key={category.id}
-                    value={category.name}>
-                    {category.name}
+                    key={item.name}
+                    value={item.name}>
+                    {item.name}
                   </option>
                 ))}
               </select>
@@ -119,7 +133,7 @@ export default function CreatePost() {
               <label className="font-semibold">Tác giả:</label>
               <select
                 {...register("user")}
-                className="min-w-[300px] w-full border rounded-md p-[10px] cursor-pointer shadow-lg"
+                className="min-w-[300px] w-full rounded-md p-[12px] cursor-pointer shadow-lg"
                 id="user">
                 <option value="">Vui lòng bấm chọn</option>
                 {users && users.map(user => (
@@ -162,7 +176,8 @@ export default function CreatePost() {
             <label className="font-semibold">Mô tả ngắn:</label>
             <TextField
               {...register("description", { required: "Vui lòng điền thông tin." })}
-              className="min-w-[300px] w-full border rounded-md p-[10px] cursor-pointer shadow-lg"
+              type="text" size="small" variant="outlined"
+              className="min-w-[300px] w-full rounded-md cursor-pointer shadow-lg"
               placeholder="Nhập mô tả ngắn"
             />
             <FormHelperText className="text-red-700 px-2 mt-2 ">{errors.description?.message}</FormHelperText>
@@ -170,9 +185,9 @@ export default function CreatePost() {
 
           <Box className="my-3">
             <label className="font-semibold">Nội dung bài viết:</label>
-            <TextField
+            <TextField variant="outlined"
               {...register("content", { required: "Vui lòng điền thông tin." })}
-              className="min-w-[300px] w-full border rounded-md p-[10px] cursor-pointer shadow-lg"
+              className="min-w-[300px] w-full rounded-md cursor-pointer shadow-lg"
             />
             <FormHelperText className="text-red-700 px-2 mt-2 ">{register("content") == null ? errors.content?.message : ""}</FormHelperText>
           </Box>

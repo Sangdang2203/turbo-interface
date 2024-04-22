@@ -12,7 +12,7 @@ import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
 const schema = z.object({
-  userId: z.string({
+  username: z.string({
     required_error: "Nhập đầy đủ thông tin.",
   }),
   password: z
@@ -52,9 +52,7 @@ export default function AdminLoginForm() {
     try {
       const employeeRes = await signIn("credentials", {
         redirect: false,
-        username: data.userId,
-        password: data.password,
-        role: "User"
+        ...data
       });
 
       if (!employeeRes?.error) {
@@ -82,19 +80,18 @@ export default function AdminLoginForm() {
         </Alert>
       )}
 
-      <FormControl fullWidth variant="outlined" error={!!errors.userId}>
+      <FormControl fullWidth variant="outlined" error={!!errors.username}>
         <label className="font-semibold" htmlFor="email">Email</label>
         <OutlinedInput
           label="Email"
-          id="email"
           type="text"
           placeholder="Nhập email"
-          className="border rounded-md p-[10px] cursor-pointer shadow-lg"
-          {...register("userId", {
+
+          {...register("username", {
             setValueAs: v => (v === "" ? undefined : v),
           })}
         />
-        <FormHelperText className="my-2 px-2">{errors.userId?.message}</FormHelperText>
+        <FormHelperText className="my-2 px-2">{errors.username?.message}</FormHelperText>
       </FormControl>
 
 
@@ -102,9 +99,8 @@ export default function AdminLoginForm() {
         <label className="font-semibold" htmlFor="password">Password</label>
         <OutlinedInput
           label="Password"
-          id="password"
           placeholder="Nhập mật khẩu "
-          className="border rounded-md p-[10px] cursor-pointer shadow-lg"
+
           autoComplete="current-password"
           type={showPassword ? "text" : "password"}
           {...register("password", {

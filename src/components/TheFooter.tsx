@@ -33,12 +33,12 @@ export default function TheFooter() {
 
             <div className="flex my-1">
               <MailOutlineRounded fontSize="small" />
-              <a href="mailto:info@turbo.vn" className="font-thin px-2">info@turbo.vn</a>
+              <a href="mailto:info@turbo.vn" className="text-white font-thin px-2 no-underline">info@turbo.vn</a>
             </div>
 
             <div className="flex my-1">
               <PhoneCallbackRounded fontSize="small" />
-              <Typography className="font-thin px-2">076.9999.967</Typography>
+              <Link href="tel:076.9999.967" className="font-thin no-underline text-white px-2">076.9999.967</Link>
             </div>
           </Box>
         </Grid>
@@ -47,10 +47,10 @@ export default function TheFooter() {
             &quot; Với 10 năm kinh nghiệm, công ty Turbo Solutions chuyên cung cấp các giải pháp, ứng dụng điện toán đám mây hàng đầu Việt Nam. &quot;
           </Typography>
           <Box className="flex justify-center my-5">
-            <Tooltip title="Twitter"><Link href="/" target="_blank" className="mx-1" ><Twitter /></Link></Tooltip>
-            <Tooltip title="Youtube"><Link href="https://www.youtube.com/@turbosolutions506" target="_blank" className="mx-1"><YouTube /></Link></Tooltip>
-            <Tooltip title="Facebook"><Link href="https://www.facebook.com/ecocloud.vn" target="_blank" className="mx-1"><Facebook /></Link></Tooltip>
-            <Tooltip title="LinkedIn"><Link href="/" target="_blank" className="mx-1"><LinkedIn /></Link></Tooltip>
+            <Tooltip title="Twitter"><Link href="/" target="_blank" className="mx-1" ><Twitter color="info" /></Link></Tooltip>
+            <Tooltip title="Youtube"><Link href="https://www.youtube.com/@turbosolutions506" target="_blank" className="mx-1"><YouTube color="info" /></Link></Tooltip>
+            <Tooltip title="Facebook"><Link href="https://www.facebook.com/ecocloud.vn" target="_blank" className="mx-1"><Facebook color="info" /></Link></Tooltip>
+            <Tooltip title="LinkedIn"><Link href="/" target="_blank" className="mx-1"><LinkedIn color="info" /></Link></Tooltip>
           </Box>
         </Grid>
 
@@ -68,7 +68,7 @@ export default function TheFooter() {
               {solutonLinks.map((link) => {
                 return (
                   <div key={link.name}>
-                    <Link className="text-sm font-thin hover:text-[1rem] duration-500" href={link.path}>{link.name}</Link>
+                    <Link className="text-sm no-underline text-white font-thin hover:text-[1rem] duration-500" href={link.path}>{link.name}</Link>
                   </div>
                 )
               })}
@@ -78,7 +78,7 @@ export default function TheFooter() {
               {cloudLinks.map((link) => {
                 return (
                   <div key={link.name}>
-                    <Link className="text-sm font-thin hover:text-[1rem] duration-500" href={link.path}>{link.name}</Link>
+                    <Link className="text-sm no-underline text-white font-thin hover:text-[1rem] duration-500" href={link.path}>{link.name}</Link>
                   </div>
                 )
               })}

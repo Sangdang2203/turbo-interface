@@ -1,9 +1,10 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
-export async function GET() {
+export async function GET(req: NextRequest) {
 	try {
 		const response = await fetch(process.env.NEXT_PUBLIC_API_URL + "/posts", {
-			method: "GET",
+			method: req.method,
+			headers: req.headers,
 			cache: "no-cache",
 		});
 
@@ -11,10 +12,6 @@ export async function GET() {
 
 		if (response.ok) {
 			data = await response.json();
-			console.log(data);
-		}
-
-		if (response.ok) {
 			return NextResponse.json({
 				ok: true,
 				status: "Success",
@@ -38,14 +35,12 @@ export async function GET() {
 	}
 }
 
-export async function POST(req: Request) {
+export async function POST(req: NextRequest) {
 	const newPost = await req.json();
 	try {
 		const response = await fetch(process.env.NEXT_PUBLIC_API_URL + "/posts", {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-			},
+			method: req.method,
+			headers: req.headers,
 			body: JSON.stringify(newPost),
 		});
 
