@@ -30,9 +30,17 @@ export const fetchCategories = async (token: string) => {
 	return response.json() as Promise<ApiResponse>;
 };
 
-export const fetchPosts = async (token: string) => {
+export const fetchPosts = async () => {
 	const response = await fetch("/api/posts", {
 		method: "GET",
+		cache: "no-cache",
+	});
+	return response.json() as Promise<ApiResponse>;
+};
+
+export const fetchDeletePost = async (token: string, postId: string) => {
+	const response = await fetch(`/api/posts/${postId}`, {
+		method: "DELETE",
 		headers: {
 			Authorization: `Bearer ${token}`,
 		},

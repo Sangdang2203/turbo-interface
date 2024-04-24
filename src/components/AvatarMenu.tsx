@@ -4,7 +4,7 @@ import * as React from "react";
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import { Avatar } from "@mui/material";
+import { Avatar, Box, Typography } from "@mui/material";
 import { signIn, signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 
@@ -20,12 +20,14 @@ export default function AvatarMenu() {
 	};
 
 	const handleSignOut = () => {
-		fetch("/api/Users/revoke-token", {
-			method: "DELETE",
-			headers: {
-				Authorization: `Bearer ${session?.user.token}`,
-			},
-		}).then(() => {});
+		if (session) {
+			fetch("/api/Users/revoke-token", {
+				method: "DELETE",
+				headers: {
+					Authorization: `Bearer ${session.user.id_token}`,
+				},
+			}).then(() => { });
+		}
 	};
 
 	if (status === "authenticated") {
@@ -51,16 +53,16 @@ export default function AvatarMenu() {
 						"aria-labelledby": "basic-button",
 					}}>
 					<MenuItem>
-						<p className="uppercase">{session.user.fullname}</p>
+						<p className="">Administrator</p>
 					</MenuItem>
 					<MenuItem
 						color="black"
 						onClick={handleClose}>
-						<Link
-							href="/app/employee"
+						{/* <Link
+							href="/dars/employee"
 							className="text-decoration-none py-1 text-dark">
 							Profiles
-						</Link>
+						</Link> */}
 					</MenuItem>
 					<MenuItem onClick={() => signOut()}>Logout</MenuItem>
 				</Menu>

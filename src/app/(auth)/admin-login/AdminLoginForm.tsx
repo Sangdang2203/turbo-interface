@@ -83,6 +83,7 @@ export default function AdminLoginForm() {
       <FormControl fullWidth variant="outlined" error={!!errors.username}>
         <label className="font-semibold" htmlFor="email">Email</label>
         <OutlinedInput
+          size="medium"
           label="Email"
           type="text"
           placeholder="Nhập email"
@@ -98,6 +99,7 @@ export default function AdminLoginForm() {
       <FormControl fullWidth variant="outlined" error={!!errors.password} >
         <label className="font-semibold" htmlFor="password">Password</label>
         <OutlinedInput
+          size="medium"
           label="Password"
           placeholder="Nhập mật khẩu "
 

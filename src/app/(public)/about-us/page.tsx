@@ -3,14 +3,9 @@
 import React from "react";
 import Image from "next/image";
 import about from "../../../../public/images/aboutImage.png";
-import { Box, Button, Card, CardActions, CardContent, CardMedia, Container, FormHelperText, Grid, ImageList, ImageListItem, Link, MobileStepper, Paper, Typography, useTheme } from "@mui/material";
-import { KeyboardArrowLeft, KeyboardArrowRight, OndemandVideoRounded, ReadMoreRounded } from "@mui/icons-material";
+import { Box, Button, Container, Grid, ImageList, ImageListItem, Link, MobileStepper, Paper, Typography, useTheme } from "@mui/material";
+import { OndemandVideoRounded } from "@mui/icons-material";
 
-// export const metadata = () => {
-//   return {
-//     title: "About Us"
-//   }
-// }
 
 const images = [
   {
@@ -36,9 +31,9 @@ const images = [
 const AboutPage = () => {
 
   return (
-    <Box >
-      <Container className="text-center">
-        <Link href="/" className="text-[4rem] font-extrabold text-blue-900">Turbo</Link>
+    <Box className="__theme h-full">
+      <Container className="text-center py-5">
+        <Link href="/" className="text-[4rem] no-underline font-extrabold text-blue-900">Turbo</Link>
         <Typography className="text-[2rem] font-extralight">chuyên cung cấp các dịch vụ, giải pháp AI (trí tuệ nhân tạo),<br /> điện toán đám mây hàng đầu Việt Nam.</Typography>
       </Container>
 
@@ -58,27 +53,23 @@ const AboutPage = () => {
         </ImageList>
       </Container>
 
-      <Box className='__theme h-[500px]'>
-        <p>aaaa</p>
-      </Box>
-
-
-
-      <Grid container my={5}>
-        <Grid item xs={12} md={6} lg={6} xl={6}>
-          <iframe
-            className="rounded-xl mx-auto"
-            width="100%" height="400px"
-            title="Vaidio  AI Vision 7.0"
-            src="https://www.youtube.com/embed/LdPqO124iE0?feature=oembed?autoplay=1"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowFullScreen></iframe>
+      <Container>
+        <Grid container my={5}>
+          <Grid item xs={12} md={6}>
+            <iframe
+              className="rounded-xl mx-auto"
+              width="100%" height="400px"
+              title="Vaidio  AI Vision 7.0"
+              src="https://www.youtube.com/embed/LdPqO124iE0?feature=oembed?autoplay=1"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen></iframe>
+          </Grid>
+          <Grid item xs={12} md={6} className="flex justify-center items-center flex-col text-center" >
+            <Typography className="text-[2rem] font-extralight">Ứng dụng của trí tuệ nhân tạo <br /> trong đời sống thực tế.</Typography>
+            <Button className="btn-grad w-1/3 my-3 hover:opacity-80" href="https://www.youtube.com/@turbosolutions506" target="_blank" endIcon={<OndemandVideoRounded />}>Xem thêm tại đây</Button>
+          </Grid>
         </Grid>
-        <Grid item xs={12} md={6} lg={6} xl={6} className="flex justify-center items-center flex-col text-center" >
-          <Typography className="text-[2rem] font-extralight">Ứng dụng của trí tuệ nhân tạo <br /> trong đời sống thực tế.</Typography>
-          <Button className="btn-grad w-1/3 my-3 hover:opacity-80" href="https://www.youtube.com/@turbosolutions506" target="_blank" endIcon={<OndemandVideoRounded />}>Xem thêm tại đây</Button>
-        </Grid>
-      </Grid>
+      </Container>
     </Box >
   )
 }

@@ -9,6 +9,7 @@ import { ApiResponse, Post, UpdatedPostRequest } from "types/interfaces";
 import { DoneRounded, RotateLeftRounded } from "@mui/icons-material";
 import { Box, Button, FormHelperText, Paper, TextField } from "@mui/material";
 import useS3 from "hooks/useS3";
+import { useSession } from "next-auth/react";
 
 
 const CustomEditor = dynamic(() => {
@@ -17,8 +18,8 @@ const CustomEditor = dynamic(() => {
 
 export default function EditPost() {
   const [loading, setLoading] = React.useState(true);
-  const [post, setPost] = React.useState<Post>();
-
+  const [selectedPost, setSelectedPost] = React.useState<Post | null>(null);
+  const { data: session } = useSession();
   const {
     register,
     handleSubmit,
@@ -35,25 +36,32 @@ export default function EditPost() {
   }, [preview]);
 
   async function UpdatePost(updatedPost: UpdatedPostRequest) {
-    const message = toast.loading("Loading...")
-    try {
-      const res = await fetch(`/api/posts/${post?.id}`, {
-        method: "PUT",
-        body: JSON.stringify(updatedPost)
-      })
+    if (session) {
+      const message = toast.loading("Loading...")
+      try {
+        const res = await fetch(`/api/posts/`, {
+          method: "PUT",
+          body: JSON.stringify(updatedPost),
+          headers: {
+            Authorization: `Bearer ${session?.user.id_token}`,
+            "Content-Type": "application/json"
+          },
+        })
 
-      const payload = (await res.json()) as ApiResponse;
+        const payload = (await res.json()) as ApiResponse;
 
-      if (payload.ok) {
-        toast.success(payload.message)
+        if (payload.ok) {
+          toast.success(payload.message)
+        }
+        toast.error(payload.message)
+
+      } catch (error) {
+        console.log(error);
       }
-      toast.error(payload.message)
-
-    } catch (error) {
-      console.log(error);
+      toast.dismiss(message);
     }
-    toast.dismiss(message);
   }
+
   return (
     <>
       <Paper sx={{ p: 5 }}>
@@ -67,8 +75,9 @@ export default function EditPost() {
                 minLength: { value: 10, message: "Tối thiểu 10 ký tự.", },
                 maxLength: { value: 100, message: "Tối thiểu 100 ký tự.", },
               })}
-              defaultValue={post?.title}
-              className="min-w-[300px] border rounded-md p-[10px] cursor-pointer shadow-lg w-full"
+              value={selectedPost?.title}
+              size="small" variant="outlined"
+              className="min-w-[300px] w-full rounded-md cursor-pointer shadow-lg"
               placeholder="Nhập tiêu đề bài viết "
             />
             <FormHelperText className="text-red-700 px-2 mt-2">{errors.title?.message}</FormHelperText>
@@ -79,16 +88,18 @@ export default function EditPost() {
               <label className="font-semibold">Loại bài viết:</label>
               <TextField
                 disabled
-                defaultValue={post?.category}
-                className="min-w-[300px] border rounded-md p-[10px] cursor-pointer shadow-lg w-full"
+                value={selectedPost?.category}
+                size="small" variant="outlined"
+                className="min-w-[300px] w-full rounded-md cursor-pointer shadow-lg"
               />
             </Box>
             <Box>
               <label className="font-semibold">Tác giả:</label>
               <TextField
                 disabled
-                defaultValue={post?.user}
-                className="min-w-[300px] border rounded-md p-[10px] cursor-pointer shadow-lg w-full"
+                value={selectedPost?.user}
+                size="small" variant="outlined"
+                className="min-w-[300px] w-full rounded-md cursor-pointer shadow-lg"
               />
             </Box>
           </Box>
@@ -127,7 +138,9 @@ export default function EditPost() {
               {...register("description", {
                 required: "Vui lòng điền thông tin."
               })}
-              className="min-w-[300px] border rounded-md p-[10px] cursor-pointer shadow-lg w-full"
+              size="small" variant="outlined"
+              className="min-w-[300px] w-full rounded-md cursor-pointer shadow-lg"
+              value={selectedPost?.description}
               placeholder="Nhập mô tả ngắn"
             />
             <FormHelperText className="text-red-700 px-2 mt-2 ">{errors.description?.message}</FormHelperText>
@@ -139,11 +152,12 @@ export default function EditPost() {
               {...register("content", {
                 required: "Vui lòng điền thông tin."
               })}
-              className="min-w-[300px] border rounded-md p-[10px] cursor-pointer shadow-lg w-full"
-              value={post?.content}
+              size="small" variant="outlined"
+              className="min-w-[300px] w-full rounded-md cursor-pointer shadow-lg"
+              value={selectedPost?.content}
               placeholder="Nhập nội dung bài viết"
             />
-            <FormHelperText className="text-red-700 px-2 mt-2 ">{post?.content.length === 0 ? errors.content?.message : ""}</FormHelperText>
+            <FormHelperText className="text-red-700 px-2 mt-2 ">{errors.content?.message}</FormHelperText>
           </Box>
 
           <Box className="flex justify-around mb-2 mt-10 w-1/2 mx-auto">

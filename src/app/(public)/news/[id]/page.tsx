@@ -7,23 +7,43 @@ import { ReadMoreRounded } from "@mui/icons-material";
 import { Box, Button, Card, CardActions, CardContent, Container, Paper, Typography } from "@mui/material";
 import { fetchPosts } from "app/methods/method";
 import Image from "next/image";
+import Link from 'next/link';
 import * as React from "react";
-import { Post } from "types/interfaces";
+import { ApiResponse, Post } from "types/interfaces";
 
-export default function PostDetail() {
+export default function PostDetail({ params }: { params: { id: string } }) {
   const [loading, setLoading] = React.useState(true);
-  const [post, setPost] = React.useState<Post>();
   const [posts, setPosts] = React.useState<Post[]>([]);
+  const [post, setPost] = React.useState<Post>();
+
+  React.useEffect(() => {
+    async function fetchPost() {
+      const res = await fetch(`/api/posts/${params.id}`, {
+        method: "GET",
+        cache: "no-cache"
+      });
+
+      const payload = (await res.json()) as ApiResponse;
+
+      if (payload.ok) {
+        setPost(payload.data)
+      }
+    }
+    fetchPost();
+    setLoading(false);
+  }, [params.id])
 
   React.useEffect(() => {
     Promise.all([fetchPosts()])
-      .then(() => {
-        const shuffledPosts = posts.sort(() => Math.random() - 0.5);
-        const relatedPosts = shuffledPosts.slice(0, 4);
-        setPosts(relatedPosts);
+      .then(data => {
+        const [resPosts] = data;
+        if (resPosts.ok) {
+
+          setPosts(resPosts.data);
+        }
         setLoading(false);
       })
-  }, [])
+  }, [posts])
   return (
     <>
       {loading ? (<Loading />)
@@ -41,7 +61,6 @@ export default function PostDetail() {
           <Container>
             <div>{post?.content}</div>
             <CustomRating />
-
           </Container>
 
 
@@ -50,15 +69,15 @@ export default function PostDetail() {
             {posts && posts.map((item) => {
               return (
                 <Card key={item.id} className="relative px-1 rounded-md hover:shadow-lg cursor-pointer">
-                  <Image src="" className="w-full h-auto" alt="cloudServer" />
+
                   <CardContent>
                     <Box className="mb-16">
-                      <Typography className="text-xl font-light">Cloud Server</Typography>
-                      <Typography className="font-extralight">Cụm máy chủ Cloud với Firewall cùng mạng nội bộ riêng biệt, trở thành trung tâm dữ liệu ảo cho doanh nghiệp thực hiện chuyển đổi số.</Typography>
+                      <Typography className="text-xl font-light">{item.title}</Typography>
+                      <Typography className="font-extralight">{item.description}</Typography>
                     </Box>
                   </CardContent>
                   <CardActions className="absolute bottom-1 left-1">
-                    <Button href={`/news/${item?.slug}`} className="hover:border-blue-400 p-3 border" variant="outlined" size="small" endIcon={<ReadMoreRounded />}>Tìm hiểu thêm </Button>
+                    <Link href={`news/${item.id}`} className='text-sky-700 no-underline hover:text-sky-500' >Đọc thêm &gt;&gt;</Link>
                   </CardActions>
                 </Card>
               )

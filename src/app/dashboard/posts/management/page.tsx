@@ -1,41 +1,89 @@
 'use client'
 
-import { Box, Button, Grid, IconButton, Paper, Switch, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, TextField, Tooltip } from '@mui/material'
-import { SearchOutlined, DriveFileRenameOutline, DeleteOutlineOutlined } from '@mui/icons-material'
+import { FormHelperText, Box, Button, Dialog, DialogContent, DialogTitle, Divider, Grid, IconButton, Paper, Switch, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, TextField, Tooltip } from '@mui/material'
+import { SearchOutlined, DriveFileRenameOutline, DeleteOutline } from '@mui/icons-material'
 
-import { useRouter } from 'next/navigation'
 import Loading from '@/components/Loading'
 import Link from 'next/link'
 import { toast } from 'sonner'
 import * as React from 'react'
-import { ApiResponse, Post } from 'types/interfaces'
-import { fetchPosts } from 'app/methods/method'
+import { ApiResponse, Post, UpdatedPostRequest } from 'types/interfaces'
+import { fetchPosts, fetchDeletePost } from 'app/methods/method'
 import { useSession } from 'next-auth/react'
+import { useForm, SubmitHandler } from "react-hook-form";
 
 export default function PostManagement() {
-  const [loading, setLoading] = React.useState(false);
+  const [loading, setLoading] = React.useState(true);
   const [posts, setPosts] = React.useState<Post[]>([])
   const [page, setPage] = React.useState(0)
   const [rowsPerPage, setRowsPerPage] = React.useState(10)
   const { data: session } = useSession();
 
-  function handleSearch(event: React.FormEvent<HTMLFormElement>) {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    setValue,
+    watch,
+  } = useForm<UpdatedPostRequest>();
+
+  async function UpdatePost(updatedPost: UpdatedPostRequest) {
     if (session) {
-      event.preventDefault();
-      const nameInput = document.getElementById(
-        "searchInput"
-      ) as HTMLInputElement;
-      const name = nameInput.value.trim();
+      const message = toast.loading("Loading...")
+      try {
+        const res = await fetch(`/api/posts/`, {
+          method: "PUT",
+          body: JSON.stringify(updatedPost),
+          headers: {
+            Authorization: `Bearer ${session?.user.id_token}`,
+            "Content-Type": "application/json"
+          },
+        })
 
-      if (name === "") {
-        fetchPosts(session.user.id_token).then(res => setPosts(res.data));
-      } else {
-        const filterPosts = posts.filter(
-          post => post.title.includes(name)
-        );
+        const payload = (await res.json()) as ApiResponse;
 
-        setPosts(filterPosts);
+        if (payload.ok) {
+          toast.success(payload.message)
+        }
+        toast.error(payload.message)
+
+      } catch (error) {
+        console.log(error);
       }
+      toast.dismiss(message);
+    }
+  }
+
+  function handleSearch(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const nameInput = document.getElementById(
+      "searchInput"
+    ) as HTMLInputElement;
+    const name = nameInput.value.trim();
+
+    if (name === "") {
+      fetchPosts().then(res => setPosts(res.data));
+    } else {
+      const filterPosts = posts.filter(
+        post => post.title.includes(name)
+      );
+
+      setPosts(filterPosts);
+    }
+  }
+
+  async function handleDelete(postId: string) {
+    if (session) {
+      const message = toast.loading("Loading...");
+      const response = await fetchDeletePost(session.user.id_token, postId);
+
+      if (response.ok) {
+        setPosts(pre => pre.filter(post => post.id !== postId));
+        toast.success(response.message);
+      } else {
+        toast.error(response.message);
+      }
+      toast.dismiss(message);
     }
   }
 
@@ -55,17 +103,15 @@ export default function PostManagement() {
   };
 
   React.useEffect(() => {
-    if (session) {
-      Promise.all([fetchPosts(session.user.id_token)])
-        .then(data => {
-          const [resPost] = data;
-          if (resPost.ok) {
-            setPosts(resPost.data.reverse());
-          }
-        })
-      setLoading(false);
-    }
-  }, [session]);
+    Promise.all([fetchPosts()])
+      .then(data => {
+        const [resPost] = data;
+        if (resPost.ok) {
+          setPosts(resPost.data.reverse());
+        }
+      })
+    setLoading(false);
+  }, []);
 
   return (
     <>
@@ -108,9 +154,9 @@ export default function PostManagement() {
               <Table className="mt-3" sx={{ minWidth: 650 }} size="small">
                 <TableHead className='bg-slate-300'>
                   <TableRow>
+                    <TableCell align="center" className="text-sm">#</TableCell>
                     <TableCell align="center" className="text-sm">Tiêu đề</TableCell>
                     <TableCell align="center" className="text-sm">Mô tả</TableCell>
-                    <TableCell align="center" className="text-sm">Content</TableCell>
                     <TableCell align="center" className="text-sm">Tình trạng</TableCell>
                     <TableCell align="center" className="text-sm">Thao tác</TableCell>
                   </TableRow>
@@ -122,9 +168,9 @@ export default function PostManagement() {
                         .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                         .map(post => (
                           <TableRow key={post.id} className='hover:bg-slate-100 cursor-pointer' sx={{ "&:last-child td, &:last-child th": { border: 0 }, }}>
+                            <TableCell align="center"> {post?.id} </TableCell>
                             <TableCell align="center"> {post?.title} </TableCell>
                             <TableCell align="center"> {post?.description} </TableCell>
-                            <TableCell align="center"> {post?.content} </TableCell>
                             <TableCell align="center">
                               <Tooltip title={post.status === "ACTIVE" ? "Disable" : "Active"} placement='right-start'>
                                 <Switch size="small" color="success" className="cursor-pointer"
@@ -135,10 +181,19 @@ export default function PostManagement() {
 
                             <TableCell align="center">
                               <Tooltip title="Edit">
-                                <Button type="button" size='small' variant="text" color="success"
-                                  href={`/dashboard/posts/edit/${post.slug}`}>
+                                <IconButton color="success" href={`/dashboard/posts/edit/${post.id}`}>
                                   <DriveFileRenameOutline fontSize="small" />
-                                </Button>
+                                </IconButton>
+                              </Tooltip>
+                              <Tooltip title="Remove">
+                                <IconButton color="error" onClick={() => {
+                                  if (window.confirm("Bạn chắc chắn muốn xóa ?")) {
+                                    handleDelete(post.id)
+                                  }
+                                }}
+                                >
+                                  <DeleteOutline fontSize="small" />
+                                </IconButton>
                               </Tooltip>
                             </TableCell>
                           </TableRow>

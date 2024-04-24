@@ -5,16 +5,19 @@ import Image from "next/image";
 import { styled } from '@mui/material/styles';
 import Switch, { SwitchProps } from '@mui/material/Switch';
 import { Box, Button, Card, CardActions, CardContent, Chip, Container, Divider, FormControlLabel, FormHelperText, Grid, Link, Typography } from "@mui/material";
-import { PublicRounded, ReadMoreRounded } from "@mui/icons-material";
-import logoTurbo from "../../../../public/images/logoTurbo.png";
-import cloudServer from "../../../../public/images/cloudServer.png";
-import cloudCamera from "../../../../public/images/cloudCamera.png";
-import Backup from "../../../../public/images/Backup.png";
-import ScalablePrivateCloud from "../../../../public/images/ScalablePrivateCloud.png";
-import CloudCameraDiagram from "../../../../public/images/CloudCameraDiagram.jpg";
-import CloudBackupRecovery from "../../../../public/images/CloudBackupRecovery.png";
-import UnifiedCloudStorage from "../../../../public/images/UnifiedCloudStorage.png";
-import opennebula_cloud_dash from "../../../../public/images/opennebula_cloud_dash.png";
+import { PublicRounded } from "@mui/icons-material";
+import logoTurbo from "../../images/logoTurbo.png";
+import cloudServer from "../../images/cloudServer.png";
+import cloudCamera from "../../images/cloudCamera.png";
+import Backup from "../../images/Backup.png";
+import ScalablePrivateCloud from "../../images/ScalablePrivateCloud.png";
+import CloudCameraDiagram from "../../images/CloudCameraDiagram.jpg";
+import CloudBackupRecovery from "../../images/CloudBackupRecovery.png";
+import UnifiedCloudStorage from "../../images/UnifiedCloudStorage.png";
+import promotion from "../../images/promotion.jpg";
+import feedback_01 from "../../images/feedback_01.png";
+import feedback_02 from "../../images/feedback_02.png";
+import feedback_03 from "../../images/feedback_03.png";
 
 const IOSSwitch = styled((props: SwitchProps) => (
   <Switch focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} />
@@ -85,7 +88,7 @@ const HomePage = () => {
             <Image src={ScalablePrivateCloud} className="w-full h-auto rounded-md mt-3" alt="ScalablePrivateCloud" />
             <CardContent>
               <Box>
-                <Typography className="text-lg font-leading-relaxed text-justify text-blue-500">Scalable Private Cloud</Typography>
+                <Typography className="text-lg font-leading-relaxed  text-blue-500">Cloud Server</Typography>
                 <FormHelperText>Hạ tầng điện toán đám mây</FormHelperText>
                 <Typography className="font-light mt-3">
                   Với công nghệ siêu hội tụ (HCI) và phần mềm định hướng (SDX) mang lại hạ tầng đám mây siêu hiệu năng, siêu ổn định, là nền tảng vững chắc cho phát triển các ứng dụng.
@@ -133,14 +136,6 @@ const HomePage = () => {
             </CardContent>
           </Card>
         </Container>
-      </Box>
-
-
-      <Box sx={{ position: "relative", textAlign: "center", my: 10 }} >
-        <Image src={opennebula_cloud_dash} className="w-[80%] h-auto mx-auto rounded-lg" alt="opennebula_cloud_dash" />
-        <Box width="100%" sx={{ position: "absolute", bottom: "4px", marginX: "auto", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", textAlign: "center" }}>
-          <Button href="/contact" variant="contained" className="btn-astro rounded-full hover:duration-700 hover:opacity-80" >Kết nối ngay với chúng tôi</Button>
-        </Box>
       </Box>
 
       <Box my={10} sx={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", textAlign: "center" }}>
@@ -197,6 +192,36 @@ const HomePage = () => {
         </Card>
       </Container>
 
+      <Box my={10}>
+        <Image src={promotion} title="Liên hệ ngay 076.9999.967 để nhận hỗ trợ tốt nhất" alt="promotion" className="w-full h-auto shadow-xl cursor-pointer" />
+      </Box>
+
+      <Container className='shadow-lg rounded-2xl py-5 my-28'>
+        <Box className='text-center'>
+          <Typography className="text-[2rem] font-semibold"> Được hàng trăm doanh nghiệp tin dùng cho đến nay </Typography>
+          <Typography className="text-[1.25rem] pb-10 pt-3"> Khách hàng của chúng tôi đến từ khắp nơi trên thế giới. </Typography>
+        </Box>
+        <Box className="flex justify-between items-center text-center">
+          <Box>
+            <Typography className="text-[3rem] font-bold">250+</Typography>
+            <Typography>Dự án đã triển khai</Typography>
+          </Box>
+          <Box>
+            <Typography className="text-[3rem] font-bold">10+</Typography>
+            <Typography>Hơn 10 năm kinh nghiệm</Typography>
+          </Box>
+          <Box>
+            <Typography className="text-[3rem] font-bold">5</Typography>
+            <Typography>Quốc gia</Typography>
+          </Box>
+          <Box>
+            <Typography className="text-[3rem] font-bold">50+</Typography>
+            <Typography>Thành viên</Typography>
+          </Box>
+        </Box>
+      </Container>
+
+
       <Box className="text-center my-10">
         <Typography className="text-[2.5rem]">Why clients choose us</Typography>
         <Typography>Because it’s good to work with good people!</Typography>
@@ -215,7 +240,7 @@ const HomePage = () => {
             />
           </Box>
           <Typography className='text-xl font-semibold py-5'>Đáng tin cậy & Chuyên nghiệp</Typography>
-          <Typography className='leading-normal text-justify'>
+          <Typography className='leading-normal '>
             Turbo là một trong những công ty AI Vision hàng đầu tại Việt Nam.
             Bằng cách cộng tác với chúng tôi, bạn có thể tiết kiệm thời gian để tập trung vào việc lập kế hoạch và
             điều hành hoạt động kinh doanh cốt lõi của mình. Chúng tôi mang phong cách chuyên nghiệp vào dự án.
@@ -233,7 +258,7 @@ const HomePage = () => {
             <Typography className="py-3">Theo dõi hàng ngày</Typography>
           </Box>
           <Typography className='text-xl font-semibold py-5'>Tính linh hoạt và minh bạch</Typography>
-          <Typography className='leading-relaxed text-justify'>
+          <Typography className='leading-relaxed '>
             Điểm mạnh của chúng tôi nằm ở kiến ​​thức chuyên môn vững chắc về nhiều loại công nghệ và tính linh hoạt của nhóm
             để phù hợp với nhu cầu của khách hàng. Mỗi bước công việc của chúng tôi luôn được minh bạch với khách hàng từ đầu
             đến cuối.
@@ -250,7 +275,7 @@ const HomePage = () => {
             <Typography className="py-3">Đảm bảo chi phí và hiệu quả</Typography>
           </Box>
           <Typography className='text-xl font-semibold py-5'>Tuân thủ & Cam kết</Typography>
-          <Typography className='leading-relaxed text-justify'>
+          <Typography className='leading-relaxed '>
             Chúng tôi tuân theo tất cả các thủ tục pháp lý khi giao dịch với khách hàng của mình để đảm bảo rằng không ai
             phải đối mặt với bất kỳ vấn đề pháp lý nào. Khách hàng chọn chúng tôi biết rằng sản phẩm cuối cùng của họ sẽ
             là những sản phẩm có hiệu suất cao, đáng kinh ngạc.
@@ -259,25 +284,58 @@ const HomePage = () => {
       </Container>
 
       <Box className='__theme min-h-[500px]'>
-        <Box>
-          <Typography className="text-[2.5rem] font-semibold text-center py-5">What our clients say</Typography>
+
+        <Box textAlign="center">
+          <Typography className="text-[2rem] pt-10">Đăng ký trải nghiệm</Typography>
+          <Typography>để nhận thêm thông tin về các dịch vụ của EcoCloud</Typography>
+          <Button href="tel:0769999967" variant="contained" color="primary" className="my-3">Liên hệ ngay</Button>
         </Box>
-        <Box>
-          <Grid container className="text-center">
-            <Grid item xs={12} md={6}>
-              <Typography>Đăng ký trải nghiệm dịch vụ</Typography>
-              <Typography>để nhận thêm thông tin về các dịch vụ của EcoCloud</Typography>
-            </Grid>
-            <Grid item xs={12} md={6}>
-              <Typography>Đăng ký trải nghiệm dịch vụ</Typography>
-              <Typography>để nhận thêm thông tin về các dịch vụ của EcoCloud</Typography>
-            </Grid>
-          </Grid>
-        </Box>
+
+        <Typography className="text-[2.5rem] font-semibold text-center py-10"> Khách hàng nói gì về chúng tôi </Typography>
+        <Container className='grid sm:grid-cols-3 gap-x-6 gap-y-6 mb-10'>
+          <Box className='h-fit my-3 p-3  rounded-xl shadow-2xl hover:duration-500'>
+            <Typography className="">
+              Thay vì phải chờ đợi cấu hình từng máy chủ thì nay chỉ cần 3 phút là có Cloud Server để sử dụng
+              cho các dự án của công ty.
+            </Typography>
+            <Box className="flex items-center mt-10">
+              <Image src={feedback_01} alt="customer feedback" className="w-16 h-16 rounded-full mr-2" />
+              <Box>
+                <Typography>Mr. Tài</Typography>
+                <Typography>Technical Manager - GOSU</Typography>
+              </Box>
+            </Box>
+          </Box>
+
+          <Box className='h-fit my-3 p-3  rounded-xl shadow-2xl hover:duration-500'>
+            <Typography className="">
+              Đội ngũ EcoCloud rất nhiệt tình đã không ngại đường xa hỗ trợ demo những giải pháp và hỗ trợ
+              chúng tôi Backup dữ liệu.
+            </Typography>
+            <Box className="flex items-center mt-10">
+              <Image src={feedback_02} alt="customer feedback" className="w-16 h-16 rounded-full mr-2" />
+              <Box>
+                <Typography>Mr. Phú</Typography>
+                <Typography>IT Consultant - Viet An Group</Typography>
+              </Box>
+            </Box>
+          </Box>
+
+          <Box className='h-fit my-3 p-3  rounded-xl shadow-2xl hover:duration-500'>
+            <Typography className="">
+              Thay vì phải chờ đợi cấu hình từng máy chủ thì nay chỉ cần 3 phút là có Cloud Server để sử dụng
+              cho các dự án của công ty.
+            </Typography>
+            <Box className="flex items-center mt-10">
+              <Image src={feedback_03} alt="customer feedback" className="w-16 h-16 rounded-full mr-2" />
+              <Box>
+                <Typography>Mr. Nguyên</Typography>
+                <Typography>IT Manager - Bell Technology</Typography>
+              </Box>
+            </Box>
+          </Box>
+        </Container>
       </Box>
-
-
-
     </Box >
   )
 }

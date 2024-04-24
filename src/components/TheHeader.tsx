@@ -4,7 +4,7 @@ import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Close, MenuRounded, KeyboardArrowDownRounded } from "@mui/icons-material";
-import logoTurbo from "../../public/images/logoTurbo.png";
+import logoTurbo from "../app/images/logoTurbo.png";
 import Image from "next/image";
 import { Box, Button, Menu, MenuItem, Select, SelectChangeEvent, Typography } from "@mui/material";
 
@@ -18,10 +18,15 @@ const navLinks = [
   { path: "/contact", name: "liên hệ" },
 ];
 const subServicesLinks = [
-  { path: "https://ecocloud.vn/cloud-server/", name: "cloud server" },
-  { path: "https://ecocloud.vn/bang-gia-cloud-gpu-server/", name: "cpu server" },
-  { path: "https://baas.ecocloud.vn/", name: "cloud backup" },
-  { path: "https://ecocloud.vn/bang-gia-virtual-data-center/", name: "vitual data center" }
+  { path: "/services/cloud-server", name: "cloud server" },
+  { path: "/services/cloud-gpu/", name: "cloud GPU" },
+  { path: "/services/cloud-backup", name: "cloud backup" },
+  { path: "/services/cloudflare", name: "cloudflare" },
+  { path: "/services/dedicated-server", name: "dedicated server" },
+  { path: "/services/disaster-recovery", name: "disaster recovery" },
+  { path: "/services/virtual-data-center", name: "vitual data center" },
+  { path: "/services/private-cloud", name: "private cloud service" },
+  { path: "/services/cloud-backup-recovery", name: "cloud backup & recovery" },
 ]
 const subSoftwareLinks = [
   { path: "/microsoft-office", name: "microsoft office 365" },
@@ -88,37 +93,37 @@ export default function TheHeader() {
           <Link href="/"><Image src={logoTurbo} className="w-28 h-10" title="Trang chủ" alt="logo_turbo_solutions" /></Link>
         </div>
         {/* nav pc */}
-        <Box className="hidden text-[1rem] lg:flex justify-between items-center uppercase">
-          <Button href="/home" className="uppercase no-underline p-3 hover:text-[#378CE7]"> trang chủ </Button>
-          <Button href="/about-us" className="uppercase no-underline p-3 hover:text-[#378CE7]"> giới thiệu </Button>
+        <div className="hidden text-[1rem] lg:flex justify-between items-center uppercase">
+          <Button href="/home" className="uppercase no-underline p-3 hover:text-sky-900"> trang chủ </Button>
+          <Button href="/about-us" className="uppercase no-underline p-3 hover:text-sky-900"> giới thiệu </Button>
 
-          <Button onClick={handleClickService} endIcon={<KeyboardArrowDownRounded />} className="uppercase p-3 hover:text-[#378CE7]"> dịch vụ </Button>
+          <Button onClick={handleClickService} endIcon={<KeyboardArrowDownRounded />} className="uppercase p-3 hover:text-sky-900"> dịch vụ </Button>
           <Menu id="services" anchorEl={anchorEl} open={openService} onClose={handleCloseService} MenuListProps={{ 'aria-labelledby': 'basic-button', }} >
             {subServicesLinks.map((sub) => {
               return (
                 <MenuItem key={sub.path}>
-                  <Link href={sub.path} className="capitalize no-underline" target="_blank">{sub.name}</Link>
+                  <Link href={sub.path} className="capitalize no-underline text-[#378CE7] hover:text-sky-900" target="_blank">{sub.name}</Link>
                 </MenuItem>
               )
             })}
           </Menu>
 
-          <Button onClick={handleClickSolution} endIcon={<KeyboardArrowDownRounded />} className="uppercase no-underline p-3 hover:text-[#378CE7]">giải pháp</Button>
+          <Button onClick={handleClickSolution} endIcon={<KeyboardArrowDownRounded />} className="uppercase no-underline p-3 hover:text-sky-900">giải pháp</Button>
           <Menu id="services" anchorEl={anchorE3} open={openSolution} onClose={handleCloseSolution} MenuListProps={{ 'aria-labelledby': 'basic-button', }} >
             {subSolutonLinks.map((sub) => {
               return (
                 <MenuItem key={sub.path}>
-                  <Link href={sub.path} className="capitalize no-underline" >{sub.name}</Link>
+                  <Link href={sub.path} className="capitalize no-underline text-[#378CE7] hover:text-sky-900" >{sub.name}</Link>
                 </MenuItem>
               )
             })}
           </Menu>
 
-          <Button href="/recruitment" className="uppercase no-underline p-3 hover:text-[#378CE7]"> tuyển dụng </Button>
-          <Button href="/news" className="uppercase no-underline p-3 hover:text-[#378CE7]"> tin tức </Button>
-          <Button href="/contact" className="uppercase no-underline p-3 hover:text-[#378CE7]">  liên hệ </Button>
+          <Button href="/recruitment" className="uppercase no-underline p-3 hover:text-sky-900"> tuyển dụng </Button>
+          <Button href="/news" className="uppercase no-underline p-3 hover:text-sky-900"> tin tức </Button>
+          <Button href="/contact" className="uppercase no-underline p-3 hover:text-sky-900">  liên hệ </Button>
 
-        </Box>
+        </div>
 
         {/* Handle the menu icon */}
         <div

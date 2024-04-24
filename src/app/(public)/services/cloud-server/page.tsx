@@ -1,19 +1,22 @@
 "use client";
 
-import cloudGPU_01 from "../../../images/cloudServer/cloudGPU_01.png"
-import cloudGPU_02 from "../../../images/cloudServer/cloudGPU_02.png"
-import cloudGPU_03 from "../../../images/cloudServer/cloudGPU_03.png"
-import cloudGPU from "../../../images/cloudServer/cloudGPU.png"
+
+import Image from "next/image";
+import { styled } from '@mui/material/styles';
+import { Box, Button, Card, CardActions, CardContent, Container, Grid, Typography, FormControlLabel, Divider, TextField } from "@mui/material";
+import Switch, { SwitchProps } from '@mui/material/Switch';
+import promotion from "../../images/promotion.jpg";
 import cloudServer_icon_01 from "../../../images/cloudServer/cloudServer_icon_01.png"
 import cloudServer_icon_02 from "../../../images/cloudServer/cloudServer_icon_02.png"
 import cloudServer_icon_03 from "../../../images/cloudServer/cloudServer_icon_03.png"
 import cloudServer_icon_04 from "../../../images/cloudServer/cloudServer_icon_04.png"
-import { Box, Card, Divider, FormControlLabel, Grid, TextField, Typography, Container } from "@mui/material";
-import Switch, { SwitchProps } from '@mui/material/Switch';
-import { styled } from '@mui/material/styles';
-import Image from "next/image";
+import cloudServer_01 from "../../../images/cloudServer/cloudServer_01.png"
+import cloudServer_02 from "../../../images/cloudServer/cloudServer_02.png"
+import cloudServer_03 from "../../../images/cloudServer/cloudServer_03.png"
+import cloudServer_07 from "../../../images/cloudServer/cloudServer_07.png"
 
-export default function CloudGPU() {
+export default function CloudServer() {
+
   const IOSSwitch = styled((props: SwitchProps) => (
     <Switch focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} />
   ))(({ theme }) => ({
@@ -68,50 +71,53 @@ export default function CloudGPU() {
     <>
       <Container>
         <Box sx={{ textAlign: "center", py: 10 }}>
-          <Typography className="text-[2.5rem] font-light text-sky-900"> Cloud GPU Server máy chủ GPU cho <br /> Deep Learning | Machine Learning | Computer Vision </Typography>
-          <Typography> Khởi tạo và sử dụng Cloud GPU Server chỉ trong 45 giây! </Typography>
+          <Typography className="text-[2.5rem] font-light text-sky-900"> ECOLOUD SERVER </Typography>
+          <Typography> Khởi tạo và sử dụng máy chủ Cloud Server chỉ trong 45 giây! </Typography>
         </Box>
 
         <Box className="container grid sm:grid-cols-3 gap-x-6 gap-y-6 mb-10">
           <Card className="relative rounded-xl hover:shadow-lg cursor-pointer  text-sky-900">
             <Box className="flex flex-col justify-center items-center p-3">
-              <Typography className="text-[1.5rem] font-bold">Minh bạch chi phí</Typography>
-              <Image src={cloudGPU_03} className="w-52 h-auto my-5" alt="Minh bạch chi phí" />
+              <Typography className="text-[1.5rem] font-bold">Giao diện đơn giản</Typography>
+              <Image src={cloudServer_01} className="w-full h-auto" alt="Giao diện đơn giản" />
               <Typography className="font-extralight text-justify px-3">
-                Giao diện trực quan giúp dễ dàng quản lý và giám sát các tài nguyên thực dùng trên từng máy chủ.
-                Lập báo cáo thống kê chỉ với 1 click.
+                Giao diện EcoCloud trực quan dễ dàng quản lý nhiều Cloud Server và giám sát các thông số
+                tài nguyên sử dụng trên từng máy chủ
               </Typography>
             </Box>
           </Card>
 
           <Card className="relative rounded-xl hover:shadow-lg cursor-pointer">
             <Box className="flex flex-col justify-center items-center p-3  text-sky-900">
-              <Typography className="text-[1.5rem] font-bold"> Hoạt động hiệu quả </Typography>
+              <Typography className="text-[1.5rem] font-bold"> Hiệu năng vượt trội </Typography>
 
-              <Image src={cloudGPU_01} className="w-52 h-auto my-5" alt="Hoạt động hiệu quả" />
+              <Image src={cloudServer_02} className="w-full h-auto" alt="Hiệu năng vượt trội" />
               <Typography className="font-extralight text-justify px-3">
-                Dễ dàng mở rộng hay thu hẹp tài nguyên nhanh chóng để phù hợp với nhu cầu công việc của doanh nghiệp,
-                theo sát nhu cầu kinh doanh.
+                EcoCloud sử dụng 100% Enterprise SSD tạo nên kho lưu trữ siêu hiệu năng IOPS cao,
+                cùng tính năng tự điều chỉnh và không có điểm lỗi đơn
               </Typography>
             </Box>
           </Card>
 
           <Card className="rounded-xl hover:shadow-lg cursor-pointer">
             <Box className="flex flex-col justify-center items-center p-3  text-sky-900">
-              <Typography className="text-[1.5rem] font-bold"> Tối đa hóa lợi nhuận </Typography>
-              <Image src={cloudGPU_02} className="w-52 h-auto my-5" alt="Tối đa hóa lợi nhuận" />
+              <Typography className="text-[1.5rem] font-bold"> IDC tiêu chuẩn 3 </Typography>
+              <Image src={cloudServer_03} className="w-full h-auto" alt="IDC tiêu chuẩn 3" />
               <Typography className="font-extralight text-justify px-3">
-                Không cần đầu tư CAPEX cho phần cứng, thiết bị đắt đỏ. Giảm thiểu chi phí
-                vận hành OPEX tối đa. Chỉ chi trả cho tài nguyên thực dùng.
+                Hệ thống Ecocloud đặt tại các IDC tiêu chuẩn Tier - 3 như Viettel
+                và VNPT đảm bảo đường truyền băng thông rộng 10+ Gbps siêu tốc độ
               </Typography>
             </Box>
           </Card>
         </Box>
 
+        <Image src={promotion} className="w-full h-auto rounded-2xl" alt="promotion" />
+
+
         <Card className="rounded-2xl my-10">
           <Grid container className="shadow-lg pb-5">
             <Grid item xs={12} md={5} className="flex flex-col items-center justify-center">
-              <Image src={cloudGPU} className="w-full h-auto mt-10" alt="cloudGPU" />
+              <Image src={cloudServer_07} className="w-72 h-auto" alt="cloudServer_07" />
             </Grid>
 
             <Grid item xs={12} md={7} className=" text-sky-900">
@@ -119,9 +125,9 @@ export default function CloudGPU() {
                 <Box sx={{ display: "flex", alignItems: "center", py: 1 }}>
                   <Image src={cloudServer_icon_01} className="w-16 h-auto mr-4" alt="" />
                   <Box>
-                    <Typography className="text-[1.3rem] font-semibold pt-10">99.99% Uptime</Typography>
+                    <Typography className="text-[1.3rem] font-semibold">99.99% Uptime</Typography>
                     <Typography className="w-3/4 text-justify">
-                      Cloud GPU luôn hoạt động với cam kết chất lượng dịch vụ 99.99% uptime, đáp ứng nhu cầu luôn kết nối.
+                      Cloud Server luôn hoạt động với cam kết chất lượng dịch vụ 99.99% uptime, đáp ứng nhu cầu luôn kết nối.
                     </Typography>
                   </Box>
                 </Box>
@@ -129,9 +135,9 @@ export default function CloudGPU() {
                 <Box sx={{ display: "flex", alignItems: "center", py: 1 }}>
                   <Image src={cloudServer_icon_02} className="w-16 h-auto mr-4" alt="" />
                   <Box>
-                    <Typography className="text-[1.3rem] font-semibold">GPU siêu tốc độ</Typography>
+                    <Typography className="text-[1.3rem] font-semibold">Hỗ trợ phòng chống DDoS</Typography>
                     <Typography className="w-3/4 text-justify">
-                      Dòng GPU Nvidia với hiệu suất CUDA Cores, Tensor Cores siêu cao giúp giải nhanh các thuật toán Deep Learning phức tạp.
+                      Mục đích chính EcoCloud Server là luôn luôn hoạt động, vì vậy phòng chống DDoS là 1 tính năng quan trọng được tích hợp sẵn
                     </Typography>
                   </Box>
                 </Box>
@@ -139,9 +145,9 @@ export default function CloudGPU() {
                 <Box sx={{ display: "flex", alignItems: "center", py: 1 }}>
                   <Image src={cloudServer_icon_03} className="w-16 h-auto mr-4" alt="" />
                   <Box>
-                    <Typography className="text-[1.3rem] font-semibold">An toàn dữ liệu</Typography>
+                    <Typography className="text-[1.3rem] font-semibold">Cấu hình linh hoạt</Typography>
                     <Typography className="w-3/4 text-justify">
-                      Máy chủ Cloud GPU hoạt động trên nền Storage SDS với hiệu năng IOPS cao giúp xử lý dữ liệu nhanh chóng, an toàn và bảo mật.
+                      Lựa chọn gói dịch vụ phù hợp với nhu cầu ban đầu, thay đổi cấu hình linh hoạt và nhanh chóng đáp ứng nhu cầu ngày càng phát triển
                     </Typography>
                   </Box>
                 </Box>
@@ -149,9 +155,9 @@ export default function CloudGPU() {
                 <Box sx={{ display: "flex", alignItems: "center", py: 1 }}>
                   <Image src={cloudServer_icon_04} className="w-16 h-auto mr-4" alt="" />
                   <Box>
-                    <Typography className="text-[1.3rem] font-semibold">Băng thông rộng</Typography>
+                    <Typography className="text-[1.3rem] font-semibold">Hỗ trợ dịch vụ 24/7</Typography>
                     <Typography className="w-3/4 text-justify">
-                      Kết nối mạng tốc độ cao đến 10+ Gbps đáp ứng nhu cầu xử lý luồng Video Streaming lớn từ các Camera CCTV hoặc thiết bị Mobile, IoT
+                      Bất kể khi nào bạn cần hỗ trợ, đội ngũ EcoCloud luôn có mặt và sẽ phản hồi trong 15 phút
                     </Typography>
                   </Box>
                 </Box>
@@ -167,21 +173,20 @@ export default function CloudGPU() {
               <Typography className="text-[2rem] font-light text-sky-900"> Bảng giá dịch vụ Cloud Server </Typography>
               <Typography> * Bảng giá chưa bao gồm 10% VAT </Typography>
             </Box>
-            <Box className='grid sm:grid-cols-3 gap-x-6 gap-y-6 mb-10 text-center'>
+            <Box className='grid sm:grid-cols-5 gap-x-6 gap-y-6 mb-10 text-center'>
               <Card className='h-fit my-3 p-3 rounded-xl shadow-lg'>
                 <Box className="">
                   <Divider className="border-t-4 bg-yellow-600" />
-                  <Typography className="py-5 uppercase text-[2rem] font-bold text-sky-900" > gói gpu 01</Typography>
+                  <Typography className="py-5 uppercase text-[1.25rem] font-bold text-sky-900" > gói server 01</Typography>
                 </Box>
                 <Box>
-                  <div><TextField disabled size="small" className="py-1" defaultValue="8 vCPU" /></div>
-                  <div><TextField disabled size="small" className="py-1" defaultValue="16 GB RAM" /></div>
-                  <div><TextField disabled size="small" className="py-1" defaultValue="240 GB SSD" /></div>
+                  <div><TextField disabled size="small" className="py-1" defaultValue="2 vCPU" /></div>
+                  <div><TextField disabled size="small" className="py-1" defaultValue="1 GB RAM" /></div>
+                  <div><TextField disabled size="small" className="py-1" defaultValue="20 GB SSD" /></div>
                   <div><TextField disabled size="small" className="py-1" defaultValue="1 IPv4" /></div>
                   <div><TextField disabled size="small" className="py-1" defaultValue="200 Mbps Network" /></div>
-                  <div><TextField disabled size="small" className="py-1" defaultValue="1 Dedicated RTX 2080Ti" /></div>
 
-                  <Typography className="uppercase text-[1.5rem] font-bold py-5 text-yellow-600" > 5.300.000 vnd</Typography>
+                  <Typography className="uppercase text-[1.5rem] font-bold py-5 text-yellow-600" > 260.000 vnd</Typography>
                   <Divider className="border-t-4 bg-yellow-600" />
                 </Box>
               </Card>
@@ -189,16 +194,15 @@ export default function CloudGPU() {
               <Card className='h-fit my-3 p-3 rounded-xl shadow-lg'>
                 <Box className="">
                   <Divider className="border-t-4 bg-yellow-600" />
-                  <Typography className="py-5 uppercase text-[2rem] font-bold text-sky-900" > gói gpu 02</Typography>
+                  <Typography className="py-5 uppercase text-[1.25rem] font-bold text-sky-900" > gói server 02</Typography>
                 </Box>
                 <Box>
-                  <div><TextField disabled size="small" className="py-1" defaultValue="12 vCPU" /></div>
-                  <div><TextField disabled size="small" className="py-1" defaultValue="32 GB RAM" /></div>
-                  <div><TextField disabled size="small" className="py-1" defaultValue="480 GB SSD" /></div>
+                  <div><TextField disabled size="small" className="py-1" defaultValue="3 vCPU" /></div>
+                  <div><TextField disabled size="small" className="py-1" defaultValue="2 GB RAM" /></div>
+                  <div><TextField disabled size="small" className="py-1" defaultValue="40 GB SSD" /></div>
                   <div><TextField disabled size="small" className="py-1" defaultValue="1 IPv4" /></div>
                   <div><TextField disabled size="small" className="py-1" defaultValue="200 Mbps Network" /></div>
-                  <div><TextField disabled size="small" className="py-1" defaultValue="1 Dedicated RTX 2080Ti" /></div>
-                  <Typography className="uppercase text-[1.5rem] font-bold py-5 text-yellow-600" > 7.600.000 vnd</Typography>
+                  <Typography className="uppercase text-[1.5rem] font-bold py-5 text-yellow-600" > 470.000 vnd</Typography>
                   <Divider className="border-t-4 bg-yellow-600" />
                 </Box>
               </Card>
@@ -206,16 +210,47 @@ export default function CloudGPU() {
               <Card className='h-fit my-3 p-3 rounded-xl shadow-lg'>
                 <Box className="">
                   <Divider className="border-t-4 bg-yellow-600" />
-                  <Typography className="py-5 uppercase text-[2rem] font-bold text-sky-900" > gói gpu 03</Typography>
+                  <Typography className="py-5 uppercase text-[1.25rem] font-bold text-sky-900" > gói server 03</Typography>
                 </Box>
                 <Box>
-                  <div><TextField disabled size="small" className="py-1" defaultValue="16 vCPU" /></div>
-                  <div><TextField disabled size="small" className="py-1" defaultValue="64 GB RAM" /></div>
-                  <div><TextField disabled size="small" className="py-1" defaultValue="480 GB SSD" /></div>
+                  <div><TextField disabled size="small" className="py-1" defaultValue="4 vCPU" /></div>
+                  <div><TextField disabled size="small" className="py-1" defaultValue="3 GB RAM" /></div>
+                  <div><TextField disabled size="small" className="py-1" defaultValue="60 GB SSD" /></div>
                   <div><TextField disabled size="small" className="py-1" defaultValue="1 IPv4" /></div>
                   <div><TextField disabled size="small" className="py-1" defaultValue="200 Mbps Network" /></div>
-                  <div><TextField disabled size="small" className="py-1" defaultValue="1 Dedicated RTX 2080Ti" /></div>
-                  <Typography className="uppercase text-[1.5rem]  font-bold py-5 text-yellow-600" > 9.800.000 vnd</Typography>
+                  <Typography className="uppercase text-[1.5rem]  font-bold py-5 text-yellow-600" > 780.000 vnd</Typography>
+                  <Divider className="border-t-4 bg-yellow-600" />
+                </Box>
+              </Card>
+
+              <Card className='h-fit my-3 p-3 rounded-xl shadow-lg'>
+                <Box className="">
+                  <Divider className="border-t-4 bg-yellow-600" />
+                  <Typography className="py-5 uppercase text-[1.25rem] font-bold text-sky-900" > gói server 04</Typography>
+                </Box>
+                <Box>
+                  <div><TextField disabled size="small" className="py-1" defaultValue="5 vCPU" /></div>
+                  <div><TextField disabled size="small" className="py-1" defaultValue="4 GB RAM" /></div>
+                  <div><TextField disabled size="small" className="py-1" defaultValue="80 GB SSD" /></div>
+                  <div><TextField disabled size="small" className="py-1" defaultValue="1 IPv4" /></div>
+                  <div><TextField disabled size="small" className="py-1" defaultValue="200 Mbps Network" /></div>
+                  <Typography className="uppercase text-[1.5rem] font-bold py-5 text-yellow-600" > 1.090.000 vnd</Typography>
+                  <Divider className="border-t-4 bg-yellow-600" />
+                </Box>
+              </Card>
+
+              <Card className='h-fit my-3 p-3 rounded-xl shadow-lg'>
+                <Box className="">
+                  <Divider className="border-t-4 bg-yellow-600" />
+                  <Typography className="py-5 uppercase text-[1.25rem] font-bold text-sky-900" > gói server 05</Typography>
+                </Box>
+                <Box>
+                  <div><TextField disabled size="small" className="py-1" defaultValue="6 vCPU" /></div>
+                  <div><TextField disabled size="small" className="py-1" defaultValue="5 GB RAM" /></div>
+                  <div><TextField disabled size="small" className="py-1" defaultValue="100 GB SSD" /></div>
+                  <div><TextField disabled size="small" className="py-1" defaultValue="1 IPv4" /></div>
+                  <div><TextField disabled size="small" className="py-1" defaultValue="200 Mbps Network" /></div>
+                  <Typography className="uppercase text-[1.5rem] font-bold py-5 text-yellow-600" > 1.350.000 vnd</Typography>
                   <Divider className="border-t-4 bg-yellow-600" />
                 </Box>
               </Card>
@@ -306,50 +341,51 @@ export default function CloudGPU() {
             <Typography className="text-[2rem] text-sky-900 font-light text-center py-5"> Câu hỏi thường gặp </Typography>
             <Grid container className=" text-sky-900">
               <Grid item xs={12} md={6} lg={6} xl={6} className="flex flex-col items-center justify-center">
-                <Typography className="w-3/4 text-xl font-semibold">Tôi muốn dùng thử dịch vụ Cloud GPU Server?</Typography>
+                <Typography className="w-3/4 text-xl font-semibold">Tôi muốn dùng thử Cloud Server trước khi sử dụng chính thức?</Typography>
                 <Typography className="w-3/4 text-justify py-3">
                   EcoCloud luôn có chương trình dùng thử miễn phí để khách hàng có thể trải nghiệm tốt nhất.
-                  Hãy liên hệ với chúng tôi qua hotline 076 9999 967 hoặc email cskh@turbo.vn để được hỗ trợ.
+                  Hãy liên hệ với chúng tôi qua hotline +84 76 9999 967 hoặc email cskh@turbo.vn để được hỗ trợ khởi tạo tài khoản.
                 </Typography>
               </Grid>
               <Grid item xs={12} md={6} lg={6} xl={6} className="flex flex-col items-center justify-center">
-                <Typography className="w-3/4 text-xl font-semibold">Khác biệt giữa GPU GTX 1080TI và RTX 2080TI là gì?</Typography>
+                <Typography className="w-3/4 text-xl font-semibold">Khác biệt giữa VPS với Cloud Server là gì?</Typography>
                 <Typography className="w-3/4 text-justify py-3">
-                  Ngoài khác biệt về cấu trúc GPU cũng như giá thành, dòng GPU 2080TI đạt hiệu năng cao hơn hẳn so với 1080TI
-                  trong xử lý các Deep Learning và Machine Learning.
+                  Nói đơn giản, cả hai đều là máy chủ ảo hóa. Với Cloud Server là máy chủ ảo nằm trong cụm hệ thống được cấu
+                  thành từ nhiều máy chủ và storage, network mở rộng không giới hạn; so với VPS là những máy chủ đơn lẻ hạn chế tài nguyên.
                 </Typography>
               </Grid>
               <Grid item xs={12} md={6} lg={6} xl={6} className="flex flex-col items-center justify-center">
-                <Typography className="w-3/4 text-xl font-semibold">Cloud GPU Server có thể sử dụng cho những framework nào?</Typography>
+                <Typography className="w-3/4 text-xl font-semibold">Có hỗ trợ migrate sang dịch vụ của EcoCloud?</Typography>
                 <Typography className="w-3/4 text-justify py-3">
-                  Khi khởi tạo Cloud GPU Server, bạn có thể cài đặt thêm các framework TensorFlow, MXNET, Pytorch, Caffe2… theo nhu cầu xử lý thuật toán.
-                  Bạn cũng có thể cài đặt thêm FFMpeg để xử lý luồng stream từ Camera, Mobile…
+                  Chúng tôi luôn hỗ trợ khách hàng chuyển đổi sang dịch vụ Cloud Server của EcoCloud. Chúng tôi có thể giúp quý khách hàng chuyển đổi từ Dedicated Server sang Cloud Server;
+                  chuyển từ ảo hóa VMWare hoặc Hyper-V dễ dàng và không gây downtime.
                 </Typography>
               </Grid>
               <Grid item xs={12} md={6} lg={6} xl={6} className="flex flex-col items-center justify-center">
-                <Typography className="w-3/4 text-xl font-semibold">Tôi có thể cài đặt HĐH riêng cho Cloud GPU Server?</Typography>
+                <Typography className="w-3/4 text-xl font-semibold">Tôi có thể tự cài đặt HĐH riêng cho Cloud Server của tôi?</Typography>
                 <Typography className="w-3/4 text-justify py-3">
-                  EcoCloud hiện cung cấp hai HĐH cho Cloud GPU Server là Windows và Ubuntu. Nếu có gặp khó khăn trong quá trình cài đặt thư viện,
-                  hãy liên hệ với đội kỹ thuật để được hỗ trợ nhanh chóng.
+                  Khách hàng hoàn toàn có thể cài đặt HĐH riêng nếu nó không nằm trong hàng trăm templates trên giao diện quản lý.
+                  Nếu có gặp khó khăn trong quá trình cài đặt, hãy liên hệ với đội kỹ thuật để được hỗ trợ nhanh chóng.
                 </Typography>
               </Grid>
               <Grid item xs={12} md={6} lg={6} xl={6} className="flex flex-col items-center justify-center">
-                <Typography className="w-3/4 text-xl font-semibold">Cloud GPU Server của EcoCloud có hỗ trợ Windows Server?</Typography>
+                <Typography className="w-3/4 text-xl font-semibold">Cloud Server của EcoCloud có hỗ trợ Windows Server?</Typography>
                 <Typography className="w-3/4 text-justify py-3">
-                  Trong các phiên bản Windows Cloud GPU, hiện EcoCloud có cung cấp GPU hoạt động trên Windows Server các phiên bản 2012, 2016, 2019 và cả Windows 10.
+                  EcoCloud có hàng trăm templates hệ điều hành được chuẩn bị sẵn, và trong đó có nhiều mẫu Windows Server như Win Server 2012, 2016, 2019
+                  với nhiều phiên bản từ Standard đến DataCenter, giúp quý khách nhanh chóng triển khai.
                 </Typography>
               </Grid>
               <Grid item xs={12} md={6} lg={6} xl={6} className="flex flex-col items-center justify-center">
-                <Typography className="w-3/4 text-xl font-semibold">Cloud GPU Server có thể dùng trong những trường hợp nào?</Typography>
+                <Typography className="w-3/4 text-xl font-semibold">Nhà cung cấp cũ không hợp tác chuyển đổi máy chủ?</Typography>
                 <Typography className="w-3/4 text-justify py-3">
-                  Có rất nhiều trường hợp để sử dụng Cloud GPU Server. Bạn có thể sử dụng cho Machine Learning và AI, bạn cũng có thể sử dụng cho mục đích xử lý hình ảnh,
-                  video và thị giác máy tính. Hoặc dùng cho Big Data với Hadoop, Apache Spark…
+                  Chúng tôi rất lấy làm tiếc vì sự không hợp tác từ nhà cung cấp cũ. Chúng tôi có những công nghệ khác biệt, giúp khách hàng chuyển đổi hệ thống mà không cần thao tác từ tầng vật lý.
+                  Hãy liên hệ với chúng tôi để được tư vấn hỗ trợ.
                 </Typography>
               </Grid>
             </Grid>
           </Box>
         </Box>
-      </Container>
+      </Container >
     </>
   )
 }

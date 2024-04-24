@@ -38,7 +38,7 @@ export default function TheFooter() {
 
             <div className="flex my-1">
               <PhoneCallbackRounded fontSize="small" />
-              <Link href="tel:076.9999.967" className="font-thin no-underline text-white px-2">076.9999.967</Link>
+              <Link href="tel:0769999967" className="font-thin no-underline text-white px-2">076.9999.967</Link>
             </div>
           </Box>
         </Grid>
@@ -64,22 +64,22 @@ export default function TheFooter() {
 
           <Box sx={{ display: "flex", justifyContent: "center" }}>
             <Box mx={2}>
-              <Typography className="text-lg font-normal">Giải pháp AI</Typography>
+              <Typography className="text-lg uppercase"> giải pháp </Typography>
               {solutonLinks.map((link) => {
                 return (
-                  <div key={link.name}>
-                    <Link className="text-sm no-underline text-white font-thin hover:text-[1rem] duration-500" href={link.path}>{link.name}</Link>
-                  </div>
+                  <Box key={link.name}>
+                    <Link className="text-sm no-underline text-white font-thin hover:text-yellow-500 duration-500" href={link.path}>{link.name}</Link>
+                  </Box>
                 )
               })}
             </Box>
             <Box mx={2}>
-              <Typography className="text-lg font-normal">Cloud Computing</Typography>
+              <Typography className="text-lg uppercase">dịch vụ</Typography>
               {cloudLinks.map((link) => {
                 return (
-                  <div key={link.name}>
-                    <Link className="text-sm no-underline text-white font-thin hover:text-[1rem] duration-500" href={link.path}>{link.name}</Link>
-                  </div>
+                  <Box key={link.name}>
+                    <Link className="text-sm no-underline text-white font-thin hover:text-yellow-500 duration-500" href={link.path}>{link.name}</Link>
+                  </Box>
                 )
               })}
             </Box>

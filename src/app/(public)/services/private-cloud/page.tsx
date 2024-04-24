@@ -1,8 +1,8 @@
 
 
-import icon_01 from "../../../../public/images/privateCloud/icon_01.png"
-import icon_02 from "../../../../public/images/privateCloud/icon_02.png"
-import opennebula_admin_view from "../../../../public/images/privateCloud/opennebula_admin_view.png"
+import icon_01 from "../../../images/privateCloud/icon_01.png"
+import icon_02 from "../../../images/privateCloud/icon_02.png"
+import opennebula_admin_view from "../../../images/privateCloud/opennebula_admin_view.png"
 import { OndemandVideoRounded, ReadMoreRounded } from "@mui/icons-material";
 import { Box, Button, Card, CardActions, CardContent, Container, Grid, Paper, Typography } from "@mui/material";
 import Image from "next/image";
@@ -17,8 +17,8 @@ export const metadata = () => {
 const PrivateCloud = () => {
   return (
     <Container>
-      <Box my={5} sx={{ textAlign: "center", marginX: "auto" }}>
-        <Typography className="text-[2rem] text-center text-blue-900 font-semibold">Nền tảng Private Cloud mạnh mẽ, ổn định & hiệu năng cao</Typography>
+      <Box sx={{ textAlign: "center", marginX: "auto", paddingY: 10 }}>
+        <Typography className="text-[2rem] text-center text-sky-900 font-semibold">Nền tảng Private Cloud mạnh mẽ, ổn định & hiệu năng cao</Typography>
         <Typography className="text-[1.5rem] w-3/4 mx-auto leading-relaxed text-gray-500">Sở hữu sức mạnh không giới hạn của điện toán đám mây một cách dễ dàng với Private Cloud chỉ dành riêng cho doanh nghiệp của bạn.</Typography>
         <Box my={5}>
           <iframe
@@ -86,24 +86,24 @@ const PrivateCloud = () => {
       </Box>
 
       <Box my={5}>
-        <Typography className="text-[2rem] text-blue-900 text-center font-semibold">Giao diện quản lý Private Cloud</Typography>
+        <Typography className="text-[2rem] text-sky-900 text-center font-semibold">Giao diện quản lý Private Cloud</Typography>
         <Card className="my-10 relative px-1 rounded-md hover:shadow-lg cursor-pointer">
           <CardContent>
             <Box className="mb-16 flex justify-between">
-              <Typography className="text-[2.5rem] font-light py-3 mr-2">Private Cloud sẽ mang lại cho bạn góc nhìn khác biệt về vận hành dịch vụ CNTT.</Typography>
+              <Typography className="text-[2.5rem] font-extralight py-3 mr-2">Private Cloud sẽ mang lại cho bạn góc nhìn khác biệt về vận hành dịch vụ CNTT.</Typography>
               <Image src={opennebula_admin_view} title="Giao diện" className="max-w-[700px] h-auto rounded-lg my-5 ml-2" alt="Giao diện"></Image>
             </Box>
           </CardContent>
           <CardActions className="absolute bottom-3 left-3">
-            <Button href="https://opennebula.io/discover/" className="min-w-[200px] p-3 bg-blue-500 text-white border rounded-full hover:opacity-80" variant="outlined" size="small" endIcon={<ReadMoreRounded />}>kết nối với chúng tôi </Button>
+            <Button href="https://opennebula.io/discover/" variant="contained" size="medium" endIcon={<ReadMoreRounded />}>kết nối với chúng tôi </Button>
           </CardActions>
         </Card>
       </Box>
 
       <Box>
-        <Typography className="text-[2rem] text-blue-900 text-center font-semibold">Sẵn sàng triển khai Private Cloud?</Typography>
+        <Typography className="text-[2rem] text-sky-900 text-center font-semibold">Sẵn sàng triển khai Private Cloud?</Typography>
         <Typography className="text-[1.5rem] text-center w-2/3 mx-auto ">Dịch vụ Private Cloud của Turbo Solutions hoạt động giống như trung tâm dữ liệu của riêng bạn, có thể kiểm soát và định cấu hình theo nhu cầu của tổ chức mình.</Typography>
-        <Card className="my-5">
+        <Card className="my-5 shadow-2xl rounded-xl">
           <Grid container>
             <Grid item xs={12} md={6} lg={7} xl={7} className="flex flex-col items-center justify-center">
               <Box textAlign="center" my={3}>
@@ -125,18 +125,18 @@ const PrivateCloud = () => {
               <Button className="btn-grad rounded-full w-1/3 my-3 hover:opacity-80" href="/contact" target="_blank">Liên hệ ngay</Button>
 
             </Grid>
-            <Grid item xs={12} md={6} lg={5} xl={5} className="bg-sky-600 py-5 px-auto">
+            <Grid item xs={12} md={6} lg={5} xl={5} className="bg-sky-600 py-5 px-auto shadow-2xl rounded-xl">
               <Grid pl={8}>
                 <Box>
                   <Typography className="text-[1.3rem] font-semibold text-white">99.99% Uptime SLA</Typography>
                   <Typography className="w-3/4 text-white">Đa trung tâm dữ liệu tiêu chuẩn Tier-3 đáp ứng thời gian Uptime lên đến 99,99%</Typography>
                 </Box>
-                <hr className="my-5 max-w-[350px]" />
+                <hr className="my-5 max-w-[450px]" />
                 <Box>
                   <Typography className="text-[1.3rem] font-semibold text-white">Băng thông không giới hạn</Typography>
                   <Typography className="w-3/4 text-white">Đường truyền tốc độ từ 10+ Gbps đảm bảo mọi kết nối luôn ở tốc độ cao nhất.</Typography>
                 </Box>
-                <hr className="my-5 max-w-[350px]" />
+                <hr className="my-5 max-w-[450px]" />
                 <Box>
                   <Typography className="text-[1.3rem] font-semibold text-white">Lưu trữ siêu tốc độ</Typography>
                   <Typography className="w-3/4 text-white">Công nghệ phần mềm định hướng mang lại hệ thống lưu trữ siêu hiệu năng, siêu ổn định.</Typography>
@@ -148,27 +148,27 @@ const PrivateCloud = () => {
         </Card>
       </Box>
 
-      <Box my={5}>
-        <Typography className="text-[2rem] text-blue-900 text-center font-semibold">Các thông tin thường gặp</Typography>
-        <Grid container my={5}>
-          <Grid item xs={12} md={6} lg={6} xl={6} className="flex flex-col items-center justify-center">
-            <Typography className="w-2/3 text-xl font-semibold">Hình thức triển khai tại trung tâm dữ liệu?</Typography>
-            <Typography className="w-2/3">Bạn có thể triển khai private cloud tại bất kì trung tâm dữ liệu nào bạn mong muốn. Tại trung tâm dữ liệu ở trụ sở chính của doanh nghiệp, hoặc tại các trung tâm dữ liệu Internet tiêu chuẩn.</Typography>
+      <Box mt={5}>
+        <Typography className="text-[2rem] text-sky-900 text-center font-semibold">Các thông tin thường gặp</Typography>
+        <Grid container pt={5} >
+          <Grid item xs={12} md={6} className="flex flex-col items-center justify-center text-sky-900">
+            <Typography className="w-3/4 text-xl font-semibold pb-3">Hình thức triển khai tại trung tâm dữ liệu?</Typography>
+            <Typography className="w-3/4">Bạn có thể triển khai private cloud tại bất kì trung tâm dữ liệu nào bạn mong muốn. Tại trung tâm dữ liệu ở trụ sở chính của doanh nghiệp, hoặc tại các trung tâm dữ liệu Internet tiêu chuẩn.</Typography>
           </Grid>
-          <Grid item xs={12} md={6} lg={6} xl={6} className="flex flex-col items-center justify-center">
-            <Typography className="w-2/3 text-xl font-semibold">Đám mây riêng khác với đám mây công cộng như thế nào?</Typography>
-            <Typography className="w-2/3">Nói một cách đơn giản, public cloud bao gồm các tài nguyên được chia sẻ mà bạn thuê từ một nhà cung cấp dịch vụ và đám mây riêng gồm các tài nguyên của riêng bạn (dedicated).</Typography>
+          <Grid item xs={12} md={6} className="flex flex-col items-center justify-center text-sky-900">
+            <Typography className="w-3/4 text-xl font-semibold pb-3">Đám mây riêng khác với đám mây công cộng như thế nào?</Typography>
+            <Typography className="w-3/4">Nói một cách đơn giản, public cloud bao gồm các tài nguyên được chia sẻ mà bạn thuê từ một nhà cung cấp dịch vụ và đám mây riêng gồm các tài nguyên của riêng bạn (dedicated).</Typography>
           </Grid>
         </Grid>
 
-        <Grid container my={5}>
-          <Grid item xs={12} md={6} lg={6} xl={6} className="flex flex-col items-center justify-center">
-            <Typography className="w-2/3 text-xl font-semibold">Với Private Cloud, điều gì xảy ra khi 1 disk hoặc server bị lỗi?</Typography>
-            <Typography className="w-2/3">Đám mây là tập hợp các máy chủ được kết hợp với nhau để tạo thành một nhóm tài nguyên chung. Trong trường hợp bất kỳ tài nguyên riêng lẻ nào bị lỗi, máy ảo (VM) của bạn sẽ tự động được chuyển đến một máy chủ đầy đủ chức năng trong đám mây.</Typography>
+        <Grid container py={5} >
+          <Grid item xs={12} md={6} className="flex flex-col items-center justify-center text-sky-900">
+            <Typography className="w-3/4 text-xl font-semibold pb-3">Với Private Cloud, điều gì xảy ra khi 1 disk hoặc server bị lỗi?</Typography>
+            <Typography className="w-3/4">Đám mây là tập hợp các máy chủ được kết hợp với nhau để tạo thành một nhóm tài nguyên chung. Trong trường hợp bất kỳ tài nguyên riêng lẻ nào bị lỗi, máy ảo (VM) của bạn sẽ tự động được chuyển đến một máy chủ đầy đủ chức năng trong đám mây.</Typography>
           </Grid>
-          <Grid item xs={12} md={6} lg={6} xl={6} className="flex flex-col items-center justify-center">
-            <Typography className="w-2/3 text-xl font-semibold">Phương thức hỗ trợ như thế nào?</Typography>
-            <Typography className="w-2/3">Đây là thế mạnh của Turbo Solutions, chúng tôi sẽ song hành như một thành viên phòng CNTT của bạn trong suốt quá trình hoạt động. Chúng tôi có thể lập báo cáo, hỗ trợ tư vấn triển khai, chuyển đổi máy chủ và ứng dụng.</Typography>
+          <Grid item xs={12} md={6} className="flex flex-col items-center justify-center text-sky-900">
+            <Typography className="w-3/4 text-xl font-semibold pb-3">Phương thức hỗ trợ như thế nào?</Typography>
+            <Typography className="w-3/4">Đây là thế mạnh của Turbo Solutions, chúng tôi sẽ song hành như một thành viên phòng CNTT của bạn trong suốt quá trình hoạt động. Chúng tôi có thể lập báo cáo, hỗ trợ tư vấn triển khai, chuyển đổi máy chủ và ứng dụng.</Typography>
           </Grid>
         </Grid>
       </Box>

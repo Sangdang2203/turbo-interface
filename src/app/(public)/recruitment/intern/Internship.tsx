@@ -11,8 +11,15 @@ const Internship = () => {
           <CardContent>
             <Box className="mb-16">
               <Typography className="text-lg font-normal mb-2">Tuyển dụng Nhân Viên Marketing</Typography>
-              <Button startIcon={<PersonRounded />} className="font-extralight">Số lượng: 1</Button>
-              <Button startIcon={<FmdGoodRounded />} className="font-extralight">Nơi làm việc: TPHCM</Button>
+              <Box className="flex items-center">
+                <PersonRounded fontSize="medium" />
+                <Typography className="px-3 font-extralight">Số lượng: 1</Typography>
+              </Box>
+
+              <Box className="flex items-center my-3">
+                <FmdGoodRounded fontSize="medium" />
+                <Typography className="px-3 font-extralight">Nơi làm việc: TPHCM</Typography>
+              </Box>
             </Box>
           </CardContent >
           <CardActions className="absolute bottom-1 left-1">

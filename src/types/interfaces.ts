@@ -74,14 +74,19 @@ export interface Category {
 export interface Post {
 	id: string;
 	title: string;
-	category: string;
+	categories: [
+		{
+			id: string;
+			name: string;
+		}
+	];
 	user: string;
 	slug: string;
 	image: string;
 	description: string;
 	content: string;
-	createAt: string;
-	updateAt: string;
+	createDate: string;
+	updateDate: string;
 	status: string;
 }
 

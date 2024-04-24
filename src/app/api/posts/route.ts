@@ -35,23 +35,24 @@ export async function GET(req: NextRequest) {
 	}
 }
 
-export async function POST(req: NextRequest) {
+export async function POST(req: NextRequest, token: string) {
 	const newPost = await req.json();
+	newPost.status = "ACTIVE";
 	try {
 		const response = await fetch(process.env.NEXT_PUBLIC_API_URL + "/posts", {
 			method: req.method,
-			headers: req.headers,
+			headers: {
+				Authorization: `Bearer ${token}`,
+			},
 			body: JSON.stringify(newPost),
 		});
 
 		let data = null;
 
-		if (response.ok) {
-			data = await response.json();
-			console.log(data);
-		}
+		console.log(response);
 
 		if (response.ok) {
+			data = await response.json();
 			return NextResponse.json({
 				ok: true,
 				status: "Success",

@@ -7,7 +7,6 @@ import {
 	ArticleOutlined,
 	BadgeOutlined,
 	EditNoteOutlined,
-	ManageAccountsOutlined,
 	ManageSearchRounded,
 	NewspaperOutlined,
 	PasswordOutlined,
@@ -50,7 +49,7 @@ export default function DrawerMenu() {
 		createMenu('Tuyển Dụng', NewspaperOutlined, '/dashboard/recruitment', 'recruitment.view', [
 			createMenu('Quản lý', ManageSearchRounded, '/dashboard/recruitment/management', 'recruitment.view'),
 			createMenu('Tạo mới', AddCircleOutlineOutlined, '/dashboard/recruitment/create', 'recruitment.create'),
-			createMenu('Cập nhật', EditNoteOutlined, '/dashboard/recruitment/edit', 'recruitment.update')
+			createMenu('Cập nhật', EditNoteOutlined, '/dashboard/posts/edit/', 'recruitment.update')
 		]),
 
 		//createMenu("Vai Trò", ManageAccountsOutlined, "/dashboard/roles", "role.view"),
