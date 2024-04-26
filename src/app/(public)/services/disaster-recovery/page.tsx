@@ -27,7 +27,7 @@ export default function DisasterRecovery() {
         </Grid>
 
         <Grid item xs={12} md={6} className=" text-sky-900">
-          <Box pl={10}>
+          <Box pl={2}>
             <Typography className="text-[2rem] font-semibold">
               Giải pháp Disaster Recovery, dự phòng và phục hồi thảm họa của EcoCloud.
             </Typography>

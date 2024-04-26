@@ -76,9 +76,9 @@ const HomePage = () => {
     <Box>
       <Box className="theme -mt-[10vh] text-white">
         <Box textAlign="center" my={5} className="text-white">
-          <Typography id="typing" className="text-[2.5rem] font-semibold">Ứng dụng | Dịch vụ | Giải pháp</Typography>
+          <Typography className="text-[2.5rem] font-semibold">Ứng dụng | Dịch vụ | Giải pháp</Typography>
           <Typography className="text-[2rem] font-extralight">điện toán đám mây chất lượng hàng đầu.</Typography>
-          <Typography className="text-center text-[1.75rem] font-light w-2/3 mx-auto my-5">
+          <Typography className="text-center text-[1.75rem] font-light w-3/4 mx-auto my-5">
             Công ty Turbo Solutions chung tay cùng quý doanh nghiệp thực hiện chuyển đổi số bằng cách tích hợp các công nghệ thông minh 4.0, cùng đạt mục tiêu thắng lợi.
           </Typography>
         </Box>
@@ -88,7 +88,7 @@ const HomePage = () => {
             <Image src={ScalablePrivateCloud} className="w-full h-auto rounded-md mt-3" alt="ScalablePrivateCloud" />
             <CardContent>
               <Box>
-                <Typography className="text-lg font-leading-relaxed  text-blue-500">Cloud Server</Typography>
+                <Typography className="text-lg font-leading-relaxed text-blue-500">Cloud Server</Typography>
                 <FormHelperText>Hạ tầng điện toán đám mây</FormHelperText>
                 <Typography className="font-light mt-3">
                   Với công nghệ siêu hội tụ (HCI) và phần mềm định hướng (SDX) mang lại hạ tầng đám mây siêu hiệu năng, siêu ổn định, là nền tảng vững chắc cho phát triển các ứng dụng.
@@ -201,24 +201,24 @@ const HomePage = () => {
           <Typography className="text-[2rem] font-semibold"> Được hàng trăm doanh nghiệp tin dùng cho đến nay </Typography>
           <Typography className="text-[1.25rem] pb-10 pt-3"> Khách hàng của chúng tôi đến từ khắp nơi trên thế giới. </Typography>
         </Box>
-        <Box className="flex justify-between items-center text-center">
-          <Box>
+        <Grid container className="flex justify-between items-center text-center">
+          <Grid item xs={12} md={3}>
             <Typography className="text-[3rem] font-bold">250+</Typography>
             <Typography>Dự án đã triển khai</Typography>
-          </Box>
-          <Box>
+          </Grid>
+          <Grid item xs={12} md={3}>
             <Typography className="text-[3rem] font-bold">10+</Typography>
             <Typography>Hơn 10 năm kinh nghiệm</Typography>
-          </Box>
-          <Box>
+          </Grid>
+          <Grid item xs={12} md={3}>
             <Typography className="text-[3rem] font-bold">5</Typography>
             <Typography>Quốc gia</Typography>
-          </Box>
-          <Box>
+          </Grid>
+          <Grid item xs={12} md={3}>
             <Typography className="text-[3rem] font-bold">50+</Typography>
             <Typography>Thành viên</Typography>
-          </Box>
-        </Box>
+          </Grid>
+        </Grid>
       </Container>
 
 

@@ -18,7 +18,7 @@ export default function BasicSpeedDial() {
       <SpeedDial
         ariaLabel="SpeedDial basic example"
         sx={{ position: 'absolute', bottom: 8, right: 16 }}
-        icon={<SpeedDialIcon />}
+        icon={<SpeedDialIcon color='info' />}
       >
         {actions.map((action) => (
           <SpeedDialAction

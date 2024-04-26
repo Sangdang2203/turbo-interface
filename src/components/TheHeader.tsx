@@ -146,28 +146,42 @@ export default function TheHeader() {
         <div
           className={
             navigation
-              ? "lg:hidden absolute top-[12vh] right-0 left-0 bottom-0 bg-slate-200 w-full h-screen ease-in duration-500"
-              : "lg:hidden absolute top-[12vh] right-0 left-[-100%] bottom-0 bg-slate-200 w-full h-screen ease-in duration-500"
+              ? "lg:hidden absolute top-[10vh] right-0 left-0 bottom-0 bg-slate-200 w-full h-screen ease-in duration-500"
+              : "lg:hidden absolute top-[10vh] right-0 left-[-100%] bottom-0 bg-slate-200 w-full h-screen ease-in duration-500"
           }>
           {/* navbar links */}
           <ul className="text-center uppercase text-[1rem] fond-bold mt-6">
-            <li onClick={handleNavigation}>
-              {navLinks.map(link => {
-                const isActive = pathname.startsWith(link.path);
-                return (
-                  <Link
-                    key={link.path}
-                    href={link.path}
-                    className={
-                      isActive
-                        ? "text-amber-400 font-bold pb-4 flex flex-col justify-center items-center"
-                        : "pb-4  hover:text-amber-400 hover:text-[1.5rem] duration-300 flex flex-col justify-center items-center"
-                    }>
-                    {link.name}
-                  </Link>
-                );
-              })}
-            </li>
+            <div className="text-[1rem] flex flex-col uppercase">
+              <Button href="/home" className="uppercase no-underline p-3 hover:text-sky-900"> trang chủ </Button>
+              <Button href="/about-us" className="uppercase no-underline p-3 hover:text-sky-900"> giới thiệu </Button>
+
+              <Button onClick={handleClickService} endIcon={<KeyboardArrowDownRounded />} className="uppercase p-3 hover:text-sky-900"> dịch vụ </Button>
+              <Menu id="services" anchorEl={anchorEl} open={openService} onClose={handleCloseService} MenuListProps={{ 'aria-labelledby': 'basic-button', }} >
+                {subServicesLinks.map((sub) => {
+                  return (
+                    <MenuItem key={sub.path}>
+                      <Link href={sub.path} className="capitalize no-underline text-[#378CE7] hover:text-sky-900" >{sub.name}</Link>
+                    </MenuItem>
+                  )
+                })}
+              </Menu>
+
+              <Button onClick={handleClickSolution} endIcon={<KeyboardArrowDownRounded />} className="uppercase no-underline p-3 hover:text-sky-900">giải pháp</Button>
+              <Menu id="services" anchorEl={anchorE3} open={openSolution} onClose={handleCloseSolution} MenuListProps={{ 'aria-labelledby': 'basic-button', }} >
+                {subSolutonLinks.map((sub) => {
+                  return (
+                    <MenuItem key={sub.path}>
+                      <Link href={sub.path} className="capitalize no-underline text-[#378CE7] hover:text-sky-900" >{sub.name}</Link>
+                    </MenuItem>
+                  )
+                })}
+              </Menu>
+
+              <Button href="/recruitment" className="uppercase no-underline p-3 hover:text-sky-900"> tuyển dụng </Button>
+              <Button href="/news" className="uppercase no-underline p-3 hover:text-sky-900"> tin tức </Button>
+              <Button href="/contact" className="uppercase no-underline p-3 hover:text-sky-900">  liên hệ </Button>
+
+            </div>
           </ul>
         </div>
       </nav>

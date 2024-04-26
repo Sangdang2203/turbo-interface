@@ -25,9 +25,13 @@ const PrivateCloud = () => {
         </Box>
       </Box>
 
-      <Box>
-        <Typography className="p-3 bg-green-50 text-green-500 uppercase w-fit rounded-full">Lợi ích của private cloud</Typography>
-        <Typography className="my-3 text-[2rem] w-1/2">Lợi ích của Private Cloud là tính linh hoạt, khả năng cung cấp tài nguyên được đảm bảo, bảo mật mạnh mẽ…</Typography>
+      <Box >
+        <Box textAlign="center">
+          <Typography className="p-3 bg-green-50 text-green-500 uppercase w-fit rounded-full">Lợi ích của private cloud</Typography>
+          <Typography className="my-3 text-[2rem]">
+            Lợi ích của Private Cloud là tính linh hoạt, khả năng cung cấp tài nguyên được đảm bảo, bảo mật mạnh mẽ…
+          </Typography>
+        </Box>
 
         <Box my={5} className="container grid sm:grid-cols-4 gap-x-6 gap-y-6">
 

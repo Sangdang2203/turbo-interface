@@ -99,3 +99,9 @@ body {
 		display: none;
 	}
 }
+
+@media (min-width: 20.3125rem) and (max-width: 40rem) {
+	body {
+		font-size: 1rem;
+	}
+}

@@ -133,12 +133,12 @@ export default function VirtualDataCenter() {
             </Grid>
 
             <Grid item xs={12} md={7} className=" text-sky-900">
-              <Grid pl={8}>
+              <Grid pl={2}>
                 <Box sx={{ display: "flex", alignItems: "center", py: 1 }}>
                   <Image src={cloudServer_icon_01} className="w-16 h-auto mr-4" alt="99.99% Uptime" />
                   <Box>
                     <Typography className="text-[1.3rem] font-semibold pt-5">99.99% Uptime</Typography>
-                    <Typography className="w-3/4 text-justify">
+                    <Typography className="pr-5 text-justify">
                       Virtual Data Center luôn hoạt động với cam kết chất lượng dịch vụ 99.99% uptime, đáp ứng nhu cầu luôn kết nối.
                     </Typography>
                   </Box>
@@ -148,7 +148,7 @@ export default function VirtualDataCenter() {
                   <Image src={cloudServer_icon_02} className="w-16 h-auto mr-4" alt="Băng thông rộng, siêu tốc độ" />
                   <Box>
                     <Typography className="text-[1.3rem] font-semibold">Băng thông rộng, siêu tốc độ</Typography>
-                    <Typography className="w-3/4 text-justify">
+                    <Typography className="pr-5 text-justify">
                       Kết nối mạng tốc độ cao đến 10+ Gbps đáp ứng nhu cầu truy cập lớn, phục vụ người dùng đông như media, streaming, gaming…
                     </Typography>
                   </Box>
@@ -158,7 +158,7 @@ export default function VirtualDataCenter() {
                   <Image src={cloudServer_icon_03} className="w-16 h-auto mr-4" alt="Kiểm soát, phân quyền" />
                   <Box>
                     <Typography className="text-[1.3rem] font-semibold">Kiểm soát, phân quyền</Typography>
-                    <Typography className="w-3/4 text-justify">
+                    <Typography className="pr-5 text-justify">
                       Kiểm soát, phân quyền truy cập dựa trên vai trò (RBAC) để ủy quyền quản lý tài nguyên.
                     </Typography>
                   </Box>
@@ -168,7 +168,7 @@ export default function VirtualDataCenter() {
                   <Image src={cloudServer_icon_04} className="w-16 h-auto mr-4" alt="Quản trị linh hoạt" />
                   <Box>
                     <Typography className="text-[1.3rem] font-semibold">Quản trị linh hoạt</Typography>
-                    <Typography className="w-3/4 text-justify">
+                    <Typography className="pr-5 text-justify">
                       Quản trị độc lập, linh hoạt với tường lửa và mạng riêng biệt, cấu hình tùy chỉnh để phù hợp với kiến trúc hạ tầng hiện hữu.
                     </Typography>
                   </Box>

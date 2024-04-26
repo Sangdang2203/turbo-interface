@@ -137,7 +137,6 @@ const ContactPage = () => {
           </Grid>
         </Grid>
       </Paper>
-      <br /><br />
 
     </Box>
   )

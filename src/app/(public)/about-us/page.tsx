@@ -54,19 +54,19 @@ const AboutPage = () => {
       </Container>
 
       <Container>
-        <Grid container my={5}>
+        <Grid container py={5}>
           <Grid item xs={12} md={6}>
             <iframe
               className="rounded-xl mx-auto"
-              width="100%" height="400px"
+              width="100%" height={300}
               title="Vaidio  AI Vision 7.0"
               src="https://www.youtube.com/embed/LdPqO124iE0?feature=oembed?autoplay=1"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowFullScreen></iframe>
           </Grid>
           <Grid item xs={12} md={6} className="flex justify-center items-center flex-col text-center" >
-            <Typography className="text-[2rem] font-extralight">Ứng dụng của trí tuệ nhân tạo <br /> trong đời sống thực tế.</Typography>
-            <Button className="btn-grad w-1/3 my-3 hover:opacity-80" href="https://www.youtube.com/@turbosolutions506" target="_blank" endIcon={<OndemandVideoRounded />}>Xem thêm tại đây</Button>
+            <Typography className="text-[2rem] font-extralight pb-2">Ứng dụng của trí tuệ nhân tạo trong đời sống thực tế.</Typography>
+            <Button className="btn-grad" variant="contained" href="https://www.youtube.com/@turbosolutions506" target="_blank" endIcon={<OndemandVideoRounded />}>Xem thêm tại đây</Button>
           </Grid>
         </Grid>
       </Container>
