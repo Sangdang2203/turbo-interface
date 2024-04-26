@@ -14,6 +14,7 @@ export default function NewsPage() {
   const { data: session } = useSession();
   const [loading, setLoading] = React.useState(true);
   const [posts, setPosts] = React.useState<Post[]>([]);
+  const [postsMap, setPostsMap] = React.useState<Map<string, string>>(new Map());
   const [latestPosts, setLatestPosts] = React.useState<Post[]>([]);
   const [page, setPage] = React.useState(1);
   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
@@ -65,6 +66,26 @@ export default function NewsPage() {
     setLoading(false);
   }, [])
 
+  React.useEffect(() => {
+    // const newPostsMap = new Map();
+
+    // for (const post of posts) {
+    //   newPostsMap.set(post.slug, post.id);
+    // }
+
+    // setPostsMap(newPostsMap);
+    Promise.all([fetchPosts()]).then(data => {
+      const [resPosts] = data;
+
+      if (resPosts.ok) {
+        setPosts(resPosts.data);
+      }
+
+      setLoading(false);
+    })
+
+  }, [])
+
   return (
     <>
       {loading ?
@@ -74,24 +95,27 @@ export default function NewsPage() {
           <Grid container>
             <Grid item xs={12} md={9} className='grid lg:grid-cols-3 gap-6 my-10'>
               {posts && posts.map((item) => {
-                return (
-                  <Box key={item.id} className="max-h-[400px] rounded-md hover:shadow-lg cursor-pointer hover:scale-105 duration-700">
-                    <CardContent>
-                      <img src="https://hoanghamobile.com/tin-tuc/wp-content/uploads/2023/07/anh-phong-canh-dep-24.jpg" className="w-full h-auto rounded-md" alt="UnifiedCloudStorage" />
-                      <Box my={2}>
-                        <Typography className="text-lg title-truncate">{item.title}</Typography>
-                        {item.categories.map((cate) => {
-                          return (
-                            <Chip key={cate.id} label={cate.name} size='small' color='secondary' />
-                          )
-                        })}
+                if (item.status === "ACTIVE") {
+                  return (
+                    <Box key={item.id} className="max-h-[400px] rounded-md hover:shadow-lg cursor-pointer hover:scale-105 duration-700">
+                      <CardContent>
+                        <img src="https://hoanghamobile.com/tin-tuc/wp-content/uploads/2023/07/anh-phong-canh-dep-24.jpg" className="w-full h-auto rounded-md" alt="UnifiedCloudStorage" />
+                        <Box my={2}>
+                          <Typography className="text-lg title-truncate">{item.title}</Typography>
+                          {item.categories.map((cate) => {
+                            return (
+                              <Chip key={cate.id} label={cate.name} size='small' color='secondary' />
+                            )
+                          })}
 
-                        <Typography className="text-sm font-extralight mt-3 content-truncate">{item.description}</Typography>
-                      </Box>
-                      <Link href={`news/${item.id}`} className='text-sky-700 no-underline hover:text-sky-500' >Đọc thêm &gt;&gt;</Link>
-                    </CardContent>
-                  </Box>
-                )
+                          <Typography className="text-sm font-extralight mt-3 content-truncate">{item.description}</Typography>
+                        </Box>
+                        <Link href={`news/${item.id}`} className='text-sky-700 no-underline hover:text-sky-500' >Đọc thêm &gt;&gt;</Link>
+                      </CardContent>
+                    </Box>
+                  )
+                }
+
               })}
             </Grid>
 
@@ -113,12 +137,14 @@ export default function NewsPage() {
               </form>
               <Typography className='text-xl text-center'>Bài viết mới</Typography>
               {lastestPosts && lastestPosts.map((item) => {
-                return (
-                  <Box key={item.id} my={2} ml={2}>
-                    <Link href={`news/${item.id}`} className='text-sky-700 no-underline text-lg hover:text-[1.25rem] duration-500' title={item.title}>{item.title}</Link>
-                    <Divider className='my-3' />
-                  </Box>
-                )
+                if (item.status === "ACTIVE") {
+                  return (
+                    <Box key={item.id} my={2} ml={2}>
+                      <Link href={`news/${item.id}`} className='text-sky-700 no-underline text-lg hover:text-[1.25rem] duration-500' title={item.title}>{item.title}</Link>
+                      <Divider className='my-3' />
+                    </Box>
+                  )
+                }
               })}
             </Grid>
           </Grid>

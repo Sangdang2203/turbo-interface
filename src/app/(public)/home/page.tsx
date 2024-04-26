@@ -292,7 +292,7 @@ const HomePage = () => {
         </Box>
 
         <Typography className="text-[2.5rem] font-semibold text-center py-10"> Khách hàng nói gì về chúng tôi </Typography>
-        <Container className='grid sm:grid-cols-3 gap-x-6 gap-y-6 mb-10'>
+        <Container className='grid sm:grid-cols-3 gap-x-6 gap-y-6 pb-10'>
           <Box className='h-fit my-3 p-3  rounded-xl shadow-2xl hover:duration-500'>
             <Typography className="">
               Thay vì phải chờ đợi cấu hình từng máy chủ thì nay chỉ cần 3 phút là có Cloud Server để sử dụng

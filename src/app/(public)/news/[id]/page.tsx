@@ -1,6 +1,6 @@
 'use client';
 
-import theme from "../../../../../public/images/themePost.jpeg";
+import theme from "../../../images/themePost.jpeg";
 import CustomRating from "@/components/CustomRating";
 import Loading from "@/components/Loading";
 import { ReadMoreRounded } from "@mui/icons-material";

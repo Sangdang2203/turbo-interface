@@ -67,8 +67,9 @@ export default function CloudGPU() {
   return (
     <>
       <Container>
+
         <Box sx={{ textAlign: "center", py: 10 }}>
-          <Typography className="text-[2.5rem] font-light text-sky-900"> Cloud GPU Server máy chủ GPU cho <br /> Deep Learning | Machine Learning | Computer Vision </Typography>
+          <Typography className="text-[2.5rem] font-semibold text-sky-900"> Cloud GPU Server máy chủ GPU cho <br /> Deep Learning | Machine Learning | Computer Vision </Typography>
           <Typography> Khởi tạo và sử dụng Cloud GPU Server chỉ trong 45 giây! </Typography>
         </Box>
 
@@ -110,8 +111,9 @@ export default function CloudGPU() {
 
         <Card className="rounded-2xl my-10">
           <Grid container className="shadow-lg pb-5">
+
             <Grid item xs={12} md={5} className="flex flex-col items-center justify-center">
-              <Image src={cloudGPU} className="w-full h-auto mt-10" alt="cloudGPU" />
+              <Image src={cloudGPU} className="w-full h-auto" alt="cloudGPU" />
             </Grid>
 
             <Grid item xs={12} md={7} className=" text-sky-900">
@@ -119,7 +121,7 @@ export default function CloudGPU() {
                 <Box sx={{ display: "flex", alignItems: "center", py: 1 }}>
                   <Image src={cloudServer_icon_01} className="w-16 h-auto mr-4" alt="" />
                   <Box>
-                    <Typography className="text-[1.3rem] font-semibold pt-10">99.99% Uptime</Typography>
+                    <Typography className="text-[1.3rem] font-semibold pt-5">99.99% Uptime</Typography>
                     <Typography className="w-3/4 text-justify">
                       Cloud GPU luôn hoạt động với cam kết chất lượng dịch vụ 99.99% uptime, đáp ứng nhu cầu luôn kết nối.
                     </Typography>
@@ -157,6 +159,7 @@ export default function CloudGPU() {
                 </Box>
               </Grid>
             </Grid>
+
           </Grid>
         </Card>
 
@@ -164,7 +167,7 @@ export default function CloudGPU() {
         <Box >
           <Box>
             <Box my={5} sx={{ textAlign: "center" }}>
-              <Typography className="text-[2rem] font-light text-sky-900"> Bảng giá dịch vụ Cloud Server </Typography>
+              <Typography className="text-[2rem] font-semibold text-sky-900"> Bảng giá dịch vụ Cloud Server </Typography>
               <Typography> * Bảng giá chưa bao gồm 10% VAT </Typography>
             </Box>
             <Box className='grid sm:grid-cols-3 gap-x-6 gap-y-6 mb-10 text-center'>
@@ -223,7 +226,7 @@ export default function CloudGPU() {
           </Box>
 
           <Box className=" text-sky-900">
-            <Typography className="text-[2rem] font-light text-center py-5"> Bảng giá tài nguyên bổ sung </Typography>
+            <Typography className="text-[2rem] font-semibold text-center py-5"> Bảng giá tài nguyên bổ sung </Typography>
 
             <Box className='grid sm:grid-cols-3 gap-x-6 gap-y-6 mb-10'>
               <Box className='h-[180px] my-3 px-3 rounded-xl shadow-2xl'>
@@ -303,44 +306,51 @@ export default function CloudGPU() {
 
         <Box>
           <Box pb={5}>
-            <Typography className="text-[2rem] text-sky-900 font-light text-center py-5"> Câu hỏi thường gặp </Typography>
+
+            <Typography className="text-[2rem] text-sky-900 font-semibold text-center py-5"> Câu hỏi thường gặp </Typography>
+
             <Grid container className=" text-sky-900">
               <Grid item xs={12} md={6} lg={6} xl={6} className="flex flex-col items-center justify-center">
-                <Typography className="w-3/4 text-xl font-semibold">Tôi muốn dùng thử dịch vụ Cloud GPU Server?</Typography>
+                <Typography className="w-3/4 text-lg font-semibold">Tôi muốn dùng thử dịch vụ Cloud GPU Server?</Typography>
                 <Typography className="w-3/4 text-justify py-3">
                   EcoCloud luôn có chương trình dùng thử miễn phí để khách hàng có thể trải nghiệm tốt nhất.
                   Hãy liên hệ với chúng tôi qua hotline 076 9999 967 hoặc email cskh@turbo.vn để được hỗ trợ.
                 </Typography>
               </Grid>
+
               <Grid item xs={12} md={6} lg={6} xl={6} className="flex flex-col items-center justify-center">
-                <Typography className="w-3/4 text-xl font-semibold">Khác biệt giữa GPU GTX 1080TI và RTX 2080TI là gì?</Typography>
+                <Typography className="w-3/4 text-lg font-semibold">Khác biệt giữa GPU GTX 1080TI và RTX 2080TI là gì?</Typography>
                 <Typography className="w-3/4 text-justify py-3">
                   Ngoài khác biệt về cấu trúc GPU cũng như giá thành, dòng GPU 2080TI đạt hiệu năng cao hơn hẳn so với 1080TI
                   trong xử lý các Deep Learning và Machine Learning.
                 </Typography>
               </Grid>
+
               <Grid item xs={12} md={6} lg={6} xl={6} className="flex flex-col items-center justify-center">
-                <Typography className="w-3/4 text-xl font-semibold">Cloud GPU Server có thể sử dụng cho những framework nào?</Typography>
+                <Typography className="w-3/4 text-lg font-semibold">Cloud GPU Server có thể sử dụng cho những framework nào?</Typography>
                 <Typography className="w-3/4 text-justify py-3">
                   Khi khởi tạo Cloud GPU Server, bạn có thể cài đặt thêm các framework TensorFlow, MXNET, Pytorch, Caffe2… theo nhu cầu xử lý thuật toán.
                   Bạn cũng có thể cài đặt thêm FFMpeg để xử lý luồng stream từ Camera, Mobile…
                 </Typography>
               </Grid>
+
               <Grid item xs={12} md={6} lg={6} xl={6} className="flex flex-col items-center justify-center">
-                <Typography className="w-3/4 text-xl font-semibold">Tôi có thể cài đặt HĐH riêng cho Cloud GPU Server?</Typography>
+                <Typography className="w-3/4 text-lg font-semibold">Tôi có thể cài đặt HĐH riêng cho Cloud GPU Server?</Typography>
                 <Typography className="w-3/4 text-justify py-3">
                   EcoCloud hiện cung cấp hai HĐH cho Cloud GPU Server là Windows và Ubuntu. Nếu có gặp khó khăn trong quá trình cài đặt thư viện,
                   hãy liên hệ với đội kỹ thuật để được hỗ trợ nhanh chóng.
                 </Typography>
               </Grid>
+
               <Grid item xs={12} md={6} lg={6} xl={6} className="flex flex-col items-center justify-center">
-                <Typography className="w-3/4 text-xl font-semibold">Cloud GPU Server của EcoCloud có hỗ trợ Windows Server?</Typography>
+                <Typography className="w-3/4 text-lg font-semibold">Cloud GPU Server của EcoCloud có hỗ trợ Windows Server?</Typography>
                 <Typography className="w-3/4 text-justify py-3">
                   Trong các phiên bản Windows Cloud GPU, hiện EcoCloud có cung cấp GPU hoạt động trên Windows Server các phiên bản 2012, 2016, 2019 và cả Windows 10.
                 </Typography>
               </Grid>
+
               <Grid item xs={12} md={6} lg={6} xl={6} className="flex flex-col items-center justify-center">
-                <Typography className="w-3/4 text-xl font-semibold">Cloud GPU Server có thể dùng trong những trường hợp nào?</Typography>
+                <Typography className="w-3/4 text-lg font-semibold">Cloud GPU Server có thể dùng trong những trường hợp nào?</Typography>
                 <Typography className="w-3/4 text-justify py-3">
                   Có rất nhiều trường hợp để sử dụng Cloud GPU Server. Bạn có thể sử dụng cho Machine Learning và AI, bạn cũng có thể sử dụng cho mục đích xử lý hình ảnh,
                   video và thị giác máy tính. Hoặc dùng cho Big Data với Hadoop, Apache Spark…

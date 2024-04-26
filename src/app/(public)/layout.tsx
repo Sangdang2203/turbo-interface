@@ -14,7 +14,7 @@ import SpeedDial from '@/components/SpeedDial'
 export const metadata = {
   title: {
     // absolute: "",
-    default: "Turbo AI Solution",
+    default: "EcoCloud | Điện toán đám mây",
     template: "%s | Turbo AI Solution",
   },
   description: "More than 10 years of experience, Turbo Solutions specializes in providing leading cloud computing solutions and applications in Vietnam.",
@@ -28,9 +28,14 @@ export default function RootLayout(props: { children: React.ReactNode }) {
         <AppRouterCacheProvider options={{ enableCssLayer: true }}>
           <ThemeProvider theme={theme}>
             <CssBaseline />
-            <header><TheHeader /></header>
+            <header> <TheHeader /> </header>
+
             <main className="background-body"> {props.children} </main>
-            <footer className='background-footer'> <TheFooter /> <SpeedDial />  </footer>
+
+            <footer>
+              <TheFooter />
+              <SpeedDial />
+            </footer>
           </ThemeProvider>
         </AppRouterCacheProvider>
         <Toaster

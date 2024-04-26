@@ -4,7 +4,7 @@ import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Close, MenuRounded, KeyboardArrowDownRounded } from "@mui/icons-material";
-import logoTurbo from "../app/images/logoTurbo.png";
+import EcoCloud from "../app/images/EcoCloud.png";
 import Image from "next/image";
 import { Box, Button, Menu, MenuItem, Select, SelectChangeEvent, Typography } from "@mui/material";
 
@@ -90,7 +90,7 @@ export default function TheHeader() {
     <header className="w-full fixed top-0 left-0 z-30 bg-white shadow-lg">
       <nav className="h-[10vh] flex justify-between items-center p-4 ">
         <div className="uppercase font-bold text-3xl text-amber-400 hover:text-amber-200">
-          <Link href="/"><Image src={logoTurbo} className="w-28 h-10" title="Trang chủ" alt="logo_turbo_solutions" /></Link>
+          <Link href="/"><Image src={EcoCloud} className="w-28 h-10" title="Trang chủ" alt="logo_turbo_solutions" /></Link>
         </div>
         {/* nav pc */}
         <div className="hidden text-[1rem] lg:flex justify-between items-center uppercase">
@@ -102,7 +102,7 @@ export default function TheHeader() {
             {subServicesLinks.map((sub) => {
               return (
                 <MenuItem key={sub.path}>
-                  <Link href={sub.path} className="capitalize no-underline text-[#378CE7] hover:text-sky-900" target="_blank">{sub.name}</Link>
+                  <Link href={sub.path} className="capitalize no-underline text-[#378CE7] hover:text-sky-900" >{sub.name}</Link>
                 </MenuItem>
               )
             })}

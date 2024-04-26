@@ -121,14 +121,14 @@ export default function CloudGPU() {
     <>
       <Container>
         <Box sx={{ textAlign: "center", py: 10 }}>
-          <Typography className="text-[2.5rem] font-light text-sky-900">
+          <Typography className="text-[2.5rem] font-semibold text-sky-900">
             Bảng giá dịch vụ sao lưu dữ liệu đám mây
           </Typography>
           <Typography> Với Cloud Backup, dữ liệu của bạn sẽ được bảo vệ an toàn khi gặp sự cố </Typography>
           <Button href="tel:0769999967" variant="contained" color="info" className="my-5">Liên hệ ngay để nhận ưu đãi hấp dẫn</Button>
         </Box>
 
-        <div className="container grid sm:grid-cols-3 gap-x-6 gap-y-6 mb-10">
+        <Box className="container grid sm:grid-cols-3 gap-x-6 gap-y-6 mb-10">
           <Card className="relative rounded-xl hover:shadow-lg cursor-pointer  text-sky-900">
             <div className="flex flex-col justify-center items-center p-3">
               <Image src={theme_card} className="w-full h-auto rounded-xl relative" alt="Minh bạch chi phí" />
@@ -173,7 +173,7 @@ export default function CloudGPU() {
             </div>
           </Card>
 
-          <Card className="relative rounded-xl hover:shadow-lg cursor-pointer  text-sky-900">
+          <Card className="relative rounded-xl hover:shadow-lg cursor-pointer text-sky-900">
             <div className="flex flex-col justify-center items-center p-3">
               <Image src={theme_card} className="w-full h-auto rounded-xl relative" alt="Minh bạch chi phí" />
 
@@ -196,7 +196,7 @@ export default function CloudGPU() {
           </Card>
 
 
-        </div>
+        </Box>
 
         <Card className="rounded-2xl my-10">
           <Grid container className="shadow-lg pb-5">
@@ -244,7 +244,7 @@ export default function CloudGPU() {
                 <Box sx={{ display: "flex", alignItems: "center", py: 1 }}>
                   <Image src={cloudServer_icon_01} className="w-16 h-auto mr-4" alt="" />
                   <Box>
-                    <Typography className="text-[1.3rem] font-semibold pt-10">Chi phí phù hợp</Typography>
+                    <Typography className="text-[1.3rem] font-semibold pt-5">Chi phí phù hợp</Typography>
                     <Typography className="w-3/4 text-justify">
                       Không cần lo lắng ngân sách về các cấp giá. Lựa chọn gói dung lượng lưu trữ đám mây phù hợp với nhu cầu sao lưu của doanh nghiệp.
                     </Typography>
@@ -335,14 +335,14 @@ export default function CloudGPU() {
             </div>
           </Box>
 
-          <div className=" text-sky-900">
-            <Typography className="text-[2rem] font-light text-center py-5"> Bảng giá tài nguyên bổ sung </Typography>
+          <Box className=" text-sky-900">
+            <Typography className="text-[2rem] font-semibold text-center py-5"> Bảng giá tài nguyên bổ sung </Typography>
 
             <div className='grid sm:grid-cols-4 gap-x-6 gap-y-6 mb-10'>
               <div className='h-[180px] my-3 px-3 rounded-xl shadow-2xl'>
                 <div className='py-5'>
                   <Typography className='text-[0.9rem] font-bold'>Bản quyền máy chủ vật lý</Typography>
-                  <Typography className='text-sm pt-2'>Tặng 100 GB dung lượng sao lưu / license</Typography>
+                  <Typography className='text-sm pt-2'>Tặng 100 GB dung lượng sao lưu / </Typography>
                 </div>
                 <Divider />
                 <FormControlLabel className="py-3 text-yellow-600"
@@ -354,7 +354,7 @@ export default function CloudGPU() {
               <div className='h-[180px] my-3 px-3 rounded-xl shadow-2xl'>
                 <div className='py-5'>
                   <Typography className='text-[0.9rem] font-bold'>Bản quyền cho máy chủ ảo</Typography>
-                  <Typography className='text-sm pt-2'>Tặng 100 GB dung lượng sao lưu / license</Typography>
+                  <Typography className='text-sm pt-2'>Tặng 100 GB dung lượng sao lưu / </Typography>
                 </div>
                 <Divider />
                 <FormControlLabel className="py-3 text-yellow-600"
@@ -366,7 +366,7 @@ export default function CloudGPU() {
               <div className='h-[180px] my-3 px-3 rounded-xl shadow-2xl'>
                 <div className='py-5'>
                   <Typography className='text-[0.9rem] font-bold'>Bản quyền PC/Laptop/Workstation</Typography>
-                  <Typography className='text-sm pt-2'>Tặng 100 GB dung lượng sao lưu / license </Typography>
+                  <Typography className='text-sm pt-2'>Tặng 100 GB dung lượng sao lưu /  </Typography>
                 </div>
                 <Divider />
                 <FormControlLabel className="py-3 text-yellow-600"
@@ -378,7 +378,7 @@ export default function CloudGPU() {
               <div className='h-[180px] my-3 px-3 rounded-xl shadow-2xl'>
                 <div className='py-5'>
                   <Typography className='text-[0.9rem] font-bold'>WAN Acceleration - Unlimited VM&apos;s</Typography>
-                  <Typography className='text-sm pt-2'>Thêm 100 GB Attached Storage</Typography><br />
+                  <Typography className='text-sm pt-2'>Thêm 100 GB Attached Storage</Typography>
                 </div>
                 <Divider />
                 <FormControlLabel className="py-3 text-yellow-600"
@@ -387,35 +387,35 @@ export default function CloudGPU() {
                 />
               </div>
             </div>
-          </div>
+          </Box>
         </Box >
 
         <Box pb={5}>
-          <Typography className="text-[2rem] text-sky-900 font-light text-center py-5"> Các câu hỏi thường gặp </Typography>
+          <Typography className="text-[2rem] text-sky-900 font-semibold text-center py-5"> Các câu hỏi thường gặp </Typography>
           <Grid container className=" text-sky-900">
             <Grid item xs={12} md={6} lg={6} xl={6} className="flex flex-col items-center justify-center">
-              <Typography className="w-3/4 text-xl font-semibold">Tôi có thể hủy bất cứ lúc nào không?</Typography>
+              <Typography className="w-3/4 text-lg font-semibold">Tôi có thể hủy bất cứ lúc nào không?</Typography>
               <Typography className="w-3/4 text-justify py-3">
                 Bạn có thể hủy dịch vụ Cloud Backup bất cứ lúc nào. Không có câu hỏi nào được hỏi
                 khi bạn hủy nhưng chúng tôi sẽ đánh giá cao nếu bạn cung cấp cho chúng tôi một số phản hồi.
               </Typography>
             </Grid>
             <Grid item xs={12} md={6} lg={6} xl={6} className="flex flex-col items-center justify-center">
-              <Typography className="w-3/4 text-xl font-semibold">Gói dịch vụ dùng thử?</Typography>
+              <Typography className="w-3/4 text-lg font-semibold">Gói dịch vụ dùng thử?</Typography>
               <Typography className="w-3/4 text-justify py-3">
                 Chắc chắn có. Hãy dùng thử dịch vụ Cloud Backup miễn phí 30 ngày để trải nghiệm hiệu quả và sự đơn giản ngay từ đầu.
                 Trong vòng vài phút sau khi đăng ký, bạn sẽ có thể sử dụng dịch vụ của mình.
               </Typography>
             </Grid>
             <Grid item xs={12} md={6} lg={6} xl={6} className="flex flex-col items-center justify-center">
-              <Typography className="w-3/4 text-xl font-semibold">Có tính phí truyền dữ liệu hàng tháng không?</Typography>
+              <Typography className="w-3/4 text-lg font-semibold">Có tính phí truyền dữ liệu hàng tháng không?</Typography>
               <Typography className="w-3/4 text-justify py-3">
                 Bạn sẽ không phải chịu bất kỳ khoản phí truyền dữ liệu nào đến hệ thống sao lưu lưu trữ đám mây của chúng tôi.
                 Bạn có thể sao lưu và khôi phục bao nhiêu phiên bản tùy ý.
               </Typography>
             </Grid>
             <Grid item xs={12} md={6} lg={6} xl={6} className="flex flex-col items-center justify-center">
-              <Typography className="w-3/4 text-xl font-semibold">Cách tính chi phí sao lưu như thế nào?</Typography>
+              <Typography className="w-3/4 text-lg font-semibold">Cách tính chi phí sao lưu như thế nào?</Typography>
               <Typography className="w-3/4 text-justify py-3">
                 Bạn chỉ phải trả một khoản phí thấp cho mỗi máy chủ cần sao lưu và dung lượng lưu trữ,
                 không có thêm gì khác. Chiết khấu cao khi bạn cam kết sử dụng lâu dài.

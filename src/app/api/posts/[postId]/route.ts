@@ -6,7 +6,6 @@ export async function GET(
 ) {
 	try {
 		const id = params.postId;
-		// console.log(id);
 		const res = await fetch(process.env.NEXT_PUBLIC_API_URL + `/posts/${id}`, {
 			method: "GET",
 			cache: "no-cache",
