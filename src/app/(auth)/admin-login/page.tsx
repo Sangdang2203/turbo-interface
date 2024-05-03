@@ -7,14 +7,13 @@ import React from "react";
 
 export default function LoginPage() {
   const [value, setValue] = React.useState(0);
-  const { data: session } = useSession();
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
 
   return (
-    <Container className="my-[13%]">
+    <Container className="my-[15%]">
       <Tabs
         value={value}
         onChange={handleChange}

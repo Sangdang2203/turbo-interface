@@ -5,16 +5,34 @@ import { toast } from "sonner";
 import Image from "next/image";
 import { useForm, SubmitHandler } from "react-hook-form";
 import dynamic from "next/dynamic";
-import { ApiResponse, Post, UpdatedPostRequest } from "types/interfaces";
+import { ApiResponse, Post } from "types/interfaces";
 import { DoneRounded, RotateLeftRounded } from "@mui/icons-material";
-import { Box, Button, FormHelperText, Paper, TextField } from "@mui/material";
+import { Box, Button, Typography, Paper, TextField } from "@mui/material";
 import useS3 from "hooks/useS3";
 import { useSession } from "next-auth/react";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 
 const CustomEditor = dynamic(() => {
   return import("@/components/CustomEditor");
 }, { ssr: false });
+
+const SCHEMA = z.object({
+  title: z.string({
+    required_error: "Nhập tiêu đề bài viết."
+  }).min(10, "Tối thiểu 10 ký tự").max(100, "Tối đa 100 ký tự."),
+  description: z.string({
+    required_error: "Vui lòng điền thông tin."
+  }),
+  content: z.string({
+    required_error: "Vui lòng điền thông tin."
+  }),
+  status: z.string().optional()
+})
+
+type UpdatedPostRequest = z.infer<typeof SCHEMA>
+
 
 export default function EditPost() {
   const [loading, setLoading] = React.useState(true);
@@ -24,16 +42,14 @@ export default function EditPost() {
     register,
     handleSubmit,
     formState: { errors },
-    setValue,
-    watch,
   } = useForm<Post>();
 
-  const { handleFileUpload, ButtonUpload, preview } = useS3();
-  const previewUrl = React.useMemo(() => {
-    if (preview) {
-      return URL.createObjectURL(preview);
-    }
-  }, [preview]);
+  // const { handleFileUpload, ButtonUpload, preview } = useS3();
+  // const previewUrl = React.useMemo(() => {
+  //   if (preview) {
+  //     return URL.createObjectURL(preview);
+  //   }
+  // }, [preview]);
 
   async function UpdatePost(updatedPost: UpdatedPostRequest) {
     if (session) {
@@ -70,17 +86,13 @@ export default function EditPost() {
           <Box className="my-3">
             <label className="font-semibold">Tiêu đề bài viết:</label>
             <TextField
-              {...register("title", {
-                required: "Vui lòng điền thông tin.",
-                minLength: { value: 10, message: "Tối thiểu 10 ký tự.", },
-                maxLength: { value: 100, message: "Tối thiểu 100 ký tự.", },
-              })}
+              {...register("title")}
               value={selectedPost?.title}
               size="small" variant="outlined"
               className="min-w-[300px] w-full rounded-md cursor-pointer shadow-lg"
               placeholder="Nhập tiêu đề bài viết "
             />
-            <FormHelperText className="text-red-700 px-2 mt-2">{errors.title?.message}</FormHelperText>
+            <Typography className="text-red-700 px-2 mt-2">{errors.title?.message}</Typography>
           </Box>
 
           <Box className="my-3 flex justify-between">
@@ -88,7 +100,7 @@ export default function EditPost() {
               <label className="font-semibold">Loại bài viết:</label>
               <TextField
                 disabled
-                value={selectedPost?.category}
+                value={selectedPost?.categories}
                 size="small" variant="outlined"
                 className="min-w-[300px] w-full rounded-md cursor-pointer shadow-lg"
               />
@@ -135,29 +147,25 @@ export default function EditPost() {
           <Box className="my-3">
             <label className="font-semibold">Mô tả ngắn:</label>
             <TextField
-              {...register("description", {
-                required: "Vui lòng điền thông tin."
-              })}
+              {...register("description", { setValueAs: value => value.length ? value : undefined })}
               size="small" variant="outlined"
               className="min-w-[300px] w-full rounded-md cursor-pointer shadow-lg"
               value={selectedPost?.description}
               placeholder="Nhập mô tả ngắn"
             />
-            <FormHelperText className="text-red-700 px-2 mt-2 ">{errors.description?.message}</FormHelperText>
+            <Typography className="text-red-700 px-2 mt-2 ">{errors.description?.message}</Typography>
           </Box>
 
           <Box className="my-3">
             <label className="font-semibold">Nội dung bài viết:</label>
             <TextField
-              {...register("content", {
-                required: "Vui lòng điền thông tin."
-              })}
+              {...register("content", { setValueAs: value => value.length ? value : undefined })}
               size="small" variant="outlined"
               className="min-w-[300px] w-full rounded-md cursor-pointer shadow-lg"
               value={selectedPost?.content}
               placeholder="Nhập nội dung bài viết"
             />
-            <FormHelperText className="text-red-700 px-2 mt-2 ">{errors.content?.message}</FormHelperText>
+            <Typography className="text-red-700 px-2 mt-2 ">{errors.content?.message}</Typography>
           </Box>
 
           <Box className="flex justify-around mb-2 mt-10 w-1/2 mx-auto">

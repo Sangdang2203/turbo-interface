@@ -90,15 +90,6 @@ export interface Post {
 	status: string;
 }
 
-export interface CreatePostRequest {
-	title: string;
-	category: string;
-	user: string;
-	description: string;
-	content: string;
-	status: string;
-}
-
 export interface UpdatedPostRequest {
 	id: string;
 	title: string;

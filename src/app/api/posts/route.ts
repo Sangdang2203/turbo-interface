@@ -35,15 +35,15 @@ export async function GET(req: NextRequest) {
 	}
 }
 
-export async function POST(req: NextRequest, token: string) {
+export async function POST(req: NextRequest) {
 	const newPost = await req.json();
 	newPost.status = "ACTIVE";
+
+	req.headers.delete("Content-Length");
 	try {
 		const response = await fetch(process.env.NEXT_PUBLIC_API_URL + "/posts", {
 			method: req.method,
-			headers: {
-				Authorization: `Bearer ${token}`,
-			},
+			headers: req.headers,
 			body: JSON.stringify(newPost),
 		});
 

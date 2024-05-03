@@ -1,11 +1,10 @@
 "use client";
 
-import LinkBehaviour from "@/components/LinkBehaviour";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { VisibilityOff, Visibility } from "@mui/icons-material";
-import { Link, Box, Alert, AlertTitle, Typography, TextField, FormControl, InputLabel, OutlinedInput, InputAdornment, IconButton, FormHelperText, Button } from "@mui/material";
+import { Box, Alert, AlertTitle, FormControl, OutlinedInput, InputAdornment, IconButton, FormHelperText, Button, InputLabel, CircularProgress } from "@mui/material";
 import { signIn } from "next-auth/react";
-import { useSearchParams, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import React from "react";
 import z from "zod";
 import { useForm } from "react-hook-form";
@@ -37,8 +36,6 @@ export default function AdminLoginForm() {
     resolver: zodResolver(schema),
   });
 
-  const searchParams = useSearchParams();
-
   const handleClickShowPassword = () => {
     setShowPassword(show => !show);
   };
@@ -48,14 +45,14 @@ export default function AdminLoginForm() {
   };
 
   const onSubmit = async (data: Schema) => {
-    const loadingId = toast.loading("Loading ... ");
+    const message = toast.loading("Loading ... ");
     try {
-      const employeeRes = await signIn("credentials", {
+      const adminRes = await signIn("credentials", {
         redirect: false,
         ...data
       });
 
-      if (!employeeRes?.error) {
+      if (!adminRes?.error) {
         router.push("/dashboard");
       } else {
         setError("Email hoặc mật khẩu không đúng. Vui lòng kiểm tra lại.");
@@ -63,25 +60,24 @@ export default function AdminLoginForm() {
     } catch (error) {
       setError("An unexpected error happened");
     }
-    toast.dismiss(loadingId);
+    toast.dismiss(message);
   };
 
   return (
     <Box
-      className="my-auto"
       component="form"
       onSubmit={handleSubmit(onSubmit)}
       sx={{ maxWidth: "500px", margin: "auto", padding: "20px", borderRadius: "8px", boxShadow: "0 4px 8px rgba(0,0,0,0.1)", backgroundColor: "white" }}
     >
       {error && (
-        <Alert severity="error">
+        <Alert severity="error" className="mb-4">
           <AlertTitle>Error</AlertTitle>
           {error}
         </Alert>
       )}
 
       <FormControl fullWidth variant="outlined" error={!!errors.username}>
-        <label className="font-semibold" htmlFor="email">Email</label>
+        <InputLabel htmlFor="email">Email</InputLabel>
         <OutlinedInput
           size="medium"
           label="Email"
@@ -92,18 +88,17 @@ export default function AdminLoginForm() {
             setValueAs: v => (v === "" ? undefined : v),
           })}
         />
-        <FormHelperText className="my-2 px-2">{errors.username?.message}</FormHelperText>
+        <FormHelperText className="p-2">{errors.username?.message}</FormHelperText>
       </FormControl>
 
-
-      <FormControl fullWidth variant="outlined" error={!!errors.password} >
-        <label className="font-semibold" htmlFor="password">Password</label>
+      <FormControl fullWidth variant="outlined" error={!!errors.password}>
+        <InputLabel htmlFor="password">Password</InputLabel>
         <OutlinedInput
           size="medium"
           label="Password"
           placeholder="Nhập mật khẩu "
-
           autoComplete="current-password"
+
           type={showPassword ? "text" : "password"}
           {...register("password", {
             setValueAs: v => (v === "" ? undefined : v),
@@ -122,12 +117,10 @@ export default function AdminLoginForm() {
             </InputAdornment>
           }
         />
-        <FormHelperText className="my-2 px-2">{errors.password?.message}</FormHelperText>
+        <FormHelperText className="p-2">{errors.password?.message}</FormHelperText>
       </FormControl>
 
-      <Button type="submit" variant="contained" fullWidth className="mt-2 bg-green-800 text-white shadow-lg p-2 hover:opacity-80" >
-        Đăng nhập
-      </Button>
+      <Button type="submit" variant="contained" color="success" fullWidth>Đăng nhập</Button>
     </Box>
   );
 }

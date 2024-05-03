@@ -4,22 +4,43 @@ import * as React from "react";
 import { toast } from "sonner";
 import { useForm, SubmitHandler } from "react-hook-form";
 import dynamic from "next/dynamic";
-import { Post, Category, CreatePostRequest, ApiResponse, User } from "types/interfaces";
+import { Post, Category, ApiResponse, User } from "types/interfaces";
 import { DoneRounded, RotateLeftRounded } from "@mui/icons-material";
 import Select, { SelectChangeEvent } from '@mui/material/Select';
-import { Box, Button, Checkbox, FormControl, FormHelperText, ListItemText, MenuItem, OutlinedInput, Paper, TextField } from "@mui/material";
+import { Box, Button, Checkbox, FormControl, Typography, ListItemText, MenuItem, OutlinedInput, Paper, TextField } from "@mui/material";
 import useS3 from "hooks/useS3";
 import Image from "next/image";
 import { fetchCategories, fetchUsers } from "app/methods/method";
 import { useSession } from "next-auth/react";
-import { redirect } from "next/navigation";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 const CustomEditor = dynamic(() => {
   return import("@/components/CustomEditor");
 }, { ssr: false });
 
+const SCHEMA = z.object({
+  title: z.string({
+    required_error: "Nhập tiêu đề bài viết."
+  }).min(10, "Tối thiểu 10 ký tự.").max(100, "Tối đa 100 ký tự."),
+  category: z.array(z.string(), {
+    required_error: "Vui lòng bấm chọn."
+  }),
+  user: z.string({
+    required_error: "Vui lòng bấm chọn."
+  }),
+  description: z.string({
+    required_error: "Vui lòng điền thông tin."
+  }),
+  content: z.string({
+    required_error: "Vui lòng điền thông tin."
+  }),
+  status: z.string().optional(),
+});
+
+type CreatePostRequest = z.infer<typeof SCHEMA>;
+
 export default function CreatePost() {
-  const [loading, setLoading] = React.useState(true);
   const [post, setPost] = React.useState<Post>();
   const [categories, setCategories] = React.useState<Category[]>([]);
   const [user, setUser] = React.useState("");
@@ -32,10 +53,9 @@ export default function CreatePost() {
     register,
     handleSubmit,
     formState: { errors },
-    getValues,
-    setValue,
-    watch,
-  } = useForm<CreatePostRequest>();
+  } = useForm<CreatePostRequest>({
+    resolver: zodResolver(SCHEMA),
+  });
 
   const { handleFileUpload, ButtonUpload, preview } = useS3();
   const previewUrl = React.useMemo(() => {
@@ -44,6 +64,7 @@ export default function CreatePost() {
     }
   }, [preview]);
 
+  // Begin multi select
   const ITEM_HEIGHT = 40;
   const ITEM_PADDING_TOP = 8;
   const MenuProps = {
@@ -68,15 +89,16 @@ export default function CreatePost() {
       typeof value === 'string' ? value.split(',') : value,
     );
   };
+  // End multi select
 
   async function AddNewPost(post: CreatePostRequest) {
     if (session) {
-      const message = toast.loading("Loading...");
+      const message = toast.loading("Adding a new post ...");
       try {
         const res = await fetch("/api/posts", {
           method: "POST",
           headers: {
-            Authorization: `Bearer ${session?.user.id_token}`,
+            Authorization: `Bearer ${session.user.id_token}`,
             "Content-Type": "application/json",
           },
           body: JSON.stringify(post),
@@ -100,7 +122,7 @@ export default function CreatePost() {
     if (session) {
       Promise.all([
         fetchCategories(session.user.id_token),
-        fetchUsers(session.user.id_token)
+        fetchUsers(session.user.id_token),
       ])
         .then(data => {
           const [resCate, resUser] = data;
@@ -113,7 +135,6 @@ export default function CreatePost() {
             setUsers(resUser.data)
           }
         })
-      setLoading(false);
     }
   }, [session])
 
@@ -127,15 +148,13 @@ export default function CreatePost() {
             <label className="font-semibold">Tiêu đề bài viết:</label>
             <TextField
               {...register("title", {
-                required: "Nhập tiêu đề bài viết.",
-                minLength: { value: 10, message: "Tối thiểu 10 ký tự.", },
-                maxLength: { value: 100, message: "Tối thiểu 100 ký tự.", },
+                setValueAs: value => value.length ? value : undefined
               })}
               type="text" size="small" variant="outlined"
               className="min-w-[300px] w-full rounded-md cursor-pointer shadow-lg"
               placeholder="Nhập tiêu đề bài viết "
             />
-            <FormHelperText className="text-red-700 px-2 mt-2">{errors.title?.message}</FormHelperText>
+            <Typography className="text-red-700 px-2 mt-2">{errors.title?.message}</Typography>
           </Box>
 
           <Box className="my-3 flex justify-between">
@@ -144,7 +163,9 @@ export default function CreatePost() {
               <div>
                 <FormControl sx={{ width: 300 }}>
                   <Select
-                    {...register("category")}
+                    {...register("category", {
+                      setValueAs: value => (typeof value == "string") ? undefined : value
+                    })}
                     labelId="categories"
                     id="categories"
                     size="small"
@@ -165,14 +186,13 @@ export default function CreatePost() {
                   >
                     {categories && categories.map((item) => (
                       <MenuItem key={item.id} value={item.name}>
-                        {/* <Checkbox checked={categoryName.indexOf(item.id) > -1} /> */}
                         <ListItemText primary={item.name} />
                       </MenuItem>
                     ))}
                   </Select>
                 </FormControl>
               </div>
-              <FormHelperText className="text-red-700 px-2 mt-2">{errors.category?.message}</FormHelperText>
+              <Typography className="text-red-700 px-2 mt-2">{errors.category?.message}</Typography>
             </Box>
 
             <Box>
@@ -205,7 +225,7 @@ export default function CreatePost() {
                   </Select>
                 </FormControl>
               </div>
-              <FormHelperText className="text-red-700 px-2 mt-2">{errors.user?.message}</FormHelperText>
+              <Typography className="text-red-700 px-2 mt-2">{errors.user?.message}</Typography>
             </Box>
           </Box>
 
@@ -236,32 +256,36 @@ export default function CreatePost() {
           <Box className="my-3">
             <label className="font-semibold">Mô tả ngắn:</label>
             <TextField
-              {...register("description", { required: "Vui lòng điền thông tin." })}
+              {...register("description", { setValueAs: value => value.length ? value : undefined })}
               type="text" size="small" variant="outlined"
               className="min-w-[300px] w-full rounded-md cursor-pointer shadow-lg"
               placeholder="Nhập mô tả ngắn"
             />
-            <FormHelperText className="text-red-700 px-2 mt-2 ">{errors.description?.message}</FormHelperText>
+            <Typography className="text-red-700 px-2 mt-2 ">{errors.description?.message}</Typography>
           </Box>
 
           <Box className="my-3">
             <label className="font-semibold">Nội dung bài viết:</label>
             <TextField variant="outlined"
-              {...register("content", { required: "Vui lòng điền thông tin." })}
+              {...register("content", { setValueAs: value => value.length ? value : undefined })}
               className="min-w-[300px] w-full rounded-md cursor-pointer shadow-lg"
               placeholder="Nhập nội dung bài viết"
             />
-            <FormHelperText className="text-red-700 px-2 mt-2 ">{register("content") == null ? errors.content?.message : ""}</FormHelperText>
+            <Typography className="text-red-700 px-2 mt-2 ">{errors.content?.message}</Typography>
           </Box>
 
           <Box className="flex justify-around mb-2 mt-10 w-1/2 mx-auto">
             <Button
-              type="submit" variant="contained" size="medium" className="w-full mx-1 p-2 text-white bg-[#008200] hover:opacity-85"
-              startIcon={<DoneRounded fontSize='medium' />} >Thêm bài viết
+              type="submit" variant="contained" size="medium"
+              className="w-full mx-1 p-2 text-white bg-[#008200] hover:opacity-85"
+              startIcon={<DoneRounded fontSize='medium' />} >
+              Thêm bài viết
             </Button>
             <Button
-              type="reset" variant="contained" size="medium" className="w-full mx-1 p-2 text-white bg-[#0C2340] hover:opacity-85"
-              startIcon={<RotateLeftRounded fontSize='medium' />} >Hủy bỏ
+              type="reset" variant="contained" size="medium"
+              className="w-full mx-1 p-2 text-white bg-[#0C2340] hover:opacity-85"
+              startIcon={<RotateLeftRounded fontSize='medium' />} >
+              Hủy bỏ
             </Button>
           </Box>
         </form >
