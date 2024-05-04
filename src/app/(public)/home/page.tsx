@@ -1,9 +1,8 @@
-"use client";
+
 
 import React from "react";
 import Image from "next/image";
-import { styled } from '@mui/material/styles';
-import Switch, { SwitchProps } from '@mui/material/Switch';
+import Switch from '@mui/material/Switch';
 import { Box, Button, Card, CardActions, CardContent, Chip, Container, Divider, FormControlLabel, FormHelperText, Grid, Link, Typography } from "@mui/material";
 import { PublicRounded } from "@mui/icons-material";
 import logoTurbo from "../../images/logoTurbo.png";
@@ -19,123 +18,122 @@ import feedback_01 from "../../images/feedback_01.png";
 import feedback_02 from "../../images/feedback_02.png";
 import feedback_03 from "../../images/feedback_03.png";
 
-const IOSSwitch = styled((props: SwitchProps) => (
-  <Switch focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} />
-))(({ theme }) => ({
-  width: 42,
-  height: 26,
-  padding: 0,
-  '& .MuiSwitch-switchBase': {
-    padding: 0,
-    margin: 2,
-    transitionDuration: '300ms',
-    '&.Mui-checked': {
-      transform: 'translateX(16px)',
-      color: '#fff',
-      '& + .MuiSwitch-track': {
-        backgroundColor: theme.palette.mode === 'dark' ? '#2ECA45' : '#65C466',
-        opacity: 1,
-        border: 0,
-      },
-      '&.Mui-disabled + .MuiSwitch-track': {
-        opacity: 0.5,
-      },
-    },
-    '&.Mui-focusVisible .MuiSwitch-thumb': {
-      color: '#33cf4d',
-      border: '6px solid #fff',
-    },
-    '&.Mui-disabled .MuiSwitch-thumb': {
-      color:
-        theme.palette.mode === 'light'
-          ? theme.palette.grey[100]
-          : theme.palette.grey[600],
-    },
-    '&.Mui-disabled + .MuiSwitch-track': {
-      opacity: theme.palette.mode === 'light' ? 0.7 : 0.3,
-    },
-  },
-  '& .MuiSwitch-thumb': {
-    boxSizing: 'border-box',
-    width: 22,
-    height: 22,
-  },
-  '& .MuiSwitch-track': {
-    borderRadius: 26 / 2,
-    backgroundColor: theme.palette.mode === 'light' ? '#E9E9EA' : '#39393D',
-    opacity: 1,
-    transition: theme.transitions.create(['background-color'], {
-      duration: 500,
-    }),
-  },
-}));
 
 const HomePage = () => {
 
   return (
     <Box>
-      <Box className="theme -mt-[10vh] text-white">
-        <Box textAlign="center" my={5} className="text-white">
-          <Typography className="text-[2.5rem] font-semibold">Ứng dụng | Dịch vụ | Giải pháp</Typography>
-          <Typography className="text-[2rem] font-extralight">điện toán đám mây chất lượng hàng đầu.</Typography>
-          <Typography className="text-center text-[1.75rem] font-light w-3/4 mx-auto my-5">
-            Công ty Turbo Solutions chung tay cùng quý doanh nghiệp thực hiện chuyển đổi số bằng cách tích hợp các công nghệ thông minh 4.0, cùng đạt mục tiêu thắng lợi.
-          </Typography>
-        </Box>
+      <Box textAlign="center" my={5} className="text-white theme mt-[10vh]">
+        <Typography className="text-[2.5rem] font-semibold">Ứng dụng | Dịch vụ | Giải pháp</Typography>
+        <Typography className="text-[2rem] font-extralight">điện toán đám mây chất lượng hàng đầu.</Typography>
+        <Typography className="text-center text-[1.75rem] font-light w-3/4 mx-auto my-5">
+          Công ty Turbo Solutions chung tay cùng quý doanh nghiệp thực hiện chuyển đổi số bằng cách tích hợp các công nghệ thông minh 4.0, cùng đạt mục tiêu thắng lợi.
+        </Typography>
+      </Box>
 
-        <Container className="container grid lg:grid-cols-4 gap-x-6 gap-y-6 mt-10">
-          <Card className="relative px-1 rounded-md cursor-pointer shadow-2xl">
-            <Image src={ScalablePrivateCloud} className="w-full h-auto rounded-md mt-3" alt="ScalablePrivateCloud" />
-            <CardContent>
-              <Box>
-                <Typography className="text-lg font-leading-relaxed text-blue-500">Cloud Server</Typography>
-                <FormHelperText>Hạ tầng điện toán đám mây</FormHelperText>
-                <Typography className="font-light mt-3">
-                  Với công nghệ siêu hội tụ (HCI) và phần mềm định hướng (SDX) mang lại hạ tầng đám mây siêu hiệu năng, siêu ổn định, là nền tảng vững chắc cho phát triển các ứng dụng.
-                </Typography>
-              </Box>
-            </CardContent>
-          </Card>
 
-          <Card className="relative px-1 rounded-md cursor-pointer shadow-2xl ">
-            <Image src={CloudCameraDiagram} className="w-full h-auto rounded-md mt-3" alt="CloudCameraDiagram" />
-            <CardContent>
-              <Box>
-                <Typography className="text-lg font-normal text-orange-400">Smart Cloud Camera</Typography>
-                <FormHelperText>Giải pháp Cloud Camera tích hợp A.I</FormHelperText>
-                <Typography className="font-extralight mt-3">
-                  Nền tảng Cloud quản lý và lưu trữ Video Camera, tích hợp trí thông tin nhân tạo (AI) dùng nhận dạng vật thể, nhận dạng khuôn mặt, nhận dạng biển số, kiểm soát an ninh, giao thông…
-                </Typography>
-              </Box>
-            </CardContent>
-          </Card>
+      <Box className="container grid lg:grid-cols-4 gap-x-6 gap-y-6 mt-10">
+        <div className="e-card playing">
+          <div className="image"></div>
 
-          <Card className="relative px-1 rounded-md cursor-pointer shadow-2xl ">
-            <Image src={CloudBackupRecovery} className="w-full h-auto rounded-md mt-3" alt="CloudBackupRecovery" />
-            <CardContent>
-              <Box>
-                <Typography className="text-lg font-normal text-green-600">Cloud Backup & Recovery</Typography>
-                <FormHelperText>Sao lưu an toàn dữ liệu trên đám mây</FormHelperText>
-                <Typography className="font-extralight mt-3">
-                  Nền tảng sao lưu, quản lý, khôi phục dữ liệu đám mây hàng đầu cho máy chủ vật lý và máy chủ ảo (Hyper-V | VMWare); giúp nhà quản lý an tâm, thúc đẩy phát triển doanh nghiệp.
-                </Typography>
-              </Box>
-            </CardContent>
-          </Card>
+          <div className="wave"></div>
+          <div className="wave"></div>
+          <div className="wave"></div>
 
-          <Card className="relative px-1 rounded-md cursor-pointer shadow-2xl ">
-            <Image src={UnifiedCloudStorage} className="w-full h-auto rounded-md mt-3" alt="UnifiedCloudStorage" />
-            <CardContent>
-              <Box>
-                <Typography className="text-lg font-normal text-blue-900">Unified Cloud Storage</Typography>
-                <FormHelperText>Lưu trữ dữ liệu đám mây</FormHelperText>
-                <Typography className="font-extralight mt-3">
-                  Nền tảng lưu trữ đám mây hợp nhất (file-based, block và object&nbsp;storage), mở rộng không giới hạn. Kết nối đơn giản và nhanh chóng, dễ dàng chia sẻ với băng thông cao.
-                </Typography>
-              </Box>
-            </CardContent>
-          </Card>
-        </Container>
+
+          <div className="infotop">
+            <p>UI / EX Designer</p>
+          </div>
+        </div>
+
+        <div className="e-card playing">
+          <div className="image"></div>
+
+          <div className="wave"></div>
+          <div className="wave"></div>
+          <div className="wave"></div>
+
+
+          <div className="infotop">
+            <p>UI / EX Designer</p>
+          </div>
+        </div>
+
+        <div className="e-card playing">
+          <div className="image"></div>
+
+          <div className="wave"></div>
+          <div className="wave"></div>
+          <div className="wave"></div>
+
+
+          <div className="infotop">
+            <p>UI / EX Designer</p>
+          </div>
+        </div>
+        <div className="e-card playing">
+          <div className="image"></div>
+
+          <div className="wave"></div>
+          <div className="wave"></div>
+          <div className="wave"></div>
+
+
+          <div className="infotop">
+            <p>UI / EX Designer</p>
+          </div>
+        </div>
+        <Card className="relative px-1 rounded-md cursor-pointer shadow-2xl">
+          <Image src={ScalablePrivateCloud} className="w-full h-auto rounded-md mt-3" alt="ScalablePrivateCloud" />
+          <CardContent>
+            <Box>
+              <Typography className="text-lg font-leading-relaxed text-blue-500">Cloud Server</Typography>
+              <FormHelperText>Hạ tầng điện toán đám mây</FormHelperText>
+              <Typography className="font-light mt-3">
+                Với công nghệ siêu hội tụ (HCI) và phần mềm định hướng (SDX) mang lại hạ tầng đám mây siêu hiệu năng, siêu ổn định, là nền tảng vững chắc cho phát triển các ứng dụng.
+              </Typography>
+            </Box>
+          </CardContent>
+        </Card>
+
+        <Card className="relative px-1 rounded-md cursor-pointer shadow-2xl ">
+          <Image src={CloudCameraDiagram} className="w-full h-auto rounded-md mt-3" alt="CloudCameraDiagram" />
+          <CardContent>
+            <Box>
+              <Typography className="text-lg font-normal text-orange-400">Smart Cloud Camera</Typography>
+              <FormHelperText>Giải pháp Cloud Camera tích hợp A.I</FormHelperText>
+              <Typography className="font-extralight mt-3">
+                Nền tảng Cloud quản lý và lưu trữ Video Camera, tích hợp trí thông tin nhân tạo (AI) dùng nhận dạng vật thể, nhận dạng khuôn mặt, nhận dạng biển số, kiểm soát an ninh, giao thông…
+              </Typography>
+            </Box>
+          </CardContent>
+        </Card>
+
+        <Card className="relative px-1 rounded-md cursor-pointer shadow-2xl ">
+          <Image src={CloudBackupRecovery} className="w-full h-auto rounded-md mt-3" alt="CloudBackupRecovery" />
+          <CardContent>
+            <Box>
+              <Typography className="text-lg font-normal text-green-600">Cloud Backup & Recovery</Typography>
+              <FormHelperText>Sao lưu an toàn dữ liệu trên đám mây</FormHelperText>
+              <Typography className="font-extralight mt-3">
+                Nền tảng sao lưu, quản lý, khôi phục dữ liệu đám mây hàng đầu cho máy chủ vật lý và máy chủ ảo (Hyper-V | VMWare); giúp nhà quản lý an tâm, thúc đẩy phát triển doanh nghiệp.
+              </Typography>
+            </Box>
+          </CardContent>
+        </Card>
+
+        <Card className="relative px-1 rounded-md cursor-pointer shadow-2xl ">
+          <Image src={UnifiedCloudStorage} className="w-full h-auto rounded-md mt-3" alt="UnifiedCloudStorage" />
+          <CardContent>
+            <Box>
+              <Typography className="text-lg font-normal text-blue-900">Unified Cloud Storage</Typography>
+              <FormHelperText>Lưu trữ dữ liệu đám mây</FormHelperText>
+              <Typography className="font-extralight mt-3">
+                Nền tảng lưu trữ đám mây hợp nhất (file-based, block và object&nbsp;storage), mở rộng không giới hạn. Kết nối đơn giản và nhanh chóng, dễ dàng chia sẻ với băng thông cao.
+              </Typography>
+            </Box>
+          </CardContent>
+        </Card>
       </Box>
 
       <Box my={10} sx={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", textAlign: "center" }}>
@@ -147,47 +145,62 @@ const HomePage = () => {
 
       <Container className="container grid sm:grid-cols-3 gap-x-6 gap-y-6 mb-10">
         <Card className="relative rounded-xl hover:shadow-lg cursor-pointer">
-          <CardContent className="mb-10">
+          <CardContent className="mb-16">
             <Box className="flex items-start">
               <Image src={cloudServer} className="w-28 h-28" alt="cloudServer" />
               <Box>
                 <Typography className="text-[1.5rem]">Cloud Server</Typography>
-                <Typography className="font-extralight">Cụm máy chủ Cloud với Firewall cùng mạng nội bộ riêng biệt, trở thành trung tâm dữ liệu ảo cho doanh nghiệp thực hiện chuyển đổi số.</Typography>
+                <Typography>Cụm máy chủ Cloud với Firewall cùng mạng nội bộ riêng biệt, trở thành trung tâm dữ liệu ảo cho doanh nghiệp thực hiện chuyển đổi số.</Typography>
               </Box>
             </Box>
           </CardContent>
           <CardActions className="absolute bottom-1 left-1">
-            <Button href="https://ecocloud.vn/bang-gia-cloud-server/" className="hover:opacity-80" variant="contained" size="small"> Tìm hiểu thêm </Button>
+            <Button href="https://ecocloud.vn/bang-gia-cloud-server/" className="fancy hover:opacity-80">
+              <span className="top-key"></span>
+              <span className="text">Tìm hiểu thêm</span>
+              <span className="bottom-key-1"></span>
+              <span className="bottom-key-2"></span>
+            </Button>
           </CardActions>
         </Card>
 
         <Card className="relative rounded-xl hover:shadow-lg cursor-pointer">
-          <CardContent className="mb-10">
+          <CardContent className="mb-16">
             <Box className="flex items-start">
               <Image src={Backup} className="w-32 h-32" alt="backupDR" />
               <Box>
                 <Typography className="text-[1.5rem]">Backup & DR Site</Typography>
-                <Typography className="font-extralight">Sao lưu và khôi phục dữ liệu trên Cloud. Thực hiện Disaster Recovery Site với chi phí thấp.</Typography>
+                <Typography>Sao lưu và khôi phục dữ liệu trên Cloud. Thực hiện Disaster Recovery Site với chi phí thấp.</Typography>
               </Box>
             </Box>
           </CardContent>
           <CardActions className="absolute bottom-1 left-1">
-            <Button href="https://baas.ecocloud.vn/" className="hover:opacity-80" variant="contained" size="small"> Tìm hiểu thêm </Button>
+            <Button href="https://baas.ecocloud.vn/" className="fancy hover:opacity-80">
+              <span className="top-key"></span>
+              <span className="text">Tìm hiểu thêm</span>
+              <span className="bottom-key-1"></span>
+              <span className="bottom-key-2"></span>
+            </Button>
           </CardActions>
         </Card>
 
         <Card className="relative rounded-xl hover:shadow-lg cursor-pointer">
-          <CardContent className="mb-10">
+          <CardContent className="mb-16">
             <Box className="flex items-start">
               <Image src={cloudCamera} className="w-32 h-32" alt="cloudCamera" />
               <Box>
                 <Typography className="text-[1.5rem]">Cloud Camera</Typography>
-                <Typography className="font-extralight">Quản lý và lưu trữ Video Camera từ nhiều chi nhánh trên nền tảng đám mây</Typography>
+                <Typography>Quản lý và lưu trữ Video Camera từ nhiều chi nhánh trên nền tảng đám mây</Typography>
               </Box>
             </Box>
           </CardContent>
           <CardActions className="absolute bottom-1 left-1">
-            <Button href="/smart-cloud-camera" className="hover:opacity-80" variant="contained" size="small"> Tìm hiểu thêm </Button>
+            <Button href="/smart-cloud-camera" className="fancy hover:opacity-80">
+              <span className="top-key"></span>
+              <span className="text">Tìm hiểu thêm</span>
+              <span className="bottom-key-1"></span>
+              <span className="bottom-key-2"></span>
+            </Button>
           </CardActions>
         </Card>
       </Container>
@@ -235,7 +248,7 @@ const HomePage = () => {
             </Box>
             <Divider />
             <FormControlLabel className="py-3"
-              control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
+              control={<Switch size="medium" color="success" defaultChecked />}
               label="Chất lượng dịch vụ luôn được đảm bảo"
             />
           </Box>

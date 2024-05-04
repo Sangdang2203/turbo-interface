@@ -129,14 +129,14 @@ export default function NewsPage() {
                       <CardContent>
                         <img src="https://hoanghamobile.com/tin-tuc/wp-content/uploads/2023/07/anh-phong-canh-dep-24.jpg" className="w-full h-auto rounded-md" alt="UnifiedCloudStorage" />
                         <Box my={2}>
-                          <Typography className="text-lg title-truncate">{item.title}</Typography>
+                          <Typography className="text-lg line-clamp-2"> {item.title} </Typography>
                           {item.categories.map((cate) => {
                             return (
                               <Chip key={cate.id} label={cate.name} size='small' color='secondary' />
                             )
                           })}
 
-                          <Typography className="text-sm font-extralight mt-3 content-truncate">{item.description}</Typography>
+                          <Typography className="text-sm font-extralight mt-3 line-clamp-3"> {item.description} </Typography>
                         </Box>
                         <Link href={`news/${item.id}`} className='text-sky-700 no-underline hover:text-sky-500' >Đọc thêm &gt;&gt;</Link>
                       </CardContent>

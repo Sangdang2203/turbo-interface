@@ -7,11 +7,12 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import dynamic from "next/dynamic";
 import { ApiResponse, Post } from "types/interfaces";
 import { DoneRounded, RotateLeftRounded } from "@mui/icons-material";
-import { Box, Button, Typography, Paper, TextField } from "@mui/material";
+import { Box, Button, Typography, Paper, TextField, InputLabel } from "@mui/material";
 import useS3 from "hooks/useS3";
 import { useSession } from "next-auth/react";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import Loading from "@/components/Loading";
 
 
 const CustomEditor = dynamic(() => {
@@ -42,7 +43,9 @@ export default function EditPost() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<Post>();
+  } = useForm<UpdatedPostRequest>({
+    resolver: zodResolver(SCHEMA)
+  });
 
   // const { handleFileUpload, ButtonUpload, preview } = useS3();
   // const previewUrl = React.useMemo(() => {
@@ -53,15 +56,15 @@ export default function EditPost() {
 
   async function UpdatePost(updatedPost: UpdatedPostRequest) {
     if (session) {
-      const message = toast.loading("Loading...")
+      const message = toast.loading("Updating post ...")
       try {
-        const res = await fetch(`/api/posts/`, {
-          method: "PUT",
-          body: JSON.stringify(updatedPost),
+        const res = await fetch(`/api/posts/${selectedPost?.id}`, {
+          method: "PATCH",
           headers: {
             Authorization: `Bearer ${session?.user.id_token}`,
             "Content-Type": "application/json"
           },
+          body: JSON.stringify(updatedPost),
         })
 
         const payload = (await res.json()) as ApiResponse;
@@ -80,44 +83,47 @@ export default function EditPost() {
 
   return (
     <>
-      <Paper sx={{ p: 5 }}>
-        <form
-          onSubmit={handleSubmit(UpdatePost)}>
-          <Box className="my-3">
-            <label className="font-semibold">Tiêu đề bài viết:</label>
-            <TextField
-              {...register("title")}
-              value={selectedPost?.title}
-              size="small" variant="outlined"
-              className="min-w-[300px] w-full rounded-md cursor-pointer shadow-lg"
-              placeholder="Nhập tiêu đề bài viết "
-            />
-            <Typography className="text-red-700 px-2 mt-2">{errors.title?.message}</Typography>
-          </Box>
-
-          <Box className="my-3 flex justify-between">
-            <Box>
-              <label className="font-semibold">Loại bài viết:</label>
+      {!loading ?
+        <Loading />
+        :
+        <Paper sx={{ p: 5 }}>
+          <form
+            onSubmit={handleSubmit(UpdatePost)}>
+            <Box className="my-3">
+              <InputLabel className="font-semibold">Tiêu đề bài viết:</InputLabel>
               <TextField
-                disabled
-                value={selectedPost?.categories}
-                size="small" variant="outlined"
-                className="min-w-[300px] w-full rounded-md cursor-pointer shadow-lg"
+                {...register("title")}
+                value={selectedPost?.title}
+                size="small" variant="outlined" fullWidth
+                className="shadow-lg"
+                placeholder="Nhập tiêu đề bài viết"
               />
+              <Typography className="text-red-700 p-2">{errors.title?.message}</Typography>
             </Box>
-            <Box>
-              <label className="font-semibold">Tác giả:</label>
-              <TextField
-                disabled
-                value={selectedPost?.user}
-                size="small" variant="outlined"
-                className="min-w-[300px] w-full rounded-md cursor-pointer shadow-lg"
-              />
-            </Box>
-          </Box>
 
-          {/* Upload and display post photo */}
-          {/* <Box className="my-3 flex justify-between items-center">
+            <Box className="my-3 flex justify-between">
+              <Box>
+                <InputLabel className="font-semibold">Loại bài viết:</InputLabel>
+                <TextField
+                  disabled
+                  value={selectedPost?.categories}
+                  size="small" variant="outlined" fullWidth
+                  className="shadow-lg"
+                />
+              </Box>
+              <Box>
+                <InputLabel className="font-semibold">Tác giả:</InputLabel>
+                <TextField
+                  disabled
+                  value={selectedPost?.user}
+                  size="small" variant="outlined"
+                  className="min-w-[300px] w-full rounded-md cursor-pointer shadow-lg"
+                />
+              </Box>
+            </Box>
+
+            {/* Upload and display post photo */}
+            {/* <Box className="my-3 flex justify-between items-center">
             <Box>
               {preview ?
                 <Image src={`${previewUrl}`}
@@ -144,42 +150,46 @@ export default function EditPost() {
             <Box><ButtonUpload /></Box>
           </Box> */}
 
-          <Box className="my-3">
-            <label className="font-semibold">Mô tả ngắn:</label>
-            <TextField
-              {...register("description", { setValueAs: value => value.length ? value : undefined })}
-              size="small" variant="outlined"
-              className="min-w-[300px] w-full rounded-md cursor-pointer shadow-lg"
-              value={selectedPost?.description}
-              placeholder="Nhập mô tả ngắn"
-            />
-            <Typography className="text-red-700 px-2 mt-2 ">{errors.description?.message}</Typography>
-          </Box>
+            <Box className="my-3">
+              <InputLabel className="font-semibold">Mô tả ngắn:</InputLabel>
+              <TextField
+                {...register("description", { setValueAs: value => value.length ? value : undefined })}
+                type="text" size="small" variant="outlined" fullWidth
+                className="shadow-lg"
+                value={selectedPost?.description}
+                placeholder="Nhập mô tả ngắn"
+              />
+              <Typography className="text-red-700 p-2 ">{errors.description?.message}</Typography>
+            </Box>
 
-          <Box className="my-3">
-            <label className="font-semibold">Nội dung bài viết:</label>
-            <TextField
-              {...register("content", { setValueAs: value => value.length ? value : undefined })}
-              size="small" variant="outlined"
-              className="min-w-[300px] w-full rounded-md cursor-pointer shadow-lg"
-              value={selectedPost?.content}
-              placeholder="Nhập nội dung bài viết"
-            />
-            <Typography className="text-red-700 px-2 mt-2 ">{errors.content?.message}</Typography>
-          </Box>
+            <Box className="my-3">
+              <InputLabel className="font-semibold">Nội dung bài viết:</InputLabel>
+              <TextField
+                {...register("content", { setValueAs: value => value.length ? value : undefined })}
+                type="text" variant="outlined" fullWidth
+                className="shadow-lg"
+                value={selectedPost?.content}
+                placeholder="Nhập nội dung bài viết"
+              />
+              <Typography className="text-red-700 p-2 ">{errors.content?.message}</Typography>
+            </Box>
 
-          <Box className="flex justify-around mb-2 mt-10 w-1/2 mx-auto">
-            <Button
-              type="submit" variant="contained" size="medium" className="w-full mx-1 p-2 text-white bg-[#008200] hover:opacity-85"
-              startIcon={<DoneRounded fontSize='medium' />} >Cập nhật
-            </Button>
-            <Button
-              type="reset" variant="contained" size="medium" className="w-full mx-1 p-2 text-white bg-[#0C2340] hover:opacity-85"
-              startIcon={<RotateLeftRounded fontSize='medium' />} >Hủy bỏ
-            </Button>
-          </Box>
-        </form >
-      </Paper >
+            <Box className="flex justify-around mb-2 mt-10 w-1/2 mx-auto">
+              <Button
+                type="submit" variant="contained" size="medium"
+                color="success" fullWidth className="mx-2"
+                startIcon={<DoneRounded fontSize='medium' />} >
+                Cập nhật
+              </Button>
+              <Button
+                type="reset" variant="contained" size="medium"
+                color="error" fullWidth
+                startIcon={<RotateLeftRounded fontSize='medium' />} >
+                Hủy bỏ
+              </Button>
+            </Box>
+          </form >
+        </Paper >}
     </>
   )
 }

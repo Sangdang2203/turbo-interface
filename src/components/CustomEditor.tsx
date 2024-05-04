@@ -15,8 +15,8 @@ const editorConfiguration = {
       'italic',
       'underline',
       'strikethrough',
-      'fontColor',
-      'fontBackgroundColor',
+      // 'fontColor',
+      // 'fontBackgroundColor',
       'fontSize',
       'fontFamily',
       '|',
@@ -29,34 +29,34 @@ const editorConfiguration = {
       'imageUpload',
       '|',
       'link',
-      'autoImage',
-      'imageCaption',
-      'imageResize',
-      'imageStyle',
+      // 'autoImage',
+      // 'imageCaption',
+      // 'imageResize',
+      // 'imageStyle',
       'insertTable',
       'mediaEmbed',
-      'wordCount',
+      // 'wordCount',
       'blockQuote',
     ]
   },
   language: 'vi',
   image: {
-    toolbar: [
-      'imageTextAlternative',
-      'toggleImageCaption',
-      'imageStyle:inline',
-      'imageStyle:center',
-      'imageStyle:side',
-      'linkImage'
-    ]
+    // toolbar: [
+    //   'imageTextAlternative',
+    //   'toggleImageCaption',
+    //   'imageStyle:inline',
+    //   'imageStyle:center',
+    //   'imageStyle:side',
+    //   'linkImage'
+    // ]
   },
   table: {
     contentToolbar: [
       'tableColumn',
       'tableRow',
       'mergeTableCells',
-      'tableCellProperties',
-      'tableProperties'
+      // 'tableCellProperties',
+      // 'tableProperties'
     ]
   }
 };
@@ -71,6 +71,8 @@ function CustomEditor(props: any) {
         const data = editor.getData();
         console.log({ event, editor, data });
       }}
+
+
     />
   )
 }

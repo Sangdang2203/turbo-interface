@@ -1,14 +1,15 @@
-"use client";
 
-import React from "react";
 import theme_card from "../../../images/theme_card.png";
 import cloudServer_icon_01 from "../../../images/cloudServer/cloudServer_icon_01.png"
 import cloudServer_icon_02 from "../../../images/cloudServer/cloudServer_icon_02.png"
 import cloudServer_icon_03 from "../../../images/cloudServer/cloudServer_icon_03.png"
-import { Container, Box, Typography, Card, Grid, Divider, TextField, FormControlLabel, Tab, Tabs, Slider, Input, Button } from "@mui/material";
+import { Container, Box, Typography, Card, Grid, Divider, TextField, FormControlLabel, Tab, Tabs, Slider, Button } from "@mui/material";
 import Switch, { SwitchProps } from '@mui/material/Switch';
 import { styled } from '@mui/material/styles';
 import Image from "next/image";
+import { TaskAltRounded } from "@mui/icons-material";
+import { cloudBackupPrices, cloudBackupBonus, cloudBackupQuestions, cloudBackupPackage } from "app/libs/data";
+import React from "react";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -28,9 +29,9 @@ function CustomTabPanel(props: TabPanelProps) {
       {...other}
     >
       {value === index && (
-        <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
-        </Box>
+        <div className="p-3">
+          <p>{children}</p>
+        </div>
       )}
     </div>
   );
@@ -44,7 +45,7 @@ function a11yProps(index: number) {
 }
 
 
-export default function CloudGPU() {
+export default function CloudBackup() {
   const [month, setMonth] = React.useState(1);
   const [value, setValue] = React.useState(0);
 
@@ -56,19 +57,9 @@ export default function CloudGPU() {
     setMonth(newValue as number);
   };
 
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setMonth(event.target.value === '' ? 0 : Number(event.target.value));
-  };
-
-  const handleBlur = () => {
-    if (month < 1) {
-      setMonth(1);
-    } else if (month > 12) {
-      setMonth(12);
-    }
-  };
   const IOSSwitch = styled((props: SwitchProps) => (
     <Switch focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} />
+    //@ts-ignore
   ))(({ theme }) => ({
     width: 42,
     height: 26,
@@ -121,81 +112,33 @@ export default function CloudGPU() {
     <>
       <Container>
         <Box sx={{ textAlign: "center", py: 10 }}>
-          <Typography className="text-[2.5rem] font-semibold text-sky-900">
-            Bảng giá dịch vụ sao lưu dữ liệu đám mây
-          </Typography>
-          <Typography> Với Cloud Backup, dữ liệu của bạn sẽ được bảo vệ an toàn khi gặp sự cố </Typography>
+          <Box>
+            <Typography className="text-[2.5rem] font-semibold text-sky-900">
+              Bảng giá dịch vụ sao lưu dữ liệu đám mây
+            </Typography>
+            <Typography> Với Cloud Backup, dữ liệu của bạn sẽ được bảo vệ an toàn khi gặp sự cố </Typography>
+          </Box>
           <Button href="tel:0769999967" variant="contained" color="info" className="my-5">Liên hệ ngay để nhận ưu đãi hấp dẫn</Button>
         </Box>
 
+        {/* cloud backup packages */}
         <Box className="container grid sm:grid-cols-3 gap-x-6 gap-y-6 mb-10">
-          <Card className="relative rounded-xl hover:shadow-lg cursor-pointer  text-sky-900">
-            <div className="flex flex-col justify-center items-center p-3">
-              <Image src={theme_card} className="w-full h-auto rounded-xl relative" alt="Minh bạch chi phí" />
-
-              <div className="absolute text-center">
-                <Typography className="text-[1.5rem] font-bold pb-10">Starter tiết kiệm 20%</Typography>
-                <Typography className="font-extralight text-justify px-3">
-                  Hỗ trợ ảo hóa VMware/Hyper-V
-                </Typography>
-                <Typography className="font-extralight px-3">
-                  300 GB dung lượng lưu trữ cloud
-                </Typography>
-                <Typography className="font-extralight px-3">
-                  01 máy chủ ảo được sao lưu
-                </Typography>
-                <Typography className="font-extralight px-3">
-                  Khôn giới hạn bản sao lưu
-                </Typography>
-              </div>
-            </div>
-          </Card>
-
-          <Card className="relative rounded-xl hover:shadow-lg cursor-pointer  text-sky-900">
-            <div className="flex flex-col justify-center items-center p-3">
-              <Image src={theme_card} className="w-full h-auto rounded-xl relative" alt="Minh bạch chi phí" />
-
-              <div className="absolute text-center">
-                <Typography className="text-[1.5rem] font-bold pb-10">Pro tiết kiệm 35%</Typography>
-                <Typography className="font-extralight text-justify px-3">
-                  Hỗ trợ ảo hóa VMware/Hyper-V
-                </Typography>
-                <Typography className="font-extralight px-3">
-                  600 GB dung lượng lưu trữ cloud
-                </Typography>
-                <Typography className="font-extralight px-3">
-                  03 máy chủ ảo được sao lưu
-                </Typography>
-                <Typography className="font-extralight px-3">
-                  Khôn giới hạn bản sao lưu
-                </Typography>
-              </div>
-            </div>
-          </Card>
-
-          <Card className="relative rounded-xl hover:shadow-lg cursor-pointer text-sky-900">
-            <div className="flex flex-col justify-center items-center p-3">
-              <Image src={theme_card} className="w-full h-auto rounded-xl relative" alt="Minh bạch chi phí" />
-
-              <div className="absolute text-center">
-                <Typography className="text-[1.5rem] font-bold pb-10">Enterise tiết kiệm 45%</Typography>
-                <Typography className="font-extralight text-justify px-3">
-                  Hỗ trợ ảo hóa VMware/Hyper-V
-                </Typography>
-                <Typography className="font-extralight px-3">
-                  1500 GB dung lượng lưu trữ cloud
-                </Typography>
-                <Typography className="font-extralight px-3">
-                  06 máy chủ ảo được sao lưu
-                </Typography>
-                <Typography className="font-extralight px-3">
-                  Khôn giới hạn bản sao lưu
-                </Typography>
-              </div>
-            </div>
-          </Card>
-
-
+          {cloudBackupPackage.map((item) => {
+            return (
+              <Card key={item.id} className="relative rounded-xl hover:shadow-lg cursor-pointer text-sky-900">
+                <Box className="flex flex-col justify-center items-center p-3">
+                  <Image src={theme_card} className="w-full h-auto rounded-xl relative" alt="Minh bạch chi phí" />
+                  <Box key={item.id} className="absolute text-center">
+                    <Typography className="text-[1.5rem] font-bold pb-10">{item.title}</Typography>
+                    <Typography className="text-justify px-3"> {item.hyperv} </Typography>
+                    <Typography className="px-3"> {item.ram} </Typography>
+                    <Typography className="px-3"> {item.server} </Typography>
+                    <Typography className="px-3"> {item.limit} </Typography>
+                  </Box>
+                </Box>
+              </Card>
+            )
+          })}
         </Box>
 
         <Card className="rounded-2xl my-10">
@@ -242,7 +185,7 @@ export default function CloudGPU() {
             <Grid item xs={12} md={7} className=" text-sky-900">
               <Grid>
                 <Box sx={{ display: "flex", alignItems: "center", py: 1 }}>
-                  <Image src={cloudServer_icon_01} className="w-16 h-auto mr-4" alt="" />
+                  <Image src={cloudServer_icon_01} className="w-16 h-auto mr-4" alt="Chi phí phù hợp" />
                   <Box>
                     <Typography className="text-[1.3rem] font-semibold pt-5">Chi phí phù hợp</Typography>
                     <Typography className="w-3/4 text-justify">
@@ -252,7 +195,7 @@ export default function CloudGPU() {
                 </Box>
 
                 <Box sx={{ display: "flex", alignItems: "center", py: 1 }}>
-                  <Image src={cloudServer_icon_02} className="w-16 h-auto mr-4" alt="" />
+                  <Image src={cloudServer_icon_02} className="w-16 h-auto mr-4" alt="Bảo mật đầu cuối" />
                   <Box>
                     <Typography className="text-[1.3rem] font-semibold">Bảo mật đầu cuối</Typography>
                     <Typography className="w-3/4 text-justify">
@@ -262,7 +205,7 @@ export default function CloudGPU() {
                 </Box>
 
                 <Box sx={{ display: "flex", alignItems: "center", py: 1 }}>
-                  <Image src={cloudServer_icon_03} className="w-16 h-auto mr-4" alt="" />
+                  <Image src={cloudServer_icon_03} className="w-16 h-auto mr-4" alt="Ổn định và tin cậy" />
                   <Box>
                     <Typography className="text-[1.3rem] font-semibold">Ổn định và tin cậy</Typography>
                     <Typography className="w-3/4 text-justify">
@@ -270,160 +213,98 @@ export default function CloudGPU() {
                     </Typography>
                   </Box>
                 </Box>
-
-
               </Grid>
             </Grid>
           </Grid>
         </Card>
 
-
+        {/* service price */}
         <Box >
           <Box>
             <Box my={5} sx={{ textAlign: "center" }}>
               <Typography className="text-[2rem] font-light text-sky-900"> Bảng giá dịch vụ Cloud Backup (-35%) </Typography>
               <Typography> * Bảng giá chưa bao gồm 10% VAT </Typography>
             </Box>
-            <div className='grid sm:grid-cols-3 gap-x-6 gap-y-6 mb-10 text-center'>
-              <Card className='h-fit my-3 p-3 rounded-xl shadow-lg'>
-                <div className="">
-                  <Divider className="border-t-4 bg-yellow-600" />
-                  <Typography className="py-5 uppercase text-[1.5rem] font-bold text-sky-900" > business starter</Typography>
-                </div>
-                <Box>
-                  <div><TextField disabled size="small" className="py-1 w-[300px]" defaultValue="Hỗ trợ ảo hóa VMware/Hyper-V" /></div>
-                  <div><TextField disabled size="small" className="py-1 w-[300px]" defaultValue="300 GB dung lượng lưu trữ Cloud" /></div>
-                  <div><TextField disabled size="small" className="py-1 w-[300px]" defaultValue="1 máy chủ ảo được sao lưu" /></div>
-                  <div><TextField disabled size="small" className="py-1 w-[300px]" defaultValue="Không giới hạn số bản sao lưu" /></div>
 
-                  <Typography className="uppercase text-[1.5rem] font-bold py-5 text-yellow-600" > 500.000 vnd</Typography>
-                  <Divider className="border-t-4 bg-yellow-600" />
-                </Box>
-              </Card>
 
-              <Card className='h-fit my-3 p-3 rounded-xl shadow-lg'>
-                <div className="">
-                  <Divider className="border-t-4 bg-yellow-600" />
-                  <Typography className="py-5 uppercase text-[1.5rem] font-bold text-sky-900" > business standard</Typography>
-                </div>
-                <Box>
-                  <div><TextField disabled size="small" className="py-1 w-[300px]" defaultValue="Hỗ trợ ảo hóa VMware/Hyper-V" /></div>
-                  <div><TextField disabled size="small" className="py-1 w-[300px]" defaultValue="300 GB dung lượng lưu trữ Cloud" /></div>
-                  <div><TextField disabled size="small" className="py-1 w-[300px]" defaultValue="1 máy chủ ảo được sao lưu" /></div>
-                  <div><TextField disabled size="small" className="py-1 w-[300px]" defaultValue="Không giới hạn số bản sao lưu" /></div>
-
-                  <Typography className="uppercase text-[1.5rem] font-bold py-5 text-yellow-600" > 980.000 vnd</Typography>
-                  <Divider className="border-t-4 bg-yellow-600" />
-                </Box>
-              </Card>
-
-              <Card className='h-fit my-3 p-3 rounded-xl shadow-lg'>
-                <div className="">
-                  <Divider className="border-t-4 bg-yellow-600" />
-                  <Typography className="py-5 uppercase text-[1.5rem] font-bold text-sky-900" > business plus</Typography>
-                </div>
-                <Box>
-                  <div><TextField disabled size="small" className="py-1 w-[300px]" defaultValue="Hỗ trợ ảo hóa VMware/Hyper-V" /></div>
-                  <div><TextField disabled size="small" className="py-1 w-[300px]" defaultValue="300 GB dung lượng lưu trữ Cloud" /></div>
-                  <div><TextField disabled size="small" className="py-1 w-[300px]" defaultValue="1 máy chủ ảo được sao lưu" /></div>
-                  <div><TextField disabled size="small" className="py-1 w-[300px]" defaultValue="Không giới hạn số bản sao lưu" /></div>
-
-                  <Typography className="uppercase text-[1.5rem]  font-bold py-5 text-yellow-600" > 2.015.000 vnd</Typography>
-                  <Divider className="border-t-4 bg-yellow-600" />
-                </Box>
-              </Card>
-            </div>
+            <Box className='grid sm:grid-cols-3 gap-x-6 gap-y-6 mb-10 text-center'>
+              {cloudBackupPrices.map((item) => {
+                return (
+                  <Box key={item.title} className="card_price h-fit">
+                    <Box className="card__border"></Box>
+                    <Box className="card_title__container">
+                      <span className="card_title">{item.title}</span>
+                      <p className="card_paragraph">{item.price}</p>
+                    </Box>
+                    <hr className="line" />
+                    <ul className="card__list">
+                      <li className="card__list_item">
+                        <TaskAltRounded color="secondary" />
+                        <span className="list_text">{item.hyperv}</span>
+                      </li>
+                      <li className="card__list_item">
+                        <TaskAltRounded color="secondary" />
+                        <span className="list_text">{item.ram}</span>
+                      </li>
+                      <li className="card__list_item">
+                        <TaskAltRounded color="secondary" />
+                        <span className="list_text">{item.server}</span>
+                      </li>
+                      <li className="card__list_item">
+                        <TaskAltRounded color="secondary" />
+                        <span className="list_text">{item.server}</span>
+                      </li>
+                      <li className="card__list_item">
+                        <TaskAltRounded color="secondary" />
+                        <span className="list_text">{item.limit}</span>
+                      </li>
+                    </ul>
+                    <Button href="tel:0769999967" className="button">Liên hệ ngay</Button>
+                  </Box>
+                )
+              })}
+            </Box>
           </Box>
 
           <Box className=" text-sky-900">
             <Typography className="text-[2rem] font-semibold text-center py-5"> Bảng giá tài nguyên bổ sung </Typography>
 
-            <div className='grid sm:grid-cols-4 gap-x-6 gap-y-6 mb-10'>
-              <div className='h-[180px] my-3 px-3 rounded-xl shadow-2xl'>
-                <div className='py-5'>
-                  <Typography className='text-[0.9rem] font-bold'>Bản quyền máy chủ vật lý</Typography>
-                  <Typography className='text-sm pt-2'>Tặng 100 GB dung lượng sao lưu / </Typography>
-                </div>
-                <Divider />
-                <FormControlLabel className="py-3 text-yellow-600"
-                  control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
-                  label="15 USD x 1 tháng"
-                />
-              </div>
-
-              <div className='h-[180px] my-3 px-3 rounded-xl shadow-2xl'>
-                <div className='py-5'>
-                  <Typography className='text-[0.9rem] font-bold'>Bản quyền cho máy chủ ảo</Typography>
-                  <Typography className='text-sm pt-2'>Tặng 100 GB dung lượng sao lưu / </Typography>
-                </div>
-                <Divider />
-                <FormControlLabel className="py-3 text-yellow-600"
-                  control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
-                  label="12 USD x 1 tháng"
-                />
-              </div>
-
-              <div className='h-[180px] my-3 px-3 rounded-xl shadow-2xl'>
-                <div className='py-5'>
-                  <Typography className='text-[0.9rem] font-bold'>Bản quyền PC/Laptop/Workstation</Typography>
-                  <Typography className='text-sm pt-2'>Tặng 100 GB dung lượng sao lưu /  </Typography>
-                </div>
-                <Divider />
-                <FormControlLabel className="py-3 text-yellow-600"
-                  control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
-                  label="6 USD x 1 tháng"
-                />
-              </div>
-
-              <div className='h-[180px] my-3 px-3 rounded-xl shadow-2xl'>
-                <div className='py-5'>
-                  <Typography className='text-[0.9rem] font-bold'>WAN Acceleration - Unlimited VM&apos;s</Typography>
-                  <Typography className='text-sm pt-2'>Thêm 100 GB Attached Storage</Typography>
-                </div>
-                <Divider />
-                <FormControlLabel className="py-3 text-yellow-600"
-                  control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
-                  label="70 USD x 1 tháng"
-                />
-              </div>
-            </div>
+            <Box className='grid sm:grid-cols-4 gap-6 mb-10'>
+              {cloudBackupBonus.map((item) => {
+                return (
+                  <Box key={item.id} className='h-[180px] my-3 px-3 rounded-xl shadow-2xl'>
+                    <Box className='py-5'>
+                      <Typography className='text-[1rem] font-bold'>{item.title}</Typography>
+                      <Typography className=''>{item.bonus}</Typography>
+                    </Box>
+                    <Divider />
+                    <FormControlLabel className="py-3"
+                      control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
+                      label={item.price}
+                    />
+                  </Box>
+                )
+              })}
+            </Box>
           </Box>
         </Box >
 
+        {/* Q & A */}
         <Box pb={5}>
           <Typography className="text-[2rem] text-sky-900 font-semibold text-center py-5"> Các câu hỏi thường gặp </Typography>
           <Grid container className=" text-sky-900">
-            <Grid item xs={12} md={6} lg={6} xl={6} className="flex flex-col items-center justify-center">
-              <Typography className="w-3/4 text-lg font-semibold">Tôi có thể hủy bất cứ lúc nào không?</Typography>
-              <Typography className="w-3/4 text-justify py-3">
-                Bạn có thể hủy dịch vụ Cloud Backup bất cứ lúc nào. Không có câu hỏi nào được hỏi
-                khi bạn hủy nhưng chúng tôi sẽ đánh giá cao nếu bạn cung cấp cho chúng tôi một số phản hồi.
-              </Typography>
-            </Grid>
-            <Grid item xs={12} md={6} lg={6} xl={6} className="flex flex-col items-center justify-center">
-              <Typography className="w-3/4 text-lg font-semibold">Gói dịch vụ dùng thử?</Typography>
-              <Typography className="w-3/4 text-justify py-3">
-                Chắc chắn có. Hãy dùng thử dịch vụ Cloud Backup miễn phí 30 ngày để trải nghiệm hiệu quả và sự đơn giản ngay từ đầu.
-                Trong vòng vài phút sau khi đăng ký, bạn sẽ có thể sử dụng dịch vụ của mình.
-              </Typography>
-            </Grid>
-            <Grid item xs={12} md={6} lg={6} xl={6} className="flex flex-col items-center justify-center">
-              <Typography className="w-3/4 text-lg font-semibold">Có tính phí truyền dữ liệu hàng tháng không?</Typography>
-              <Typography className="w-3/4 text-justify py-3">
-                Bạn sẽ không phải chịu bất kỳ khoản phí truyền dữ liệu nào đến hệ thống sao lưu lưu trữ đám mây của chúng tôi.
-                Bạn có thể sao lưu và khôi phục bao nhiêu phiên bản tùy ý.
-              </Typography>
-            </Grid>
-            <Grid item xs={12} md={6} lg={6} xl={6} className="flex flex-col items-center justify-center">
-              <Typography className="w-3/4 text-lg font-semibold">Cách tính chi phí sao lưu như thế nào?</Typography>
-              <Typography className="w-3/4 text-justify py-3">
-                Bạn chỉ phải trả một khoản phí thấp cho mỗi máy chủ cần sao lưu và dung lượng lưu trữ,
-                không có thêm gì khác. Chiết khấu cao khi bạn cam kết sử dụng lâu dài.
-              </Typography>
-            </Grid>
+            {cloudBackupQuestions.map((item) => {
+              return (
+                <Grid key={item.id} item xs={12} md={6} className="flex flex-col items-center justify-center">
+                  <Typography className="w-3/4 text-lg font-semibold"> {item.question} </Typography>
+                  <Typography className="w-3/4 text-justify py-3"> {item.answer} </Typography>
+                </Grid>
+              )
+            })}
           </Grid>
         </Box>
       </Container>
     </>
+
   )
 }

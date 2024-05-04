@@ -8,7 +8,6 @@ import veeam_azure from "../../../images/veemBackup/veeam-azure-img01.png"
 import manager_interface from "../../../images/veemBackup/manager_interface.png"
 import { Box, Button, Card, CardActions, CardContent, Container, Grid, Paper, Typography } from "@mui/material";
 import Image from "next/image";
-import * as React from "react";
 
 const CloudBackupPage = () => {
   return (

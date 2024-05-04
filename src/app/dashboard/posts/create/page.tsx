@@ -2,14 +2,11 @@
 
 import * as React from "react";
 import { toast } from "sonner";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import dynamic from "next/dynamic";
-import { Post, Category, ApiResponse, User } from "types/interfaces";
+import { Post, Category, ApiResponse, User, POSTSCHEMA, CreatePostRequest, SCHEMA } from "types/interfaces";
 import { DoneRounded, RotateLeftRounded } from "@mui/icons-material";
-import Select, { SelectChangeEvent } from '@mui/material/Select';
-import { Box, Button, Checkbox, FormControl, Typography, ListItemText, MenuItem, OutlinedInput, Paper, TextField } from "@mui/material";
-import useS3 from "hooks/useS3";
-import Image from "next/image";
+import { Box, Button, Typography, Paper, TextField, InputLabel, FormControl, ListItemText, MenuItem, Select, SelectChangeEvent } from "@mui/material";
 import { fetchCategories, fetchUsers } from "app/methods/method";
 import { useSession } from "next-auth/react";
 import { z } from "zod";
@@ -19,33 +16,10 @@ const CustomEditor = dynamic(() => {
   return import("@/components/CustomEditor");
 }, { ssr: false });
 
-const SCHEMA = z.object({
-  title: z.string({
-    required_error: "Nhập tiêu đề bài viết."
-  }).min(10, "Tối thiểu 10 ký tự.").max(100, "Tối đa 100 ký tự."),
-  category: z.array(z.string(), {
-    required_error: "Vui lòng bấm chọn."
-  }),
-  user: z.string({
-    required_error: "Vui lòng bấm chọn."
-  }),
-  description: z.string({
-    required_error: "Vui lòng điền thông tin."
-  }),
-  content: z.string({
-    required_error: "Vui lòng điền thông tin."
-  }),
-  status: z.string().optional(),
-});
-
-type CreatePostRequest = z.infer<typeof SCHEMA>;
 
 export default function CreatePost() {
-  const [post, setPost] = React.useState<Post>();
-  const [categories, setCategories] = React.useState<Category[]>([]);
-  const [user, setUser] = React.useState("");
-  const [users, setUsers] = React.useState<User[]>([]);
-  const [categoryName, setCategoryName] = React.useState<string[]>([]);
+  const [categories, setCategories] = React.useState<Map<string, string>>(new Map<string, string>());
+  const [users, setUsers] = React.useState<Map<string, string>>(new Map<string, string>());
 
   const { data: session } = useSession();
 
@@ -53,16 +27,18 @@ export default function CreatePost() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<CreatePostRequest>({
+    watch,
+    reset
+  } = useForm<POSTSCHEMA>({
     resolver: zodResolver(SCHEMA),
-  });
-
-  const { handleFileUpload, ButtonUpload, preview } = useS3();
-  const previewUrl = React.useMemo(() => {
-    if (preview) {
-      return URL.createObjectURL(preview);
+    defaultValues: {
+      title: undefined,
+      categories: [],
+      userId: "",
+      description: undefined,
+      content: undefined,
     }
-  }, [preview]);
+  });
 
   // Begin multi select
   const ITEM_HEIGHT = 40;
@@ -76,24 +52,21 @@ export default function CreatePost() {
     },
   };
 
-  const handleChangeAuthor = (event: SelectChangeEvent) => {
-    setUser(event.target.value);
-  };
-
-  const handleChangeCategory = (event: SelectChangeEvent<typeof categoryName>) => {
-    const {
-      target: { value },
-    } = event;
-    setCategoryName(
-      // On autofill we get a stringified value.
-      typeof value === 'string' ? value.split(',') : value,
-    );
-  };
-  // End multi select
-
-  async function AddNewPost(post: CreatePostRequest) {
+  async function AddNewPost(data: POSTSCHEMA) {
     if (session) {
-      const message = toast.loading("Adding a new post ...");
+      const message = toast.loading("Đang tạo bài viết mới");
+
+      const post: CreatePostRequest = {
+        title: data.title,
+        categories: data.categories.map(item => ({ id: item })),
+        user: {
+          id: data.userId
+        },
+        description: data.description,
+        content: data.content,
+        status: "ACTIVE"
+      }
+
       try {
         const res = await fetch("/api/posts", {
           method: "POST",
@@ -109,9 +82,13 @@ export default function CreatePost() {
         if (payload.ok) {
           toast.success(payload.message);
         }
-        toast.error(payload.message);
+        else {
+          toast.error(payload.message);
+        }
+
 
       } catch (error) {
+        toast.error("Loi");
         console.log(error);
       }
       toast.dismiss(message);
@@ -128,11 +105,11 @@ export default function CreatePost() {
           const [resCate, resUser] = data;
 
           if (resCate.ok) {
-            setCategories(resCate.data);
+            setCategories(new Map<string, string>(resCate.data.map((item: Category) => [item.id, item.name])));
           }
 
           if (resUser.ok) {
-            setUsers(resUser.data)
+            setUsers(new Map<string, string>(resUser.data.map((item: User) => [item.id, item.login])))
           }
         })
     }
@@ -145,145 +122,121 @@ export default function CreatePost() {
           onSubmit={handleSubmit(AddNewPost)}>
 
           <Box className="my-3">
-            <label className="font-semibold">Tiêu đề bài viết:</label>
+            <InputLabel className="font-semibold">Tiêu đề bài viết:</InputLabel>
             <TextField
-              {...register("title", {
-                setValueAs: value => value.length ? value : undefined
-              })}
-              type="text" size="small" variant="outlined"
-              className="min-w-[300px] w-full rounded-md cursor-pointer shadow-lg"
+              {...register("title")}
+              type="text" size="small" variant="outlined" fullWidth
+              className="cursor-pointer shadow-lg"
               placeholder="Nhập tiêu đề bài viết "
             />
-            <Typography className="text-red-700 px-2 mt-2">{errors.title?.message}</Typography>
+            <Typography className="text-red-700 p-2">{errors.title?.message}</Typography>
           </Box>
 
           <Box className="my-3 flex justify-between">
             <Box>
-              <label className="font-semibold">Loại bài viết:</label>
-              <div>
-                <FormControl sx={{ width: 300 }}>
-                  <Select
-                    {...register("category", {
-                      setValueAs: value => (typeof value == "string") ? undefined : value
-                    })}
-                    labelId="categories"
-                    id="categories"
-                    size="small"
-                    className="shadow-lg"
-                    multiple
-                    displayEmpty
-                    value={categoryName}
-                    onChange={handleChangeCategory}
-                    input={<OutlinedInput label="Tag" />}
-                    renderValue={(selected) => {
-                      if (selected.length === 0) {
-                        return <em>Vui lòng bấm chọn</em>;
-                      }
+              <InputLabel className="font-semibold">Loại bài viết:</InputLabel>
+              <FormControl sx={{ width: 300 }}>
+                <Select
+                  {...register("categories")}
+                  labelId="categories"
+                  id="categories"
+                  size="small"
+                  className="shadow-lg"
+                  multiple
+                  displayEmpty
+                  value={watch("categories")}
+                  renderValue={(categoriesId) => {
+                    if (categoriesId.length === 0) {
+                      return <i className="text-gray-400">Vui lòng bấm chọn</i>;
+                    }
 
-                      return selected.join(', ');
-                    }}
-                    MenuProps={MenuProps}
-                  >
-                    {categories && categories.map((item) => (
-                      <MenuItem key={item.id} value={item.name}>
-                        <ListItemText primary={item.name} />
-                      </MenuItem>
-                    ))}
-                  </Select>
-                </FormControl>
-              </div>
-              <Typography className="text-red-700 px-2 mt-2">{errors.category?.message}</Typography>
+                    const categoriesName = categoriesId.map(id => categories.get(id));
+
+                    return categoriesName.join(", ");
+                  }}
+                  MenuProps={MenuProps}
+                >
+                  {Array.from(categories).map((item) => (
+                    <MenuItem key={item[0]} value={item[0]}>
+                      <ListItemText primary={item[1]} />
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+              <Typography className="text-red-700 p-2">{errors.categories?.message}</Typography>
             </Box>
 
             <Box>
-              <label className="font-semibold">Tác giả:</label>
-              <div>
-                <FormControl sx={{ width: 300 }} size="small">
-                  <Select
-                    {...register("user")}
-                    labelId="demo-select-small-label"
-                    id="demo-select-small"
-                    size="small"
-                    className="shadow-lg"
-                    displayEmpty
-                    value={user}
-                    onChange={handleChangeAuthor}
-                    renderValue={(selected) => {
-                      if (!selected) {
-                        return <em>Vui lòng bấm chọn</em>;
-                      }
-                      return selected;
-                    }}
-                  >
-                    {users && users.map((item) => {
-                      return (
-                        <MenuItem key={item.id} value={item.lastName + " " + item.firstName}>
-                          {item.lastName + " " + item.firstName}
-                        </MenuItem>
-                      )
-                    })}
-                  </Select>
-                </FormControl>
-              </div>
-              <Typography className="text-red-700 px-2 mt-2">{errors.user?.message}</Typography>
+              <InputLabel className="font-semibold">Tác giả:</InputLabel>
+              <FormControl sx={{ width: 300 }} size="small">
+                <Select
+                  {...register("userId")}
+                  labelId="demo-select-small-label"
+                  id="demo-select-small"
+                  size="small"
+                  className="shadow-lg"
+                  displayEmpty
+                  value={watch("userId")}
+                  renderValue={userId => {
+                    if (!userId) {
+                      return <i className="text-gray-400">Vui lòng bấm chọn</i>;
+                    }
+                    return users.get(userId);
+                  }}
+                >
+                  {Array.from(users).map((item) => {
+                    return (
+                      <MenuItem key={item[0]} value={item[0]}>
+                        {item[1]}
+                      </MenuItem>
+                    )
+                  })}
+                </Select>
+              </FormControl>
+              <Typography className="text-red-700 p-2">{errors.userId?.message}</Typography>
             </Box>
           </Box>
 
-          {/* <Box className="my-3 flex items-center justify-between">
-            <Box>
-              {preview ?
-                <Image src={`${previewUrl}`}
-                  width={0}
-                  height={0}
-                  objectFit='contain'
-                  alt={"preview"}
-                  title={"Ảnh đại diện bài viết"}
-                  style={{
-                    width: 'clamp(100px, 100%, 200px)',
-                    height: 'auto',
-                    marginBottom: '15px',
-                    borderRadius: '12px'
-                  }}
-                /> :
-                <img {...register("image")} src={'https://dummyimage.com/500x500/c3c3c3/FFF.png&text=UploadImage'}
-                  alt={"preview"} title={"preview"} width={180} height={180} className="rounded-md"
-                />
-              }
-            </Box>
-            <Box><ButtonUpload /></Box>
-          </Box> */}
-
           <Box className="my-3">
-            <label className="font-semibold">Mô tả ngắn:</label>
+            <InputLabel className="font-semibold">Mô tả ngắn:</InputLabel>
             <TextField
-              {...register("description", { setValueAs: value => value.length ? value : undefined })}
-              type="text" size="small" variant="outlined"
-              className="min-w-[300px] w-full rounded-md cursor-pointer shadow-lg"
+              {...register("description")}
+              type="text" size="small" variant="outlined" fullWidth
+              className="shadow-lg"
               placeholder="Nhập mô tả ngắn"
             />
-            <Typography className="text-red-700 px-2 mt-2 ">{errors.description?.message}</Typography>
+            <Typography className="text-red-700 p-2 ">{errors.description?.message}</Typography>
           </Box>
 
           <Box className="my-3">
-            <label className="font-semibold">Nội dung bài viết:</label>
-            <TextField variant="outlined"
-              {...register("content", { setValueAs: value => value.length ? value : undefined })}
-              className="min-w-[300px] w-full rounded-md cursor-pointer shadow-lg"
+            <InputLabel className="font-semibold">Nội dung bài viết:</InputLabel>
+            {/* <CustomEditor
+              {...register("content")}
+              fullWidth
+              variant="outlined"
+              className="shadow-lg"
+              placeholder="Nhập nội dung bài viết" /> */}
+            <TextField
+              {...register("content")}
+              fullWidth
+              variant="outlined"
+              className="shadow-lg"
               placeholder="Nhập nội dung bài viết"
             />
-            <Typography className="text-red-700 px-2 mt-2 ">{errors.content?.message}</Typography>
+            <Typography className="text-red-700 p-2 ">{errors.content?.message}</Typography>
           </Box>
 
-          <Box className="flex justify-around mb-2 mt-10 w-1/2 mx-auto">
+          <Box className="flex justify-center mb-2 mt-10 mx-auto">
             <Button
               type="submit" variant="contained" size="medium"
-              className="w-full mx-1 p-2 text-white bg-[#008200] hover:opacity-85"
+              color="success" className="w-[30%] mx-2"
               startIcon={<DoneRounded fontSize='medium' />} >
-              Thêm bài viết
+              Hoàn thành
             </Button>
             <Button
-              type="reset" variant="contained" size="medium"
-              className="w-full mx-1 p-2 text-white bg-[#0C2340] hover:opacity-85"
+              variant="contained" size="medium"
+              color="error" className="w-[30%] mx-2"
+              onClick={e => { reset() }}
               startIcon={<RotateLeftRounded fontSize='medium' />} >
               Hủy bỏ
             </Button>

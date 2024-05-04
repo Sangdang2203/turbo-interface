@@ -36,15 +36,14 @@ export async function GET(req: NextRequest) {
 }
 
 export async function POST(req: NextRequest) {
-	const newPost = await req.json();
-	newPost.status = "ACTIVE";
+	const post = await req.json();
+	console.log(post);
 
-	req.headers.delete("Content-Length");
 	try {
 		const response = await fetch(process.env.NEXT_PUBLIC_API_URL + "/posts", {
 			method: req.method,
 			headers: req.headers,
-			body: JSON.stringify(newPost),
+			body: JSON.stringify(post),
 		});
 
 		let data = null;
@@ -56,7 +55,7 @@ export async function POST(req: NextRequest) {
 			return NextResponse.json({
 				ok: true,
 				status: "Success",
-				message: "Add new post successfully.",
+				message: "Tạo bài viết mới thành công.",
 				data,
 			});
 		}
@@ -64,7 +63,7 @@ export async function POST(req: NextRequest) {
 		return NextResponse.json({
 			ok: false,
 			status: "Error",
-			message: "Failed to add post.",
+			message: "Tạo bài viết mới thất bại.",
 		});
 	} catch (error) {
 		console.log(error);

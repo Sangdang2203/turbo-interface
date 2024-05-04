@@ -1,4 +1,3 @@
-"use client";
 
 import cloudGPU_01 from "../../../images/cloudServer/cloudGPU_01.png"
 import cloudGPU_02 from "../../../images/cloudServer/cloudGPU_02.png"
@@ -8,14 +7,17 @@ import cloudServer_icon_01 from "../../../images/cloudServer/cloudServer_icon_01
 import cloudServer_icon_02 from "../../../images/cloudServer/cloudServer_icon_02.png"
 import cloudServer_icon_03 from "../../../images/cloudServer/cloudServer_icon_03.png"
 import cloudServer_icon_04 from "../../../images/cloudServer/cloudServer_icon_04.png"
-import { Box, Card, Divider, FormControlLabel, Grid, TextField, Typography, Container } from "@mui/material";
+import { Box, Card, Divider, FormControlLabel, Grid, Typography, Container, Button } from "@mui/material";
+import { TaskAltRounded } from '@mui/icons-material';
 import Switch, { SwitchProps } from '@mui/material/Switch';
+import { cloudGPUPrices, bonusPrices, cloudGPUQuestions } from "app/libs/data";
 import { styled } from '@mui/material/styles';
 import Image from "next/image";
 
 export default function CloudGPU() {
   const IOSSwitch = styled((props: SwitchProps) => (
     <Switch focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} />
+    //@ts-ignore
   ))(({ theme }) => ({
     width: 42,
     height: 26,
@@ -64,6 +66,8 @@ export default function CloudGPU() {
       }),
     },
   }));
+
+
   return (
     <>
       <Container>
@@ -74,38 +78,40 @@ export default function CloudGPU() {
         </Box>
 
         <Box className="container grid sm:grid-cols-3 gap-x-6 gap-y-6 mb-10">
-          <Card className="relative rounded-xl hover:shadow-lg cursor-pointer  text-sky-900">
-            <Box className="flex flex-col justify-center items-center p-3">
-              <Typography className="text-[1.5rem] font-bold">Minh bạch chi phí</Typography>
-              <Image src={cloudGPU_03} className="w-52 h-auto my-5" alt="Minh bạch chi phí" />
-              <Typography className="font-extralight text-justify px-3">
+          <Card className="card">
+            <Box className="card-details">
+              <Typography className="text-title text-sky-900">Minh bạch chi phí</Typography>
+              <Image src={cloudGPU_03} className="w-[100%] h-auto my-5" alt="Minh bạch chi phí" />
+              <Typography className="text-body text-justify px-3">
                 Giao diện trực quan giúp dễ dàng quản lý và giám sát các tài nguyên thực dùng trên từng máy chủ.
                 Lập báo cáo thống kê chỉ với 1 click.
               </Typography>
             </Box>
+            <Button href="" className="card-button">More info</Button>
           </Card>
 
-          <Card className="relative rounded-xl hover:shadow-lg cursor-pointer">
-            <Box className="flex flex-col justify-center items-center p-3  text-sky-900">
-              <Typography className="text-[1.5rem] font-bold"> Hoạt động hiệu quả </Typography>
-
-              <Image src={cloudGPU_01} className="w-52 h-auto my-5" alt="Hoạt động hiệu quả" />
-              <Typography className="font-extralight text-justify px-3">
+          <Card className="card">
+            <Box className="card-details">
+              <Typography className="text-title text-sky-900"> Hoạt động hiệu quả </Typography>
+              <Image src={cloudGPU_01} className="w-[100%] h-auto my-5" alt="Hoạt động hiệu quả" />
+              <Typography className="text-body text-justify px-3">
                 Dễ dàng mở rộng hay thu hẹp tài nguyên nhanh chóng để phù hợp với nhu cầu công việc của doanh nghiệp,
                 theo sát nhu cầu kinh doanh.
               </Typography>
             </Box>
+            <Button href="" className="card-button">More info</Button>
           </Card>
 
-          <Card className="rounded-xl hover:shadow-lg cursor-pointer">
-            <Box className="flex flex-col justify-center items-center p-3  text-sky-900">
-              <Typography className="text-[1.5rem] font-bold"> Tối đa hóa lợi nhuận </Typography>
-              <Image src={cloudGPU_02} className="w-52 h-auto my-5" alt="Tối đa hóa lợi nhuận" />
-              <Typography className="font-extralight text-justify px-3">
+          <Card className="card">
+            <Box className="card-details">
+              <Typography className="text-title text-sky-900"> Tối đa hóa lợi nhuận </Typography>
+              <Image src={cloudGPU_02} className="w-[100%] h-auto my-5" alt="Tối đa hóa lợi nhuận" />
+              <Typography className="text-body text-justify px-3">
                 Không cần đầu tư CAPEX cho phần cứng, thiết bị đắt đỏ. Giảm thiểu chi phí
                 vận hành OPEX tối đa. Chỉ chi trả cho tài nguyên thực dùng.
               </Typography>
             </Box>
+            <Button href="" className="card-button">More info</Button>
           </Card>
         </Box>
 
@@ -163,65 +169,55 @@ export default function CloudGPU() {
           </Grid>
         </Card>
 
-
+        {/* service price */}
         <Box >
           <Box>
             <Box my={5} sx={{ textAlign: "center" }}>
               <Typography className="text-[2rem] font-semibold text-sky-900"> Bảng giá dịch vụ Cloud Server </Typography>
               <Typography> * Bảng giá chưa bao gồm 10% VAT </Typography>
             </Box>
+
+
             <Box className='grid sm:grid-cols-3 gap-x-6 gap-y-6 mb-10 text-center'>
-              <Card className='h-fit my-3 p-3 rounded-xl shadow-lg'>
-                <Box className="">
-                  <Divider className="border-t-4 bg-yellow-600" />
-                  <Typography className="py-5 uppercase text-[2rem] font-bold text-sky-900" > gói gpu 01</Typography>
-                </Box>
-                <Box>
-                  <div><TextField disabled size="small" className="py-1" defaultValue="8 vCPU" /></div>
-                  <div><TextField disabled size="small" className="py-1" defaultValue="16 GB RAM" /></div>
-                  <div><TextField disabled size="small" className="py-1" defaultValue="240 GB SSD" /></div>
-                  <div><TextField disabled size="small" className="py-1" defaultValue="1 IPv4" /></div>
-                  <div><TextField disabled size="small" className="py-1" defaultValue="200 Mbps Network" /></div>
-                  <div><TextField disabled size="small" className="py-1" defaultValue="1 Dedicated RTX 2080Ti" /></div>
-
-                  <Typography className="uppercase text-[1.5rem] font-bold py-5 text-yellow-600" > 5.300.000 vnd</Typography>
-                  <Divider className="border-t-4 bg-yellow-600" />
-                </Box>
-              </Card>
-
-              <Card className='h-fit my-3 p-3 rounded-xl shadow-lg'>
-                <Box className="">
-                  <Divider className="border-t-4 bg-yellow-600" />
-                  <Typography className="py-5 uppercase text-[2rem] font-bold text-sky-900" > gói gpu 02</Typography>
-                </Box>
-                <Box>
-                  <div><TextField disabled size="small" className="py-1" defaultValue="12 vCPU" /></div>
-                  <div><TextField disabled size="small" className="py-1" defaultValue="32 GB RAM" /></div>
-                  <div><TextField disabled size="small" className="py-1" defaultValue="480 GB SSD" /></div>
-                  <div><TextField disabled size="small" className="py-1" defaultValue="1 IPv4" /></div>
-                  <div><TextField disabled size="small" className="py-1" defaultValue="200 Mbps Network" /></div>
-                  <div><TextField disabled size="small" className="py-1" defaultValue="1 Dedicated RTX 2080Ti" /></div>
-                  <Typography className="uppercase text-[1.5rem] font-bold py-5 text-yellow-600" > 7.600.000 vnd</Typography>
-                  <Divider className="border-t-4 bg-yellow-600" />
-                </Box>
-              </Card>
-
-              <Card className='h-fit my-3 p-3 rounded-xl shadow-lg'>
-                <Box className="">
-                  <Divider className="border-t-4 bg-yellow-600" />
-                  <Typography className="py-5 uppercase text-[2rem] font-bold text-sky-900" > gói gpu 03</Typography>
-                </Box>
-                <Box>
-                  <div><TextField disabled size="small" className="py-1" defaultValue="16 vCPU" /></div>
-                  <div><TextField disabled size="small" className="py-1" defaultValue="64 GB RAM" /></div>
-                  <div><TextField disabled size="small" className="py-1" defaultValue="480 GB SSD" /></div>
-                  <div><TextField disabled size="small" className="py-1" defaultValue="1 IPv4" /></div>
-                  <div><TextField disabled size="small" className="py-1" defaultValue="200 Mbps Network" /></div>
-                  <div><TextField disabled size="small" className="py-1" defaultValue="1 Dedicated RTX 2080Ti" /></div>
-                  <Typography className="uppercase text-[1.5rem]  font-bold py-5 text-yellow-600" > 9.800.000 vnd</Typography>
-                  <Divider className="border-t-4 bg-yellow-600" />
-                </Box>
-              </Card>
+              {cloudGPUPrices.map((item) => {
+                return (
+                  <Box key={item.title} className="card_price h-fit">
+                    <Box className="card__border"></Box>
+                    <Box className="card_title__container">
+                      <span className="card_title">{item.title}</span>
+                      <p className="card_paragraph">{item.price}</p>
+                    </Box>
+                    <hr className="line" />
+                    <ul className="card__list">
+                      <li className="card__list_item">
+                        <TaskAltRounded color="secondary" />
+                        <span className="list_text">{item.cpu}</span>
+                      </li>
+                      <li className="card__list_item">
+                        <TaskAltRounded color="secondary" />
+                        <span className="list_text">{item.ram}</span>
+                      </li>
+                      <li className="card__list_item">
+                        <TaskAltRounded color="secondary" />
+                        <span className="list_text">{item.ssd}</span>
+                      </li>
+                      <li className="card__list_item">
+                        <TaskAltRounded color="secondary" />
+                        <span className="list_text">{item.ipv4}</span>
+                      </li>
+                      <li className="card__list_item">
+                        <TaskAltRounded color="secondary" />
+                        <span className="list_text">{item.network}</span>
+                      </li>
+                      <li className="card__list_item">
+                        <TaskAltRounded color="secondary" />
+                        <span className="list_text">{item.rtx}</span>
+                      </li>
+                    </ul>
+                    <Button href="tel:0769999967" className="button">Liên hệ ngay</Button>
+                  </Box>
+                )
+              })}
             </Box>
           </Box>
 
@@ -229,133 +225,38 @@ export default function CloudGPU() {
             <Typography className="text-[2rem] font-semibold text-center py-5"> Bảng giá tài nguyên bổ sung </Typography>
 
             <Box className='grid sm:grid-cols-3 gap-x-6 gap-y-6 mb-10'>
-              <Box className='h-[180px] my-3 px-3 rounded-xl shadow-2xl'>
-                <Box className='py-5'>
-                  <Typography className='text-[1.5rem] font-bold'>vCPU</Typography>
-                  <Typography className=''>Thêm 1 vCPU</Typography>
-                </Box>
-                <Divider />
-                <FormControlLabel className="py-3"
-                  control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
-                  label="80.000 VND x 1 tháng"
-                />
-              </Box>
-
-              <Box className='h-[180px] my-3 px-3 rounded-xl shadow-2xl'>
-                <Box className='py-5'>
-                  <Typography className='text-[1.5rem] font-bold'>RAM</Typography>
-                  <Typography className=''>Thêm 1 GB RAM</Typography>
-                </Box>
-                <Divider />
-                <FormControlLabel className="py-3"
-                  control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
-                  label="80.000 VND x 1 tháng"
-                />
-              </Box>
-
-              <Box className='h-[180px] my-3 px-3 rounded-xl shadow-2xl'>
-                <Box className='py-5'>
-                  <Typography className='text-[1.5rem] font-bold'>SSD Storage</Typography>
-                  <Typography className=''>Thêm 10 GB SSD Storage</Typography>
-                </Box>
-                <Divider />
-                <FormControlLabel className="py-3"
-                  control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
-                  label="60.000 VND x 1 tháng"
-                />
-              </Box>
-
-              <Box className='h-[180px] my-3 px-3 rounded-xl shadow-2xl'>
-                <Box className='py-5'>
-                  <Typography className='text-[1.5rem] font-bold'>Attached Storage</Typography>
-                  <Typography className=''>Thêm 100 GB Attached Storage</Typography>
-                </Box>
-                <Divider />
-                <FormControlLabel className="py-3"
-                  control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
-                  label="150.000 VND x 1 tháng"
-                />
-              </Box>
-
-              <Box className='h-[180px] my-3 px-3 rounded-xl shadow-2xl'>
-                <Box className='py-5'>
-                  <Typography className='text-[1.5rem] font-bold'>Địa chỉ IPv4</Typography>
-                  <Typography className=''>Thêm 1 địa chỉ IPv4 public</Typography>
-                </Box>
-                <Divider />
-                <FormControlLabel className="py-3"
-                  control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
-                  label="100.000 VND x 1 tháng"
-                />
-              </Box>
-
-              <Box className='h-[180px] my-3 px-3 rounded-xl shadow-2xl'>
-                <Box className='py-5'>
-                  <Typography className='text-[1.5rem] font-bold'>Network (trong nước)</Typography>
-                  <Typography className=''>Thêm 100 Mbps Network</Typography>
-                </Box>
-                <Divider />
-                <FormControlLabel className="py-3"
-                  control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
-                  label="1.100.000 VND x 1 tháng"
-                />
-              </Box>
+              {bonusPrices.map((item) => {
+                return (
+                  <Box key={item.title} className='h-[180px] my-3 px-3 rounded-xl shadow-2xl'>
+                    <Box className='py-5'>
+                      <Typography className='text-[1.5rem] font-bold'>{item.title}</Typography>
+                      <Typography className=''>{item.bonus}</Typography>
+                    </Box>
+                    <Divider />
+                    <FormControlLabel className="py-3"
+                      control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
+                      label={item.price}
+                    />
+                  </Box>
+                )
+              })}
             </Box>
           </Box>
         </Box >
 
+        {/* Q & A */}
         <Box>
           <Box pb={5}>
-
             <Typography className="text-[2rem] text-sky-900 font-semibold text-center py-5"> Câu hỏi thường gặp </Typography>
-
             <Grid container className=" text-sky-900">
-              <Grid item xs={12} md={6} lg={6} xl={6} className="flex flex-col items-center justify-center">
-                <Typography className="w-3/4 text-lg font-semibold">Tôi muốn dùng thử dịch vụ Cloud GPU Server?</Typography>
-                <Typography className="w-3/4 text-justify py-3">
-                  EcoCloud luôn có chương trình dùng thử miễn phí để khách hàng có thể trải nghiệm tốt nhất.
-                  Hãy liên hệ với chúng tôi qua hotline 076 9999 967 hoặc email cskh@turbo.vn để được hỗ trợ.
-                </Typography>
-              </Grid>
-
-              <Grid item xs={12} md={6} lg={6} xl={6} className="flex flex-col items-center justify-center">
-                <Typography className="w-3/4 text-lg font-semibold">Khác biệt giữa GPU GTX 1080TI và RTX 2080TI là gì?</Typography>
-                <Typography className="w-3/4 text-justify py-3">
-                  Ngoài khác biệt về cấu trúc GPU cũng như giá thành, dòng GPU 2080TI đạt hiệu năng cao hơn hẳn so với 1080TI
-                  trong xử lý các Deep Learning và Machine Learning.
-                </Typography>
-              </Grid>
-
-              <Grid item xs={12} md={6} lg={6} xl={6} className="flex flex-col items-center justify-center">
-                <Typography className="w-3/4 text-lg font-semibold">Cloud GPU Server có thể sử dụng cho những framework nào?</Typography>
-                <Typography className="w-3/4 text-justify py-3">
-                  Khi khởi tạo Cloud GPU Server, bạn có thể cài đặt thêm các framework TensorFlow, MXNET, Pytorch, Caffe2… theo nhu cầu xử lý thuật toán.
-                  Bạn cũng có thể cài đặt thêm FFMpeg để xử lý luồng stream từ Camera, Mobile…
-                </Typography>
-              </Grid>
-
-              <Grid item xs={12} md={6} lg={6} xl={6} className="flex flex-col items-center justify-center">
-                <Typography className="w-3/4 text-lg font-semibold">Tôi có thể cài đặt HĐH riêng cho Cloud GPU Server?</Typography>
-                <Typography className="w-3/4 text-justify py-3">
-                  EcoCloud hiện cung cấp hai HĐH cho Cloud GPU Server là Windows và Ubuntu. Nếu có gặp khó khăn trong quá trình cài đặt thư viện,
-                  hãy liên hệ với đội kỹ thuật để được hỗ trợ nhanh chóng.
-                </Typography>
-              </Grid>
-
-              <Grid item xs={12} md={6} lg={6} xl={6} className="flex flex-col items-center justify-center">
-                <Typography className="w-3/4 text-lg font-semibold">Cloud GPU Server của EcoCloud có hỗ trợ Windows Server?</Typography>
-                <Typography className="w-3/4 text-justify py-3">
-                  Trong các phiên bản Windows Cloud GPU, hiện EcoCloud có cung cấp GPU hoạt động trên Windows Server các phiên bản 2012, 2016, 2019 và cả Windows 10.
-                </Typography>
-              </Grid>
-
-              <Grid item xs={12} md={6} lg={6} xl={6} className="flex flex-col items-center justify-center">
-                <Typography className="w-3/4 text-lg font-semibold">Cloud GPU Server có thể dùng trong những trường hợp nào?</Typography>
-                <Typography className="w-3/4 text-justify py-3">
-                  Có rất nhiều trường hợp để sử dụng Cloud GPU Server. Bạn có thể sử dụng cho Machine Learning và AI, bạn cũng có thể sử dụng cho mục đích xử lý hình ảnh,
-                  video và thị giác máy tính. Hoặc dùng cho Big Data với Hadoop, Apache Spark…
-                </Typography>
-              </Grid>
+              {cloudGPUQuestions.map((item) => {
+                return (
+                  <Grid key={item.id} item xs={12} md={6} className="flex flex-col items-center justify-center">
+                    <Typography className="w-3/4 text-lg font-semibold"> {item.question} </Typography>
+                    <Typography className="w-3/4 text-justify py-3"> {item.answer} </Typography>
+                  </Grid>
+                )
+              })}
             </Grid>
           </Box>
         </Box>

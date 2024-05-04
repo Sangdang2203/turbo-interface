@@ -61,7 +61,7 @@ export default function PostDetail({ params }: { params: { id: string } }) {
 
           <Container>
             <Box my={2}><CustomRating /></Box>
-            <Box>{post?.content}</Box>
+            <Box className='w-3/4 mx-auto'> {post?.content} </Box>
           </Container>
 
 
@@ -69,10 +69,10 @@ export default function PostDetail({ params }: { params: { id: string } }) {
           <Container className="container grid sm:grid-cols-4 gap-x-6 gap-y-6 pb-10">
             {posts && posts.map((item) => {
               return (
-                <Box key={item.id} className="relative shadow-2xl px-1 rounded-md hover:scale-105 duration-700 cursor-pointer">
+                <Box key={item.id} className="relative shadow-2xl p-1 rounded-md hover:scale-105 duration-700 cursor-pointer">
                   <Box className="mb-16 px-3">
-                    <Typography className="text-xl font-light">{item.title}</Typography>
-                    <Typography className="text-sm font-extralight">{item.description}</Typography>
+                    <Typography className="text-xl line-clamp-2"> {item.title} </Typography>
+                    <Typography className="text-sm pt-2 line-clamp-2"> {item.description} </Typography>
                   </Box>
 
                   <Box className="absolute bottom-1 left-1">

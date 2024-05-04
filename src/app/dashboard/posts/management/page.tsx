@@ -1,16 +1,14 @@
 'use client'
 
-import { FormHelperText, Box, Button, Dialog, DialogContent, DialogTitle, Divider, Grid, IconButton, Paper, Switch, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, TextField, Tooltip } from '@mui/material'
+import { Button, Chip, Grid, IconButton, Paper, Switch, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, TextField, Tooltip } from '@mui/material'
 import { SearchOutlined, DriveFileRenameOutline, DeleteOutline } from '@mui/icons-material'
 
 import Loading from '@/components/Loading'
-import Link from 'next/link'
-import { toast } from 'sonner'
-import * as React from 'react'
-import { ApiResponse, Post, UpdatedPostRequest } from 'types/interfaces'
+import { Post } from 'types/interfaces'
 import { fetchPosts, fetchDeletePost } from 'app/methods/method'
 import { useSession } from 'next-auth/react'
-import { useForm, SubmitHandler } from "react-hook-form";
+import { toast } from 'sonner'
+import * as React from 'react'
 
 export default function PostManagement() {
   const [loading, setLoading] = React.useState(true);
@@ -19,40 +17,6 @@ export default function PostManagement() {
   const [rowsPerPage, setRowsPerPage] = React.useState(10)
   const { data: session } = useSession();
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    setValue,
-    watch,
-  } = useForm<UpdatedPostRequest>();
-
-  async function UpdatePost(updatedPost: UpdatedPostRequest) {
-    if (session) {
-      const message = toast.loading("Loading...")
-      try {
-        const res = await fetch(`/api/posts/`, {
-          method: "PUT",
-          body: JSON.stringify(updatedPost),
-          headers: {
-            Authorization: `Bearer ${session?.user.id_token}`,
-            "Content-Type": "application/json"
-          },
-        })
-
-        const payload = (await res.json()) as ApiResponse;
-
-        if (payload.ok) {
-          toast.success(payload.message)
-        }
-        toast.error(payload.message)
-
-      } catch (error) {
-        console.log(error);
-      }
-      toast.dismiss(message);
-    }
-  }
 
   function handleSearch(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -62,7 +26,7 @@ export default function PostManagement() {
     const name = nameInput.value.trim();
 
     if (name === "") {
-      fetchPosts().then(res => setPosts(res.data));
+      fetchPosts().then(res => setPosts(res.data.reverse()));
     } else {
       const filterPosts = posts.filter(
         post => post.title.includes(name)
@@ -74,7 +38,7 @@ export default function PostManagement() {
 
   async function handleDelete(postId: string) {
     if (session) {
-      const message = toast.loading("Loading...");
+      const message = toast.loading("Đang thực hiện xóa bài viết.");
       const response = await fetchDeletePost(session.user.id_token, postId);
 
       if (response.ok) {
@@ -83,6 +47,7 @@ export default function PostManagement() {
       } else {
         toast.error(response.message);
       }
+
       toast.dismiss(message);
     }
   }
@@ -110,7 +75,9 @@ export default function PostManagement() {
           setPosts(resPost.data.reverse());
         }
       })
+
     setLoading(false);
+
   }, []);
 
   return (
@@ -154,11 +121,12 @@ export default function PostManagement() {
               <Table className="mt-3" sx={{ minWidth: 650 }} size="small">
                 <TableHead className='bg-slate-300'>
                   <TableRow>
-                    <TableCell align="center" className="text-sm">#</TableCell>
-                    <TableCell align="center" className="text-sm">Tiêu đề</TableCell>
-                    <TableCell align="center" className="text-sm">Mô tả</TableCell>
-                    <TableCell align="center" className="text-sm">Tình trạng</TableCell>
-                    <TableCell align="center" className="text-sm">Thao tác</TableCell>
+                    {/* <TableCell align="center" className="text-sm">#</TableCell> */}
+                    <TableCell>Tiêu đề</TableCell>
+                    <TableCell>Mô tả</TableCell>
+                    <TableCell>Thể loại</TableCell>
+                    <TableCell>Tình trạng</TableCell>
+                    <TableCell>Thao tác</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -168,18 +136,35 @@ export default function PostManagement() {
                         .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                         .map(post => (
                           <TableRow key={post.id} className='hover:bg-slate-100 cursor-pointer' sx={{ "&:last-child td, &:last-child th": { border: 0 }, }}>
-                            <TableCell align="center"> {post?.id} </TableCell>
-                            <TableCell align="center"> {post?.title} </TableCell>
-                            <TableCell align="center"> {post?.description} </TableCell>
-                            <TableCell align="center">
-                              <Tooltip title={post.status === "ACTIVE" ? "Disable" : "Active"} placement='right-start'>
+                            {/* <TableCell align="center"> {post.id} </TableCell> */}
+                            <Tooltip title={post.title} placement='bottom' >
+                              <TableCell className='w-[25%]'>
+                                {post.title.length <= 50 ? post.title : post.title.slice(0, 50) + "..."}
+                              </TableCell>
+                            </Tooltip>
+
+                            <Tooltip title={post.description} placement='bottom' >
+                              <TableCell className='w-[25%]'>
+                                {post.description.length <= 50 ? post.description : post.description.slice(0, 50) + "..."}
+                              </TableCell>
+                            </Tooltip>
+
+                            <TableCell className='w-[20%]'> {post.categories.map((item) => {
+                              return (
+                                <Chip key={item.id} label={item.name} size='small' color="secondary" className='mr-1' />
+                              )
+                            })}
+                            </TableCell>
+
+                            <TableCell className='w-[15%]'>
+                              <Tooltip title={post.status === "ACTIVE" ? "Disable" : "Active"} placement='bottom'>
                                 <Switch size="small" color="success" className="cursor-pointer"
                                   checked={post.status === "ACTIVE" ? true : false}
                                 />
                               </Tooltip>
                             </TableCell>
 
-                            <TableCell align="center">
+                            <TableCell className='w-[15%]'>
                               <Tooltip title="Edit">
                                 <IconButton color="success" href={`/dashboard/posts/edit/${post.id}`}>
                                   <DriveFileRenameOutline fontSize="small" />

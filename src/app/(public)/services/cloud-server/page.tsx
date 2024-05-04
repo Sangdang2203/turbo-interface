@@ -1,9 +1,7 @@
-"use client";
-
 
 import Image from "next/image";
 import { styled } from '@mui/material/styles';
-import { Box, Button, Card, CardActions, CardContent, Container, Grid, Typography, FormControlLabel, Divider, TextField } from "@mui/material";
+import { Box, Button, Card, Container, Grid, Typography, FormControlLabel, Divider } from "@mui/material";
 import Switch, { SwitchProps } from '@mui/material/Switch';
 import promotion from "../../../images/promotion.jpg";
 import cloudServer_icon_01 from "../../../images/cloudServer/cloudServer_icon_01.png"
@@ -14,11 +12,14 @@ import cloudServer_01 from "../../../images/cloudServer/cloudServer_01.png"
 import cloudServer_02 from "../../../images/cloudServer/cloudServer_02.png"
 import cloudServer_03 from "../../../images/cloudServer/cloudServer_03.png"
 import cloudServer_07 from "../../../images/cloudServer/cloudServer_07.png"
+import { TaskAltRounded } from "@mui/icons-material";
+import { cloudServerPrices, bonusPrices, cloudServerQuestions } from "app/libs/data";
 
 export default function CloudServer() {
 
   const IOSSwitch = styled((props: SwitchProps) => (
     <Switch focusVisibleClassName=".Mui-focusVisible" disableRipple {...props} />
+    //@ts-ignore
   ))(({ theme }) => ({
     width: 42,
     height: 26,
@@ -166,7 +167,7 @@ export default function CloudServer() {
           </Grid>
         </Card>
 
-
+        {/* service price */}
         <Box >
           <Box>
             <Box my={5} sx={{ textAlign: "center" }}>
@@ -174,88 +175,43 @@ export default function CloudServer() {
               <Typography> * Bảng giá chưa bao gồm 10% VAT </Typography>
             </Box>
 
-            <Box className='grid sm:grid-cols-5 gap-x-6 gap-y-6 mb-10 text-center'>
+            <Box className='grid sm:grid-cols-5 gap-3 mb-10 text-center'>
 
-              <Card className='h-fit my-3 p-3 rounded-xl shadow-lg'>
-                <Box className="">
-                  <Divider className="border-t-4 bg-yellow-600" />
-                  <Typography className="py-5 uppercase text-[1.25rem] font-bold text-sky-900" > gói server 01</Typography>
-                </Box>
-                <Box>
-                  <div><TextField disabled size="small" className="py-1" defaultValue="2 vCPU" /></div>
-                  <div><TextField disabled size="small" className="py-1" defaultValue="1 GB RAM" /></div>
-                  <div><TextField disabled size="small" className="py-1" defaultValue="20 GB SSD" /></div>
-                  <div><TextField disabled size="small" className="py-1" defaultValue="1 IPv4" /></div>
-                  <div><TextField disabled size="small" className="py-1" defaultValue="200 Mbps Network" /></div>
-
-                  <Typography className="uppercase text-[1.5rem] font-bold py-5 text-yellow-600" > 260.000 vnd</Typography>
-                  <Divider className="border-t-4 bg-yellow-600" />
-                </Box>
-              </Card>
-
-              <Card className='h-fit my-3 p-3 rounded-xl shadow-lg'>
-                <Box className="">
-                  <Divider className="border-t-4 bg-yellow-600" />
-                  <Typography className="py-5 uppercase text-[1.25rem] font-bold text-sky-900" > gói server 02</Typography>
-                </Box>
-                <Box>
-                  <div><TextField disabled size="small" className="py-1" defaultValue="3 vCPU" /></div>
-                  <div><TextField disabled size="small" className="py-1" defaultValue="2 GB RAM" /></div>
-                  <div><TextField disabled size="small" className="py-1" defaultValue="40 GB SSD" /></div>
-                  <div><TextField disabled size="small" className="py-1" defaultValue="1 IPv4" /></div>
-                  <div><TextField disabled size="small" className="py-1" defaultValue="200 Mbps Network" /></div>
-                  <Typography className="uppercase text-[1.5rem] font-bold py-5 text-yellow-600" > 470.000 vnd</Typography>
-                  <Divider className="border-t-4 bg-yellow-600" />
-                </Box>
-              </Card>
-
-              <Card className='h-fit my-3 p-3 rounded-xl shadow-lg'>
-                <Box className="">
-                  <Divider className="border-t-4 bg-yellow-600" />
-                  <Typography className="py-5 uppercase text-[1.25rem] font-bold text-sky-900" > gói server 03</Typography>
-                </Box>
-                <Box>
-                  <div><TextField disabled size="small" className="py-1" defaultValue="4 vCPU" /></div>
-                  <div><TextField disabled size="small" className="py-1" defaultValue="3 GB RAM" /></div>
-                  <div><TextField disabled size="small" className="py-1" defaultValue="60 GB SSD" /></div>
-                  <div><TextField disabled size="small" className="py-1" defaultValue="1 IPv4" /></div>
-                  <div><TextField disabled size="small" className="py-1" defaultValue="200 Mbps Network" /></div>
-                  <Typography className="uppercase text-[1.5rem]  font-bold py-5 text-yellow-600" > 780.000 vnd</Typography>
-                  <Divider className="border-t-4 bg-yellow-600" />
-                </Box>
-              </Card>
-
-              <Card className='h-fit my-3 p-3 rounded-xl shadow-lg'>
-                <Box className="">
-                  <Divider className="border-t-4 bg-yellow-600" />
-                  <Typography className="py-5 uppercase text-[1.25rem] font-bold text-sky-900" > gói server 04</Typography>
-                </Box>
-                <Box>
-                  <div><TextField disabled size="small" className="py-1" defaultValue="5 vCPU" /></div>
-                  <div><TextField disabled size="small" className="py-1" defaultValue="4 GB RAM" /></div>
-                  <div><TextField disabled size="small" className="py-1" defaultValue="80 GB SSD" /></div>
-                  <div><TextField disabled size="small" className="py-1" defaultValue="1 IPv4" /></div>
-                  <div><TextField disabled size="small" className="py-1" defaultValue="200 Mbps Network" /></div>
-                  <Typography className="uppercase text-[1.5rem] font-bold py-5 text-yellow-600" > 1.090.000 vnd</Typography>
-                  <Divider className="border-t-4 bg-yellow-600" />
-                </Box>
-              </Card>
-
-              <Card className='h-fit my-3 p-3 rounded-xl shadow-lg'>
-                <Box className="">
-                  <Divider className="border-t-4 bg-yellow-600" />
-                  <Typography className="py-5 uppercase text-[1.25rem] font-bold text-sky-900" > gói server 05</Typography>
-                </Box>
-                <Box>
-                  <div><TextField disabled size="small" className="py-1" defaultValue="6 vCPU" /></div>
-                  <div><TextField disabled size="small" className="py-1" defaultValue="5 GB RAM" /></div>
-                  <div><TextField disabled size="small" className="py-1" defaultValue="100 GB SSD" /></div>
-                  <div><TextField disabled size="small" className="py-1" defaultValue="1 IPv4" /></div>
-                  <div><TextField disabled size="small" className="py-1" defaultValue="200 Mbps Network" /></div>
-                  <Typography className="uppercase text-[1.5rem] font-bold py-5 text-yellow-600" > 1.350.000 vnd</Typography>
-                  <Divider className="border-t-4 bg-yellow-600" />
-                </Box>
-              </Card>
+              {cloudServerPrices.map((item) => {
+                return (
+                  <Box key={item.id} className="card_price h-fit">
+                    <Box className="card__border"></Box>
+                    <Box className="card_title__container">
+                      <span className="card_title">{item.title}</span>
+                      <p className="card_paragraph">{item.price}</p>
+                    </Box>
+                    <hr className="line" />
+                    <ul className="card__list">
+                      <li className="card__list_item" >
+                        <TaskAltRounded color="secondary" fontSize="small" />
+                        <span className="list_text">{item.cpu}</span>
+                      </li>
+                      <li className="card__list_item">
+                        <TaskAltRounded color="secondary" fontSize="small" />
+                        <span className="list_text">{item.ram}</span>
+                      </li>
+                      <li className="card__list_item">
+                        <TaskAltRounded color="secondary" fontSize="small" />
+                        <span className="list_text">{item.ssd}</span>
+                      </li>
+                      <li className="card__list_item">
+                        <TaskAltRounded color="secondary" fontSize="small" />
+                        <span className="list_text">{item.ipv4}</span>
+                      </li>
+                      <li className="card__list_item">
+                        <TaskAltRounded color="secondary" fontSize="small" />
+                        <span className="list_text">{item.network}</span>
+                      </li>
+                    </ul>
+                    <Button href="tel:0769999967" className="button">Liên hệ ngay</Button>
+                  </Box>
+                )
+              })}
 
             </Box>
           </Box>
@@ -264,133 +220,38 @@ export default function CloudServer() {
             <Typography className="text-[2rem] font-semibold text-center py-5"> Bảng giá tài nguyên bổ sung </Typography>
 
             <Box className='grid sm:grid-cols-3 gap-x-6 gap-y-6 mb-10'>
-              <Box className='h-[180px] my-3 px-3 rounded-xl shadow-2xl'>
-                <Box className='py-5'>
-                  <Typography className='text-[1.5rem] font-bold'>vCPU</Typography>
-                  <Typography className=''>Thêm 1 vCPU</Typography>
-                </Box>
-                <Divider />
-                <FormControlLabel className="py-3"
-                  control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
-                  label="80.000 VND x 1 tháng"
-                />
-              </Box>
-
-              <Box className='h-[180px] my-3 px-3 rounded-xl shadow-2xl'>
-                <Box className='py-5'>
-                  <Typography className='text-[1.5rem] font-bold'>RAM</Typography>
-                  <Typography className=''>Thêm 1 GB RAM</Typography>
-                </Box>
-                <Divider />
-                <FormControlLabel className="py-3"
-                  control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
-                  label="80.000 VND x 1 tháng"
-                />
-              </Box>
-
-              <Box className='h-[180px] my-3 px-3 rounded-xl shadow-2xl'>
-                <Box className='py-5'>
-                  <Typography className='text-[1.5rem] font-bold'>SSD Storage</Typography>
-                  <Typography className=''>Thêm 10 GB SSD Storage</Typography>
-                </Box>
-                <Divider />
-                <FormControlLabel className="py-3"
-                  control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
-                  label="60.000 VND x 1 tháng"
-                />
-              </Box>
-
-              <Box className='h-[180px] my-3 px-3 rounded-xl shadow-2xl'>
-                <Box className='py-5'>
-                  <Typography className='text-[1.5rem] font-bold'>Attached Storage</Typography>
-                  <Typography className=''>Thêm 100 GB Attached Storage</Typography>
-                </Box>
-                <Divider />
-                <FormControlLabel className="py-3"
-                  control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
-                  label="150.000 VND x 1 tháng"
-                />
-              </Box>
-
-              <Box className='h-[180px] my-3 px-3 rounded-xl shadow-2xl'>
-                <Box className='py-5'>
-                  <Typography className='text-[1.5rem] font-bold'>Địa chỉ IPv4</Typography>
-                  <Typography className=''>Thêm 1 địa chỉ IPv4 public</Typography>
-                </Box>
-                <Divider />
-                <FormControlLabel className="py-3"
-                  control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
-                  label="100.000 VND x 1 tháng"
-                />
-              </Box>
-
-              <Box className='h-[180px] my-3 px-3 rounded-xl shadow-2xl'>
-                <Box className='py-5'>
-                  <Typography className='text-[1.5rem] font-bold'>Network (trong nước)</Typography>
-                  <Typography className=''>Thêm 100 Mbps Network</Typography>
-                </Box>
-                <Divider />
-                <FormControlLabel className="py-3"
-                  control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
-                  label="1.100.000 VND x 1 tháng"
-                />
-              </Box>
+              {bonusPrices.map((item) => {
+                return (
+                  <Box key={item.title} className='h-[180px] my-3 px-3 rounded-xl shadow-2xl'>
+                    <Box className='py-5'>
+                      <Typography className='text-[1.5rem] font-bold'>{item.title}</Typography>
+                      <Typography className=''>{item.bonus}</Typography>
+                    </Box>
+                    <Divider />
+                    <FormControlLabel className="py-3"
+                      control={<IOSSwitch sx={{ m: 1 }} defaultChecked />}
+                      label={item.price}
+                    />
+                  </Box>
+                )
+              })}
             </Box>
           </Box>
         </Box >
 
+        {/* Q & A */}
         <Box>
           <Box pb={5}>
             <Typography className="text-[2rem] text-sky-900 font-semibold text-center py-5"> Câu hỏi thường gặp </Typography>
-
             <Grid container className=" text-sky-900">
-              <Grid item xs={12} md={6} lg={6} xl={6} className="flex flex-col items-center justify-center">
-                <Typography className="w-3/4 text-lg font-semibold">Tôi muốn dùng thử Cloud Server trước khi sử dụng chính thức?</Typography>
-                <Typography className="w-3/4 text-justify py-3">
-                  EcoCloud luôn có chương trình dùng thử miễn phí để khách hàng có thể trải nghiệm tốt nhất.
-                  Hãy liên hệ với chúng tôi qua hotline +84 76 9999 967 hoặc email cskh@turbo.vn để được hỗ trợ khởi tạo tài khoản.
-                </Typography>
-              </Grid>
-
-              <Grid item xs={12} md={6} lg={6} xl={6} className="flex flex-col items-center justify-center">
-                <Typography className="w-3/4 text-lg font-semibold">Khác biệt giữa VPS với Cloud Server là gì?</Typography>
-                <Typography className="w-3/4 text-justify py-3">
-                  Nói đơn giản, cả hai đều là máy chủ ảo hóa. Với Cloud Server là máy chủ ảo nằm trong cụm hệ thống được cấu
-                  thành từ nhiều máy chủ và storage, network mở rộng không giới hạn; so với VPS là những máy chủ đơn lẻ hạn chế tài nguyên.
-                </Typography>
-              </Grid>
-
-              <Grid item xs={12} md={6} lg={6} xl={6} className="flex flex-col items-center justify-center">
-                <Typography className="w-3/4 text-lg font-semibold">Có hỗ trợ migrate sang dịch vụ của EcoCloud?</Typography>
-                <Typography className="w-3/4 text-justify py-3">
-                  Chúng tôi luôn hỗ trợ khách hàng chuyển đổi sang dịch vụ Cloud Server của EcoCloud. Chúng tôi có thể giúp quý khách hàng chuyển đổi từ Dedicated Server sang Cloud Server;
-                  chuyển từ ảo hóa VMWare hoặc Hyper-V dễ dàng và không gây downtime.
-                </Typography>
-              </Grid>
-
-              <Grid item xs={12} md={6} lg={6} xl={6} className="flex flex-col items-center justify-center">
-                <Typography className="w-3/4 text-lg font-semibold">Tôi có thể tự cài đặt HĐH riêng cho Cloud Server của tôi?</Typography>
-                <Typography className="w-3/4 text-justify py-3">
-                  Khách hàng hoàn toàn có thể cài đặt HĐH riêng nếu nó không nằm trong hàng trăm templates trên giao diện quản lý.
-                  Nếu có gặp khó khăn trong quá trình cài đặt, hãy liên hệ với đội kỹ thuật để được hỗ trợ nhanh chóng.
-                </Typography>
-              </Grid>
-
-              <Grid item xs={12} md={6} lg={6} xl={6} className="flex flex-col items-center justify-center">
-                <Typography className="w-3/4 text-lg font-semibold">Cloud Server của EcoCloud có hỗ trợ Windows Server?</Typography>
-                <Typography className="w-3/4 text-justify py-3">
-                  EcoCloud có hàng trăm templates hệ điều hành được chuẩn bị sẵn, và trong đó có nhiều mẫu Windows Server như Win Server 2012, 2016, 2019
-                  với nhiều phiên bản từ Standard đến DataCenter, giúp quý khách nhanh chóng triển khai.
-                </Typography>
-              </Grid>
-
-              <Grid item xs={12} md={6} lg={6} xl={6} className="flex flex-col items-center justify-center">
-                <Typography className="w-3/4 text-lg font-semibold">Nhà cung cấp cũ không hợp tác chuyển đổi máy chủ?</Typography>
-                <Typography className="w-3/4 text-justify py-3">
-                  Chúng tôi rất lấy làm tiếc vì sự không hợp tác từ nhà cung cấp cũ. Chúng tôi có những công nghệ khác biệt, giúp khách hàng chuyển đổi hệ thống mà không cần thao tác từ tầng vật lý.
-                  Hãy liên hệ với chúng tôi để được tư vấn hỗ trợ.
-                </Typography>
-              </Grid>
+              {cloudServerQuestions.map((item) => {
+                return (
+                  <Grid key={item.id} item xs={12} md={6} className="flex flex-col items-center justify-center">
+                    <Typography className="w-3/4 text-lg font-semibold"> {item.question} </Typography>
+                    <Typography className="w-3/4 text-justify py-3"> {item.answer} </Typography>
+                  </Grid>
+                )
+              })}
             </Grid>
           </Box>
         </Box>

@@ -39,14 +39,17 @@ export async function GET(
 	}
 }
 
-export async function PUT(
+export async function PATCH(
 	req: NextRequest,
 	{ params }: { params: { postId: string } }
 ) {
-	const updatePost = req.json();
+	const id = params.postId;
+	const updatePost = await req.json();
 	try {
+		req.headers.delete("Content-Length");
+
 		const response = await fetch(
-			process.env.NEXT_PUBLIC_API_URL + "/posts" + params.postId,
+			process.env.NEXT_PUBLIC_API_URL + `/posts/${id} `,
 			{
 				method: req.method,
 				headers: req.headers,
@@ -65,14 +68,14 @@ export async function PUT(
 			return NextResponse.json({
 				ok: true,
 				status: "Success",
-				message: "Thao tác cập nhật thành công.",
+				message: "Cập nhật thành công.",
 				data,
 			});
 		}
 		return NextResponse.json({
 			ok: false,
 			status: "Error",
-			message: "Thao tác cập nhật thất bại.",
+			message: "Cập nhật thất bại.",
 		});
 	} catch (error) {
 		console.log(error);
@@ -86,35 +89,29 @@ export async function PUT(
 
 export async function DELETE(
 	req: NextRequest,
-	{ params }: { params: { postId: string } },
-	token: string
+	{ params }: { params: { postId: string } }
 ) {
 	try {
 		const id = params.postId;
-		console.log(id);
+		console.log("id: ", id);
 		const res = await fetch(process.env.NEXT_PUBLIC_API_URL + `/posts/${id}`, {
 			method: req.method,
 			headers: req.headers,
 			cache: "no-cache",
 		});
 
-		let data = null;
-
 		if (res.ok) {
-			data = await res.json();
-
 			return NextResponse.json({
 				ok: true,
 				status: "success",
-				message: "Delete post successfully.",
-				data,
+				message: "Xóa bài viết thành công.",
 			});
 		}
 
 		return NextResponse.json({
 			ok: false,
 			status: "Error",
-			message: "Failed to delete post !",
+			message: "Xóa bài viết thất bại !",
 		});
 	} catch (error) {
 		console.log(error);

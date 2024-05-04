@@ -1,8 +1,44 @@
+import { z } from "zod";
+
 export interface ApiResponse {
 	ok: boolean;
 	status: string;
 	message: string;
 	data: any;
+}
+
+export const SCHEMA = z.object({
+	title: z
+		.string({
+			required_error: "Nhập tiêu đề bài viết.",
+		})
+		.min(10, "Tiêu đề phải nhập tối thiểu 10 ký tự")
+		.max(100, "Tiêu đề nhập tối đa 100 ký tự"),
+
+	categories: z.array(z.string()).min(1, "Vui lòng bấm chọn."),
+
+	userId: z.string().min(1, "Vui lòng bấm chọn."),
+
+	description: z
+		.string({
+			required_error: "Nhập mô tả bài viết.",
+		})
+		.min(10, "Mô tả bài viết phải nhập tối thiểu 10 ký tự."),
+
+	content: z
+		.string({
+			required_error: "Nhập nội dung bài viết.",
+		})
+		.min(10, "Nội dung bài viết phải nhập tối thiểu 10 ký tự."),
+});
+
+export type POSTSCHEMA = z.infer<typeof SCHEMA>;
+
+export interface CreatePostRequest
+	extends Omit<POSTSCHEMA, "categories" | "userId"> {
+	categories: { id: string }[];
+	user: { id: string };
+	status: "ACTIVE";
 }
 
 export interface CustomerMessage {
@@ -42,30 +78,6 @@ export interface Authority {
 	name: string;
 }
 
-export interface Role {
-	name: string;
-}
-
-// export interface Permission {
-// 	id: number;
-// 	name: string;
-// }
-
-// export interface CreatePermissionRequest {
-// 	permissionNames: string[];
-// }
-
-// export interface CreateRoleRequest {
-// 	id: string;
-// 	name: string;
-// 	roleHasPermissions: string[];
-// 	status: boolean;
-// }
-
-// export interface CreatePermission {
-// 	name: string;
-// }
-
 export interface Category {
 	id: string;
 	name: string;
@@ -88,11 +100,4 @@ export interface Post {
 	createDate: string;
 	updateDate: string;
 	status: string;
-}
-
-export interface UpdatedPostRequest {
-	id: string;
-	title: string;
-	description: string;
-	content: string;
 }

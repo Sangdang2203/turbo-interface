@@ -32,29 +32,19 @@ export default function DrawerMenu() {
 	const menu = [
 		createMenu("Trang Quản Trị", AppsOutlined, "/dashboard", "app.view"),
 
-		createMenu("Thông Tin Cá Nhân", AccountBoxOutlined, "/dashboard/user", "profile.view"),
+		//createMenu("Thông Tin Cá Nhân", AccountBoxOutlined, "/dashboard/user", "profile.view"),
 
-		createMenu("Nhân Viên", BadgeOutlined, "/dashboard/users", "emp.view",
-			// createMenu('Quản lý', ManageSearchRounded, '/dashboard/users/management', 'emp.view'),
-			// createMenu('Tạo mới', AddCircleOutlineOutlined, '/dashboard/users/create', 'post.create'),
-			// createMenu('Cập nhật', EditNoteOutlined, '/dashboard/users/edit', 'post.update')
-		),
+		createMenu("Nhân Viên", BadgeOutlined, "/dashboard/users", "emp.view"),
 
-		createMenu('Bài Viết', ArticleOutlined, '/dashboard/posts', 'post.view', [
-			createMenu('Quản lý', ManageSearchRounded, '/dashboard/posts/management', 'post.view'),
+		createMenu('Quản lý Bài Viết', ArticleOutlined, '/dashboard/posts', 'post.view', [
+			createMenu('Danh sách', ManageSearchRounded, '/dashboard/posts/management', 'post.view'),
 			createMenu('Tạo mới', AddCircleOutlineOutlined, '/dashboard/posts/create', 'post.create'),
-			createMenu('Cập nhật', EditNoteOutlined, '/dashboard/posts/edit', 'post.update')
 		]),
 
-		createMenu('Tuyển Dụng', NewspaperOutlined, '/dashboard/recruitment', 'recruitment.view', [
-			createMenu('Quản lý', ManageSearchRounded, '/dashboard/recruitment/management', 'recruitment.view'),
-			createMenu('Tạo mới', AddCircleOutlineOutlined, '/dashboard/recruitment/create', 'recruitment.create'),
-			createMenu('Cập nhật', EditNoteOutlined, '/dashboard/posts/edit/', 'recruitment.update')
-		]),
-
-		//createMenu("Vai Trò", ManageAccountsOutlined, "/dashboard/roles", "role.view"),
-
-		createMenu('Cài đặt', PasswordOutlined, '/dashboard/general-settings', 'setting.view'),
+		// createMenu('Tuyển Dụng', NewspaperOutlined, '/dashboard/recruitment', 'recruitment.view', [
+		// 	createMenu('Quản lý', ManageSearchRounded, '/dashboard/recruitment/management', 'recruitment.view'),
+		// 	createMenu('Tạo mới', AddCircleOutlineOutlined, '/dashboard/recruitment/create', 'recruitment.create')
+		// ]),
 	]
 
 	return (
@@ -63,11 +53,6 @@ export default function DrawerMenu() {
 			<Divider />
 			<List>
 				{menu.map((item, index) => (
-					// <PermissionCheck
-					// 	permission={item.permission}
-					// 	key={index}>
-
-					// </PermissionCheck>
 					<MenuGroup key={index} item={item}></MenuGroup>
 				))}
 			</List>
