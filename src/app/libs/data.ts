@@ -445,3 +445,292 @@ export const cloudflareQuestions = [
 			"Đây là yếu tố rất quan trọng bởi nó đảm bảo website của bạn luôn an toán trước những kẻ tấn công. Cloudflare có thể phát hiện và ngăn chặn sự tấn công của các hacker đến website của bạn",
 	},
 ];
+
+export const dedicatedServerBenefits = [
+	{
+		id: 1,
+		title: "99.99% Uptime",
+		desc: "Virtual Data Center luôn hoạt động với cam kết chất lượng dịch vụ 99.99% uptime, đáp ứng nhu cầu luôn kết nối.",
+	},
+	{
+		id: 2,
+		title: "Băng thông rộng, siêu tốc độ",
+		desc: "Kết nối mạng tốc độ cao đến 10+ Gbps đáp ứng nhu cầu truy cập lớn, phục vụ người dùng đông như media, streaming, gaming…",
+	},
+	{
+		id: 3,
+		title: "Phòng chống tấn công DDOS",
+		desc: "Máy chủ dùng riêng Dedicated Server luôn được bảo vệ bởi hệ thống phòng chống tấn công DDOS chuyên dụng với công nghệ AI.",
+	},
+	{
+		id: 4,
+		title: "Tùy chọn hệ điều hành",
+		desc: "EcoCloud hỗ trợ cài đặt hệ điều hành đa dạng, từ Windows Server, Linux và các hệ điều hành ảo hóa như VMWARE, KVM…",
+	},
+];
+
+export const decicatedServerPrices = [
+	{
+		id: 1,
+		title: "GÓI PRIVATE 01",
+		price: "7.600.000 VND",
+		intel: "1 Intel Xeon Silver 4410",
+		ram: "16 GB RAM",
+		ssd: "480 GB SSD",
+		ipv4: "1 ipv4",
+		network: "100 Mbps network",
+	},
+	{
+		id: 2,
+		title: "GÓI PRIVATE 02",
+		price: "8.300.000 VND",
+		intel: "1 Intel Xeon Silver 4410",
+		ram: "32 GB RAM",
+		ssd: "960 GB SSD",
+		ipv4: "1 ipv4",
+		network: "400 Mbps network",
+	},
+	{
+		id: 3,
+		title: "GÓI PRIVATE 03",
+		price: "9.300.000 VND",
+		intel: "2 Intel Xeon Silver 4410",
+		ram: "2 x 32 GB RAM",
+		ssd: "1.9 TB SSD",
+		ipv4: "1 ipv4",
+		network: "500 Mbps network",
+	},
+	{
+		id: 4,
+		title: "GÓI PRIVATE 04",
+		price: "9.999.000 VND",
+		intel: "2 Intel Xeon Silver 4410",
+		ram: "2 x 32 GB RAM",
+		ssd: "3.8 TB SSD",
+		ipv4: "1 IPv4",
+		network: "500 Mbps network",
+	},
+];
+
+export const dedicatedServerQuestions = [
+	{
+		id: 1,
+		question: "Dedicated Server là gì? Lợi ích Dedicated Server",
+		answer:
+			"Dedicated Server là dịch vụ cho thuê máy chủ vật lý đặt tại Data Center, hoạt động kết nối Internet 24/7. Với cấu hình mạnh mẽ, Dedicated Server đáp ứng cho việc sử dụng các ứng dụng yêu cầu hiệu năng cao, đảm bảo yêu cầu bảo mật của doanh nghiệp.",
+	},
+	{
+		id: 2,
+		question: "Khác biệt giữa Dedicated Server với Cloud Server là gì?",
+		answer:
+			"Cloud Server là máy chủ ảo hóa trên tổng thể nhiều máy chủ vật lý được tích hợp chặt chẽ với nhau; Khác với Dedicated Server hoạt động độc lập riêng biệt, không chia sẽ tài nguyên.",
+	},
+	{
+		id: 3,
+		question: "Có hỗ trợ migrate sang dịch vụ của EcoCloud?",
+		answer:
+			"Chúng tôi luôn hỗ trợ khách hàng chuyển đổi sang dịch vụ của EcoCloud. Chúng tôi có thể giúp quý khách hàng chuyển đổi từ máy chủ ảo hóa VMWare hoặc Hyper-V sang Dedicated Server và ngược lại mà không gây gián đoạn dịch vụ.",
+	},
+	{
+		id: 4,
+		question: "Tôi muốn dùng thử dịch vụ Dedicated Server của EcoCloud ?",
+		answer:
+			"EcoCloud hiện chưa có chương trình dùng thử cho dịch vụ máy chủ riêng, tuy nhiên, chúng tôi có thể thực hiện Demo trực quan. Hãy liên hệ với chúng tôi qua hotline +84 76 9999 967 để được hỗ trợ.",
+	},
+	{
+		id: 5,
+		question: "Dedicated Server của EcoCloud có hỗ trợ Windows Server ?",
+		answer:
+			"EcoCloud hỗ trợ cài đặt nhiều hệ điều hành cho Dedicated Server, trong đó có nhiều phiên bản Windows Server như Win Server 2012, 2016, 2019…",
+	},
+	{
+		id: 6,
+		question: "Nhà cung cấp cũ không hợp tác chuyển đổi máy chủ ?",
+		answer:
+			"Chúng tôi rất lấy làm tiếc vì sự không hợp tác từ nhà cung cấp cũ. Chúng tôi có những công nghệ khác biệt, giúp khách hàng chuyển đổi hệ thống mà không cần thao tác từ tầng vật lý. Hãy liên hệ với chúng tôi để được tư vấn hỗ trợ.",
+	},
+];
+
+export const vitualDataCenterPrices = [
+	{
+		id: 1,
+		title: "GÓI VDC 01",
+		price: "9.600.000 VND",
+		cpu: "20 vCPU",
+		ram: "48 GB RAM",
+		ssd: "600 GB SSD",
+		ipv4: "6 ipv4",
+		network: "400 Mbps network",
+		userGroup: "1 User Group",
+		privateLAN: "16 IPv4 Private LAN",
+	},
+	{
+		id: 2,
+		title: "GÓI VDC 02",
+		price: "14.400.000 VND",
+		cpu: "30 vCPU",
+		ram: "64 GB RAM",
+		ssd: "1000 GB SSD",
+		ipv4: "9 ipv4",
+		network: "400 Mbps network",
+		userGroup: "1 User Group",
+		privateLAN: "32 IPv4 Private LAN",
+	},
+	{
+		id: 3,
+		title: "GÓI VDC 03",
+		price: "21.100.000 VND",
+		cpu: "40 vCPU",
+		ram: "96 GB RAM",
+		ssd: "1500 GB SSD",
+		ipv4: "12 ipv4",
+		network: "500 Mbps network",
+		userGroup: "1 User Group",
+		privateLAN: "48 IPv4 Private LAN",
+	},
+	{
+		id: 4,
+		title: "GÓI VDC 04",
+		price: "27.800.000 VND",
+		cpu: "50 vCPU",
+		ram: "128 GB RAM",
+		ssd: "2000 GB SSD",
+		ipv4: "16 IPv4",
+		network: "500 Mbps network",
+		userGroup: "1 User Group",
+		privateLAN: "64 IPv4 Private LAN",
+	},
+];
+
+export const vitualDataCenterBenefits = [
+	{
+		id: 1,
+		title: "99.99% Uptime",
+		desc: "Virtual Data Center luôn hoạt động với cam kết chất lượng dịch vụ 99.99% uptime, đáp ứng nhu cầu luôn kết nối.",
+	},
+	{
+		id: 2,
+		title: "Băng thông rộng, siêu tốc độ",
+		desc: "Kết nối mạng tốc độ cao đến 10+ Gbps đáp ứng nhu cầu truy cập lớn, phục vụ người dùng đông như media, streaming, gaming…",
+	},
+	{
+		id: 3,
+		title: "Kiểm soát, phân quyền",
+		desc: "Kiểm soát, phân quyền truy cập dựa trên vai trò (RBAC) để ủy quyền quản lý tài nguyên.",
+	},
+	{
+		id: 4,
+		title: "Quản trị linh hoạt",
+		desc: "Quản trị độc lập, linh hoạt với tường lửa và mạng riêng biệt, cấu hình tùy chỉnh để phù hợp với kiến trúc hạ tầng hiện hữu.",
+	},
+];
+
+export const vitualDataCenterQuestions = [
+	{
+		id: 1,
+		question: "Tôi muốn dùng thử dịch vụ Virtual Data Center?",
+		answer:
+			"EcoCloud luôn có chương trình dùng thử miễn phí để khách hàng có thể trải nghiệm tốt nhất. Hãy liên hệ với chúng tôi qua hotline +84 76 9999 967 hoặc email cskh@turbo.vn để được hỗ trợ khởi tạo tài khoản.",
+	},
+	{
+		id: 2,
+		question: "Khác biệt giữa Virtual Data Center với Private Cloud là gì ?",
+		answer:
+			"Với Private Cloud là cụm hệ thống máy chủ và storage, network chỉ dành riêng cho doanh nghiệp và không chia sẻ; Với Virtual Data Center là những khối tài nguyên được chuẩn bị trước và độc lập, nằm trong hệ thống Cloud IaaS.",
+	},
+	{
+		id: 3,
+		question: "Có hỗ trợ migrate sang dịch vụ của EcoCloud ?",
+		answer:
+			"Chúng tôi luôn hỗ trợ khách hàng chuyển đổi sang dịch vụ Cloud Server của EcoCloud. Chúng tôi có thể giúp quý khách hàng chuyển đổi từ Dedicated Server sang Cloud Server; chuyển từ ảo hóa VMWare hoặc Hyper-V dễ dàng và không gây downtime.",
+	},
+	{
+		id: 4,
+		question: "Tôi có thể cài đặt mạng LAN cho Virtual Data Center ?",
+		answer:
+			"Khách hàng hoàn toàn có thể cài đặt LAN và Firewall riêng cho Virtual Data Center trên giao diện quản lý. Nếu có gặp khó khăn trong quá trình cài đặt, hãy liên hệ với đội kỹ thuật để được hỗ trợ nhanh chóng.",
+	},
+	{
+		id: 5,
+		question: "Cloud Server của EcoCloud có hỗ trợ Windows Server ?",
+		answer:
+			"EcoCloud có hàng trăm templates hệ điều hành được chuẩn bị sẵn, và trong đó có nhiều mẫu Windows Server như Win Server 2012, 2016, 2019 với nhiều phiên bản từ Standard đến DataCenter, giúp quý khách nhanh chóng triển khai.",
+	},
+	{
+		id: 6,
+		question: "Nhà cung cấp cũ không hợp tác chuyển đổi máy chủ ?",
+		answer:
+			"Chúng tôi rất lấy làm tiếc vì sự không hợp tác từ nhà cung cấp cũ. Chúng tôi có những công nghệ khác biệt, giúp khách hàng chuyển đổi hệ thống mà không cần thao tác từ tầng vật lý. Hãy liên hệ với chúng tôi để được tư vấn hỗ trợ.",
+	},
+];
+
+export const privateCloudPrices = [
+	{
+		id: 1,
+		title: "GÓI PRIVATE 01",
+		price: "7.600.000 VND",
+		intel: "1 Intel Xeon Silver 4410",
+		ram: "16 GB RAM",
+		ssd: "480 GB SSD",
+		ipv4: "1 ipv4",
+		network: "100 Mbps network",
+	},
+	{
+		id: 2,
+		title: "GÓI PRIVATE 02",
+		price: "8.300.000 VND",
+		intel: "1 Intel Xeon Silver 4410",
+		ram: "32 GB RAM",
+		ssd: "960 GB SSD",
+		ipv4: "1 ipv4",
+		network: "100 Mbps network",
+	},
+	{
+		id: 3,
+		title: "GÓI PRIVATE 03",
+		price: "9.300.000 VND",
+		intel: "2 Intel Xeon Silver 4410",
+		ram: "2 x 32 GB RAM",
+		ssd: "1.9 TB SSD",
+		ipv4: "1 ipv4",
+		network: "100 Mbps network",
+	},
+	{
+		id: 4,
+		title: "GÓI PRIVATE 04",
+		price: "9.999.000 VND",
+		intel: "2 Intel Xeon Silver 4410",
+		ram: "2 x 32 GB RAM",
+		ssd: "3.8 TB SSD",
+		ipv4: "1 IPv4",
+		network: "100 Mbps network",
+	},
+];
+
+export const privateCloudQuestions = [
+	{
+		id: 1,
+		question: "Hình thức triển khai tại trung tâm dữ liệu ? ",
+		answer:
+			"Bạn có thể triển khai private cloud tại bất kì trung tâm dữ liệu nào bạn mong muốn. Tại trung tâm dữ liệu ở trụ sở chính của doanh nghiệp, hoặc tại các trung tâm dữ liệu Internet tiêu chuẩn.",
+	},
+	{
+		id: 2,
+		question: "Phương thức hỗ trợ như thế nào ?",
+		answer:
+			"Đây là thế mạnh của Turbo Solutions, chúng tôi sẽ song hành như một thành viên phòng CNTT của bạn trong suốt quá trình hoạt động. Chúng tôi có thể lập báo cáo, hỗ trợ tư vấn triển khai, chuyển đổi máy chủ và ứng dụng.",
+	},
+	{
+		id: 3,
+		question: "Đám mây riêng khác với đám mây công cộng như thế nào ?",
+		answer:
+			"Nói một cách đơn giản, public cloud bao gồm các tài nguyên được chia sẻ mà bạn thuê từ một nhà cung cấp dịch vụ và đám mây riêng gồm các tài nguyên của riêng bạn (dedicated).",
+	},
+	{
+		id: 4,
+		question:
+			"Với Private Cloud, điều gì xảy ra khi 1 disk hoặc server bị lỗi ?",
+		answer:
+			"Trong trường hợp bất kỳ tài nguyên riêng lẻ nào bị lỗi, máy ảo (VM) của bạn sẽ tự động được chuyển đến một máy chủ đầy đủ chức năng trong đám mây.",
+	},
+];

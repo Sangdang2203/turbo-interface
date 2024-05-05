@@ -2,9 +2,9 @@
 
 import icon_01 from "../../../images/privateCloud/icon_01.png"
 import icon_02 from "../../../images/privateCloud/icon_02.png"
-import opennebula_admin_view from "../../../images/privateCloud/opennebula_admin_view.png"
-import { OndemandVideoRounded, ReadMoreRounded } from "@mui/icons-material";
-import { Box, Button, Card, CardActions, CardContent, Container, Divider, Grid, Paper, TextField, Typography } from "@mui/material";
+import { ReadMoreRounded, TaskAltRounded } from "@mui/icons-material";
+import { Box, Button, Card, CardActions, CardContent, Container, Divider, Grid, TextField, Typography } from "@mui/material";
+import { vitualDataCenterBenefits, privateCloudQuestions, privateCloudPrices } from "app/libs/data";
 import Image from "next/image";
 import * as React from "react";
 
@@ -94,74 +94,41 @@ const PrivateCloud = () => {
 
         <Box className='grid sm:grid-cols-4 gap-x-6 gap-y-6 mb-10 text-center'>
 
-          <Card className='h-fit my-3 p-3 rounded-xl shadow-lg'>
-            <Box className="">
-              <Divider className="border-t-4 bg-yellow-600" />
-              <Typography className="py-5 uppercase text-[1.25rem] font-bold text-sky-900" > gói private 01</Typography>
-            </Box>
-            <Box>
-              <div><TextField disabled size="small" className="py-1" defaultValue="Intel Xeon Silver 4110" /></div>
-              <div><TextField disabled size="small" className="py-1" defaultValue="16 GB RAM" /></div>
-              <div><TextField disabled size="small" className="py-1" defaultValue="480 GB SSD" /></div>
-              <div><TextField disabled size="small" className="py-1" defaultValue="1 IPv4" /></div>
-              <div><TextField disabled size="small" className="py-1" defaultValue="100 Mbps Network" /></div>
-
-              <Typography className="uppercase text-[1.5rem] font-bold py-5 text-yellow-600" > 7.600.000 vnd</Typography>
-              <Divider className="border-t-4 bg-yellow-600" />
-            </Box>
-          </Card>
-
-          <Card className='h-fit my-3 p-3 rounded-xl shadow-lg'>
-            <Box className="">
-              <Divider className="border-t-4 bg-yellow-600" />
-              <Typography className="py-5 uppercase text-[1.25rem] font-bold text-sky-900" > gói private 02</Typography>
-            </Box>
-            <Box>
-              <div><TextField disabled size="small" className="py-1" defaultValue="Intel Xeon Silver 4110" /></div>
-              <div><TextField disabled size="small" className="py-1" defaultValue="32 GB RAM" /></div>
-              <div><TextField disabled size="small" className="py-1" defaultValue="960 GB SSD" /></div>
-              <div><TextField disabled size="small" className="py-1" defaultValue="1 IPv4" /></div>
-              <div><TextField disabled size="small" className="py-1" defaultValue="100 Mbps Network" /></div>
-
-              <Typography className="uppercase text-[1.5rem] font-bold py-5 text-yellow-600" > 8.300.000 vnd</Typography>
-              <Divider className="border-t-4 bg-yellow-600" />
-            </Box>
-          </Card>
-
-          <Card className='h-fit my-3 p-3 rounded-xl shadow-lg'>
-            <Box className="">
-              <Divider className="border-t-4 bg-yellow-600" />
-              <Typography className="py-5 uppercase text-[1.25rem] font-bold text-sky-900" > gói private 03</Typography>
-            </Box>
-            <Box>
-              <div><TextField disabled size="small" className="py-1" defaultValue="2x Intel Xeon Silver 4110" /></div>
-              <div><TextField disabled size="small" className="py-1" defaultValue="2 x 32 GB RAM" /></div>
-              <div><TextField disabled size="small" className="py-1" defaultValue="1.9 TB SSD" /></div>
-              <div><TextField disabled size="small" className="py-1" defaultValue="1 IPv4" /></div>
-              <div><TextField disabled size="small" className="py-1" defaultValue="100 Mbps Network" /></div>
-
-              <Typography className="uppercase text-[1.5rem]  font-bold py-5 text-yellow-600" > 9.300.000 vnd</Typography>
-              <Divider className="border-t-4 bg-yellow-600" />
-            </Box>
-          </Card>
-
-          <Card className='h-fit my-3 p-3 rounded-xl shadow-lg'>
-            <Box className="">
-              <Divider className="border-t-4 bg-yellow-600" />
-              <Typography className="py-5 uppercase text-[1.25rem] font-bold text-sky-900" > gói private 04</Typography>
-            </Box>
-            <Box>
-              <div><TextField disabled size="small" className="py-1" defaultValue="2x Intel Xeon Silver 4110" /></div>
-              <div><TextField disabled size="small" className="py-1" defaultValue="2 x 32 GB RAM" /></div>
-              <div><TextField disabled size="small" className="py-1" defaultValue="3.8 TB SSD" /></div>
-              <div><TextField disabled size="small" className="py-1" defaultValue="1 IPv4" /></div>
-              <div><TextField disabled size="small" className="py-1" defaultValue="100 Mbps Network" /></div>
-
-              <Typography className="uppercase text-[1.5rem] font-bold py-5 text-yellow-600" > 9.999.000 vnd</Typography>
-              <Divider className="border-t-4 bg-yellow-600" />
-            </Box>
-          </Card>
-
+          {privateCloudPrices.map((item) => {
+            return (
+              <Box key={item.id} className="card_price h-fit">
+                <Box className="card__border"></Box>
+                <Box className="card_title__container">
+                  <span className="card_title">{item.title}</span>
+                  <p className="card_paragraph">{item.price}</p>
+                </Box>
+                <hr className="line" />
+                <ul className="card__list">
+                  <li className="card__list_item" >
+                    <TaskAltRounded color="secondary" fontSize="small" />
+                    <span className="list_text">{item.intel}</span>
+                  </li>
+                  <li className="card__list_item">
+                    <TaskAltRounded color="secondary" fontSize="small" />
+                    <span className="list_text">{item.ram}</span>
+                  </li>
+                  <li className="card__list_item">
+                    <TaskAltRounded color="secondary" fontSize="small" />
+                    <span className="list_text">{item.ssd}</span>
+                  </li>
+                  <li className="card__list_item">
+                    <TaskAltRounded color="secondary" fontSize="small" />
+                    <span className="list_text">{item.ipv4}</span>
+                  </li>
+                  <li className="card__list_item">
+                    <TaskAltRounded color="secondary" fontSize="small" />
+                    <span className="list_text">{item.network}</span>
+                  </li>
+                </ul>
+                <Button href="tel:0769999967" className="button">Liên hệ ngay</Button>
+              </Box>
+            )
+          })}
         </Box>
       </Box>
 
@@ -171,7 +138,7 @@ const PrivateCloud = () => {
 
         <Card className="my-5 shadow-2xl rounded-xl">
           <Grid container>
-            <Grid item xs={12} md={6} lg={7} xl={7} className="flex flex-col items-center justify-center">
+            <Grid item xs={12} md={7} className="flex flex-col items-center justify-center">
               <Box textAlign="center" my={3}>
                 <Typography className="text-[4rem] text-yellow-500">-30%</Typography>
                 <Typography className="text-xl text-gray-400">giảm chi phí đầu tư và vận hành</Typography>
@@ -191,67 +158,36 @@ const PrivateCloud = () => {
               <Button className="btn-grad rounded-full w-1/3 my-3 hover:opacity-80" href="/contact" target="_blank">Liên hệ ngay</Button>
             </Grid>
 
-            <Grid item xs={12} md={6} lg={5} xl={5} className="bg-sky-600 py-5 px-auto shadow-2xl rounded-xl">
-              <Grid pl={8}>
-                <Box>
-                  <Typography className="text-[1.3rem] font-semibold text-white">99.99% Uptime SLA</Typography>
-                  <Typography className="w-3/4 text-white">
-                    Private Cloud luôn hoạt động với cam kết chất lượng dịch vụ 99.99% uptime, đáp ứng nhu cầu luôn kết nối.
-                  </Typography>
-                </Box>
-                <hr className="my-5 max-w-[450px]" />
-                <Box>
-                  <Typography className="text-[1.3rem] font-semibold text-white">Băng thông rộng, siêu tốc độ</Typography>
-                  <Typography className="w-3/4 text-white">
-                    Kết nối mạng tốc độ cao đến 10+ Gbps đáp ứng nhu cầu truy cập lớn, phục vụ người dùng đông như media, streaming, gaming…
-                  </Typography>
-                </Box>
-                <hr className="my-5 max-w-[450px]" />
-                <Box>
-                  <Typography className="text-[1.3rem] font-semibold text-white">Kiểm soát, phân quyền</Typography>
-                  <Typography className="w-3/4 text-white">
-                    Kiểm soát, phân quyền truy cập dựa trên vai trò (RBAC) để ủy quyền quản lý tài nguyên.
-                  </Typography>
-                </Box>
-                <hr className="my-5 max-w-[450px]" />
-                <Box>
-                  <Typography className="text-[1.3rem] font-semibold text-white">Quản trị linh hoạt</Typography>
-                  <Typography className="w-3/4 text-white">
-                    Quản trị độc lập, linh hoạt với tường lửa và mạng riêng biệt, cấu hình tùy chỉnh để phù hợp với kiến trúc hạ tầng hiện hữu.
-                  </Typography>
-                </Box>
+            <Grid item xs={12} md={5} className="bg-sky-600 py-5 px-auto shadow-2xl rounded-xl">
+              <Grid>
+                {vitualDataCenterBenefits.map((item) => {
+                  return (
+                    <Box key={item.id} my={2} px={2}>
+                      <Typography className="text-[1.3rem] font-semibold text-white"> {item.title} </Typography>
+                      <Typography className="text-white"> {item.desc} </Typography>
+                    </Box>
+                  )
+                })}
               </Grid>
             </Grid>
-
           </Grid>
         </Card>
       </Box>
 
+      {/* FAQ */}
       <Box mt={5}>
         <Typography className="text-[2rem] text-sky-900 text-center font-semibold">Các thông tin thường gặp</Typography>
 
-        <Grid container pt={5} >
-          <Grid item xs={12} md={6} className="flex flex-col items-center justify-center text-sky-900">
-            <Typography className="w-3/4 text-lg font-semibold pb-3">Hình thức triển khai tại trung tâm dữ liệu?</Typography>
-            <Typography className="w-3/4">Bạn có thể triển khai private cloud tại bất kì trung tâm dữ liệu nào bạn mong muốn. Tại trung tâm dữ liệu ở trụ sở chính của doanh nghiệp, hoặc tại các trung tâm dữ liệu Internet tiêu chuẩn.</Typography>
-          </Grid>
-          <Grid item xs={12} md={6} className="flex flex-col items-center justify-center text-sky-900">
-            <Typography className="w-3/4 text-lg font-semibold pb-3">Đám mây riêng khác với đám mây công cộng như thế nào?</Typography>
-            <Typography className="w-3/4">Nói một cách đơn giản, public cloud bao gồm các tài nguyên được chia sẻ mà bạn thuê từ một nhà cung cấp dịch vụ và đám mây riêng gồm các tài nguyên của riêng bạn (dedicated).</Typography>
-          </Grid>
+        <Grid container >
+          {privateCloudQuestions.map((item) => {
+            return (
+              <Grid key={item.id} item xs={12} md={6} py={2} className="flex flex-col items-center justify-center text-sky-900">
+                <Typography className="w-3/4 text-lg font-semibold pb-3">{item.question}</Typography>
+                <Typography className="w-3/4">{item.answer}</Typography>
+              </Grid>
+            )
+          })}
         </Grid>
-
-        <Grid container py={5} >
-          <Grid item xs={12} md={6} className="flex flex-col items-center justify-center text-sky-900">
-            <Typography className="w-3/4 text-lg font-semibold pb-3">Với Private Cloud, điều gì xảy ra khi 1 disk hoặc server bị lỗi?</Typography>
-            <Typography className="w-3/4">Đám mây là tập hợp các máy chủ được kết hợp với nhau để tạo thành một nhóm tài nguyên chung. Trong trường hợp bất kỳ tài nguyên riêng lẻ nào bị lỗi, máy ảo (VM) của bạn sẽ tự động được chuyển đến một máy chủ đầy đủ chức năng trong đám mây.</Typography>
-          </Grid>
-          <Grid item xs={12} md={6} className="flex flex-col items-center justify-center text-sky-900">
-            <Typography className="w-3/4 text-lg font-semibold pb-3">Phương thức hỗ trợ như thế nào?</Typography>
-            <Typography className="w-3/4">Đây là thế mạnh của Turbo Solutions, chúng tôi sẽ song hành như một thành viên phòng CNTT của bạn trong suốt quá trình hoạt động. Chúng tôi có thể lập báo cáo, hỗ trợ tư vấn triển khai, chuyển đổi máy chủ và ứng dụng.</Typography>
-          </Grid>
-        </Grid>
-
       </Box>
     </Container >
   )

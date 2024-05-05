@@ -1,5 +1,3 @@
-
-
 import React from "react";
 import Image from "next/image";
 import Switch from '@mui/material/Switch';
@@ -9,17 +7,14 @@ import logoTurbo from "../../images/logoTurbo.png";
 import cloudServer from "../../images/cloudServer.png";
 import cloudCamera from "../../images/cloudCamera.png";
 import Backup from "../../images/Backup.png";
-import ScalablePrivateCloud from "../../images/ScalablePrivateCloud.png";
-import CloudCameraDiagram from "../../images/CloudCameraDiagram.jpg";
-import CloudBackupRecovery from "../../images/CloudBackupRecovery.png";
-import UnifiedCloudStorage from "../../images/UnifiedCloudStorage.png";
 import promotion from "../../images/promotion.jpg";
 import feedback_01 from "../../images/feedback_01.png";
 import feedback_02 from "../../images/feedback_02.png";
 import feedback_03 from "../../images/feedback_03.png";
+import { homeServices } from "app/libs/data";
 
 
-const HomePage = () => {
+export default function HomePage() {
 
   return (
     <Box>
@@ -29,112 +24,30 @@ const HomePage = () => {
         <Typography className="text-center text-[1.75rem] font-light w-3/4 mx-auto my-5">
           Công ty Turbo Solutions chung tay cùng quý doanh nghiệp thực hiện chuyển đổi số bằng cách tích hợp các công nghệ thông minh 4.0, cùng đạt mục tiêu thắng lợi.
         </Typography>
+
+        <Container className="container grid lg:grid-cols-4 gap-6 mt-10">
+          {homeServices.map((item) => {
+            return (
+              <div key={item.id} className="cardBox">
+                <div className="card">
+                  <div className="h4">{item.title}
+
+                    <p>...</p>
+                  </div>
+
+                  <div className="content">
+                    <div className="h3">{item.sub}</div>
+                    <p>{item.desc}</p>
+                  </div>
+                </div>
+              </div>
+            )
+          })}
+        </Container>
       </Box>
 
 
-      <Box className="container grid lg:grid-cols-4 gap-x-6 gap-y-6 mt-10">
-        <div className="e-card playing">
-          <div className="image"></div>
 
-          <div className="wave"></div>
-          <div className="wave"></div>
-          <div className="wave"></div>
-
-
-          <div className="infotop">
-            <p>UI / EX Designer</p>
-          </div>
-        </div>
-
-        <div className="e-card playing">
-          <div className="image"></div>
-
-          <div className="wave"></div>
-          <div className="wave"></div>
-          <div className="wave"></div>
-
-
-          <div className="infotop">
-            <p>UI / EX Designer</p>
-          </div>
-        </div>
-
-        <div className="e-card playing">
-          <div className="image"></div>
-
-          <div className="wave"></div>
-          <div className="wave"></div>
-          <div className="wave"></div>
-
-
-          <div className="infotop">
-            <p>UI / EX Designer</p>
-          </div>
-        </div>
-        <div className="e-card playing">
-          <div className="image"></div>
-
-          <div className="wave"></div>
-          <div className="wave"></div>
-          <div className="wave"></div>
-
-
-          <div className="infotop">
-            <p>UI / EX Designer</p>
-          </div>
-        </div>
-        <Card className="relative px-1 rounded-md cursor-pointer shadow-2xl">
-          <Image src={ScalablePrivateCloud} className="w-full h-auto rounded-md mt-3" alt="ScalablePrivateCloud" />
-          <CardContent>
-            <Box>
-              <Typography className="text-lg font-leading-relaxed text-blue-500">Cloud Server</Typography>
-              <FormHelperText>Hạ tầng điện toán đám mây</FormHelperText>
-              <Typography className="font-light mt-3">
-                Với công nghệ siêu hội tụ (HCI) và phần mềm định hướng (SDX) mang lại hạ tầng đám mây siêu hiệu năng, siêu ổn định, là nền tảng vững chắc cho phát triển các ứng dụng.
-              </Typography>
-            </Box>
-          </CardContent>
-        </Card>
-
-        <Card className="relative px-1 rounded-md cursor-pointer shadow-2xl ">
-          <Image src={CloudCameraDiagram} className="w-full h-auto rounded-md mt-3" alt="CloudCameraDiagram" />
-          <CardContent>
-            <Box>
-              <Typography className="text-lg font-normal text-orange-400">Smart Cloud Camera</Typography>
-              <FormHelperText>Giải pháp Cloud Camera tích hợp A.I</FormHelperText>
-              <Typography className="font-extralight mt-3">
-                Nền tảng Cloud quản lý và lưu trữ Video Camera, tích hợp trí thông tin nhân tạo (AI) dùng nhận dạng vật thể, nhận dạng khuôn mặt, nhận dạng biển số, kiểm soát an ninh, giao thông…
-              </Typography>
-            </Box>
-          </CardContent>
-        </Card>
-
-        <Card className="relative px-1 rounded-md cursor-pointer shadow-2xl ">
-          <Image src={CloudBackupRecovery} className="w-full h-auto rounded-md mt-3" alt="CloudBackupRecovery" />
-          <CardContent>
-            <Box>
-              <Typography className="text-lg font-normal text-green-600">Cloud Backup & Recovery</Typography>
-              <FormHelperText>Sao lưu an toàn dữ liệu trên đám mây</FormHelperText>
-              <Typography className="font-extralight mt-3">
-                Nền tảng sao lưu, quản lý, khôi phục dữ liệu đám mây hàng đầu cho máy chủ vật lý và máy chủ ảo (Hyper-V | VMWare); giúp nhà quản lý an tâm, thúc đẩy phát triển doanh nghiệp.
-              </Typography>
-            </Box>
-          </CardContent>
-        </Card>
-
-        <Card className="relative px-1 rounded-md cursor-pointer shadow-2xl ">
-          <Image src={UnifiedCloudStorage} className="w-full h-auto rounded-md mt-3" alt="UnifiedCloudStorage" />
-          <CardContent>
-            <Box>
-              <Typography className="text-lg font-normal text-blue-900">Unified Cloud Storage</Typography>
-              <FormHelperText>Lưu trữ dữ liệu đám mây</FormHelperText>
-              <Typography className="font-extralight mt-3">
-                Nền tảng lưu trữ đám mây hợp nhất (file-based, block và object&nbsp;storage), mở rộng không giới hạn. Kết nối đơn giản và nhanh chóng, dễ dàng chia sẻ với băng thông cao.
-              </Typography>
-            </Box>
-          </CardContent>
-        </Card>
-      </Box>
 
       <Box my={10} sx={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", textAlign: "center" }}>
         <Typography className="py-3 px-5 bg-sky-50 text-sky-700 uppercase w-fit rounded-full">dịch vụ điện toán đám mây</Typography>
@@ -235,122 +148,132 @@ const HomePage = () => {
       </Container>
 
 
-      <Box className="text-center my-10">
-        <Typography className="text-[2.5rem]">Why clients choose us</Typography>
-        <Typography>Because it’s good to work with good people!</Typography>
-      </Box>
-      <Container className='grid sm:grid-cols-3 gap-x-6 gap-y-6 mb-10'>
-        <Box>
-          <Box className='h-[200px] my-3 px-3 rounded-xl shadow-2xl hover:duration-500'>
-            <Box className='flex justify-start items-center'>
-              <Link href="/"><Image src={logoTurbo} className="w-28 h-10 mr-2" title="Trang chủ" alt="logo_turbo_solutions" /></Link>
-              <Typography className='py-8'>Turbo AI Vision</Typography>
-            </Box>
-            <Divider />
-            <FormControlLabel className="py-3"
-              control={<Switch size="medium" color="success" defaultChecked />}
-              label="Chất lượng dịch vụ luôn được đảm bảo"
-            />
-          </Box>
-          <Typography className='text-xl font-semibold py-5'>Đáng tin cậy & Chuyên nghiệp</Typography>
-          <Typography className='leading-normal '>
-            Turbo là một trong những công ty AI Vision hàng đầu tại Việt Nam.
-            Bằng cách cộng tác với chúng tôi, bạn có thể tiết kiệm thời gian để tập trung vào việc lập kế hoạch và
-            điều hành hoạt động kinh doanh cốt lõi của mình. Chúng tôi mang phong cách chuyên nghiệp vào dự án.
-          </Typography>
-        </Box>
-
-        <Box>
-          <Box className='h-[200px] my-3 px-3 rounded-xl shadow-2xl hover:duration-500'>
-            <Box className='flex items-center py-4'>
-              <Typography className='py-4'>Key success</Typography>
-              <Chip className="mx-1 bg-sky-200 text-sky-500 font-semibold" label="Flexible solutions" />
-              <Chip className="mx-1 bg-sky-200 text-sky-500 font-semibold" label="Save time" />
-            </Box>
-            <Divider />
-            <Typography className="py-3">Theo dõi hàng ngày</Typography>
-          </Box>
-          <Typography className='text-xl font-semibold py-5'>Tính linh hoạt và minh bạch</Typography>
-          <Typography className='leading-relaxed '>
-            Điểm mạnh của chúng tôi nằm ở kiến ​​thức chuyên môn vững chắc về nhiều loại công nghệ và tính linh hoạt của nhóm
-            để phù hợp với nhu cầu của khách hàng. Mỗi bước công việc của chúng tôi luôn được minh bạch với khách hàng từ đầu
-            đến cuối.
-          </Typography>
-        </Box>
-
-        <Box>
-          <Box className='h-[200px] my-3 px-3 rounded-xl shadow-2xl hover:duration-500'>
-            <Box className='flex items-center'>
-              <PublicRounded fontSize="large" />
-              <Typography className='py-8 px-2'>Quy tắc kinh doanh quốc tế</Typography>
-            </Box>
-            <Divider />
-            <Typography className="py-3">Đảm bảo chi phí và hiệu quả</Typography>
-          </Box>
-          <Typography className='text-xl font-semibold py-5'>Tuân thủ & Cam kết</Typography>
-          <Typography className='leading-relaxed '>
-            Chúng tôi tuân theo tất cả các thủ tục pháp lý khi giao dịch với khách hàng của mình để đảm bảo rằng không ai
-            phải đối mặt với bất kỳ vấn đề pháp lý nào. Khách hàng chọn chúng tôi biết rằng sản phẩm cuối cùng của họ sẽ
-            là những sản phẩm có hiệu suất cao, đáng kinh ngạc.
-          </Typography>
-        </Box>
-      </Container>
-
+      {/* Why clients choose us, Khách hàng nói gì về chúng tôi */}
       <Box className='__theme min-h-[500px]'>
 
-        <Box textAlign="center">
-          <Typography className="text-[2rem] pt-10">Đăng ký trải nghiệm</Typography>
-          <Typography>để nhận thêm thông tin về các dịch vụ của EcoCloud</Typography>
-          <Button href="tel:0769999967" variant="contained" color="primary" className="my-3">Liên hệ ngay</Button>
+        <Box className="text-center py-10">
+          <Typography className="text-[2.5rem]">Why clients choose us</Typography>
+          <Typography>Because it’s good to work with good people!</Typography>
         </Box>
+        <Container className='grid sm:grid-cols-3 gap-x-6 gap-y-6 mb-10'>
+          <Box>
+            <Box className='h-[200px] my-3 px-3 rounded-xl shadow-2xl hover:duration-500'>
+              <Box className='flex justify-start items-center'>
+                <Link href="/"><Image src={logoTurbo} className="w-28 h-10 mr-2" title="Trang chủ" alt="logo_turbo_solutions" /></Link>
+                <Typography className='py-8'>Turbo AI Vision</Typography>
+              </Box>
+              <Divider />
+              <FormControlLabel className="py-3"
+                control={<Switch size="medium" color="success" checked />}
+                label="Chất lượng luôn được đảm bảo"
+              />
+            </Box>
+            <Typography className='text-xl font-semibold py-5'>Đáng tin cậy & Chuyên nghiệp</Typography>
+            <Typography className='leading-relaxed text-justify'>
+              Turbo là một trong những công ty AI Vision hàng đầu tại Việt Nam.
+              Bằng cách cộng tác với chúng tôi, bạn có thể tiết kiệm thời gian để tập trung vào việc lập kế hoạch và
+              điều hành hoạt động kinh doanh cốt lõi của mình. Chúng tôi mang phong cách chuyên nghiệp vào dự án.
+            </Typography>
+          </Box>
+
+          <Box>
+            <Box className='h-[200px] my-3 px-3 rounded-xl shadow-2xl hover:duration-500'>
+              <Box className='flex items-center py-4'>
+                <Typography className='py-4'>Key success</Typography>
+                <Chip className="mx-1 bg-sky-200 text-sky-500 font-semibold" label="Flexible solutions" />
+                <Chip className="mx-1 bg-sky-200 text-sky-500 font-semibold" label="Save time" />
+              </Box>
+              <Divider />
+              <Typography className="py-3">Theo dõi hàng ngày</Typography>
+            </Box>
+            <Typography className='text-xl font-semibold py-5'>Tính linh hoạt và minh bạch</Typography>
+            <Typography className='leading-relaxed text-justify'>
+              Điểm mạnh của chúng tôi nằm ở kiến ​​thức chuyên môn vững chắc về nhiều loại công nghệ và tính linh hoạt của nhóm
+              để phù hợp với nhu cầu của khách hàng. Mỗi bước công việc của chúng tôi luôn được minh bạch với khách hàng từ đầu
+              đến cuối.
+            </Typography>
+          </Box>
+
+          <Box>
+            <Box className='h-[200px] my-3 px-3 rounded-xl shadow-2xl hover:duration-500'>
+              <Box className='flex items-center'>
+                <PublicRounded fontSize="large" />
+                <Typography className='py-8 px-2'>Quy tắc kinh doanh quốc tế</Typography>
+              </Box>
+              <Divider />
+              <Typography className="py-3">Đảm bảo chi phí và hiệu quả</Typography>
+            </Box>
+            <Typography className='text-xl font-semibold py-5'>Tuân thủ & Cam kết</Typography>
+            <Typography className='leading-relaxed text-justify'>
+              Chúng tôi tuân theo tất cả các thủ tục pháp lý khi giao dịch với khách hàng của mình để đảm bảo rằng không ai
+              phải đối mặt với bất kỳ vấn đề pháp lý nào. Khách hàng chọn chúng tôi biết rằng sản phẩm cuối cùng của họ sẽ
+              là những sản phẩm có hiệu suất cao, đáng kinh ngạc.
+            </Typography>
+          </Box>
+
+        </Container>
 
         <Typography className="text-[2.5rem] font-semibold text-center py-10"> Khách hàng nói gì về chúng tôi </Typography>
+
         <Container className='grid sm:grid-cols-3 gap-x-6 gap-y-6 pb-10'>
-          <Box className='h-fit my-3 p-3  rounded-xl shadow-2xl hover:duration-500'>
-            <Typography className="">
-              Thay vì phải chờ đợi cấu hình từng máy chủ thì nay chỉ cần 3 phút là có Cloud Server để sử dụng
-              cho các dự án của công ty.
-            </Typography>
-            <Box className="flex items-center mt-10">
+          <div className="notification">
+            <div className="notiglow"></div>
+            <div className="notiborderglow"></div>
+            <div className="notititle flex items-center">
               <Image src={feedback_01} alt="customer feedback" className="w-16 h-16 rounded-full mr-2" />
-              <Box>
+              <div>
                 <Typography>Mr. Tài</Typography>
                 <Typography>Technical Manager - GOSU</Typography>
-              </Box>
-            </Box>
-          </Box>
+              </div>
+            </div>
 
-          <Box className='h-fit my-3 p-3  rounded-xl shadow-2xl hover:duration-500'>
-            <Typography className="">
-              Đội ngũ EcoCloud rất nhiệt tình đã không ngại đường xa hỗ trợ demo những giải pháp và hỗ trợ
-              chúng tôi Backup dữ liệu.
-            </Typography>
-            <Box className="flex items-center mt-10">
-              <Image src={feedback_02} alt="customer feedback" className="w-16 h-16 rounded-full mr-2" />
-              <Box>
-                <Typography>Mr. Phú</Typography>
-                <Typography>IT Consultant - Viet An Group</Typography>
-              </Box>
-            </Box>
-          </Box>
-
-          <Box className='h-fit my-3 p-3  rounded-xl shadow-2xl hover:duration-500'>
-            <Typography className="">
+            <div className="notibody">
               Thay vì phải chờ đợi cấu hình từng máy chủ thì nay chỉ cần 3 phút là có Cloud Server để sử dụng
               cho các dự án của công ty.
-            </Typography>
-            <Box className="flex items-center mt-10">
+            </div>
+          </div>
+
+          <div className="notification">
+            <div className="notiglow"></div>
+            <div className="notiborderglow"></div>
+            <Box className="notititle flex items-center">
               <Image src={feedback_03} alt="customer feedback" className="w-16 h-16 rounded-full mr-2" />
               <Box>
                 <Typography>Mr. Nguyên</Typography>
                 <Typography>IT Manager - Bell Technology</Typography>
               </Box>
             </Box>
-          </Box>
+
+            <div className="notibody">
+              Đội ngũ EcoCloud rất nhiệt tình đã không ngại đường xa hỗ trợ demo những giải pháp và hỗ trợ
+              chúng tôi Backup dữ liệu.
+            </div>
+          </div>
+
+          <div className="notification">
+            <div className="notiglow"></div>
+            <div className="notiborderglow"></div>
+            <div className="notititle flex items-center">
+              <Image src={feedback_02} alt="customer feedback" className="w-16 h-16 rounded-full mr-2" />
+              <div>
+                <Typography>Mr. Phú</Typography>
+                <Typography>IT Consultant - Viet An Group</Typography>
+              </div>
+            </div>
+
+            <div className="notibody">
+              Đội ngũ EcoCloud rất nhiệt tình đã không ngại đường xa hỗ trợ demo những giải pháp và hỗ trợ
+              chúng tôi Backup dữ liệu.
+            </div>
+          </div>
         </Container>
+
+        <Box className="text-center pb-10">
+          <Typography className="text-[2rem] pb-5">Đăng ký trải nghiệm</Typography>
+          <Typography>để nhận thêm thông tin về các dịch vụ của EcoCloud</Typography>
+        </Box>
+
       </Box>
     </Box >
   )
 }
-
-export default HomePage;
