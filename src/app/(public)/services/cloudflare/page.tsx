@@ -1,178 +1,300 @@
-
 import Image from "next/image";
 import cloudFlare_01 from "../../../images/cloudFlare/cloudFlare_01.png";
 import cloudFlare_02 from "../../../images/cloudFlare/cloudFlare_02.jpg";
 import cloudFlare_03 from "../../../images/cloudFlare/cloudFlare_03.png";
 import cloudFlare_04 from "../../../images/cloudFlare/cloudFlare_04.png";
-import cloudServer_icon_01 from "../../../images/cloudServer/cloudServer_icon_01.png"
+import cloudServer_icon_01 from "../../../images/cloudServer/cloudServer_icon_01.png";
 import { Box, Typography, Grid, Button, Paper } from "@mui/material";
-import { cloudflarePackage, cloudflareQuestions, cloudflarePerformance, cloudflareWAF } from "app/libs/data";
+import {
+	cloudflarePackage,
+	cloudflareQuestions,
+	cloudflarePerformance,
+	cloudflareWAF,
+} from "app/libs/data";
+import CustomDialog from "@/components/CustomDialog";
 
 export const metadata = {
-  title: {
-    absolute: "",
-    default: "EcoCloud | Điện toán đám mây",
-    template: "%s | Turbo AI Solution",
-  },
-  description: "More than 10 years of experience, Turbo Solutions specializes in providing leading cloud computing solutions and applications in Vietnam.",
+	title: {
+		absolute: "",
+		default: "EcoCloud | Điện toán đám mây",
+		template: "%s | Turbo AI Solution",
+	},
+	description:
+		"More than 10 years of experience, Turbo Solutions specializes in providing leading cloud computing solutions and applications in Vietnam.",
 };
 
 export default function CloudFlare() {
+	return (
+		<>
+			<Box>
+				<Paper className="rounded-none shadow-xl py-10">
+					<Grid container>
+						<Grid
+							item
+							xs={12}
+							md={6}
+							pl={10}>
+							<Box sx={{ display: "flex", alignItems: "center", py: 1 }}>
+								<Box className="text-justify">
+									<Typography className="text-[2rem] text-orange-600 font-semibold">
+										CloudFlare là gì?
+									</Typography>
+									<Typography py={1}>
+										CloudFlare là dịch vụ CDN trung gian, là nơi điều phối lượng
+										truy cập giữa máy chủ với máy của khách hàng qua lớp bảo vệ
+										CloudFlare.
+									</Typography>
+									<Typography py={1}>
+										Thay vì phải truy cập trực tiếp vào website thông qua phân
+										giải tên miền DNS thì có thể sử dụng máy chủ phân giải tên
+										của CloudFlare. Ngoài ra, CloudFlare còn có cung cấp nhiều
+										dịch vụ như CNS, SPDY, tường lửa chống Ddos, Chứng chỉ số
+										SSL
+									</Typography>
+								</Box>
+							</Box>
+						</Grid>
 
-  return (
-    <>
-      <Box>
-        <Paper className="rounded-none shadow-xl py-10">
-          <Grid container >
-            <Grid item xs={12} md={6} pl={10}>
-              <Box sx={{ display: "flex", alignItems: "center", py: 1 }}>
-                <Box className="text-justify">
-                  <Typography className="text-[2rem] text-orange-600 font-semibold">CloudFlare là gì?</Typography>
-                  <Typography py={1}>
-                    CloudFlare là dịch vụ CDN trung gian, là nơi điều phối lượng truy cập giữa máy chủ với máy của khách hàng qua lớp bảo vệ CloudFlare.
-                  </Typography>
-                  <Typography py={1}>
-                    Thay vì phải truy cập trực tiếp vào website thông qua phân giải tên miền DNS thì có thể sử dụng máy chủ phân giải tên của CloudFlare.
-                    Ngoài ra, CloudFlare còn có cung cấp nhiều dịch vụ như CNS, SPDY, tường lửa chống Ddos, Chứng chỉ số SSL
-                  </Typography>
-                </Box>
-              </Box>
-            </Grid>
+						<Grid
+							item
+							xs={12}
+							md={6}
+							className="flex flex-col items-center justify-center">
+							<Image
+								src={cloudFlare_01}
+								className="w-[80%] h-auto rounded-lg"
+								alt="cloudFlare_01"
+							/>
+						</Grid>
+					</Grid>
+				</Paper>
 
-            <Grid item xs={12} md={6} className="flex flex-col items-center justify-center">
-              <Image src={cloudFlare_01} className="w-[80%] h-auto rounded-lg" alt="cloudFlare_01" />
-            </Grid>
-          </Grid>
-        </Paper>
+				<Box className="theme text-white text-center shadow-xl">
+					<Typography className="text-[2rem] font-semibold text-center">
+						PERFORMANCE
+					</Typography>
+					<Typography className="py-5 text-[1.5rem]">
+						Giúp tăng tốc độ tải của ứng dụng - website
+					</Typography>
+				</Box>
 
-        <Box className="theme text-white text-center shadow-xl">
-          <Typography className="text-[2rem] font-semibold text-center"> PERFORMANCE </Typography>
-          <Typography className="py-5 text-[1.5rem]"> Giúp tăng tốc độ tải của ứng dụng - website </Typography>
-        </Box>
+				{/* PERFORMANCE */}
+				<Paper className="rounded-none shadow-xl py-5">
+					<Grid container>
+						<Grid
+							item
+							xs={12}
+							md={4}>
+							{cloudflarePerformance.slice(0, 3).map(item => {
+								return (
+									<Paper
+										key={item.id}
+										className="m-6 p-3">
+										<Typography className="text-sky-800 font-bold pb-3">
+											{item.title}
+										</Typography>
+										<Typography> {item.desc} </Typography>
+									</Paper>
+								);
+							})}
+						</Grid>
 
-        {/* PERFORMANCE */}
-        <Paper className="rounded-none shadow-xl py-5">
-          <Grid container>
-            <Grid item xs={12} md={4}>
-              {cloudflarePerformance.slice(0, 3).map((item) => {
-                return (
-                  <Paper key={item.id} className="m-6 p-3">
-                    <Typography className="text-sky-800 font-bold pb-3"> {item.title} </Typography>
-                    <Typography> {item.desc} </Typography>
-                  </Paper>
-                )
-              })}
-            </Grid>
+						<Grid
+							item
+							xs={12}
+							md={4}
+							className="flex justify-center">
+							<Image
+								src={cloudFlare_02}
+								alt="performance"
+								className="w-[100%] h-auto"
+							/>
+						</Grid>
 
-            <Grid item xs={12} md={4} className="flex justify-center">
-              <Image src={cloudFlare_02} alt="performance" className="w-[100%] h-auto" />
-            </Grid>
+						<Grid
+							item
+							xs={12}
+							md={4}>
+							{cloudflarePerformance.slice(3, 8).map(item => {
+								return (
+									<Paper
+										key={item.id}
+										className="m-6 p-3">
+										<Typography className="text-sky-800 font-bold pb-3">
+											{item.title}
+										</Typography>
+										<Typography> {item.desc} </Typography>
+									</Paper>
+								);
+							})}
+						</Grid>
+					</Grid>
+				</Paper>
 
-            <Grid item xs={12} md={4}>
-              {cloudflarePerformance.slice(3, 8).map((item) => {
-                return (
-                  <Paper key={item.id} className="m-6 p-3">
-                    <Typography className="text-sky-800 font-bold pb-3"> {item.title} </Typography>
-                    <Typography> {item.desc} </Typography>
-                  </Paper>
-                )
-              })}
-            </Grid>
+				<Paper className="rounded-none shadow-xl py-5">
+					<Typography className="text-[2.5rem] text-center uppercase text-orange-600 font-semibold pt-1 pb-10">
+						cloudflare và các gói tiện ích riêng
+					</Typography>
+					<Grid container>
+						<Grid
+							item
+							xs={12}
+							md={6}
+							className="flex flex-col items-center justify-center">
+							<Image
+								src={cloudFlare_03}
+								className="w-[80%] h-auto rounded-lg"
+								alt="cloudFlare_03"
+							/>
+						</Grid>
 
-          </Grid>
-        </Paper>
+						<Grid
+							item
+							xs={12}
+							md={6}
+							pl={10}>
+							{cloudflarePackage.map(item => {
+								return (
+									<Box
+										key={item.id}
+										sx={{ display: "flex", alignItems: "center", py: 1 }}>
+										<Box>
+											<Typography className="text-[1.3rem] text-orange-600 font-semibold">
+												{item.title}
+											</Typography>
+											<Typography className="w-3/4 text-justify">
+												{item.desc}
+											</Typography>
+										</Box>
+									</Box>
+								);
+							})}
+						</Grid>
+					</Grid>
+				</Paper>
 
-        <Paper className="rounded-none shadow-xl py-5">
-          <Typography className="text-[2.5rem] text-center uppercase text-orange-600 font-semibold pt-1 pb-10">cloudflare và các gói tiện ích riêng</Typography>
-          <Grid container >
-            <Grid item xs={12} md={6} className="flex flex-col items-center justify-center">
-              <Image src={cloudFlare_03} className="w-[80%] h-auto rounded-lg" alt="cloudFlare_03" />
-            </Grid>
+				<Box className="theme text-white text-center shadow-xl">
+					<Typography className="text-[2rem] font-semibold text-center">
+						Trải nghiệm miễn phí dịch vụ CLOUDFLARE WAF của chúng tôi
+					</Typography>
+					<Typography className="py-5 text-[1.5rem]">
+						Tặng ngay 7 ngày miễn phí dùng thử
+					</Typography>
+					<div className="mt-5">
+						<CustomDialog />
+					</div>
+				</Box>
 
-            <Grid item xs={12} md={6} pl={10}>
-              {cloudflarePackage.map((item) => {
-                return (
-                  <Box key={item.id} sx={{ display: "flex", alignItems: "center", py: 1 }}>
-                    <Box>
-                      <Typography className="text-[1.3rem] text-orange-600 font-semibold">{item.title}</Typography>
-                      <Typography className="w-3/4 text-justify">{item.desc}</Typography>
-                    </Box>
-                  </Box>
-                )
-              })}
-            </Grid>
-          </Grid>
-        </Paper>
+				{/* CLOUDFLARE WAF */}
+				<Paper className="rounded-none mb-10">
+					<Grid container>
+						<Grid
+							item
+							xs={12}
+							md={6}
+							className="flex flex-col items-center justify-center text-sky-900">
+							<Typography className="text-[1.5rem] font-bold">
+								CloudFlare WAF là tính năng gì?
+							</Typography>
+							<Typography className="font-extralight text-center w-3/4 px-3">
+								Cloudflare Web Application Firewall (WAF) sẽ cung cấp khả năng
+								bảo vệ tự động khỏi các lỗ hổng bảo mật và tính linh hoạt trong
+								việc tạo các quy tắc tùy chỉnh
+							</Typography>
+						</Grid>
 
-        <Box className="theme text-white text-center shadow-xl">
-          <Typography className="text-[2rem] font-semibold text-center">
-            Trải nghiệm miễn phí dịch vụ CLOUDFLARE WAF của chúng tôi
-          </Typography>
-          <Typography className="py-5 text-[1.5rem]"> Tặng ngay 7 ngày miễn phí dùng thử </Typography>
-          <Button href="tel:0769999967" variant="contained" color="secondary">Trải nghiệm ngay</Button>
-        </Box>
+						<Grid
+							item
+							xs={12}
+							md={6}
+							className="flex flex-col items-center justify-center">
+							<Image
+								src={cloudFlare_04}
+								className="w-full h-full rounded-lg"
+								alt="CloudFlare WAF là tính năng gì?"
+							/>
+						</Grid>
+					</Grid>
 
-        {/* CLOUDFLARE WAF */}
-        <Paper className="rounded-none mb-10">
-          <Grid container >
-            <Grid item xs={12} md={6} className="flex flex-col items-center justify-center text-sky-900">
-              <Typography className="text-[1.5rem] font-bold"> CloudFlare WAF là tính năng gì? </Typography>
-              <Typography className="font-extralight text-center w-3/4 px-3">
-                Cloudflare Web Application Firewall (WAF) sẽ cung cấp khả năng bảo vệ tự động khỏi các
-                lỗ hổng bảo mật và tính linh hoạt trong việc tạo các quy tắc tùy chỉnh
-              </Typography>
-            </Grid>
+					<Box className="flex justify-center pt-10">
+						{cloudflareWAF.slice(0, 3).map(item => {
+							return (
+								<Box
+									key={item.id}
+									className="w-1/3 flex flex-col justify-center items-center">
+									<Image
+										src={cloudServer_icon_01}
+										className="w-20 h-auto"
+										alt="WAF"
+									/>
+									<Typography className="text-[1.3rem] font-semibold py-3">
+										{item.title}
+									</Typography>
+									<Typography className="w-3/4 text-center">
+										{item.desc}
+									</Typography>
+								</Box>
+							);
+						})}
+					</Box>
 
-            <Grid item xs={12} md={6} className="flex flex-col items-center justify-center">
-              <Image src={cloudFlare_04} className="w-full h-full rounded-lg" alt="CloudFlare WAF là tính năng gì?" />
-            </Grid>
-          </Grid>
+					<Box className="flex justify-evenly py-10">
+						{cloudflareWAF.slice(3, 5).map(item => {
+							return (
+								<Box
+									key={item.id}
+									className="w-1/3 flex flex-col justify-center items-center">
+									<Image
+										src={cloudServer_icon_01}
+										className="w-20 h-auto"
+										alt="WAF"
+									/>
+									<Typography className="text-[1.3rem] font-semibold py-3">
+										{item.title}
+									</Typography>
+									<Typography className="w-3/4 text-center">
+										{item.desc}
+									</Typography>
+								</Box>
+							);
+						})}
+					</Box>
+				</Paper>
 
-          <Box className="flex justify-center pt-10">
-            {cloudflareWAF.slice(0, 3).map((item) => {
-              return (
-                <Box key={item.id} className="w-1/3 flex flex-col justify-center items-center">
-                  <Image src={cloudServer_icon_01} className="w-20 h-auto" alt="WAF" />
-                  <Typography className="text-[1.3rem] font-semibold py-3"> {item.title} </Typography>
-                  <Typography className="w-3/4 text-center"> {item.desc} </Typography>
-                </Box>
-              )
-            })}
-          </Box>
+				{/* Q & A */}
+				<Box pb={5}>
+					<Typography className="text-[2rem] text-sky-900 font-semibold text-center py-5">
+						Có nên sử dụng CloudFlare hay không ?
+					</Typography>
+					<Typography className="text-center">
+						CloudFlare được dùng như một dịch vụ DNS thông thường khi tắt đám
+						mây tên miền. <br />
+						Nên sử dụng DNS trung gian này bởi vì các lý do sau đây:
+					</Typography>
 
-          <Box className="flex justify-evenly py-10">
-            {cloudflareWAF.slice(3, 5).map((item) => {
-              return (
-                <Box key={item.id} className="w-1/3 flex flex-col justify-center items-center">
-                  <Image src={cloudServer_icon_01} className="w-20 h-auto" alt="WAF" />
-                  <Typography className="text-[1.3rem] font-semibold py-3"> {item.title} </Typography>
-                  <Typography className="w-3/4 text-center"> {item.desc} </Typography>
-                </Box>
-              )
-            })}
-          </Box>
-        </Paper>
-
-        {/* Q & A */}
-        <Box pb={5}>
-          <Typography className="text-[2rem] text-sky-900 font-semibold text-center py-5"> Có nên sử dụng CloudFlare hay không ? </Typography>
-          <Typography className="text-center">
-            CloudFlare được dùng như một dịch vụ DNS thông thường khi tắt đám mây tên miền. <br />
-            Nên sử dụng DNS trung gian này bởi vì các lý do sau đây:
-          </Typography>
-
-          <Grid container className=" text-sky-900 mt-10">
-            {cloudflareQuestions.map((item) => {
-              return (
-                <Grid key={item.id} item xs={12} md={6} className="flex flex-col items-center justify-center">
-                  <Typography className="w-3/4 text-lg font-semibold"> {item.question} </Typography>
-                  <Typography className="w-3/4 text-justify py-3"> {item.answer} </Typography>
-                </Grid>
-              )
-            })}
-          </Grid>
-        </Box>
-      </Box>
-    </>
-  )
+					<Grid
+						container
+						className=" text-sky-900 mt-10">
+						{cloudflareQuestions.map(item => {
+							return (
+								<Grid
+									key={item.id}
+									item
+									xs={12}
+									md={6}
+									className="flex flex-col items-center justify-center">
+									<Typography className="w-3/4 text-lg font-semibold">
+										{item.question}
+									</Typography>
+									<Typography className="w-3/4 text-justify py-3">
+										{item.answer}
+									</Typography>
+								</Grid>
+							);
+						})}
+					</Grid>
+				</Box>
+			</Box>
+		</>
+	);
 }

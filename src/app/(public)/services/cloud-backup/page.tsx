@@ -1,259 +1,389 @@
 "use client";
 
 import theme_card from "../../../images/theme_card.png";
-import cloudServer_icon_01 from "../../../images/cloudServer/cloudServer_icon_01.png"
-import cloudServer_icon_02 from "../../../images/cloudServer/cloudServer_icon_02.png"
-import cloudServer_icon_03 from "../../../images/cloudServer/cloudServer_icon_03.png"
-import { Container, Box, Typography, Card, Grid, Divider, TextField, FormControlLabel, Tab, Tabs, Slider, Button } from "@mui/material";
-import Switch, { SwitchProps } from '@mui/material/Switch';
-import { styled } from '@mui/material/styles';
+import cloudServer_icon_01 from "../../../images/cloudServer/cloudServer_icon_01.png";
+import cloudServer_icon_02 from "../../../images/cloudServer/cloudServer_icon_02.png";
+import cloudServer_icon_03 from "../../../images/cloudServer/cloudServer_icon_03.png";
+import {
+	Container,
+	Box,
+	Typography,
+	Card,
+	Grid,
+	Divider,
+	FormControlLabel,
+	Tab,
+	Tabs,
+	Slider,
+	Button,
+} from "@mui/material";
+import Switch from "@mui/material/Switch";
 import Image from "next/image";
 import { TaskAltRounded } from "@mui/icons-material";
-import { cloudBackupPrices, cloudBackupBonus, cloudBackupQuestions, cloudBackupPackage } from "app/libs/data";
+import {
+	cloudBackupPrices,
+	cloudBackupBonus,
+	cloudBackupQuestions,
+	cloudBackupPackage,
+} from "app/libs/data";
 import React from "react";
+import CustomDialog from "@/components/CustomDialog";
 
 interface TabPanelProps {
-  children?: React.ReactNode;
-  index: number;
-  value: number;
+	children?: React.ReactNode;
+	index: number;
+	value: number;
 }
 
 function CustomTabPanel(props: TabPanelProps) {
-  const { children, value, index, ...other } = props;
+	const { children, value, index, ...other } = props;
 
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
-      {...other}
-    >
-      {value === index && (
-        <div className="p-3">
-          <p>{children}</p>
-        </div>
-      )}
-    </div>
-  );
+	return (
+		<div
+			role="tabpanel"
+			hidden={value !== index}
+			id={`simple-tabpanel-${index}`}
+			aria-labelledby={`simple-tab-${index}`}
+			{...other}>
+			{value === index && (
+				<div className="p-3">
+					<p>{children}</p>
+				</div>
+			)}
+		</div>
+	);
 }
 
 function a11yProps(index: number) {
-  return {
-    id: `simple-tab-${index}`,
-    'aria-controls': `simple-tabpanel-${index}`,
-  };
+	return {
+		id: `simple-tab-${index}`,
+		"aria-controls": `simple-tabpanel-${index}`,
+	};
 }
 
-
 export default function CloudBackup() {
-  const [month, setMonth] = React.useState(1);
-  const [value, setValue] = React.useState(0);
+	const [month, setMonth] = React.useState(1);
+	const [value, setValue] = React.useState(0);
 
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-    setValue(newValue);
-  };
+	const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+		setValue(newValue);
+	};
 
-  const handleSliderChange = (event: Event, newValue: number | number[]) => {
-    setMonth(newValue as number);
-  };
-  return (
-    <>
-      <Container>
-        <Box sx={{ textAlign: "center", py: 10 }}>
-          <Box>
-            <Typography className="text-[2.5rem] font-semibold text-sky-900">
-              Bảng giá dịch vụ sao lưu dữ liệu đám mây
-            </Typography>
-            <Typography> Với Cloud Backup, dữ liệu của bạn sẽ được bảo vệ an toàn khi gặp sự cố </Typography>
-          </Box>
-          <Button href="tel:0769999967" variant="contained" color="info" className="my-5">Liên hệ ngay để nhận ưu đãi hấp dẫn</Button>
-        </Box>
+	const handleSliderChange = (event: Event, newValue: number | number[]) => {
+		setMonth(newValue as number);
+	};
+	return (
+		<>
+			<Container>
+				<Box sx={{ textAlign: "center", py: 10 }}>
+					<Box>
+						<Typography className="text-[2.5rem] font-semibold text-sky-900">
+							Bảng giá dịch vụ sao lưu dữ liệu đám mây
+						</Typography>
+						<Typography>
+							Với Cloud Backup, dữ liệu của bạn sẽ được bảo vệ an toàn khi gặp
+							sự cố
+						</Typography>
+					</Box>
 
-        {/* cloud backup packages */}
-        <Box className="container grid sm:grid-cols-3 gap-x-6 gap-y-6 mb-10">
-          {cloudBackupPackage.map((item) => {
-            return (
-              <Card key={item.id} className="relative rounded-xl hover:shadow-lg cursor-pointer text-sky-900">
-                <Box className="flex flex-col justify-center items-center p-3">
-                  <Image src={theme_card} className="w-full h-auto rounded-xl relative" alt="Minh bạch chi phí" />
-                  <Box key={item.id} className="absolute text-center">
-                    <Typography className="text-[1.5rem] font-bold pb-10">{item.title}</Typography>
-                    <Typography className="text-justify px-3"> {item.hyperv} </Typography>
-                    <Typography className="px-3"> {item.ram} </Typography>
-                    <Typography className="px-3"> {item.server} </Typography>
-                    <Typography className="px-3"> {item.limit} </Typography>
-                  </Box>
-                </Box>
-              </Card>
-            )
-          })}
-        </Box>
+					<Box mt={5}>
+						<CustomDialog />
+					</Box>
+				</Box>
 
-        <Card className="rounded-2xl my-10">
-          <Grid container className="shadow-lg pb-5">
-            <Grid item xs={12} md={5} className="flex flex-col items-center justify-center">
-              <Typography className="text-[1.3rem] font-semibold">Cần sao lưu trên 2TB+ dung lượng?</Typography>
-              <Typography className="w-3/4 text-justify">
-                Liên hệ với chúng tôi để được tư vấn gói sao lưu với dung lượng lớn và nhiều tính năng hơn.
-              </Typography>
-              <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                <Tabs className="pt-5" value={value} onChange={handleChange} aria-label="basic tabs example">
-                  <Tab label="Hàng tháng" {...a11yProps(0)} />
-                  <Tab label="Hàng năm" {...a11yProps(1)} />
-                </Tabs>
-              </Box>
-              <CustomTabPanel value={value} index={0}>
-                <Typography className="font-bold text-center">{100 * month} GB Dung Lượng Sao Lưu</Typography>
-                <Typography className="text-[2rem] text-center text-yellow-600 font-bold">
-                  {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'VND' }).format(
-                    120000 * month
-                  )}
-                </Typography>
-              </CustomTabPanel>
-              <CustomTabPanel value={value} index={1}>
-                <Typography className="font-bold text-center">{100 * month} GB Dung Lượng Sao Lưu</Typography>
-                <Typography className="text-[2rem] text-center text-yellow-600 font-bold">
-                  {new Intl.NumberFormat('en-US', { style: 'currency', currency: 'VND' }).format(
-                    78000 * month
-                  )}
-                </Typography>
-              </CustomTabPanel>
+				{/* cloud backup packages */}
+				<Box className="container grid sm:grid-cols-3 gap-x-6 gap-y-6 mb-10">
+					{cloudBackupPackage.map(item => {
+						return (
+							<Card
+								key={item.id}
+								className="relative rounded-xl hover:shadow-lg cursor-pointer text-sky-900">
+								<Box className="flex flex-col justify-center items-center p-3">
+									<Image
+										src={theme_card}
+										className="w-full h-auto rounded-xl relative"
+										alt="Minh bạch chi phí"
+									/>
+									<Box
+										key={item.id}
+										className="absolute text-center">
+										<Typography className="text-[1.5rem] font-bold pb-10">
+											{item.title}
+										</Typography>
+										<Typography className="text-justify px-3">
+											{" "}
+											{item.hyperv}{" "}
+										</Typography>
+										<Typography className="px-3"> {item.ram} </Typography>
+										<Typography className="px-3"> {item.server} </Typography>
+										<Typography className="px-3"> {item.limit} </Typography>
+									</Box>
+								</Box>
+							</Card>
+						);
+					})}
+				</Box>
 
-              <Box sx={{ width: 300 }}>
-                <Slider
-                  value={typeof month === 'number' ? month : 0}
-                  min={1}
-                  max={20}
-                  onChange={handleSliderChange}
-                  aria-labelledby="input-slider"
-                />
-              </Box>
-            </Grid>
+				<Card className="rounded-2xl my-10">
+					<Grid
+						container
+						className="shadow-lg pb-5">
+						<Grid
+							item
+							xs={12}
+							md={5}
+							className="flex flex-col items-center justify-center">
+							<Typography className="text-[1.3rem] font-semibold">
+								Cần sao lưu trên 2TB+ dung lượng?
+							</Typography>
+							<Typography className="w-3/4 text-justify">
+								Liên hệ với chúng tôi để được tư vấn gói sao lưu với dung lượng
+								lớn và nhiều tính năng hơn.
+							</Typography>
+							<Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+								<Tabs
+									className="pt-5"
+									value={value}
+									onChange={handleChange}
+									aria-label="basic tabs example">
+									<Tab
+										label="Hàng tháng"
+										{...a11yProps(0)}
+									/>
+									<Tab
+										label="Hàng năm"
+										{...a11yProps(1)}
+									/>
+								</Tabs>
+							</Box>
+							<CustomTabPanel
+								value={value}
+								index={0}>
+								<Typography className="font-bold text-center">
+									{100 * month} GB Dung Lượng Sao Lưu
+								</Typography>
+								<Typography className="text-[2rem] text-center text-yellow-600 font-bold">
+									{new Intl.NumberFormat("en-US", {
+										style: "currency",
+										currency: "VND",
+									}).format(120000 * month)}
+								</Typography>
+							</CustomTabPanel>
+							<CustomTabPanel
+								value={value}
+								index={1}>
+								<Typography className="font-bold text-center">
+									{100 * month} GB Dung Lượng Sao Lưu
+								</Typography>
+								<Typography className="text-[2rem] text-center text-yellow-600 font-bold">
+									{new Intl.NumberFormat("en-US", {
+										style: "currency",
+										currency: "VND",
+									}).format(78000 * month)}
+								</Typography>
+							</CustomTabPanel>
 
-            <Grid item xs={12} md={7} className=" text-sky-900">
-              <Grid>
-                <Box sx={{ display: "flex", alignItems: "center", py: 1 }}>
-                  <Image src={cloudServer_icon_01} className="w-16 h-auto mr-4" alt="Chi phí phù hợp" />
-                  <Box>
-                    <Typography className="text-[1.3rem] font-semibold pt-5">Chi phí phù hợp</Typography>
-                    <Typography className="w-3/4 text-justify">
-                      Không cần lo lắng ngân sách về các cấp giá. Lựa chọn gói dung lượng lưu trữ đám mây phù hợp với nhu cầu sao lưu của doanh nghiệp.
-                    </Typography>
-                  </Box>
-                </Box>
+							<Box sx={{ width: 300 }}>
+								<Slider
+									value={typeof month === "number" ? month : 0}
+									min={1}
+									max={20}
+									onChange={handleSliderChange}
+									aria-labelledby="input-slider"
+								/>
+							</Box>
+						</Grid>
 
-                <Box sx={{ display: "flex", alignItems: "center", py: 1 }}>
-                  <Image src={cloudServer_icon_02} className="w-16 h-auto mr-4" alt="Bảo mật đầu cuối" />
-                  <Box>
-                    <Typography className="text-[1.3rem] font-semibold">Bảo mật đầu cuối</Typography>
-                    <Typography className="w-3/4 text-justify">
-                      Mục đích chính của sao lưu đám mây là bảo vệ tất cả dữ liệu của bạn, vì vậy mã hóa đầu cuối là một tính năng quan trọng được tích hợp sẵn.
-                    </Typography>
-                  </Box>
-                </Box>
+						<Grid
+							item
+							xs={12}
+							md={7}
+							className=" text-sky-900">
+							<Grid>
+								<Box sx={{ display: "flex", alignItems: "center", py: 1 }}>
+									<Image
+										src={cloudServer_icon_01}
+										className="w-16 h-auto mr-4"
+										alt="Chi phí phù hợp"
+									/>
+									<Box>
+										<Typography className="text-[1.3rem] font-semibold pt-5">
+											Chi phí phù hợp
+										</Typography>
+										<Typography className="w-3/4 text-justify">
+											Không cần lo lắng ngân sách về các cấp giá. Lựa chọn gói
+											dung lượng lưu trữ đám mây phù hợp với nhu cầu sao lưu của
+											doanh nghiệp.
+										</Typography>
+									</Box>
+								</Box>
 
-                <Box sx={{ display: "flex", alignItems: "center", py: 1 }}>
-                  <Image src={cloudServer_icon_03} className="w-16 h-auto mr-4" alt="Ổn định và tin cậy" />
-                  <Box>
-                    <Typography className="text-[1.3rem] font-semibold">Ổn định và tin cậy</Typography>
-                    <Typography className="w-3/4 text-justify">
-                      Giảm thời gian khôi phục (RPO) và tạo bản sao lưu cực nhanh từ ảnh chụp với hệ thống lưu trữ mở rộng không giới hạn.
-                    </Typography>
-                  </Box>
-                </Box>
-              </Grid>
-            </Grid>
-          </Grid>
-        </Card>
+								<Box sx={{ display: "flex", alignItems: "center", py: 1 }}>
+									<Image
+										src={cloudServer_icon_02}
+										className="w-16 h-auto mr-4"
+										alt="Bảo mật đầu cuối"
+									/>
+									<Box>
+										<Typography className="text-[1.3rem] font-semibold">
+											Bảo mật đầu cuối
+										</Typography>
+										<Typography className="w-3/4 text-justify">
+											Mục đích chính của sao lưu đám mây là bảo vệ tất cả dữ
+											liệu của bạn, vì vậy mã hóa đầu cuối là một tính năng quan
+											trọng được tích hợp sẵn.
+										</Typography>
+									</Box>
+								</Box>
 
-        {/* service price */}
-        <Box >
-          <Box>
-            <Box my={5} sx={{ textAlign: "center" }}>
-              <Typography className="text-[2rem] font-light text-sky-900"> Bảng giá dịch vụ Cloud Backup (-35%) </Typography>
-              <Typography> * Bảng giá chưa bao gồm 10% VAT </Typography>
-            </Box>
+								<Box sx={{ display: "flex", alignItems: "center", py: 1 }}>
+									<Image
+										src={cloudServer_icon_03}
+										className="w-16 h-auto mr-4"
+										alt="Ổn định và tin cậy"
+									/>
+									<Box>
+										<Typography className="text-[1.3rem] font-semibold">
+											Ổn định và tin cậy
+										</Typography>
+										<Typography className="w-3/4 text-justify">
+											Giảm thời gian khôi phục (RPO) và tạo bản sao lưu cực
+											nhanh từ ảnh chụp với hệ thống lưu trữ mở rộng không giới
+											hạn.
+										</Typography>
+									</Box>
+								</Box>
+							</Grid>
+						</Grid>
+					</Grid>
+				</Card>
 
+				{/* service price */}
+				<Box>
+					<Box>
+						<Box
+							my={5}
+							sx={{ textAlign: "center" }}>
+							<Typography className="text-[2rem] font-light text-sky-900">
+								{" "}
+								Bảng giá dịch vụ Cloud Backup (-35%){" "}
+							</Typography>
+							<Typography> * Bảng giá chưa bao gồm 10% VAT </Typography>
+						</Box>
 
-            <Box className='grid sm:grid-cols-3 gap-x-6 gap-y-6 mb-10 text-center'>
-              {cloudBackupPrices.map((item) => {
-                return (
-                  <Box key={item.title} className="card_price h-fit">
-                    <Box className="card__border"></Box>
-                    <Box className="card_title__container">
-                      <span className="card_title">{item.title}</span>
-                      <p className="card_paragraph">{item.price}</p>
-                    </Box>
-                    <hr className="line" />
-                    <ul className="card__list">
-                      <li className="card__list_item">
-                        <TaskAltRounded color="secondary" />
-                        <span className="list_text">{item.hyperv}</span>
-                      </li>
-                      <li className="card__list_item">
-                        <TaskAltRounded color="secondary" />
-                        <span className="list_text">{item.ram}</span>
-                      </li>
-                      <li className="card__list_item">
-                        <TaskAltRounded color="secondary" />
-                        <span className="list_text">{item.server}</span>
-                      </li>
-                      <li className="card__list_item">
-                        <TaskAltRounded color="secondary" />
-                        <span className="list_text">{item.server}</span>
-                      </li>
-                      <li className="card__list_item">
-                        <TaskAltRounded color="secondary" />
-                        <span className="list_text">{item.limit}</span>
-                      </li>
-                    </ul>
-                    <Button href="tel:0769999967" className="button">Liên hệ ngay</Button>
-                  </Box>
-                )
-              })}
-            </Box>
-          </Box>
+						<Box className="grid sm:grid-cols-3 gap-x-6 gap-y-6 mb-10 text-center">
+							{cloudBackupPrices.map(item => {
+								return (
+									<Box
+										key={item.title}
+										className="card_price h-fit">
+										<Box className="card__border"></Box>
+										<Box className="card_title__container">
+											<span className="card_title">{item.title}</span>
+											<p className="card_paragraph">{item.price}</p>
+										</Box>
+										<hr className="line" />
+										<ul className="card__list">
+											<li className="card__list_item">
+												<TaskAltRounded color="secondary" />
+												<span className="list_text">{item.hyperv}</span>
+											</li>
+											<li className="card__list_item">
+												<TaskAltRounded color="secondary" />
+												<span className="list_text">{item.ram}</span>
+											</li>
+											<li className="card__list_item">
+												<TaskAltRounded color="secondary" />
+												<span className="list_text">{item.server}</span>
+											</li>
+											<li className="card__list_item">
+												<TaskAltRounded color="secondary" />
+												<span className="list_text">{item.server}</span>
+											</li>
+											<li className="card__list_item">
+												<TaskAltRounded color="secondary" />
+												<span className="list_text">{item.limit}</span>
+											</li>
+										</ul>
+										<Button
+											href="tel:0769999967"
+											className="button">
+											Liên hệ ngay
+										</Button>
+									</Box>
+								);
+							})}
+						</Box>
+					</Box>
 
-          <Box className=" text-sky-900">
-            <Typography className="text-[2rem] font-semibold text-center py-5"> Bảng giá tài nguyên bổ sung </Typography>
+					<Box className=" text-sky-900">
+						<Typography className="text-[2rem] font-semibold text-center py-5">
+							{" "}
+							Bảng giá tài nguyên bổ sung{" "}
+						</Typography>
 
-            <Box className='grid sm:grid-cols-4 gap-6 mb-10'>
-              {cloudBackupBonus.map((item) => {
-                return (
-                  <Box key={item.id} className='h-[180px] my-3 px-3 rounded-xl shadow-2xl'>
-                    <Box className='py-5'>
-                      <Typography className='text-[1rem] font-bold'>{item.title}</Typography>
-                      <Typography className=''>{item.bonus}</Typography>
-                    </Box>
-                    <Divider />
-                    <FormControlLabel className="py-3"
-                      control={<Switch size="medium" color="success" checked />}
-                      label={item.price}
-                    />
-                  </Box>
-                )
-              })}
-            </Box>
-          </Box>
-        </Box >
+						<Box className="grid sm:grid-cols-4 gap-6 mb-10">
+							{cloudBackupBonus.map(item => {
+								return (
+									<Box
+										key={item.id}
+										className="h-[180px] my-3 px-3 rounded-xl shadow-2xl">
+										<Box className="py-5">
+											<Typography className="text-[1rem] font-bold">
+												{item.title}
+											</Typography>
+											<Typography className="">{item.bonus}</Typography>
+										</Box>
+										<Divider />
+										<FormControlLabel
+											className="py-3"
+											control={
+												<Switch
+													size="medium"
+													color="success"
+													checked
+												/>
+											}
+											label={item.price}
+										/>
+									</Box>
+								);
+							})}
+						</Box>
+					</Box>
+				</Box>
 
-        {/* Q & A */}
-        <Box pb={5}>
-          <Typography className="text-[2rem] text-sky-900 font-semibold text-center py-5"> Các câu hỏi thường gặp </Typography>
-          <Grid container className=" text-sky-900">
-            {cloudBackupQuestions.map((item) => {
-              return (
-                <Grid key={item.id} item xs={12} md={6} className="flex flex-col items-center justify-center">
-                  <Typography className="w-3/4 text-lg font-semibold"> {item.question} </Typography>
-                  <Typography className="w-3/4 text-justify py-3"> {item.answer} </Typography>
-                </Grid>
-              )
-            })}
-          </Grid>
-        </Box>
-      </Container>
-    </>
-
-  )
+				{/* Q & A */}
+				<Box pb={5}>
+					<Typography className="text-[2rem] text-sky-900 font-semibold text-center py-5">
+						{" "}
+						Các câu hỏi thường gặp{" "}
+					</Typography>
+					<Grid
+						container
+						className=" text-sky-900">
+						{cloudBackupQuestions.map(item => {
+							return (
+								<Grid
+									key={item.id}
+									item
+									xs={12}
+									md={6}
+									className="flex flex-col items-center justify-center">
+									<Typography className="w-3/4 text-lg font-semibold">
+										{" "}
+										{item.question}{" "}
+									</Typography>
+									<Typography className="w-3/4 text-justify py-3">
+										{" "}
+										{item.answer}{" "}
+									</Typography>
+								</Grid>
+							);
+						})}
+					</Grid>
+				</Box>
+			</Container>
+		</>
+	);
 }
