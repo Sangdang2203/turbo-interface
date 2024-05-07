@@ -734,3 +734,23 @@ export const privateCloudQuestions = [
 			"Trong trường hợp bất kỳ tài nguyên riêng lẻ nào bị lỗi, máy ảo (VM) của bạn sẽ tự động được chuyển đến một máy chủ đầy đủ chức năng trong đám mây.",
 	},
 ];
+
+export const services = [
+	{ name: "AI - Video Search" },
+	{ name: "AI - Nhận Diện Khuôn Mặt" },
+	{ name: "AI - Nhận Dạng Biển Số" },
+	{ name: "AI - Nhận Dạng Vật Thể" },
+	{ name: "AI - Kiểm Soát Lưu Lượng" },
+	{ name: "AI - Nhận Diện Bất Thường" },
+	{ name: "AI - Quản Lý Tập Trung" },
+	{ name: "AI - Quản Lý Dữ Liệu" },
+	{ name: "Cloud Server" },
+	{ name: "Cloud GPU" },
+	{ name: "Cloud Backup" },
+	{ name: "Cloudflare" },
+	{ name: "Dedicated Server" },
+	{ name: "Disaster Recovery" },
+	{ name: "Vitual Data Center" },
+	{ name: "Private Cloud Service" },
+	{ name: "Cloud Backup & Recovery" },
+];

@@ -39,15 +39,14 @@ export async function GET(
 	}
 }
 
-export async function PATCH(
+export async function PUT(
 	req: NextRequest,
 	{ params }: { params: { postId: string } }
 ) {
 	const id = params.postId;
+	console.log("id: ", id);
 	const updatePost = await req.json();
 	try {
-		req.headers.delete("Content-Length");
-
 		const response = await fetch(
 			process.env.NEXT_PUBLIC_API_URL + `/posts/${id} `,
 			{

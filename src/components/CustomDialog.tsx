@@ -10,9 +10,11 @@ import {
 	Box,
 	FormHelperText,
 	TextField,
+	Autocomplete,
 } from "@mui/material";
 import { SendRounded } from "@mui/icons-material";
 import { CustomerMessage } from "types/interfaces";
+import { services } from "app/libs/data";
 
 export default function CustomDialog() {
 	const [open, setOpen] = React.useState(false);
@@ -58,7 +60,7 @@ export default function CustomDialog() {
 				<DialogContent>
 					<form className="form">
 						<label>
-							<input
+							<TextField
 								{...register("name", {
 									required: "Vui lòng điền thông tin.",
 									minLength: {
@@ -72,13 +74,13 @@ export default function CustomDialog() {
 								})}
 								placeholder="Nhập họ tên quý khách hàng ..."
 								type="text"
-								className="input"
+								fullWidth
 							/>
 						</label>
 						<span className="text-danger">{errors.name?.message}</span>
 
 						<label>
-							<input
+							<TextField
 								{...register("email", {
 									required: "Vui lòng điền thông tin.",
 									pattern: {
@@ -88,13 +90,13 @@ export default function CustomDialog() {
 								})}
 								placeholder="Nhập email ..."
 								type="email"
-								className="input"
+								fullWidth
 							/>
 						</label>
 						<span className="text-danger">{errors.email?.message}</span>
 
 						<label>
-							<input
+							<TextField
 								{...register("phone", {
 									required: "Vui lòng điền thông tin.",
 									pattern: {
@@ -102,18 +104,39 @@ export default function CustomDialog() {
 										message: "Vui lòng nhập đủ 10 số.",
 									},
 								})}
+								fullWidth
 								placeholder="Nhập số điện thoại ..."
-								className="input"
 							/>
 						</label>
 						<span className="text-danger">{errors.phone?.message}</span>
+
 						<label>
-							<textarea
+							<Autocomplete
+								multiple
+								id="service"
+								className="text-[10px]"
+								options={services}
+								getOptionLabel={option => option.name}
+								renderInput={params => (
+									<TextField
+										{...params}
+										size="medium"
+										placeholder="Vui lòng bấm chọn dịch vụ."
+									/>
+								)}
+							/>
+						</label>
+						<span className="text-danger">{errors.phone?.message}</span>
+
+						<label>
+							<TextField
 								{...register("message", {
 									required: "Vui lòng điền thông tin.",
 								})}
-								placeholder="Vui lòng để lại tin nhắn ..."
-								className="input"></textarea>
+								fullWidth
+								rows={5}
+								placeholder="Chúng tôi có thể giúp gì cho bạn ?"
+							/>
 						</label>
 						<span className="text-danger">{errors.message?.message}</span>
 

@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import PhoneInTalkIcon from "@mui/icons-material/PhoneInTalk";
@@ -15,21 +15,45 @@ import { Twitter, YouTube, LinkedIn, Facebook } from "@mui/icons-material";
 
 const solutonLinks = [
 	{
-		path: "https://v2.aivisionviet.vn/quan-ly-tap-trung/",
-		name: "AI Quản lý tập trung",
+		path: "https://v2.aivisionviet.vn/ai-video-search",
+		name: "Video Search",
+	},
+	{ path: "https://aivisionviet.vn/vaidio-data", name: "Quản Lý Dữ Liệu" },
+	{
+		path: "https://aivisionviet.vn/vaidio-command-center",
+		name: "Quản Lý Tập Trung",
 	},
 	{
-		path: "https://v2.aivisionviet.vn/trich-xuat-video-camera/",
-		name: "AI video search",
+		path: "https://v2.aivisionviet.vn/nhan-dien-bien-so",
+		name: "Nhận Dạng Biển Số",
 	},
-	{ path: "https://v2.aivisionviet.vn/vaidio-data/", name: "AI Database" },
-	{ path: "/smart-cloud-camera", name: "Smart Cloud Camera" },
+	{
+		path: "https://v2.aivisionviet.vn/nhan-dang-vat-the",
+		name: "Nhận Dạng Vật Thể",
+	},
+	{
+		path: "https://v2.aivisionviet.vn/kiem-soat-luu-luong",
+		name: "Kiểm Soát Lưu Lượng",
+	},
+	{
+		path: "https://v2.aivisionviet.vn/nhan-dien-khuon-mat",
+		name: "Nhận Diện Khuôn Mặt",
+	},
+	{
+		path: "https://v2.aivisionviet.vn/phat-hien-bat-thuong",
+		name: "Nhận Diện Bất Thường",
+	},
 ];
-const cloudLinks = [
-	{ path: "/google-workspace", name: "Google Workspace" },
-	{ path: "/microsoft-365", name: "Microsoft 365" },
-	{ path: "/private-cloud", name: "Private Cloud" },
-	{ path: "/cloud-backup-recovery", name: "Cloud Backup & Recovery" },
+
+const servicesLinks = [
+	{ path: "/services/cloudflare", name: "cloudflare" },
+	{ path: "/services/cloud-server", name: "cloud server" },
+	{ path: "/services/cloud-backup", name: "cloud backup" },
+	{ path: "/services/dedicated-server", name: "dedicated server" },
+	{ path: "/services/disaster-recovery", name: "disaster recovery" },
+	{ path: "/services/virtual-data-center", name: "vitual data center" },
+	{ path: "/services/private-cloud", name: "private cloud service" },
+	{ path: "/services/cloud-backup-recovery", name: "cloud backup & recovery" },
 ];
 
 export default function TheFooter() {
@@ -44,7 +68,7 @@ export default function TheFooter() {
 					Hotline: +84 76 9999 967
 				</Button>
 			</Box>
-			<Container className="max-w-full text-white py-5 h-auto text-center background-footer">
+			<Container className="max-w-full text-white py-5 h-auto background-footer">
 				<Grid container>
 					<Grid
 						item
@@ -52,7 +76,7 @@ export default function TheFooter() {
 						md={6}>
 						<Typography
 							paragraph
-							className="text-lg font-thin text-center">
+							className="text-lg text-center">
 							&quot; Với 10 năm kinh nghiệm, công ty Turbo Solutions chuyên cung
 							cấp các giải pháp, ứng dụng điện toán đám mây hàng đầu Việt Nam.
 							&quot;
@@ -99,15 +123,12 @@ export default function TheFooter() {
 						md={6}>
 						<Box sx={{ display: "flex", justifyContent: "center" }}>
 							<Box mx={2}>
-								<Typography className="text-lg uppercase">
-									{" "}
-									giải pháp{" "}
-								</Typography>
+								<Typography className="text-lg uppercase">giải pháp</Typography>
 								{solutonLinks.map(link => {
 									return (
 										<Box key={link.name}>
 											<Link
-												className="text-sm no-underline text-white font-thin hover:text-yellow-500 duration-500"
+												className="text-sm no-underline text-white hover:text-yellow-500 duration-500"
 												href={link.path}>
 												{link.name}
 											</Link>
@@ -117,11 +138,11 @@ export default function TheFooter() {
 							</Box>
 							<Box mx={2}>
 								<Typography className="text-lg uppercase">dịch vụ</Typography>
-								{cloudLinks.map(link => {
+								{servicesLinks.map(link => {
 									return (
 										<Box key={link.name}>
 											<Link
-												className="text-sm no-underline text-white font-thin hover:text-yellow-500 duration-500"
+												className="text-sm capitalize no-underline text-white hover:text-yellow-500 duration-500"
 												href={link.path}>
 												{link.name}
 											</Link>

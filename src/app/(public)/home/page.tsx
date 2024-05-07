@@ -44,7 +44,7 @@ export default function HomePage() {
 			<Box
 				textAlign="center"
 				my={5}
-				className="text-white theme mt-[10vh]">
+				className="text-white themePolygonLuminary py-10">
 				<Typography className="text-[2.5rem] font-semibold">
 					Ứng dụng | Dịch vụ | Giải pháp
 				</Typography>
@@ -244,7 +244,7 @@ export default function HomePage() {
 			</Container>
 
 			{/* Why clients choose us, Khách hàng nói gì về chúng tôi */}
-			<Box className="__theme min-h-[500px]">
+			<Box className="themeGlobal min-h-[500px]">
 				<Box className="text-center py-10">
 					<Typography className="text-[2.5rem]">
 						Why clients choose us

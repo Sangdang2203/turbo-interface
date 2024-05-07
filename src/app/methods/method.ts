@@ -10,6 +10,16 @@ export const fetchUsers = async (token: string) => {
 	return response.json() as Promise<ApiResponse>;
 };
 
+export const fetchDeleteUser = async (token: string, userId: string) => {
+	const response = await fetch(`/api/users/${userId}`, {
+		method: "DELETE",
+		headers: {
+			Authorization: `Bearer ${token}`,
+		},
+	});
+	return response.json() as Promise<ApiResponse>;
+};
+
 export const fetchAuthorities = async (token: string) => {
 	const response = await fetch("/api/roles", {
 		method: "GET",
@@ -32,6 +42,14 @@ export const fetchCategories = async (token: string) => {
 
 export const fetchPosts = async () => {
 	const response = await fetch("/api/posts", {
+		method: "GET",
+		cache: "no-cache",
+	});
+	return response.json() as Promise<ApiResponse>;
+};
+
+export const fetchPost = async (postId: string) => {
+	const response = await fetch(`/api/posts/${postId}`, {
 		method: "GET",
 		cache: "no-cache",
 	});

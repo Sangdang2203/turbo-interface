@@ -1,37 +1,40 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 export async function DELETE(
-	req: Request,
-	{ params }: { params: { userId: string } }
+	req: NextRequest,
+	{ params }: { params: { login: string } }
 ) {
 	try {
-		const response = await fetch(
-			process.env.NEXT_PUBLIC_API_URL + "/admin/users" + params.userId,
+		const id = params.login;
+		console.log("id: ", id);
+		const res = await fetch(
+			process.env.NEXT_PUBLIC_API_URL + `/admin/users/${id}`,
 			{
-				method: "DELETE",
+				method: req.method,
+				headers: req.headers,
 				cache: "no-cache",
 			}
 		);
 
-		if (response.ok) {
+		if (res.ok) {
 			return NextResponse.json({
 				ok: true,
-				status: "Success",
-				message: "Thực hiện xóa thành công",
+				status: "success",
+				message: "Xóa thành công.",
 			});
 		}
 
 		return NextResponse.json({
-			ok: true,
+			ok: false,
 			status: "Error",
-			message: "Thực hiện xóa thất bại",
+			message: "Xóa thất bại !",
 		});
 	} catch (error) {
 		console.log(error);
 		return NextResponse.json({
-			ok: true,
-			status: "Server Error",
-			message: "Opps! Something went wrong while trying to remove.",
+			ok: false,
+			status: "Server error",
+			message: "Oops ! Something went wrong while trying delete user.",
 		});
 	}
 }

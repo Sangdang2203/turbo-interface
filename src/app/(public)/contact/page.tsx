@@ -1,11 +1,9 @@
 "use client";
 
 import {
+	Autocomplete,
 	Box,
 	Button,
-	Container,
-	FormControl,
-	FormHelperText,
 	Grid,
 	Link,
 	Paper,
@@ -13,23 +11,21 @@ import {
 	Typography,
 } from "@mui/material";
 import {
-	ArrowRightRounded,
 	LocationOnRounded,
 	MailOutlineRounded,
 	PhoneCallbackRounded,
 	SendRounded,
 } from "@mui/icons-material";
-import contactBanner from "../../images/contactBanner.jpg";
 import { CustomerMessage } from "types/interfaces";
 import { useForm, SubmitHandler } from "react-hook-form";
-import Image from "next/image";
 import * as React from "react";
+import { services } from "app/libs/data";
 
 // export const metadata = () => {
-//   return {
-//     title: "Contact"
-//   }
-// }
+// 	return {
+// 		title: "Contact",
+// 	};
+// };
 
 const ContactPage = () => {
 	const {
@@ -40,22 +36,19 @@ const ContactPage = () => {
 
 	return (
 		<Box>
-			<Image
-				src={contactBanner ? contactBanner : ""}
-				alt="cloudBanner"
-				className="w-full max-h-[35rem] opacity-80 -mt-6 "></Image>
+			<Box className="themeContact"></Box>
 
 			<Paper className="p-10 rounded-none">
 				<Box className="text-center">
-					<Typography className="text-[2rem] font-extralight">
-						Liên hệ với chúng tôi
-					</Typography>
+					<Typography className="text-[2rem]">Liên hệ với chúng tôi</Typography>
 					<Typography paragraph>
 						Luôn lắng nghe những ý kiến đóng góp từ quý khách hàng.
 					</Typography>
 				</Box>
 
-				<Grid container>
+				<Grid
+					container
+					my={5}>
 					<Grid
 						item
 						xs={12}
@@ -160,6 +153,24 @@ const ContactPage = () => {
 										type="text"
 									/>
 								</div>
+
+								<div className="form-group">
+									<label>Dịch vụ bạn đang quan tâm</label>
+									<Autocomplete
+										multiple
+										id="service"
+										size="small"
+										options={services}
+										getOptionLabel={option => option.name}
+										renderInput={params => (
+											<TextField
+												{...params}
+												placeholder="Vui lòng bấm chọn."
+											/>
+										)}
+									/>
+								</div>
+
 								<div className="form-group">
 									<label htmlFor="textarea">
 										Chúng tôi có thể giúp gì cho bạn ?
@@ -181,85 +192,6 @@ const ContactPage = () => {
 								</Button>
 							</form>
 						</div>
-
-						{/* <form className="text-sm font-medium">
-							<Box className="my-3">
-								<TextField
-									{...register("name", {
-										required: "Vui lòng điền thông tin.",
-										minLength: {
-											value: 8,
-											message: "Điền it nhất 8 ký tự.",
-										},
-										maxLength: {
-											value: 50,
-											message: "Điền tối đa 50 ký tự.",
-										},
-									})}
-									className="max-w-[650px] shadow-lg rounded-md cursor-pointer  w-full hover:shadow-lg duration-500"
-									placeholder="Họ tên..."
-								/>
-								<FormHelperText className="text-danger ">
-									{errors.name?.message}
-								</FormHelperText>
-							</Box>
-
-							<Box className="my-3">
-								<TextField
-									{...register("email", {
-										required: "Vui lòng điền thông tin.",
-										pattern: {
-											value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-											message: "Email sai định dạng.",
-										},
-									})}
-									className="max-w-[650px] shadow-lg rounded-md cursor-pointer  w-full hover:shadow-lg duration-500"
-									placeholder="Email..."
-								/>
-								<FormHelperText className="text-danger ">
-									{errors.email?.message}
-								</FormHelperText>
-							</Box>
-
-							<Box className="my-3">
-								<TextField
-									{...register("phone", {
-										required: "Vui lòng điền thông tin.",
-										pattern: {
-											value: /^\d{10}$/,
-											message: "Điền đủ 10 số.",
-										},
-									})}
-									className="max-w-[650px] shadow-lg rounded-md cursor-pointer  w-full hover:shadow-lg duration-500"
-									placeholder="Số điện thoại..."
-								/>
-								<FormHelperText className="text-danger ">
-									{errors.phone?.message}
-								</FormHelperText>
-							</Box>
-
-							<Box className="my-3">
-								<TextField
-									{...register("message", {
-										required: "Vui lòng điền thông tin.",
-									})}
-									rows={10}
-									className="max-w-[650px] shadow-lg rounded-md cursor-pointer w-full hover:shadow-lg duration-500"
-									placeholder="Vui lòng để lại tin nhắn..."
-								/>
-								<FormHelperText className="text-danger ">
-									{errors.message?.message}
-								</FormHelperText>
-							</Box>
-
-							<Button
-								startIcon={<SendRounded className="" />}
-								type="submit"
-								size="medium"
-								variant="contained">
-								Gửi
-							</Button>
-						</form> */}
 					</Grid>
 				</Grid>
 			</Paper>

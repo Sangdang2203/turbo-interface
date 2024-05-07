@@ -12,8 +12,8 @@ import {
 	TextField,
 	Typography,
 } from "@mui/material";
+import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import Link from "next/link";
-import moment from "moment";
 import * as React from "react";
 import { Post } from "types/interfaces";
 import { fetchPosts } from "app/methods/method";
@@ -29,19 +29,6 @@ export default function NewsPage() {
 	const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
 		setPage(value);
 	};
-
-	function formatDate(date: moment.MomentInput) {
-		const now = moment();
-		const diff = moment(date).diff(now, "days"); // Calculate difference in days
-
-		if (diff === 0) {
-			return "Today"; // Post created today
-		} else if (diff === 1) {
-			return "Yesterday"; // Post created yesterday
-		} else {
-			return moment(date).format("MMM DD, YYYY"); // Format for other dates
-		}
-	}
 
 	function handleSearch(event: React.FormEvent<HTMLFormElement>) {
 		event.preventDefault();
@@ -164,7 +151,7 @@ export default function NewsPage() {
 										return (
 											<div
 												key={item.id}
-												className="post_card max-h-[400px] shadow-sm hover:scale-105 hover:duration-700">
+												className="post_card max-h-[500px] shadow-sm hover:scale-105 hover:duration-700">
 												<div className="card-image">
 													<img
 														src="https://hoanghamobile.com/tin-tuc/wp-content/uploads/2023/07/anh-phong-canh-dep-24.jpg"
@@ -172,25 +159,18 @@ export default function NewsPage() {
 														alt="UnifiedCloudStorage"
 													/>
 												</div>
-												{/* <div className="category">
-													{item.categories.map(cate => {
-														return (
-															<Chip
-																key={cate.id}
-																label={cate.name}
-																size="small"
-																color="secondary"
-																className="mr-1"
-															/>
-														);
-													})}
-												</div> */}
 
 												<div className="author">
-													By <span className="name">{item.user}</span>
-													{formatDate(item.createDate)}
+													<div className="name flex items-center">
+														<AccessTimeIcon fontSize="small" />
+														<p className="px-1">
+															{item.createdDate.slice(0, 10)}
+														</p>
+													</div>
 												</div>
-												<div className="heading line-clamp-3">{item.title}</div>
+												<div className="heading line-clamp-3 min-h-[80px]">
+													{item.title}
+												</div>
 												<Link
 													href={`news/${item.id}`}
 													className="text-sky-700 text-[0.85rem] pl-2 no-underline hover:text-sky-500">

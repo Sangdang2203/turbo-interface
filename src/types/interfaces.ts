@@ -45,6 +45,7 @@ export interface CustomerMessage {
 	name: string;
 	email: string;
 	phone: string;
+	service: string[];
 	message: string;
 }
 
@@ -54,7 +55,7 @@ export interface User {
 	firstName: string;
 	lastName: string;
 	email: string;
-	authority: string;
+	authorities: string[];
 	activated: boolean;
 }
 
@@ -63,9 +64,7 @@ export interface CreateUserRequest {
 	firstName: string;
 	lastName: string;
 	email: string;
-	imageUrl: string;
-	authority: string;
-	activated: string;
+	authorities: string[];
 }
 
 export interface UpdateUserRequest {
@@ -92,12 +91,12 @@ export interface Post {
 			name: string;
 		}
 	];
-	user: string;
+	login: string;
 	slug: string;
 	image: string;
 	description: string;
 	content: string;
-	createDate: string;
-	updateDate: string;
+	createdDate: string;
+	updatedDate: string;
 	status: string;
 }
