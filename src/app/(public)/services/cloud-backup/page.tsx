@@ -39,18 +39,18 @@ function CustomTabPanel(props: TabPanelProps) {
 	const { children, value, index, ...other } = props;
 
 	return (
-		<div
+		<Box
 			role="tabpanel"
 			hidden={value !== index}
 			id={`simple-tabpanel-${index}`}
 			aria-labelledby={`simple-tab-${index}`}
 			{...other}>
 			{value === index && (
-				<div className="p-3">
-					<p>{children}</p>
-				</div>
+				<Box className="p-3">
+					<Typography>{children}</Typography>
+				</Box>
 			)}
-		</div>
+		</Box>
 	);
 }
 
@@ -133,7 +133,7 @@ export default function CloudBackup() {
 							xs={12}
 							md={5}
 							className="flex flex-col items-center justify-center">
-							<Typography className="text-[1.3rem] font-semibold">
+							<Typography className="text-[1.3rem] font-semibold pt-5">
 								Cần sao lưu trên 2TB+ dung lượng?
 							</Typography>
 							<Typography className="w-3/4 text-justify">
@@ -271,7 +271,7 @@ export default function CloudBackup() {
 							<Typography> * Bảng giá chưa bao gồm 10% VAT </Typography>
 						</Box>
 
-						<Box className="grid sm:grid-cols-3 gap-x-6 gap-y-6 mb-10 text-center">
+						<Box className="grid sm:grid-cols-3 gap-6 mb-10 text-center">
 							{cloudBackupPrices.map(item => {
 								return (
 									<Box
@@ -317,17 +317,16 @@ export default function CloudBackup() {
 					</Box>
 
 					<Box className=" text-sky-900">
-						<Typography className="text-[2rem] font-semibold text-center py-5">
-							{" "}
-							Bảng giá tài nguyên bổ sung{" "}
+						<Typography className="text-[1.75rem] font-semibold text-center py-5">
+							Bảng giá tài nguyên bổ sung
 						</Typography>
 
-						<Box className="grid sm:grid-cols-4 gap-6 mb-10">
+						<Box className="grid md:grid-cols-4 gap-3 mb-10">
 							{cloudBackupBonus.map(item => {
 								return (
 									<Box
 										key={item.id}
-										className="h-[180px] my-3 px-3 rounded-xl shadow-2xl">
+										className="min-h-[180px] my-3 px-3 rounded-xl shadow-2xl">
 										<Box className="py-5">
 											<Typography className="text-[1rem] font-bold">
 												{item.title}
@@ -354,35 +353,39 @@ export default function CloudBackup() {
 				</Box>
 
 				{/* Q & A */}
-				<Box pb={5}>
-					<Typography className="text-[2rem] text-sky-900 font-semibold text-center py-5">
-						{" "}
-						Các câu hỏi thường gặp{" "}
+				<div className="bg-white border border-gray-200 divide-y divide-gray-200 rounded-xl ">
+					<Typography className="text-[1.75rem] text-sky-900 font-semibold text-center p-5">
+						Các câu hỏi thường gặp
 					</Typography>
-					<Grid
-						container
-						className=" text-sky-900">
-						{cloudBackupQuestions.map(item => {
-							return (
-								<Grid
-									key={item.id}
-									item
-									xs={12}
-									md={6}
-									className="flex flex-col items-center justify-center">
-									<Typography className="w-3/4 text-lg font-semibold">
-										{" "}
-										{item.question}{" "}
-									</Typography>
-									<Typography className="w-3/4 text-justify py-3">
-										{" "}
-										{item.answer}{" "}
-									</Typography>
-								</Grid>
-							);
-						})}
-					</Grid>
-				</Box>
+					{cloudBackupQuestions.map(item => {
+						return (
+							<div
+								key={item.id}
+								className="space-y-12 px-2 xl:px-16 py-5">
+								<div className="mt-1 flex">
+									<div>
+										<div className="flex items-center h-16 border-l-4 border-blue-600">
+											<span className="text-4xl text-blue-600 px-4">Q.</span>
+										</div>
+										<div className="flex items-center h-16 border-l-4 border-gray-400">
+											<span className="text-4xl text-gray-400 px-4">A.</span>
+										</div>
+									</div>
+									<div>
+										<div className="flex items-center h-16">
+											<span className="text-lg text-blue-600 font-bold">
+												{item.question}
+											</span>
+										</div>
+										<div className="flex items-center py-2">
+											<span className="text-gray-500">{item.answer}</span>
+										</div>
+									</div>
+								</div>
+							</div>
+						);
+					})}
+				</div>
 			</Container>
 		</>
 	);

@@ -60,7 +60,7 @@ export default async function PostDetail({
 
 								<Box className="absolute bottom-1 left-1">
 									<Link
-										href={`/news/${item.id}`}
+										href={`/news/${item.slug}`}
 										className="px-3 text-sky-700 no-underline hover:text-sky-500">
 										Đọc thêm &gt;&gt;
 									</Link>

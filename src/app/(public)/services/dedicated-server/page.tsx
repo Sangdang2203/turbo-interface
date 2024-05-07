@@ -217,33 +217,39 @@ export default function DedicatedServer() {
 					</Box>
 				</Box>
 
-				<Box pb={5}>
-					<Typography className="text-[2rem] text-sky-900 font-semibold text-center py-5">
+				<div className="bg-white border border-gray-200 divide-y divide-gray-200 rounded-xl ">
+					<Typography className="text-[1.75rem] text-sky-900 font-semibold text-center p-5">
 						Các câu hỏi thường gặp
 					</Typography>
-
-					<Grid
-						container
-						className=" text-sky-900">
-						{dedicatedServerQuestions.map(item => {
-							return (
-								<Grid
-									key={item.id}
-									item
-									xs={12}
-									md={6}
-									className="flex flex-col items-center justify-center">
-									<Typography className="w-3/4 text-lg font-semibold">
-										{item.question}
-									</Typography>
-									<Typography className="w-3/4 text-justify py-3">
-										{item.answer}
-									</Typography>
-								</Grid>
-							);
-						})}
-					</Grid>
-				</Box>
+					{dedicatedServerQuestions.map(item => {
+						return (
+							<div
+								key={item.id}
+								className="space-y-12 px-2 xl:px-16 py-5">
+								<div className="mt-1 flex">
+									<div>
+										<div className="flex items-center h-16 border-l-4 border-blue-600">
+											<span className="text-4xl text-blue-600 px-4">Q.</span>
+										</div>
+										<div className="flex items-center h-16 border-l-4 border-gray-400">
+											<span className="text-4xl text-gray-400 px-4">A.</span>
+										</div>
+									</div>
+									<div>
+										<div className="flex items-center h-16">
+											<span className="text-lg text-blue-600 font-bold">
+												{item.question}
+											</span>
+										</div>
+										<div className="flex items-center py-2">
+											<span className="text-gray-500">{item.answer}</span>
+										</div>
+									</div>
+								</div>
+							</div>
+						);
+					})}
+				</div>
 			</Container>
 		</>
 	);

@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+html:focus-within {
+	scroll-behavior: smooth;
+}
+
 /* Loading component */
 .dot-spinner {
 	--uib-size: 2.8rem;

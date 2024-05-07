@@ -69,11 +69,11 @@ export default function CloudFlare() {
 					</Grid>
 				</Paper>
 
-				<Box className="theme text-white text-center shadow-xl">
+				<Box className="themeHeroBackground py-10 text-white text-center shadow-xl">
 					<Typography className="text-[2rem] font-semibold text-center">
 						PERFORMANCE
 					</Typography>
-					<Typography className="py-5 text-[1.5rem]">
+					<Typography className="pt-5 text-[1.5rem]">
 						Giúp tăng tốc độ tải của ứng dụng - website
 					</Typography>
 				</Box>
@@ -173,7 +173,7 @@ export default function CloudFlare() {
 					</Grid>
 				</Paper>
 
-				<Box className="theme text-white text-center shadow-xl">
+				<Box className="themeHeroBackground py-10 text-white text-center shadow-xl">
 					<Typography className="text-[2rem] font-semibold text-center">
 						Trải nghiệm miễn phí dịch vụ CLOUDFLARE WAF của chúng tôi
 					</Typography>
@@ -186,7 +186,7 @@ export default function CloudFlare() {
 				</Box>
 
 				{/* CLOUDFLARE WAF */}
-				<Paper className="rounded-none mb-10">
+				<Paper className="rounded-none">
 					<Grid container>
 						<Grid
 							item
@@ -262,8 +262,8 @@ export default function CloudFlare() {
 				</Paper>
 
 				{/* Q & A */}
-				<Box pb={5}>
-					<Typography className="text-[2rem] text-sky-900 font-semibold text-center py-5">
+				<div className="bg-white border border-gray-200 divide-y divide-gray-200 rounded-xl ">
+					<Typography className="text-[1.75rem] text-sky-900 font-semibold text-center py-5">
 						Có nên sử dụng CloudFlare hay không ?
 					</Typography>
 					<Typography className="text-center">
@@ -271,29 +271,35 @@ export default function CloudFlare() {
 						mây tên miền. <br />
 						Nên sử dụng DNS trung gian này bởi vì các lý do sau đây:
 					</Typography>
-
-					<Grid
-						container
-						className=" text-sky-900 mt-10">
-						{cloudflareQuestions.map(item => {
-							return (
-								<Grid
-									key={item.id}
-									item
-									xs={12}
-									md={6}
-									className="flex flex-col items-center justify-center">
-									<Typography className="w-3/4 text-lg font-semibold">
-										{item.question}
-									</Typography>
-									<Typography className="w-3/4 text-justify py-3">
-										{item.answer}
-									</Typography>
-								</Grid>
-							);
-						})}
-					</Grid>
-				</Box>
+					{cloudflareQuestions.map(item => {
+						return (
+							<div
+								key={item.id}
+								className="space-y-12 px-2 xl:px-16 py-5">
+								<div className="mt-1 flex">
+									<div>
+										<div className="flex items-center h-16 border-l-4 border-blue-600">
+											<span className="text-4xl text-blue-600 px-4">Q.</span>
+										</div>
+										<div className="flex items-center h-16 border-l-4 border-gray-400">
+											<span className="text-4xl text-gray-400 px-4">A.</span>
+										</div>
+									</div>
+									<div>
+										<div className="flex items-center h-16">
+											<span className="text-lg text-blue-600 font-bold">
+												{item.question}
+											</span>
+										</div>
+										<div className="flex items-center py-2">
+											<span className="text-gray-500">{item.answer}</span>
+										</div>
+									</div>
+								</div>
+							</div>
+						);
+					})}
+				</div>
 			</Box>
 		</>
 	);
