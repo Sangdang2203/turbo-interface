@@ -41,17 +41,8 @@ export const fetchCategories = async (token: string) => {
 };
 
 export const fetchPosts = async () => {
-	const response = await fetch("/api/posts", {
+	const response = await fetch(`/api/posts`, {
 		method: "GET",
-		cache: "no-cache",
-	});
-	return response.json() as Promise<ApiResponse>;
-};
-
-export const fetchPost = async (postId: string) => {
-	const response = await fetch(`/api/posts/${postId}`, {
-		method: "GET",
-		cache: "no-cache",
 	});
 	return response.json() as Promise<ApiResponse>;
 };

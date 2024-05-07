@@ -4,14 +4,7 @@ import * as React from "react";
 import { toast } from "sonner";
 import { useForm } from "react-hook-form";
 import dynamic from "next/dynamic";
-import {
-	Category,
-	ApiResponse,
-	User,
-	POSTSCHEMA,
-	CreatePostRequest,
-	SCHEMA,
-} from "types/interfaces";
+import { Category, User, POSTSCHEMA, SCHEMA } from "types/interfaces";
 import { DoneRounded, RotateLeftRounded } from "@mui/icons-material";
 import {
 	Box,
@@ -28,6 +21,7 @@ import {
 import { fetchCategories, fetchUsers } from "app/methods/method";
 import { useSession } from "next-auth/react";
 import { zodResolver } from "@hookform/resolvers/zod";
+import AddNewPost from "./addPost";
 
 const CustomEditor = dynamic(
 	() => {
@@ -76,46 +70,6 @@ export default function CreatePost() {
 		},
 	};
 
-	async function AddNewPost(data: POSTSCHEMA) {
-		if (session) {
-			const message = toast.loading("Đang tạo bài viết mới");
-
-			const post: CreatePostRequest = {
-				title: data.title,
-				categories: data.categories.map(item => ({ id: item })),
-				user: {
-					id: data.userId,
-				},
-				description: data.description,
-				content: data.content,
-				status: "ACTIVE",
-			};
-
-			try {
-				const res = await fetch("/api/posts", {
-					method: "POST",
-					headers: {
-						Authorization: `Bearer ${session.user.id_token}`,
-						"Content-Type": "application/json",
-					},
-					body: JSON.stringify(post),
-				});
-
-				const payload = (await res.json()) as ApiResponse;
-
-				if (payload.ok) {
-					toast.success(payload.message);
-				} else {
-					toast.error(payload.message);
-				}
-			} catch (error) {
-				toast.error("Loi");
-				console.log(error);
-			}
-			toast.dismiss(message);
-		}
-	}
-
 	React.useEffect(() => {
 		if (session) {
 			Promise.all([
@@ -146,7 +100,7 @@ export default function CreatePost() {
 	return (
 		<>
 			<Paper sx={{ p: 5 }}>
-				<form onSubmit={handleSubmit(AddNewPost)}>
+				<form onSubmit={handleSubmit(AddNewPost(session))}>
 					<Box className="my-3">
 						<InputLabel className="font-semibold">Tiêu đề bài viết:</InputLabel>
 						<TextField

@@ -72,18 +72,6 @@ export default function NewsPage() {
 		setLoading(false);
 	}, []);
 
-	React.useEffect(() => {
-		Promise.all([fetchPosts()]).then(data => {
-			const [resPosts] = data;
-
-			if (resPosts.ok) {
-				setPosts(resPosts.data);
-			}
-
-			setLoading(false);
-		});
-	}, []);
-
 	return (
 		<>
 			{loading ? (
@@ -172,7 +160,7 @@ export default function NewsPage() {
 													{item.title}
 												</div>
 												<Link
-													href={`news/${item.id}`}
+													href={`news/${item.slug}`}
 													className="text-sky-700 text-[0.85rem] pl-2 no-underline hover:text-sky-500">
 													Đọc thêm &gt;&gt;
 												</Link>
