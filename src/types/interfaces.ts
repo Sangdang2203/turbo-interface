@@ -41,6 +41,20 @@ export interface CreatePostRequest
 	status: "ACTIVE";
 }
 
+export interface CreateCategoryRequest {
+	name: string;
+}
+
+export interface UpdateCategoryRequest {
+	id: string;
+	name: string;
+}
+
+export interface Category {
+	id: string;
+	name: string;
+}
+
 export interface CustomerMessage {
 	name: string;
 	email: string;
@@ -65,20 +79,19 @@ export interface CreateUserRequest {
 	lastName: string;
 	email: string;
 	authorities: string[];
+	activated: boolean;
 }
 
 export interface UpdateUserRequest {
+	id: string;
+	login: string;
 	firstName: string;
 	lastName: string;
 	email: string;
+	authorities: string[];
 }
 
 export interface Authority {
-	name: string;
-}
-
-export interface Category {
-	id: string;
 	name: string;
 }
 

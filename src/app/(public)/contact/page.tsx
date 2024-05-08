@@ -106,7 +106,9 @@ const ContactPage = () => {
 						<div className="form-container">
 							<form className="form">
 								<div className="form-group">
-									<label htmlFor="name">Họ và tên khách hàng</label>
+									<label htmlFor="name">
+										Họ và tên khách hàng | Doanh nghiệp
+									</label>
 									<input
 										{...register("name", {
 											required: "Vui lòng điền thông tin.",
@@ -160,6 +162,7 @@ const ContactPage = () => {
 										multiple
 										id="service"
 										size="small"
+										limitTags={2}
 										options={services}
 										getOptionLabel={option => option.name}
 										renderInput={params => (

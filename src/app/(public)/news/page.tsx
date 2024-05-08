@@ -22,7 +22,6 @@ import Loading from "@/components/Loading";
 export default function NewsPage() {
 	const [loading, setLoading] = React.useState(true);
 	const [posts, setPosts] = React.useState<Post[]>([]);
-	//const [postsMap, setPostsMap] = React.useState<Map<string, string>>(new Map());
 	const [latestPosts, setLatestPosts] = React.useState<Post[]>([]);
 	const [page, setPage] = React.useState(1);
 
@@ -116,7 +115,7 @@ export default function NewsPage() {
 												my={2}
 												className="w-[90%]">
 												<Link
-													href={`news/${item.id}`}
+													href={`news/${item.slug}`}
 													className="line-clamp-2 text-sky-700 no-underline text-sm hover:text-yellow-600 duration-500"
 													title={item.title}>
 													{item.title}

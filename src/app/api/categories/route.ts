@@ -38,14 +38,13 @@ export async function GET(req: NextRequest) {
 	}
 }
 
-export async function POST(request: Request) {
+export async function POST(request: NextRequest) {
 	const category = await request.json();
+
 	try {
 		const res = await fetch(process.env.NEXT_PUBLIC_API_URL + "/categories", {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-			},
+			method: request.method,
+			headers: request.headers,
 			body: JSON.stringify(category),
 		});
 
@@ -55,7 +54,7 @@ export async function POST(request: Request) {
 			return NextResponse.json({
 				ok: true,
 				status: "Success",
-				message: "Get all categories successfully.",
+				message: "Tạo mới thành công.",
 				data,
 			});
 		}
@@ -63,14 +62,14 @@ export async function POST(request: Request) {
 		return NextResponse.json({
 			ok: false,
 			status: "Error",
-			message: "Failed to get all categories.",
+			message: "Thao tác tạo mới thất bại.",
 		});
 	} catch (error) {
 		return NextResponse.json({
 			ok: false,
 			status: "Server Error",
 			message:
-				"Opps ! Something went wrong while trying to get all categories.",
+				"Opps ! Something went wrong while trying to create new category.",
 		});
 	}
 }

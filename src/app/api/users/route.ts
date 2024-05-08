@@ -40,7 +40,7 @@ export async function GET(req: NextRequest) {
 
 export async function POST(req: NextRequest) {
 	const user = await req.json();
-	//console.log(user);
+
 	try {
 		const response = await fetch(
 			process.env.NEXT_PUBLIC_API_URL + "/admin/users",

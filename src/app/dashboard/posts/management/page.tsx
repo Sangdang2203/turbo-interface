@@ -260,8 +260,7 @@ export default function PostManagement() {
 												colSpan={7}
 												align="center"
 												className="text-sm">
-												{" "}
-												No Data{" "}
+												No Data
 											</TableCell>
 										</TableRow>
 									)}

@@ -72,7 +72,7 @@ export default function CustomDialog() {
 										message: "Điền tối đa 50 ký tự.",
 									},
 								})}
-								placeholder="Nhập họ tên quý khách hàng ..."
+								placeholder="Họ và tên khách hàng | Doanh nghiệp"
 								type="text"
 								fullWidth
 							/>
@@ -88,7 +88,7 @@ export default function CustomDialog() {
 										message: "Email sai định dạng.",
 									},
 								})}
-								placeholder="Nhập email ..."
+								placeholder="Email"
 								type="email"
 								fullWidth
 							/>
@@ -105,7 +105,7 @@ export default function CustomDialog() {
 									},
 								})}
 								fullWidth
-								placeholder="Nhập số điện thoại ..."
+								placeholder="Số điện thoại"
 							/>
 						</label>
 						<span className="text-danger">{errors.phone?.message}</span>
@@ -115,6 +115,7 @@ export default function CustomDialog() {
 								multiple
 								id="service"
 								className="text-[10px]"
+								limitTags={2}
 								options={services}
 								getOptionLabel={option => option.name}
 								renderInput={params => (

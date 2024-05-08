@@ -41,17 +41,15 @@ export async function DELETE(
 
 export async function PUT(
 	request: Request,
-	{ params }: { params: { userId: string } }
+	{ params }: { params: { login: string } }
 ) {
 	const updatedUser = await request.json();
 	try {
 		const response = await fetch(
-			process.env.NEXT_PUBLIC_API_URL + "/admin/users" + params.userId,
+			process.env.NEXT_PUBLIC_API_URL + "/admin/users" + params.login,
 			{
-				method: "PUT",
-				headers: {
-					"Content-Type": "application/json",
-				},
+				method: request.method,
+				headers: request.headers,
 				body: JSON.stringify(updatedUser),
 			}
 		);
@@ -60,14 +58,13 @@ export async function PUT(
 
 		if (response.ok) {
 			data = await response.json();
-			console.log(data);
 		}
 
 		if (response.ok) {
 			return NextResponse.json({
 				ok: true,
 				status: "Success",
-				message: "Thực hiện cập nhật thành công",
+				message: "Cập nhật thành công.",
 				data,
 			});
 		}
@@ -75,7 +72,7 @@ export async function PUT(
 		return NextResponse.json({
 			ok: true,
 			status: "Error",
-			message: "Thực hiện cập nhật thất bại",
+			message: "Cập nhật thất bại.",
 		});
 	} catch (error) {
 		console.log(error);

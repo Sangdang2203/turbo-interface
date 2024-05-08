@@ -21,13 +21,6 @@ export default withAuth(
 			if (!path) {
 				return NextResponse.redirect(new URL("/", req.url));
 			}
-			// const userPermissions = token.role.permissions || [];
-			// const hasPermission = path.permission.some(p =>
-			// 	userPermissions.includes(p)
-			// );
-			// if (!hasPermission) {
-			// 	return NextResponse.redirect(new URL("/access-denied", req.url));
-			// }
 			return NextResponse.next();
 		} else {
 			if (req.nextUrl.pathname === "/admin-login") return NextResponse.next();
@@ -68,16 +61,13 @@ const paths = [
 		path: "/dashboard",
 		permission: ["app.view"],
 	},
-	//---- User ----//
-
-	//---- Admin ----//
 
 	{
 		path: "/dashboard/users",
 		permission: ["emp.view"],
 	},
 	{
-		path: "/dashboard/users",
+		path: "/dashboard/posts/categories",
 		permission: ["emp.view"],
 	},
 	{
