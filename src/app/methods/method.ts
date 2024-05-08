@@ -38,6 +38,16 @@ export const fetchPosts = async () => {
 	return response.json() as Promise<ApiResponse>;
 };
 
+export const fetchContacts = async (token: string) => {
+	const response = await fetch(`/api/contacts`, {
+		method: "GET",
+		headers: {
+			Authorization: `Bearer ${token}`,
+		},
+	});
+	return response.json() as Promise<ApiResponse>;
+};
+
 // DELE METHODS
 export const fetchDeleteUser = async (token: string, userId: string) => {
 	const response = await fetch(`/api/users/${userId}`, {

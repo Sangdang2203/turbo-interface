@@ -6,6 +6,7 @@ import {
 	ArticleOutlined,
 	BadgeOutlined,
 	ManageSearchRounded,
+	RecentActors,
 } from "@mui/icons-material";
 import * as React from "react";
 import { OverridableComponent } from "@mui/material/OverridableComponent";
@@ -60,6 +61,8 @@ export default function DrawerMenu() {
 				),
 			]
 		),
+
+		createMenu("Khách hàng", RecentActors, "/dashboard/contacts", "emp.view"),
 
 		// createMenu('Tuyển Dụng', NewspaperOutlined, '/dashboard/recruitment', 'recruitment.view', [
 		// 	createMenu('Quản lý', ManageSearchRounded, '/dashboard/recruitment/management', 'recruitment.view'),

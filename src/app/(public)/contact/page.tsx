@@ -16,10 +16,12 @@ import {
 	PhoneCallbackRounded,
 	SendRounded,
 } from "@mui/icons-material";
-import { CustomerMessage } from "types/interfaces";
+import { CustomerMessage, ApiResponse } from "types/interfaces";
 import { useForm, SubmitHandler } from "react-hook-form";
 import * as React from "react";
+import { toast } from "sonner";
 import { services } from "app/libs/data";
+import { useSession } from "next-auth/react";
 
 // export const metadata = () => {
 // 	return {
@@ -28,11 +30,40 @@ import { services } from "app/libs/data";
 // };
 
 const ContactPage = () => {
+	const { data: session } = useSession();
 	const {
 		register,
 		handleSubmit,
 		formState: { errors: errors },
 	} = useForm<CustomerMessage>();
+
+	async function CreateContact(contact: CustomerMessage) {
+		if (session) {
+			const message = toast.loading("Đang gửi thông tin ...");
+
+			try {
+				const res = await fetch(`/api/contacts`, {
+					method: "POST",
+					headers: {
+						Authorization: `Bearer ${session.user.id_token}`,
+						"Content-Type": "application/json",
+					},
+					body: JSON.stringify(contact),
+				});
+
+				const payload = (await res.json()) as ApiResponse;
+
+				if (payload.ok) {
+					toast.success(payload.message);
+				} else {
+					toast.success(payload.message);
+				}
+				toast.dismiss(message);
+			} catch (error) {
+				console.log(error);
+			}
+		}
+	}
 
 	return (
 		<Box>
@@ -104,11 +135,18 @@ const ContactPage = () => {
 						xs={12}
 						md={6}>
 						<div className="form-container">
-							<form className="form">
+							<form
+								className="form"
+								onSubmit={handleSubmit(CreateContact)}>
+								<p className="text-red-700 font-bold">
+									(*) Bắt buộc nhập thông tin
+								</p>
 								<div className="form-group">
 									<label htmlFor="name">
+										<span className="text-red-700 pr-1">(*)</span>
 										Họ và tên khách hàng | Doanh nghiệp
 									</label>
+
 									<input
 										{...register("name", {
 											required: "Vui lòng điền thông tin.",
@@ -124,10 +162,14 @@ const ContactPage = () => {
 										name="name"
 										id="name"
 									/>
+									<span className="text-red-700">{errors.name?.message}</span>
 								</div>
 
 								<div className="form-group">
-									<label htmlFor="phone">Số điện thoại</label>
+									<label htmlFor="phone">
+										<span className="text-red-700 pr-1">(*)</span>
+										Số điện thoại
+									</label>
 									<input
 										{...register("phone", {
 											required: "Vui lòng điền thông tin.",
@@ -136,12 +178,17 @@ const ContactPage = () => {
 												message: "Điền đủ 10 số.",
 											},
 										})}
+										min={0}
 										name="phone"
 										id="phone"
 									/>
+									<span className="text-red-700">{errors.phone?.message}</span>
 								</div>
 								<div className="form-group">
-									<label htmlFor="email">Email</label>
+									<label htmlFor="email">
+										<span className="text-red-700 pr-1">(*)</span>
+										Email
+									</label>
 									<input
 										{...register("email", {
 											required: "Vui lòng điền thông tin.",
@@ -154,6 +201,7 @@ const ContactPage = () => {
 										id="email"
 										type="text"
 									/>
+									<span className="text-red-700">{errors.email?.message}</span>
 								</div>
 
 								<div className="form-group">
@@ -172,6 +220,9 @@ const ContactPage = () => {
 											/>
 										)}
 									/>
+									<span className="text-red-700">
+										{errors.services?.message}
+									</span>
 								</div>
 
 								<div className="form-group">
@@ -179,13 +230,14 @@ const ContactPage = () => {
 										Chúng tôi có thể giúp gì cho bạn ?
 									</label>
 									<textarea
-										{...register("message", {
-											required: "Vui lòng điền thông tin.",
-										})}
+										{...register("message")}
 										cols={50}
 										rows={10}
 										id="textarea"
 										name="textarea"></textarea>
+									<span className="text-red-700">
+										{errors.message?.message}
+									</span>
 								</div>
 								<Button
 									startIcon={<SendRounded className="" />}

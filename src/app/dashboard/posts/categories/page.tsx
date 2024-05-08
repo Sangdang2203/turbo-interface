@@ -20,83 +20,36 @@ import {
 	Dialog,
 	DialogContent,
 	DialogTitle,
-	FormHelperText,
 	Divider,
+	FormHelperText,
 } from "@mui/material";
 import {
 	CloseOutlined,
 	DoneRounded,
 	RotateLeftRounded,
-	AddCircleOutlineRounded,
 	EditNoteRounded,
-	DeleteOutline,
 } from "@mui/icons-material";
-import { fetchCategories, fetchDeleteCategory } from "app/methods/method";
-import {
-	ApiResponse,
-	Category,
-	CreateCategoryRequest,
-	UpdateCategoryRequest,
-} from "types/interfaces";
+import { fetchCategories } from "app/methods/method";
+import { ApiResponse, Category, UpdateCategoryRequest } from "types/interfaces";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
+import AddCategoryForm from "./createForm";
 
-export default function UserManagement() {
+export default function CategoryManagement() {
 	const [loading, setLoading] = React.useState(true);
-	const [selectedCategory, setSelectedCategory] =
-		React.useState<Category | null>(null);
+	const [selectedCategory, setSelectedCategory] = React.useState<Category>();
 	const [categories, setCategories] = React.useState<Category[]>([]);
-	const [modalAdd, setModalAdd] = React.useState(false);
 	const [modalUpdate, setModalUpdate] = React.useState(false);
 
 	const { data: session } = useSession();
 
 	const {
-		register,
-		handleSubmit,
-		formState: { errors },
-		setValue,
-		watch,
-		reset,
-	} = useForm<CreateCategoryRequest>();
-
-	const {
 		register: update,
 		handleSubmit: handleUpdate,
 		formState: { errors: errorsUpdate },
+		reset: resetUpdateForm,
 	} = useForm<UpdateCategoryRequest>();
 
-	// add new
-	async function AddCategory(category: CreateCategoryRequest) {
-		if (session) {
-			try {
-				const message = toast.loading("Đang tạo mới ...");
-				const res = await fetch("/api/categories", {
-					method: "POST",
-					headers: {
-						Authorization: `Bearer ${session.user.id_token}`,
-						"Content-Type": "application/json",
-					},
-					body: JSON.stringify(category),
-				});
-
-				const payload = (await res.json()) as ApiResponse;
-
-				if (payload.ok) {
-					const response = await fetchCategories(session.user.id_token);
-					setCategories(await response.data.reverse());
-					setModalAdd(false);
-					toast.success(payload.message);
-				} else {
-					toast.error(payload.message);
-				}
-				toast.dismiss(message);
-			} catch (error) {
-				console.log("Error add user: ", error);
-				toast.error("Oops! Error while trying to add user.");
-			}
-		}
-	}
 	// update
 	async function UpdateCategory(category: UpdateCategoryRequest) {
 		if (session) {
@@ -110,6 +63,8 @@ export default function UserManagement() {
 					},
 					body: JSON.stringify(category),
 				});
+
+				console.log(res);
 
 				const payload = (await res.json()) as ApiResponse;
 
@@ -158,16 +113,11 @@ export default function UserManagement() {
 								xs={12}
 								sm={6}
 								className="flex justify-between items-center p-3">
-								<Button
-									variant="contained"
-									startIcon={<AddCircleOutlineRounded />}
-									onClick={() => setModalAdd(true)}>
-									Tạo mới
-								</Button>
+								<AddCategoryForm />
 							</Grid>
 						</Grid>
 					</Paper>
-
+					{/* display all categories */}
 					<Paper
 						elevation={6}
 						sx={{ my: 3, borderRadius: "10px", boxSizing: "border-box" }}>
@@ -202,7 +152,8 @@ export default function UserManagement() {
 														<IconButton
 															color="success"
 															onClick={() => {
-																setSelectedCategory(cate), setModalUpdate(true);
+																setSelectedCategory(cate);
+																setModalUpdate(true);
 															}}>
 															<EditNoteRounded fontSize="medium" />
 														</IconButton>
@@ -226,111 +177,71 @@ export default function UserManagement() {
 				</Box>
 			)}
 
-			{/* Add or Update Category */}
+			{/* Update Category */}
 			{selectedCategory && (
 				<Dialog
-					open={selectedCategory ? modalUpdate : modalAdd}
-					onClose={() =>
-						selectedCategory ? setModalUpdate(false) : setModalAdd(false)
-					}
+					open={modalUpdate}
+					onClose={() => setModalUpdate(false)}
 					className="max-w-[500px] mx-auto">
 					<Tooltip title="Close">
 						<CloseOutlined
-							onClick={() =>
-								selectedCategory ? setModalUpdate(false) : setModalAdd(false)
-							}
+							onClick={() => setModalUpdate(false)}
 							color="error"
 							className="text-md absolute top-1 right-1 rounded-full hover:opacity-80 hover:bg-red-200 cursor-pointer"
 						/>
 					</Tooltip>
 
 					<DialogTitle className="text-center mt-2">
-						{selectedCategory ? "Updated Category" : "Add New Category"}
+						Cập nhật danh mục
 					</DialogTitle>
 
 					<Divider />
 
 					<DialogContent>
-						{selectedCategory ? (
-							<form onSubmit={handleUpdate(UpdateCategory)}>
-								<Box className="my-3">
-									<TextField
-										{...update("id")}
-										className="min-w-[300px] rounded-md  cursor-pointer shadow-lg w-full"
-										defaultValue={selectedCategory?.id}
-										hidden
-										disabled
-									/>
-								</Box>
-								<Box className="my-3">
-									<TextField
-										{...update("name", {
-											required: "Nhập đầy đủ thông tin.",
-										})}
-										className="min-w-[300px] rounded-md  cursor-pointer shadow-lg w-full"
-										defaultValue={selectedCategory?.name}
-									/>
-								</Box>
+						<form onSubmit={handleUpdate(UpdateCategory)}>
+							<Box className="my-3">
+								<TextField
+									{...update("id")}
+									className="min-w-[300px] rounded-md  cursor-pointer shadow-lg w-full"
+									value={selectedCategory?.id}
+									hidden
+									disabled
+								/>
+							</Box>
+							<Box className="my-3">
+								<TextField
+									{...update("name", {
+										required: "Nhập đầy đủ thông tin.",
+										minLength: { value: 8, message: "Tối thiểu 8 ký tự." },
+										maxLength: { value: 50, message: "Tối đa 50 ký tự." },
+									})}
+									className="min-w-[300px] rounded-md  cursor-pointer shadow-lg w-full"
+									defaultValue={selectedCategory?.name}
+								/>
+								<FormHelperText className="text-red-700 px-2 mt-2 ">
+									{errorsUpdate.name?.message}
+								</FormHelperText>
+							</Box>
 
-								<Box className="flex justify-between">
-									<Button
-										type="submit"
-										variant="contained"
-										size="medium"
-										className="w-full mr-2 p-2 text-white bg-[#008200] hover:opacity-85"
-										startIcon={<DoneRounded fontSize="medium" />}>
-										Cập nhật
-									</Button>
-									<Button
-										onClick={() => reset()}
-										variant="contained"
-										size="medium"
-										className="w-full p-2 text-white bg-[#0C2340] hover:opacity-85"
-										startIcon={<RotateLeftRounded fontSize="medium" />}>
-										Hủy bỏ
-									</Button>
-								</Box>
-							</form>
-						) : (
-							<form onSubmit={handleSubmit(AddCategory)}>
-								<Box className="my-3">
-									<TextField
-										{...register("name", {
-											required: "Nhập đầy đủ thông tin.",
-											minLength: { value: 8, message: "Tối thiểu 8 ký tự." },
-											maxLength: { value: 50, message: "Tối đa 50 ký tự." },
-										})}
-										type="text"
-										size="small"
-										color="primary"
-										className="min-w-[300px] rounded-md  cursor-pointer shadow-lg w-full"
-										placeholder="Nhập tên đăng nhập"
-									/>
-									<FormHelperText className="text-red-700 px-2 mt-2 ">
-										{errors.name?.message}
-									</FormHelperText>
-								</Box>
-
-								<Box className="flex justify-between">
-									<Button
-										type="submit"
-										variant="contained"
-										size="medium"
-										className="w-full my-3 mr-2 p-2 text-white bg-[#008200] hover:opacity-85"
-										startIcon={<DoneRounded fontSize="medium" />}>
-										Đồng ý
-									</Button>
-									<Button
-										onClick={() => reset()}
-										variant="contained"
-										size="medium"
-										className="w-full my-3 p-2 text-white bg-[#0C2340] hover:opacity-85"
-										startIcon={<RotateLeftRounded fontSize="medium" />}>
-										Hủy bỏ
-									</Button>
-								</Box>
-							</form>
-						)}
+							<Box className="flex justify-between">
+								<Button
+									type="submit"
+									variant="contained"
+									size="medium"
+									className="w-full mr-2 p-2 text-white bg-[#008200] hover:opacity-85"
+									startIcon={<DoneRounded fontSize="medium" />}>
+									Cập nhật
+								</Button>
+								<Button
+									onClick={() => resetUpdateForm()}
+									variant="contained"
+									size="medium"
+									className="w-full p-2 text-white bg-[#0C2340] hover:opacity-85"
+									startIcon={<RotateLeftRounded fontSize="medium" />}>
+									Hủy bỏ
+								</Button>
+							</Box>
+						</form>
 					</DialogContent>
 				</Dialog>
 			)}

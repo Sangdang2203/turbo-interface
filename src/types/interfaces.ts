@@ -56,10 +56,11 @@ export interface Category {
 }
 
 export interface CustomerMessage {
+	id: string;
 	name: string;
 	email: string;
 	phone: string;
-	service: string[];
+	services: string[];
 	message: string;
 }
 

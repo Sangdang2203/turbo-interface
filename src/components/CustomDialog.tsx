@@ -12,7 +12,6 @@ import {
 	TextField,
 	Autocomplete,
 } from "@mui/material";
-import { SendRounded } from "@mui/icons-material";
 import { CustomerMessage } from "types/interfaces";
 import { services } from "app/libs/data";
 

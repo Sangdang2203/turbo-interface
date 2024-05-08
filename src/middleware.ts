@@ -79,7 +79,7 @@ const paths = [
 		permission: ["fee.view"],
 	},
 	{
-		path: "/app/general-settings",
+		path: "/dashboard/contacts",
 		permission: ["emp.create"],
 	},
 ];

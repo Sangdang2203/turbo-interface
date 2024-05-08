@@ -1,5 +1,47 @@
 import { NextRequest, NextResponse } from "next/server";
 
+export async function GET(
+	req: NextRequest,
+	{ params }: { params: { postId: string } }
+) {
+	try {
+		const id = params.postId;
+		const res = await fetch(
+			process.env.NEXT_PUBLIC_API_URL + `/categories/${id}`,
+			{
+				method: "GET",
+				cache: "no-cache",
+			}
+		);
+
+		let data = null;
+
+		if (res.ok) {
+			data = await res.json();
+
+			return NextResponse.json({
+				ok: true,
+				status: "success",
+				message: "Get post successfully",
+				data,
+			});
+		}
+
+		return NextResponse.json({
+			ok: false,
+			status: "Error",
+			message: "Failed to get post",
+		});
+	} catch (error) {
+		console.log(error);
+		return NextResponse.json({
+			ok: false,
+			status: "Server Error",
+			message: "Oops ! Something went wrong while trying get post.",
+		});
+	}
+}
+
 export async function PATCH(
 	req: NextRequest,
 	{ params }: { params: { cateId: string } }
@@ -7,6 +49,7 @@ export async function PATCH(
 	const id = params.cateId;
 
 	const updateCategory = await req.json();
+
 	try {
 		const response = await fetch(
 			process.env.NEXT_PUBLIC_API_URL + `/categories/${id} `,
@@ -17,6 +60,7 @@ export async function PATCH(
 			}
 		);
 
+		console.log(updateCategory);
 		let data = null;
 
 		if (response.ok) {
