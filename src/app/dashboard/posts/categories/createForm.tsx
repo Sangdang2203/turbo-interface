@@ -19,7 +19,7 @@ import { useSession } from "next-auth/react";
 import React from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
-import { CreateCategoryRequest, ApiResponse, Category } from "types/interfaces";
+import { CreateCategoryRequest, ApiResponse } from "types/interfaces";
 
 export default function AddCategoryForm() {
 	const [openDialog, setOpenDialog] = React.useState(false);
@@ -76,7 +76,7 @@ export default function AddCategoryForm() {
 					<CloseOutlined
 						onClick={() => setOpenDialog(false)}
 						color="error"
-						className="absolute top-1 right-1 rounded-2xl hover:opacity-80 hover:bg-red-200 cursor-pointer"
+						className="text-md absolute top-1 right-1 bg-slate-500 rounded hover:opacity-80 hover:bg-red-200 cursor-pointer"
 					/>
 				</Tooltip>
 				<DialogTitle>
@@ -95,7 +95,7 @@ export default function AddCategoryForm() {
 								size="small"
 								color="primary"
 								className="min-w-[300px] rounded-md  cursor-pointer shadow-lg w-full"
-								placeholder="Nhập tên đăng nhập"
+								placeholder="Nhập tên danh mục"
 							/>
 							<FormHelperText className="text-red-700 px-2 mt-2 ">
 								{errors.name?.message}

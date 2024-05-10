@@ -140,11 +140,16 @@ export default function NewsPage() {
 												key={item.id}
 												className="post_card max-h-[500px] shadow-sm hover:scale-105 hover:duration-700">
 												<div className="card-image">
-													<img
-														src="https://hoanghamobile.com/tin-tuc/wp-content/uploads/2023/07/anh-phong-canh-dep-24.jpg"
-														className="w-full h-auto rounded-md"
-														alt="UnifiedCloudStorage"
-													/>
+													<Link href={`news/${item.slug}`}>
+														<img
+															src={
+																"https://project-sem3.s3.ap-southeast-1.amazonaws.com/" +
+																item.urlImage
+															}
+															className="w-full h-auto rounded-md"
+															alt={item.urlImage}
+														/>
+													</Link>
 												</div>
 
 												<div className="author">

@@ -48,13 +48,13 @@ import {
 } from "app/methods/method";
 import {
 	ApiResponse,
-	Authority,
 	CreateUserRequest,
 	UpdateUserRequest,
 	User,
 } from "types/interfaces";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
+import CreateUserForm from "./createUserForm";
 
 export default function UserManagement() {
 	const [loading, setLoading] = React.useState(true);
@@ -99,18 +99,6 @@ export default function UserManagement() {
 		setPage(0);
 	};
 
-	// Begin multi select
-	const ITEM_HEIGHT = 40;
-	const ITEM_PADDING_TOP = 8;
-	const MenuProps = {
-		PaperProps: {
-			style: {
-				maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-				width: 300,
-			},
-		},
-	};
-
 	// Handle Search
 	function handleSearch(event: React.FormEvent<HTMLFormElement>) {
 		if (session) {
@@ -139,38 +127,6 @@ export default function UserManagement() {
 		}
 	}
 
-	async function AddUser(user: CreateUserRequest) {
-		if (session) {
-			try {
-				const message = toast.loading("Đang tạo mới ...");
-				const res = await fetch("/api/users", {
-					method: "POST",
-					headers: {
-						Authorization: `Bearer ${session.user.id_token}`,
-						"Content-Type": "application/json",
-					},
-					body: JSON.stringify(user),
-				});
-
-				console.log(user);
-
-				const payload = (await res.json()) as ApiResponse;
-
-				if (payload.ok) {
-					const response = await fetchUsers(session.user.id_token);
-					setUsers(await response.data.reverse());
-					setModalAdd(false);
-					toast.success(payload.message);
-				} else {
-					toast.error(payload.message);
-				}
-				toast.dismiss(message);
-			} catch (error) {
-				console.log("Error add user: ", error);
-				toast.error("Oops! Error while trying to add user.");
-			}
-		}
-	}
 	// UPDATE
 	async function UpdateUser(updatedUser: UpdateUserRequest) {
 		if (session) {
@@ -251,12 +207,7 @@ export default function UserManagement() {
 								xs={12}
 								sm={6}
 								className="flex justify-between items-center p-3">
-								<Button
-									variant="contained"
-									startIcon={<AddCircleOutlineRounded />}
-									onClick={() => setModalAdd(true)}>
-									Tạo mới
-								</Button>
+								<CreateUserForm />
 							</Grid>
 							<Grid
 								item
@@ -399,85 +350,80 @@ export default function UserManagement() {
 			{/* Add or Update User */}
 			{selectedUser && (
 				<Dialog
-					open={selectedUser ? modalUpdate : modalAdd}
-					onClose={() =>
-						selectedUser ? setModalUpdate(false) : setModalAdd(false)
-					}
+					open={modalUpdate}
+					onClose={() => setModalUpdate(false)}
 					className="max-w-[500px] mx-auto">
 					<Tooltip title="Close">
 						<CloseOutlined
-							onClick={() =>
-								selectedUser ? setModalUpdate(false) : setModalAdd(false)
-							}
+							onClick={() => setModalUpdate(false)}
 							color="error"
-							className="text-md absolute top-1 right-1 rounded-full hover:opacity-80 hover:bg-red-200 cursor-pointer"
+							className="text-md absolute top-1 right-1 bg-slate-500 rounded hover:opacity-80 hover:bg-red-200 cursor-pointer"
 						/>
 					</Tooltip>
 
 					<DialogTitle className="text-center mt-2">
-						{selectedUser ? "Updated User Information" : "Add New User"}
+						Updated User Information
 					</DialogTitle>
 
 					<Divider />
 
 					<DialogContent>
-						{selectedUser ? (
-							<form onSubmit={handleUpdate(UpdateUser)}>
-								<Box className="my-3">
-									<TextField
-										{...update("id")}
-										className="min-w-[300px] rounded-md cursor-pointer shadow-lg w-full"
-										defaultValue={selectedUser.id}
-										disabled
-										hidden
-									/>
-								</Box>
+						<form onSubmit={handleUpdate(UpdateUser)}>
+							<Box className="my-3">
+								<TextField
+									{...update("id")}
+									className="min-w-[300px] rounded-md cursor-pointer shadow-lg w-full"
+									defaultValue={selectedUser.id}
+									disabled
+									hidden
+								/>
+							</Box>
 
-								<Box className="my-3">
-									<TextField
-										{...update("login")}
-										className="min-w-[300px] rounded-md  cursor-pointer shadow-lg w-full"
-										defaultValue={selectedUser.login}
-										disabled
-									/>
-								</Box>
+							<Box className="my-3">
+								<TextField
+									{...update("login")}
+									className="min-w-[300px] rounded-md  cursor-pointer shadow-lg w-full"
+									defaultValue={selectedUser.login}
+									disabled
+								/>
+							</Box>
 
-								<Box className="my-3">
-									<TextField
-										{...update("lastName", {
-											required: "Nhập đầy đủ thông tin.",
-											minLength: { value: 8, message: "Tối thiểu 8 ký tự." },
-											maxLength: { value: 50, message: "Tối đa 50 ký tự." },
-										})}
-										type="text"
-										defaultValue={selectedUser.lastName}
-										className="min-w-[300px] rounded-md cursor-pointer shadow-lg w-full"
-										placeholder="Nhập họ"
-									/>
-									<FormHelperText className="text-red-700 px-2 mt-2 ">
-										{errorsUpdate.lastName?.message}
-									</FormHelperText>
-								</Box>
+							<Box className="my-3">
+								<TextField
+									{...update("lastName", {
+										required: "Nhập đầy đủ thông tin.",
+										minLength: { value: 8, message: "Tối thiểu 8 ký tự." },
+										maxLength: { value: 50, message: "Tối đa 50 ký tự." },
+									})}
+									type="text"
+									defaultValue={selectedUser.lastName}
+									className="min-w-[300px] rounded-md cursor-pointer shadow-lg w-full"
+									placeholder="Nhập họ"
+								/>
+								<FormHelperText className="text-red-700 px-2 mt-2 ">
+									{errorsUpdate.lastName?.message}
+								</FormHelperText>
+							</Box>
 
-								<Box className="my-3">
-									<TextField
-										{...update("firstName", {
-											required: "Nhập đầy đủ thông tin.",
-											minLength: { value: 8, message: "Tối thiểu 8 ký tự." },
-											maxLength: { value: 50, message: "Tối đa 50 ký tự." },
-										})}
-										type="text"
-										defaultValue={selectedUser.firstName}
-										className="min-w-[300px] rounded-md  cursor-pointer shadow-lg w-full"
-										placeholder="Nhập tên"
-									/>
-									<FormHelperText className="text-red-700 px-2 mt-2 ">
-										{errorsUpdate.firstName?.message}
-									</FormHelperText>
-								</Box>
+							<Box className="my-3">
+								<TextField
+									{...update("firstName", {
+										required: "Nhập đầy đủ thông tin.",
+										minLength: { value: 8, message: "Tối thiểu 8 ký tự." },
+										maxLength: { value: 50, message: "Tối đa 50 ký tự." },
+									})}
+									type="text"
+									defaultValue={selectedUser.firstName}
+									className="min-w-[300px] rounded-md  cursor-pointer shadow-lg w-full"
+									placeholder="Nhập tên"
+								/>
+								<FormHelperText className="text-red-700 px-2 mt-2 ">
+									{errorsUpdate.firstName?.message}
+								</FormHelperText>
+							</Box>
 
-								<Box>
-									{/* <select
+							<Box>
+								{/* <select
 										{...update("authorities")}
 										className="min-w-[300px] w-full p-[12px] rounded-md cursor-pointer shadow-lg"
 										id="authority">
@@ -496,180 +442,43 @@ export default function UserManagement() {
 									<FormHelperText className="text-red-700 px-2 mt-2">
 										{errors.authorities?.message}
 									</FormHelperText> */}
-								</Box>
+							</Box>
 
-								<Box className="my-3">
-									<TextField
-										{...update("email", {
-											required: "Nhập đầy đủ thông tin.",
-											pattern: {
-												value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-												message: "Phải đúng định dạng email.",
-											},
-										})}
-										defaultValue={selectedUser.email}
-										className="min-w-[300px] rounded-md cursor-pointer shadow-lg w-full"
-										placeholder="Nhập địa chỉ email"
-										disabled
-									/>
-								</Box>
+							<Box className="my-3">
+								<TextField
+									{...update("email", {
+										required: "Nhập đầy đủ thông tin.",
+										pattern: {
+											value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+											message: "Phải đúng định dạng email.",
+										},
+									})}
+									defaultValue={selectedUser.email}
+									className="min-w-[300px] rounded-md cursor-pointer shadow-lg w-full"
+									placeholder="Nhập địa chỉ email"
+									disabled
+								/>
+							</Box>
 
-								<Box className="flex justify-between">
-									<Button
-										type="submit"
-										variant="contained"
-										size="medium"
-										className="w-full mr-2 p-2 text-white bg-[#008200] hover:opacity-85"
-										startIcon={<DoneRounded fontSize="medium" />}>
-										Cập nhật
-									</Button>
-									<Button
-										onClick={() => reset()}
-										variant="contained"
-										size="medium"
-										className="w-full p-2 text-white bg-[#0C2340] hover:opacity-85"
-										startIcon={<RotateLeftRounded fontSize="medium" />}>
-										Hủy bỏ
-									</Button>
-								</Box>
-							</form>
-						) : (
-							<form onSubmit={handleSubmit(AddUser)}>
-								<Box className="my-3">
-									<TextField
-										{...register("login", {
-											required: "Nhập đầy đủ thông tin.",
-											minLength: { value: 8, message: "Tối thiểu 8 ký tự." },
-											maxLength: { value: 50, message: "Tối đa 50 ký tự." },
-										})}
-										type="text"
-										size="small"
-										color="primary"
-										className="min-w-[300px] rounded-md  cursor-pointer shadow-lg w-full"
-										placeholder="Nhập tên đăng nhập"
-									/>
-									<FormHelperText className="text-red-700 px-2 mt-2 ">
-										{errors.login?.message}
-									</FormHelperText>
-								</Box>
-
-								<Box className="my-3">
-									<TextField
-										{...register("lastName", {
-											required: "Nhập đầy đủ thông tin.",
-											minLength: { value: 2, message: "Tối thiểu 2 ký tự." },
-											maxLength: { value: 10, message: "Tối đa 10 ký tự." },
-										})}
-										type="text"
-										size="small"
-										color="primary"
-										className="min-w-[300px] rounded-md  cursor-pointer shadow-lg w-full"
-										placeholder="Nhập họ"
-									/>
-									<FormHelperText className="text-red-700 px-2 mt-2 ">
-										{errors.lastName?.message}
-									</FormHelperText>
-								</Box>
-
-								<Box className="my-3">
-									<TextField
-										{...register("firstName", {
-											required: "Nhập đầy đủ thông tin.",
-											minLength: { value: 8, message: "Tối thiểu 8 ký tự." },
-											maxLength: { value: 50, message: "Tối đa 50 ký tự." },
-										})}
-										type="text"
-										size="small"
-										color="primary"
-										className="min-w-[300px] cursor-pointer shadow-lg w-full"
-										placeholder="Nhập tên"
-									/>
-									<FormHelperText className="text-red-700 px-2 mt-2 ">
-										{errors.firstName?.message}
-									</FormHelperText>
-								</Box>
-								<Box>
-									<InputLabel className="font-semibold">
-										Loại bài viết:
-									</InputLabel>
-									<FormControl sx={{ width: 300 }}>
-										<Select
-											{...register("authorities")}
-											labelId="authorities"
-											id="authorities"
-											size="small"
-											className="shadow-lg"
-											multiple
-											displayEmpty
-											value={watch("authorities")}
-											renderValue={categoriesId => {
-												if (categoriesId.length === 0) {
-													return (
-														<i className="text-gray-400">Vui lòng bấm chọn</i>
-													);
-												}
-
-												const categoriesName = categoriesId.map(id =>
-													authorities.get(id)
-												);
-
-												return categoriesName.join(", ");
-											}}
-											MenuProps={MenuProps}>
-											{Array.from(authorities).map(item => (
-												<MenuItem
-													key={item[0]}
-													value={item[0]}>
-													<ListItemText primary={item[1]} />
-												</MenuItem>
-											))}
-										</Select>
-									</FormControl>
-									<Typography className="text-red-700 p-2">
-										{errors.authorities?.message}
-									</Typography>
-								</Box>
-
-								<Box className="my-3">
-									<TextField
-										{...register("email", {
-											required: "Nhập đầy đủ thông tin.",
-											pattern: {
-												value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-												message: "Phải đúng định dạng email.",
-											},
-										})}
-										type="text"
-										size="small"
-										color="primary"
-										className="min-w-[300px] rounded-md cursor-pointer shadow-lg w-full"
-										placeholder="Nhập địa chỉ email"
-									/>
-									<FormHelperText className="text-red-700 px-2 mt-2 ">
-										{errors.email?.message}
-									</FormHelperText>
-								</Box>
-
-								<Box className="flex justify-between">
-									<Button
-										type="submit"
-										variant="contained"
-										size="medium"
-										className="w-full my-3 mr-2 p-2 text-white bg-[#008200] hover:opacity-85"
-										startIcon={<DoneRounded fontSize="medium" />}>
-										Đồng ý
-									</Button>
-									<Button
-										onClick={() => reset()}
-										variant="contained"
-										size="medium"
-										className="w-full my-3 p-2 text-white bg-[#0C2340] hover:opacity-85"
-										startIcon={<RotateLeftRounded fontSize="medium" />}>
-										Hủy bỏ
-									</Button>
-								</Box>
-							</form>
-						)}
+							<Box className="flex justify-between">
+								<Button
+									type="submit"
+									variant="contained"
+									size="medium"
+									className="w-full mr-2 p-2 text-white bg-[#008200] hover:opacity-85"
+									startIcon={<DoneRounded fontSize="medium" />}>
+									Cập nhật
+								</Button>
+								<Button
+									onClick={() => reset()}
+									variant="contained"
+									size="medium"
+									className="w-full p-2 text-white bg-[#0C2340] hover:opacity-85"
+									startIcon={<RotateLeftRounded fontSize="medium" />}>
+									Hủy bỏ
+								</Button>
+							</Box>
+						</form>
 					</DialogContent>
 				</Dialog>
 			)}

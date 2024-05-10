@@ -59,27 +59,27 @@ export const config = {
 const paths = [
 	{
 		path: "/dashboard",
-		permission: ["app.view"],
+		//permission: ["app.view"],
 	},
 
 	{
 		path: "/dashboard/users",
-		permission: ["emp.view"],
+		//permission: ["emp.view"],
 	},
 	{
 		path: "/dashboard/posts/categories",
-		permission: ["emp.view"],
+		//permission: ["emp.view"],
 	},
 	{
-		path: "/dashboard/posts/management",
-		permission: ["new.create"],
+		path: "/dashboard/posts",
+		//permission: ["new.create"],
 	},
 	{
 		path: "/dashboard/posts/create",
-		permission: ["fee.view"],
+		//permission: ["fee.view"],
 	},
 	{
 		path: "/dashboard/contacts",
-		permission: ["emp.create"],
+		//permission: ["emp.create"],
 	},
 ];

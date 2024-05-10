@@ -1,27 +1,32 @@
 "use client";
 
 import {
-	Autocomplete,
 	Box,
 	Button,
 	Grid,
 	Link,
 	Paper,
-	TextField,
 	Typography,
+	OutlinedInput,
+	Chip,
+	Select,
+	MenuItem,
 } from "@mui/material";
+
 import {
 	LocationOnRounded,
 	MailOutlineRounded,
 	PhoneCallbackRounded,
 	SendRounded,
 } from "@mui/icons-material";
+
+import { SelectChangeEvent } from "@mui/material/Select";
 import { CustomerMessage, ApiResponse } from "types/interfaces";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import * as React from "react";
 import { toast } from "sonner";
-import { services } from "app/libs/data";
 import { useSession } from "next-auth/react";
+import { services } from "app/libs/data";
 
 // export const metadata = () => {
 // 	return {
@@ -30,12 +35,21 @@ import { useSession } from "next-auth/react";
 // };
 
 const ContactPage = () => {
+	const [service, setService] = React.useState<string[]>([]);
 	const { data: session } = useSession();
+
 	const {
 		register,
 		handleSubmit,
 		formState: { errors: errors },
 	} = useForm<CustomerMessage>();
+
+	const handleChange = (event: SelectChangeEvent<typeof service>) => {
+		const {
+			target: { value },
+		} = event;
+		setService(typeof value === "string" ? value.split(",") : value);
+	};
 
 	async function CreateContact(contact: CustomerMessage) {
 		if (session) {
@@ -51,12 +65,14 @@ const ContactPage = () => {
 					body: JSON.stringify(contact),
 				});
 
+				console.log(contact);
+
 				const payload = (await res.json()) as ApiResponse;
 
 				if (payload.ok) {
 					toast.success(payload.message);
 				} else {
-					toast.success(payload.message);
+					toast.error(payload.message);
 				}
 				toast.dismiss(message);
 			} catch (error) {
@@ -206,20 +222,33 @@ const ContactPage = () => {
 
 								<div className="form-group">
 									<label>Dịch vụ bạn đang quan tâm</label>
-									<Autocomplete
+									<Select
+										{...register("services")}
+										labelId="demo-multiple-chip-label"
+										id="demo-multiple-chip"
 										multiple
-										id="service"
-										size="small"
-										limitTags={2}
-										options={services}
-										getOptionLabel={option => option.name}
-										renderInput={params => (
-											<TextField
-												{...params}
-												placeholder="Vui lòng bấm chọn."
-											/>
-										)}
-									/>
+										value={service}
+										onChange={handleChange}
+										renderValue={selected => {
+											if (selected.length === 0) {
+												return <em>Placeholder</em>;
+											}
+
+											return selected.join(", ");
+										}}>
+										<MenuItem
+											disabled
+											value="">
+											<em>Vui lòng bấm chọn dịch vụ cần tư vấn</em>
+										</MenuItem>
+										{services.map(item => (
+											<MenuItem
+												key={item}
+												value={item}>
+												{item}
+											</MenuItem>
+										))}
+									</Select>
 									<span className="text-red-700">
 										{errors.services?.message}
 									</span>

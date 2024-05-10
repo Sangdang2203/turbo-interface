@@ -1,22 +1,34 @@
 "use client";
 
 import * as React from "react";
+import { toast } from "sonner";
+import { useSession } from "next-auth/react";
 import { useForm } from "react-hook-form";
+import { CloseOutlined } from "@mui/icons-material";
 import {
 	Dialog,
 	DialogContent,
 	DialogTitle,
 	Button,
-	Box,
-	FormHelperText,
 	TextField,
-	Autocomplete,
+	Tooltip,
+	MenuItem,
+	Select,
+	SelectChangeEvent,
 } from "@mui/material";
-import { CustomerMessage } from "types/interfaces";
+import { CustomerMessage, ApiResponse } from "types/interfaces";
 import { services } from "app/libs/data";
 
 export default function CustomDialog() {
+	const [service, setService] = React.useState<string[]>([]);
 	const [open, setOpen] = React.useState(false);
+	const { data: session } = useSession();
+
+	const {
+		register,
+		handleSubmit,
+		formState: { errors: errors },
+	} = useForm<CustomerMessage>();
 
 	const handleClickOpen = () => {
 		setOpen(true);
@@ -26,11 +38,40 @@ export default function CustomDialog() {
 		setOpen(false);
 	};
 
-	const {
-		register,
-		handleSubmit,
-		formState: { errors: errors },
-	} = useForm<CustomerMessage>();
+	const handleChange = (event: SelectChangeEvent<typeof service>) => {
+		const {
+			target: { value },
+		} = event;
+		setService(typeof value === "string" ? value.split(",") : value);
+	};
+
+	async function CreateContact(contact: CustomerMessage) {
+		if (session) {
+			const message = toast.loading("Đang gửi thông tin ...");
+
+			try {
+				const res = await fetch(`/api/contacts`, {
+					method: "POST",
+					headers: {
+						Authorization: `Bearer ${session.user.id_token}`,
+						"Content-Type": "application/json",
+					},
+					body: JSON.stringify(contact),
+				});
+
+				const payload = (await res.json()) as ApiResponse;
+
+				if (payload.ok) {
+					toast.success(payload.message);
+				} else {
+					toast.success(payload.message);
+				}
+				toast.dismiss(message);
+			} catch (error) {
+				console.log(error);
+			}
+		}
+	}
 
 	return (
 		<React.Fragment>
@@ -46,8 +87,14 @@ export default function CustomDialog() {
 			<Dialog
 				open={open}
 				onClose={handleClose}
-				aria-labelledby="alert-dialog-title"
-				aria-describedby="alert-dialog-description">
+				className="min-w-[900px] mx-auto">
+				<Tooltip title="Close">
+					<CloseOutlined
+						onClick={() => setOpen(false)}
+						color="error"
+						className="text-md absolute top-1 right-1 bg-slate-500 rounded hover:opacity-80 hover:bg-red-200 cursor-pointer"
+					/>
+				</Tooltip>
 				<DialogTitle
 					className=""
 					id="alert-dialog-title">
@@ -57,7 +104,10 @@ export default function CustomDialog() {
 					</p>
 				</DialogTitle>
 				<DialogContent>
-					<form className="form">
+					<form
+						className="form"
+						onSubmit={handleSubmit(CreateContact)}>
+						<p className="text-red-700 -mt-5">(*) Bắt buộc nhập thông tin</p>
 						<label>
 							<TextField
 								{...register("name", {
@@ -71,12 +121,12 @@ export default function CustomDialog() {
 										message: "Điền tối đa 50 ký tự.",
 									},
 								})}
-								placeholder="Họ và tên khách hàng | Doanh nghiệp"
+								placeholder="(*) Họ và tên khách hàng | Doanh nghiệp"
 								type="text"
 								fullWidth
 							/>
 						</label>
-						<span className="text-danger">{errors.name?.message}</span>
+						<span className="text-red-700">{errors.name?.message}</span>
 
 						<label>
 							<TextField
@@ -87,12 +137,12 @@ export default function CustomDialog() {
 										message: "Email sai định dạng.",
 									},
 								})}
-								placeholder="Email"
+								placeholder="(*) Email"
 								type="email"
 								fullWidth
 							/>
 						</label>
-						<span className="text-danger">{errors.email?.message}</span>
+						<span className="text-red-700">{errors.email?.message}</span>
 
 						<label>
 							<TextField
@@ -104,43 +154,56 @@ export default function CustomDialog() {
 									},
 								})}
 								fullWidth
-								placeholder="Số điện thoại"
+								placeholder="(*) Số điện thoại"
 							/>
 						</label>
-						<span className="text-danger">{errors.phone?.message}</span>
+						<span className="text-red-700">{errors.phone?.message}</span>
 
 						<label>
-							<Autocomplete
+							<Select
+								{...register("services")}
+								labelId="demo-multiple-chip-label"
+								id="demo-multiple-chip"
 								multiple
-								id="service"
-								className="text-[10px]"
-								limitTags={2}
-								options={services}
-								getOptionLabel={option => option.name}
-								renderInput={params => (
-									<TextField
-										{...params}
-										size="medium"
-										placeholder="Vui lòng bấm chọn dịch vụ."
-									/>
-								)}
-							/>
+								fullWidth
+								displayEmpty
+								value={service}
+								onChange={handleChange}
+								renderValue={selected => {
+									if (selected.length === 0) {
+										return (
+											<b className="text-gray-400 font-extralight">
+												Vui lòng bấm chọn dịch vụ
+											</b>
+										);
+									}
+
+									return selected.join(", ");
+								}}>
+								<MenuItem disabled>
+									<em>Vui lòng bấm chọn dịch vụ cần tư vấn</em>
+								</MenuItem>
+								{services.map(item => (
+									<MenuItem
+										key={item}
+										value={item}>
+										{item}
+									</MenuItem>
+								))}
+							</Select>
 						</label>
-						<span className="text-danger">{errors.phone?.message}</span>
 
 						<label>
 							<TextField
-								{...register("message", {
-									required: "Vui lòng điền thông tin.",
-								})}
+								{...register("message")}
 								fullWidth
 								rows={5}
+								className="mt-3"
 								placeholder="Chúng tôi có thể giúp gì cho bạn ?"
 							/>
 						</label>
-						<span className="text-danger">{errors.message?.message}</span>
 
-						<button className="submit">Submit</button>
+						<button className="submit my-5">Submit</button>
 					</form>
 				</DialogContent>
 			</Dialog>

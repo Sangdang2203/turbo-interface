@@ -1027,7 +1027,7 @@ strong {
 	display: flex;
 	flex-direction: column;
 	gap: 10px;
-	max-width: 350px;
+	min-width: 500px;
 	background-color: #fff;
 	padding: 20px;
 	border-radius: 20px;
@@ -1072,6 +1072,7 @@ strong {
 .signin {
 	color: rgba(88, 87, 87, 0.822);
 	font-size: 14px;
+	text-align: center;
 }
 
 .form label {

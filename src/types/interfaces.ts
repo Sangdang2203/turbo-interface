@@ -15,6 +15,10 @@ export const SCHEMA = z.object({
 		.min(10, "Tiêu đề phải nhập tối thiểu 10 ký tự")
 		.max(100, "Tiêu đề nhập tối đa 100 ký tự"),
 
+	urlImage: z.string({
+		required_error: "Vui lòng tải hình ảnh.",
+	}),
+
 	categories: z.array(z.string()).min(1, "Vui lòng bấm chọn."),
 
 	userId: z.string().min(1, "Vui lòng bấm chọn."),
@@ -93,6 +97,7 @@ export interface UpdateUserRequest {
 }
 
 export interface Authority {
+	id: string;
 	name: string;
 }
 
@@ -107,7 +112,7 @@ export interface Post {
 	];
 	login: string;
 	slug: string;
-	image: string;
+	urlImage: string;
 	description: string;
 	content: string;
 	createdDate: string;

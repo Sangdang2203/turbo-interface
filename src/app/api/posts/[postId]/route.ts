@@ -92,7 +92,7 @@ export async function DELETE(
 ) {
 	try {
 		const id = params.postId;
-		console.log("id: ", id);
+
 		const res = await fetch(process.env.NEXT_PUBLIC_API_URL + `/posts/${id}`, {
 			method: req.method,
 			headers: req.headers,

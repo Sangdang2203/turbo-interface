@@ -7,6 +7,7 @@ import {
 	BadgeOutlined,
 	ManageSearchRounded,
 	RecentActors,
+	ClassOutlined,
 } from "@mui/icons-material";
 import * as React from "react";
 import { OverridableComponent } from "@mui/material/OverridableComponent";
@@ -31,12 +32,12 @@ function createMenu(
 
 export default function DrawerMenu() {
 	const menu = [
-		createMenu("Trang Quản Trị", AppsOutlined, "/dashboard", "app.view"),
+		createMenu("Trang quản trị", AppsOutlined, "/dashboard", "app.view"),
 
-		createMenu("Nhân Viên", BadgeOutlined, "/dashboard/users", "emp.view"),
+		createMenu("Nhân viên", BadgeOutlined, "/dashboard/users", "emp.view"),
 
 		createMenu(
-			"Quản lý Bài Viết",
+			"Quản lý bài viết",
 			ArticleOutlined,
 			"/dashboard/posts",
 			"post.view",
@@ -44,7 +45,7 @@ export default function DrawerMenu() {
 				createMenu(
 					"Danh sách",
 					ManageSearchRounded,
-					"/dashboard/posts/management",
+					"/dashboard/posts",
 					"post.view"
 				),
 				createMenu(
@@ -54,8 +55,8 @@ export default function DrawerMenu() {
 					"post.create"
 				),
 				createMenu(
-					"Danh Mục Bài Viết",
-					BadgeOutlined,
+					"Danh mục bài viết",
+					ClassOutlined,
 					"/dashboard/posts/categories",
 					"emp.view"
 				),

@@ -1,7 +1,8 @@
 "use client";
 
 import * as React from "react";
-import { toast } from "sonner";
+import Image from "next/image";
+import useS3 from "@/hooks/useS3";
 import { useForm } from "react-hook-form";
 import dynamic from "next/dynamic";
 import { Category, User, POSTSCHEMA, SCHEMA } from "types/interfaces";
@@ -53,22 +54,19 @@ export default function CreatePost() {
 			title: undefined,
 			categories: [],
 			userId: "",
+			urlImage: "",
 			description: undefined,
 			content: undefined,
 		},
 	});
 
-	// Begin multi select
-	const ITEM_HEIGHT = 40;
-	const ITEM_PADDING_TOP = 8;
-	const MenuProps = {
-		PaperProps: {
-			style: {
-				maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
-				width: 300,
-			},
-		},
-	};
+	const { handleFileUpload, ButtonUpload, preview } = useS3();
+
+	const previewUrl = React.useMemo(() => {
+		if (preview) {
+			return URL.createObjectURL(preview);
+		}
+	}, [preview]);
 
 	React.useEffect(() => {
 		if (session) {
@@ -117,6 +115,38 @@ export default function CreatePost() {
 						</Typography>
 					</Box>
 
+					<div className="flex justify-between items-center my-3">
+						{preview ? (
+							<Image
+								src={`${previewUrl}`}
+								width={0}
+								height={0}
+								alt={"preview"}
+								title={"preview"}
+								style={{
+									width: "clamp(100px, 100%, 200px)",
+									height: "auto",
+									margin: "20px",
+								}}
+							/>
+						) : (
+							<Image
+								src="https://dummyimage.com/500x500/c3c3c3/FFF.png&text=UploadImage"
+								alt={"preview"}
+								title={"preview"}
+								width={180}
+								height={180}
+								className="rounded-md"
+							/>
+						)}
+
+						<ButtonUpload />
+
+						<Typography className="text-red-700 p-2">
+							{errors.urlImage?.message}
+						</Typography>
+					</div>
+
 					<Box className="my-3 flex justify-between">
 						<Box>
 							<InputLabel className="font-semibold">Loại bài viết:</InputLabel>
@@ -140,8 +170,7 @@ export default function CreatePost() {
 										);
 
 										return categoriesName.join(", ");
-									}}
-									MenuProps={MenuProps}>
+									}}>
 									{Array.from(categories).map(item => (
 										<MenuItem
 											key={item[0]}

@@ -55,7 +55,7 @@ export default function CategoryManagement() {
 		if (session) {
 			const message = toast.loading("Đang cập nhật thay đổi ... ");
 			try {
-				const res = await fetch(`/api/categories/${selectedCategory?.id}`, {
+				const res = await fetch(`/api/categories/${category?.id}`, {
 					method: "PATCH",
 					headers: {
 						Authorization: `Bearer ${session.user.id_token}`,
@@ -64,7 +64,7 @@ export default function CategoryManagement() {
 					body: JSON.stringify(category),
 				});
 
-				console.log(res);
+				console.log(category);
 
 				const payload = (await res.json()) as ApiResponse;
 

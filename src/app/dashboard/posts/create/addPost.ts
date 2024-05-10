@@ -13,10 +13,13 @@ export default function AddNewPost(session: Session | null) {
 				user: {
 					id: data.userId,
 				},
+				urlImage: data.urlImage,
 				description: data.description,
 				content: data.content,
 				status: "ACTIVE",
 			};
+
+			console.log(post.urlImage);
 
 			try {
 				const res = await fetch("/api/posts", {
