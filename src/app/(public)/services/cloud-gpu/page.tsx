@@ -1,3 +1,5 @@
+"use client";
+
 import cloudGPU_01 from "../../../images/cloudServer/cloudGPU_01.png";
 import cloudGPU_02 from "../../../images/cloudServer/cloudGPU_02.png";
 import cloudGPU_03 from "../../../images/cloudServer/cloudGPU_03.png";
@@ -15,21 +17,38 @@ import {
 	Typography,
 	Container,
 	Button,
+	Switch,
 } from "@mui/material";
 import { TaskAltRounded } from "@mui/icons-material";
-import Switch, { SwitchProps } from "@mui/material/Switch";
 import { cloudGPUPrices, bonusPrices, cloudGPUQuestions } from "app/libs/data";
-import { styled } from "@mui/material/styles";
 import Image from "next/image";
+import React from "react";
 
 export default function CloudGPU() {
+	const [currentText, setCurrentText] = React.useState("Ứng dụng"); // Initial text
+	const [texts] = React.useState([
+		"Deep Learning",
+		"Machine Learning",
+		"Computer Vision",
+	]);
+
+	React.useEffect(() => {
+		const intervalId = setInterval(() => {
+			const nextTextIndex = (texts.indexOf(currentText) + 1) % texts.length;
+			setCurrentText(texts[nextTextIndex]);
+		}, 2000); // 2 seconds interval
+
+		return () => clearInterval(intervalId); // Clear on component unmount
+	}, [currentText, texts]); // Dependency array to re-run on text change
 	return (
 		<>
 			<Container>
 				<Box sx={{ textAlign: "center", py: 10 }}>
-					<Typography className="text-[2.5rem] font-semibold text-sky-900">
-						Cloud GPU Server máy chủ GPU cho <br /> Deep Learning | Machine
-						Learning | Computer Vision
+					<Typography className="text-[1.2rem] md:text-[2rem] font-semibold text-sky-900">
+						Cloud GPU Server máy chủ GPU cho
+					</Typography>
+					<Typography className="text-[2rem] md:text-[2.5rem] font-semibold uppercase text-sky-900">
+						{currentText}
 					</Typography>
 					<Typography>
 						Khởi tạo và sử dụng Cloud GPU Server chỉ trong 45 giây!
@@ -107,7 +126,7 @@ export default function CloudGPU() {
 					</Card>
 				</Box>
 
-				<Card className="rounded-2xl my-10">
+				<Card className="hidden lg:block rounded-2xl my-10">
 					<Grid
 						container
 						className="shadow-lg pb-5">
@@ -266,11 +285,11 @@ export default function CloudGPU() {
 					</Box>
 
 					<Box className=" text-sky-900">
-						<Typography className="text-[2rem] font-semibold text-center py-5">
+						<Typography className="text-[1.75rem] font-semibold text-center py-5">
 							Bảng giá tài nguyên bổ sung
 						</Typography>
 
-						<Box className="grid sm:grid-cols-3 gap-3 mb-10">
+						<Box className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 mb-10">
 							{bonusPrices.map(item => {
 								return (
 									<Box

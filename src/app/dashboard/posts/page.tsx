@@ -36,8 +36,10 @@ export default function PostManagement() {
 	const [posts, setPosts] = React.useState<Post[]>([]);
 	const [page, setPage] = React.useState(0);
 	const [rowsPerPage, setRowsPerPage] = React.useState(10);
+
 	const { data: session } = useSession();
 
+	// SEARCH POST
 	function handleSearch(event: React.FormEvent<HTMLFormElement>) {
 		event.preventDefault();
 		const nameInput = document.getElementById(
@@ -48,12 +50,14 @@ export default function PostManagement() {
 		if (name === "") {
 			fetchPosts().then(res => setPosts(res.data.reverse()));
 		} else {
-			const filterPosts = posts.filter(post => post.title.includes(name));
+			const filterPosts = posts
+				.reverse()
+				.filter(post => post.title.includes(name));
 
 			setPosts(filterPosts);
 		}
 	}
-
+	// DELETE POST
 	async function handleDelete(postId: string) {
 		if (session) {
 			const message = toast.loading("Đang thực hiện xóa bài viết.");
@@ -69,7 +73,7 @@ export default function PostManagement() {
 			toast.dismiss(message);
 		}
 	}
-
+	// PAGINATION
 	const handleChangePage = (
 		event: React.MouseEvent<HTMLButtonElement> | null,
 		newPage: number
@@ -83,7 +87,7 @@ export default function PostManagement() {
 		setRowsPerPage(parseInt(event.target.value, 10));
 		setPage(0);
 	};
-
+	// FETCH DATA
 	React.useEffect(() => {
 		Promise.all([fetchPosts()]).then(data => {
 			const [resPost] = data;
@@ -157,6 +161,7 @@ export default function PostManagement() {
 								size="small">
 								<TableHead className="bg-slate-300">
 									<TableRow>
+										<TableCell>#</TableCell>
 										<TableCell>Tiêu đề</TableCell>
 										<TableCell>Mô tả</TableCell>
 										<TableCell>Thể loại</TableCell>
@@ -171,14 +176,18 @@ export default function PostManagement() {
 												page * rowsPerPage,
 												page * rowsPerPage + rowsPerPage
 											)
-											.map(post => (
+											.map((post, index) => (
 												<TableRow
 													key={post.id}
 													className="hover:bg-slate-100 cursor-pointer"
 													sx={{
 														"&:last-child td, &:last-child th": { border: 0 },
 													}}>
-													{/* <TableCell align="center"> {post.id} </TableCell> */}
+													<TableCell
+														align="center"
+														className="font-semibold">
+														{index + 1}
+													</TableCell>
 													<Tooltip
 														title={post.title}
 														placement="bottom">
@@ -213,7 +222,7 @@ export default function PostManagement() {
 														})}
 													</TableCell>
 
-													<TableCell className="w-[15%]">
+													<TableCell className="w-[13%]">
 														<Tooltip
 															title={
 																post.status === "ACTIVE" ? "Disable" : "Active"

@@ -61,30 +61,32 @@ export default function DisasterRecovery() {
 				<Image
 					src={Hyper_V}
 					alt="Hyper_V"
+					className="hidden lg:block"
 				/>
 				<Image
 					src={Vmware}
 					alt="Vmware"
+					className="hidden lg:block"
 				/>
 				<Image
 					src={SapHana}
 					alt="SapHana"
-				/>
-				<Image
-					src={Exchange}
-					alt="Vmware"
+					className="hidden lg:block"
 				/>
 				<Image
 					src={ActiveDirectory}
 					alt="ActiveDirectory"
+					className="hidden lg:block"
 				/>
 				<Image
 					src={SQLServer}
 					alt="SQLServer"
+					className="hidden lg:block"
 				/>
 				<Image
 					src={Oracle}
 					alt="Oracle"
+					className="hidden lg:block"
 				/>
 			</Box>
 

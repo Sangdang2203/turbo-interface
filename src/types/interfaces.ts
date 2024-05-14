@@ -15,13 +15,11 @@ export const SCHEMA = z.object({
 		.min(10, "Tiêu đề phải nhập tối thiểu 10 ký tự")
 		.max(100, "Tiêu đề nhập tối đa 100 ký tự"),
 
-	urlImage: z.string({
-		required_error: "Vui lòng tải hình ảnh.",
-	}),
-
 	categories: z.array(z.string()).min(1, "Vui lòng bấm chọn."),
 
 	userId: z.string().min(1, "Vui lòng bấm chọn."),
+
+	urlImage: z.string().min(1, "Vui lòng tải ảnh."),
 
 	description: z
 		.string({
@@ -44,6 +42,15 @@ export interface CreatePostRequest
 	user: { id: string };
 	status: "ACTIVE";
 }
+
+// export interface CreatePostRequest {
+// 	title: string;
+// 	categories: { id: string }[];
+// 	userId: { id: string };
+// 	urlImage: string;
+// 	description: string;
+// 	content: string;
+// }
 
 export interface CreateCategoryRequest {
 	name: string;

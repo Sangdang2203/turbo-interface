@@ -83,7 +83,7 @@ const ContactPage = () => {
 
 	return (
 		<Box>
-			<Box className="themeContact"></Box>
+			<Box className="min-h-[20rem] lg:min-h-[30rem] themeContact "></Box>
 
 			<Paper className="p-10 rounded-none">
 				<Box className="text-center">
@@ -107,7 +107,7 @@ const ContactPage = () => {
 						<Typography>Tìm hiểu thêm về nhiều tính năng khác</Typography>
 
 						<Box mt={5}>
-							<Typography className="text-lg font-bold text-left mb-5">
+							<Typography className="text-[1rem] md:text-lg font-bold text-left mb-5">
 								CÔNG TY GIẢI PHÁP CÔNG NGHỆ TURBO
 							</Typography>
 							<div className="flex my-1">
@@ -150,7 +150,7 @@ const ContactPage = () => {
 						item
 						xs={12}
 						md={6}>
-						<div className="form-container">
+						<div className="mt-5 form-container lg:mt-0">
 							<form
 								className="form"
 								onSubmit={handleSubmit(CreateContact)}>

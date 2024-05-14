@@ -9,8 +9,6 @@ import {
 	Box,
 	Button,
 	Card,
-	CardActions,
-	CardContent,
 	Container,
 	Grid,
 	Paper,
@@ -22,20 +20,20 @@ const CloudBackupPage = () => {
 	return (
 		<Box>
 			<Box
-				py={10}
+				py={5}
 				sx={{ textAlign: "center", marginX: "auto" }}>
-				<Typography className="text-[2rem] text-center text-sky-900 font-semibold">
+				<Typography className="text-[1.5rem] md:text-[2rem] text-center text-sky-900 font-semibold">
 					Giải pháp sao lưu, phục hồi và quản lý dữ liệu trên đám mây
 				</Typography>
-				<Typography className="text-[1.5rem] w-3/4 mx-auto leading-relaxed text-gray-500">
+				<Typography className="text-[1rem] md:text-[1.5rem] w-3/4 mx-auto leading-relaxed text-gray-500">
 					Giải pháp Cloud Backup được xây dựng để sao lưu và bảo vệ máy chủ, máy
 					ảo, dữ liệu quan trọng của doanh nghiệp.
 				</Typography>
-				<Container className="my-5">
+				<Container className="mt-5">
 					<iframe
 						className="rounded-xl mx-auto"
 						width="100%"
-						height="600px"
+						height="400px"
 						title="Vaidio  AI Vision 7.0"
 						src="https://www.youtube.com/embed/tLULNUPlFO0?si=qZlMCWYCM-Lh8QP7"
 						allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -55,7 +53,7 @@ const CloudBackupPage = () => {
 								<Box
 									textAlign="center"
 									px={3}>
-									<Typography className="text-[1.5rem] text-green-600">
+									<Typography className="pt-3 lg:pt-0 text-[1.5rem] text-green-600">
 										Giải pháp số #1 để sao lưu dữ liệu quan trọng
 									</Typography>
 									<Typography className="text-lg text-sky-900">
@@ -169,7 +167,7 @@ const CloudBackupPage = () => {
 				<Typography className="p-3 bg-green-50 text-green-500 uppercase w-fit rounded-full">
 					Lợi ích của Cloud Backup
 				</Typography>
-				<Typography className="my-3 text-[2rem] w-3/4 text-sky-900">
+				<Typography className="my-3 text-[1.25rem] md:text-[2rem] w-5/6 text-sky-900">
 					Tại Turbo Solutions, chúng tôi luôn cam kết sẽ mang lại những giá trị
 					tốt nhất cho khách hàng qua những dịch vụ và công nghệ tối ưu.
 				</Typography>
@@ -200,7 +198,8 @@ const CloudBackupPage = () => {
 								my={3}
 								display="flex"
 								justifyContent="space-around"
-								width="60%">
+								width="60%"
+								className="hidden lg:block">
 								<Box
 									sx={{
 										display: "flex",
@@ -285,25 +284,10 @@ const CloudBackupPage = () => {
 				</Card>
 			</Container>
 
-			<Container sx={{ position: "relative", mb: 5 }}>
-				<Image
-					src={veemBackup}
-					title="Veeam Backup"
-					className="w-full h-auto rounded-lg"
-					alt="Veeam Backup"></Image>
-
+			<Container className="hidden lg:block">
 				<Box
 					width="100%"
-					sx={{
-						position: "absolute",
-						bottom: "4px",
-						marginX: "auto",
-						display: "flex",
-						flexDirection: "column",
-						justifyContent: "center",
-						alignItems: "center",
-						textAlign: "center",
-					}}>
+					className="themeVeem flex flex-col justify-end items-center text-center">
 					<Typography className="text-[2rem] text-blue-900 text-center font-semibold">
 						Bạn chưa backup dữ liệu?
 					</Typography>

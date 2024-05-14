@@ -1,32 +1,41 @@
 "use client";
 
-import * as React from 'react';
-import { Typography, Box, Stack, Rating } from '@mui/material';
+import * as React from "react";
+import { Typography, Box, Stack, Rating } from "@mui/material";
 
 function getRandomRating() {
-  const randomValue = Math.random() * (5 - 3.5) + 3.5;
-  return randomValue.toFixed(2);
+	const randomValue = Math.random() * (5 - 3.5) + 3.5;
+	return randomValue.toFixed(2);
 }
 
 function getRandomVote() {
-  const randomValue = Math.random() * (100 - 5) + 5;
-  return randomValue.toFixed(0);
+	const randomValue = Math.random() * (100 - 5) + 5;
+	return randomValue.toFixed(0);
 }
 
 export default function CustomRating() {
-  const rating = Number(getRandomRating());
-  const [voteCount, setVoteCount] = React.useState(0);
+	const [ratingValue, setRatingValue] = React.useState(0);
+	const [voteCount, setVoteCount] = React.useState(0);
 
-  React.useEffect(() => {
-    const newRating = Number(getRandomRating());
-    const newVoteCount = Number(getRandomVote());
-    setVoteCount(newVoteCount);
-  }, []);
+	React.useEffect(() => {
+		const newRating = Number(getRandomRating());
+		const newVoteCount = Number(getRandomVote());
 
-  return (
-    <Box sx={{ display: "flex", alignItems: "center" }}>
-      <Rating name="half-rating-read" defaultValue={rating} precision={0.5} readOnly />
-      <Typography className='px-2 font-semibold'>{voteCount} Bình chọn</Typography>
-    </Box>
-  );
+		setRatingValue(newRating);
+		setVoteCount(newVoteCount);
+	}, []);
+
+	return (
+		<Box sx={{ display: "flex", alignItems: "center" }}>
+			<Rating
+				name="half-rating-read"
+				value={ratingValue}
+				precision={0.5}
+				readOnly
+			/>
+			<Typography className="px-2 font-semibold">
+				{voteCount} Bình chọn
+			</Typography>
+		</Box>
+	);
 }

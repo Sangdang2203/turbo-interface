@@ -20,9 +20,12 @@ export default function DedicatedServer() {
 	return (
 		<>
 			<Container>
-				<Box sx={{ textAlign: "center", py: 10 }}>
+				<Box sx={{ textAlign: "center", py: 5 }}>
 					<Typography className="text-[2.5rem] font-semibold text-sky-900">
-						Dedicated Server - Máy chủ riêng của bạn
+						Dedicated Server
+					</Typography>
+					<Typography className="text-[1.5rem]">
+						Máy chủ riêng của bạn
 					</Typography>
 					<Typography>
 						Máy Chủ Vật Lý với năng lực xử lý vượt trội, hiệu năng cao, khả năng
@@ -33,19 +36,19 @@ export default function DedicatedServer() {
 					</Box>
 					<Image
 						src={dedicateServer}
-						className="w-full h-auto rounded-xl"
+						className="hidden lg:block w-full h-auto rounded-xl"
 						alt="ecoPrivateCloud"
 					/>
 				</Box>
 
-				<Typography className="text-[2.5rem] font-semibold text-sky-900 text-center py-10">
+				<Typography className="text-[2.5rem] font-semibold text-sky-900 text-center pb-5">
 					Lợi ích của Dedicated Server
 				</Typography>
 
-				<Box className="container grid sm:grid-cols-3 gap-x-6 gap-y-6 mb-10">
+				<Box className="container grid sm:grid-cols-3 gap-3 mb-10">
 					<Card className="relative rounded-xl hover:shadow-lg cursor-pointer  text-sky-900">
 						<Box className="flex flex-col justify-center items-center p-3">
-							<Typography className="text-[1.5rem] font-bold">
+							<Typography className="text-[1rem] lg:text-[1.5rem] font-bold">
 								Ổ cứng SSD Enterprise
 							</Typography>
 							<Image
@@ -63,7 +66,7 @@ export default function DedicatedServer() {
 
 					<Card className="relative rounded-xl hover:shadow-lg cursor-pointer">
 						<Box className="flex flex-col justify-center items-center p-3  text-sky-900">
-							<Typography className="text-[1.5rem] font-bold">
+							<Typography className="text-[1rem] lg:text-[1.5rem] font-bold">
 								Máy chủ chuyên dụng
 							</Typography>
 
@@ -81,7 +84,7 @@ export default function DedicatedServer() {
 
 					<Card className="rounded-xl hover:shadow-lg cursor-pointer">
 						<Box className="flex flex-col justify-center items-center p-3  text-sky-900">
-							<Typography className="text-[1.5rem] font-bold">
+							<Typography className="text-[1rem] lg:text-[1.5rem] font-bold">
 								Tối đa hóa lợi nhuận
 							</Typography>
 							<Image
@@ -156,7 +159,7 @@ export default function DedicatedServer() {
 							</Typography>
 							<Typography> * Bảng giá chưa bao gồm 10% VAT </Typography>
 						</Box>
-						<Box className="grid sm:grid-cols-4 gap-x-6 gap-y-6 mb-10 text-center">
+						<Box className="grid sm:grid-cols-2 xl:grid-cols-4 gap-3 mb-10 text-center">
 							{decicatedServerPrices.map(item => {
 								return (
 									<Box

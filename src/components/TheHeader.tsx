@@ -170,11 +170,6 @@ export default function TheHeader() {
 						})}
 					</Menu>
 
-					{/* <Button
-						href="/recruitment"
-						className=" no-underline p-3 hover:text-white hover:bg-sky-900 hover:ease-out hover:duration-700">
-						tuyển dụng
-					</Button> */}
 					<Button
 						href="/news"
 						className=" no-underline p-3 hover:text-white hover:bg-sky-900 hover:ease-out hover:duration-700">
@@ -194,12 +189,12 @@ export default function TheHeader() {
 					{navigation ? (
 						<Close
 							fontSize="medium"
-							className="text-[#002D62] hover:opacity-80 cursor-pointer"
+							className="text-[#002D62] hover:opacity-80 cursor-pointer z-50"
 						/>
 					) : (
 						<MenuRounded
 							fontSize="medium"
-							className="text-[#002D62] hover:opacity-80 cursor-pointer"
+							className="text-[#002D62] hover:opacity-80 cursor-pointer z-50"
 						/>
 					)}
 				</div>
@@ -275,11 +270,6 @@ export default function TheHeader() {
 								})}
 							</Menu>
 
-							{/* <Button
-								href="/recruitment"
-								className=" no-underline p-3 hover:text-sky-900">
-								tuyển dụng
-							</Button> */}
 							<Button
 								href="/news"
 								className=" no-underline p-3 hover:text-sky-900">

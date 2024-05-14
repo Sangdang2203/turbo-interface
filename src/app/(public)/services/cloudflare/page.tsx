@@ -33,26 +33,21 @@ export default function CloudFlare() {
 							item
 							xs={12}
 							md={6}
-							pl={10}>
-							<Box sx={{ display: "flex", alignItems: "center", py: 1 }}>
-								<Box className="text-justify">
-									<Typography className="text-[2rem] text-orange-600 font-semibold">
-										CloudFlare là gì?
-									</Typography>
-									<Typography py={1}>
-										CloudFlare là dịch vụ CDN trung gian, là nơi điều phối lượng
-										truy cập giữa máy chủ với máy của khách hàng qua lớp bảo vệ
-										CloudFlare.
-									</Typography>
-									<Typography py={1}>
-										Thay vì phải truy cập trực tiếp vào website thông qua phân
-										giải tên miền DNS thì có thể sử dụng máy chủ phân giải tên
-										của CloudFlare. Ngoài ra, CloudFlare còn có cung cấp nhiều
-										dịch vụ như CNS, SPDY, tường lửa chống Ddos, Chứng chỉ số
-										SSL
-									</Typography>
-								</Box>
-							</Box>
+							className="px-4 md:pl-10">
+							<Typography className="text-[2rem] text-orange-600 font-semibold">
+								CloudFlare là gì?
+							</Typography>
+							<Typography py={1}>
+								CloudFlare là dịch vụ CDN trung gian, là nơi điều phối lượng
+								truy cập giữa máy chủ với máy của khách hàng qua lớp bảo vệ
+								CloudFlare.
+							</Typography>
+							<Typography py={1}>
+								Thay vì phải truy cập trực tiếp vào website thông qua phân giải
+								tên miền DNS thì có thể sử dụng máy chủ phân giải tên của
+								CloudFlare. Ngoài ra, CloudFlare còn có cung cấp nhiều dịch vụ
+								như CNS, SPDY, tường lửa chống Ddos, Chứng chỉ số SSL
+							</Typography>
 						</Grid>
 
 						<Grid
@@ -73,7 +68,7 @@ export default function CloudFlare() {
 					<Typography className="text-[2rem] font-semibold text-center">
 						PERFORMANCE
 					</Typography>
-					<Typography className="pt-5 text-[1.5rem]">
+					<Typography className="text-[1rem] sm:text-[1.5rem] pt-5 ">
 						Giúp tăng tốc độ tải của ứng dụng - website
 					</Typography>
 				</Box>
@@ -132,7 +127,7 @@ export default function CloudFlare() {
 				</Paper>
 
 				<Paper className="rounded-none shadow-xl py-5">
-					<Typography className="text-[2.5rem] text-center uppercase text-orange-600 font-semibold pt-1 pb-10">
+					<Typography className="text-[1.5rem] px-4 sm:text-[2.5rem] text-center uppercase text-orange-600 font-semibold pt-1 pb-10">
 						cloudflare và các gói tiện ích riêng
 					</Typography>
 					<Grid container>
@@ -174,10 +169,10 @@ export default function CloudFlare() {
 				</Paper>
 
 				<Box className="themeHeroBackground py-10 text-white text-center shadow-xl">
-					<Typography className="text-[2rem] font-semibold text-center">
+					<Typography className="text-[1.5rem] px-4 sm:text-[2rem] font-semibold text-center">
 						Trải nghiệm miễn phí dịch vụ CLOUDFLARE WAF của chúng tôi
 					</Typography>
-					<Typography className="py-5 text-[1.5rem]">
+					<Typography className="text-[1rem] sm:text-[1.5rem] py-5">
 						Tặng ngay 7 ngày miễn phí dùng thử
 					</Typography>
 					<div className="mt-5">
@@ -193,7 +188,7 @@ export default function CloudFlare() {
 							xs={12}
 							md={6}
 							className="flex flex-col items-center justify-center text-sky-900">
-							<Typography className="text-[1.5rem] font-bold">
+							<Typography className="py-3 text-[1.5rem] font-bold">
 								CloudFlare WAF là tính năng gì?
 							</Typography>
 							<Typography className="font-extralight text-center w-3/4 px-3">
@@ -216,7 +211,7 @@ export default function CloudFlare() {
 						</Grid>
 					</Grid>
 
-					<Box className="flex justify-center pt-10">
+					<Box className="hidden xl:flex justify-center pt-10">
 						{cloudflareWAF.slice(0, 3).map(item => {
 							return (
 								<Box
@@ -238,7 +233,7 @@ export default function CloudFlare() {
 						})}
 					</Box>
 
-					<Box className="flex justify-evenly py-10">
+					<Box className="hidden xl:flex justify-evenly py-10">
 						{cloudflareWAF.slice(3, 5).map(item => {
 							return (
 								<Box
@@ -266,10 +261,10 @@ export default function CloudFlare() {
 					<Typography className="text-[1.75rem] text-sky-900 font-semibold text-center py-5">
 						Có nên sử dụng CloudFlare hay không ?
 					</Typography>
-					<Typography className="text-center">
+					<Typography className="text-center px-3">
 						CloudFlare được dùng như một dịch vụ DNS thông thường khi tắt đám
-						mây tên miền. <br />
-						Nên sử dụng DNS trung gian này bởi vì các lý do sau đây:
+						mây tên miền. Nên sử dụng DNS trung gian này bởi vì các lý do sau
+						đây:
 					</Typography>
 					{cloudflareQuestions.map(item => {
 						return (

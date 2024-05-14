@@ -24,11 +24,11 @@ import * as React from "react";
 const PrivateCloud = () => {
 	return (
 		<Container>
-			<Box sx={{ textAlign: "center", marginX: "auto", paddingY: 10 }}>
+			<Box sx={{ textAlign: "center", marginX: "auto", paddingY: 5 }}>
 				<Typography className="text-[2rem] text-center text-sky-900 font-semibold">
 					Nền tảng Private Cloud mạnh mẽ, ổn định & hiệu năng cao
 				</Typography>
-				<Typography className="text-[1.5rem] w-3/4 mx-auto leading-relaxed text-gray-500">
+				<Typography className="text-[1.25rem] w-3/4 mx-auto leading-relaxed text-gray-500">
 					Sở hữu sức mạnh không giới hạn của điện toán đám mây một cách dễ dàng
 					với Private Cloud chỉ dành riêng cho doanh nghiệp của bạn.
 				</Typography>
@@ -36,7 +36,7 @@ const PrivateCloud = () => {
 					<iframe
 						className="rounded-xl mx-auto"
 						width="100%"
-						height="600px"
+						height="400px"
 						title="Vaidio  AI Vision 7.0"
 						src="https://www.youtube.com/embed/vx24uYpn3hw?si=aO0F5ocLlAhjuBHp"
 						allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -57,7 +57,7 @@ const PrivateCloud = () => {
 
 				<Box
 					my={5}
-					className="container grid sm:grid-cols-4 gap-x-6 gap-y-6">
+					className="container grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
 					<Card className="relative px-1 rounded-md hover:shadow-lg cursor-pointer">
 						<CardContent>
 							<Box className="mb-16">
@@ -166,7 +166,7 @@ const PrivateCloud = () => {
 					<Typography> * Bảng giá chưa bao gồm 10% VAT </Typography>
 				</Box>
 
-				<Box className="grid sm:grid-cols-4 gap-x-6 gap-y-6 mb-10 text-center">
+				<Box className="grid sm:grid-cols-2 xl:grid-cols-4 gap-3 mb-10 text-center">
 					{privateCloudPrices.map(item => {
 						return (
 							<Box
@@ -230,7 +230,7 @@ const PrivateCloud = () => {
 				<Typography className="text-[2rem] text-sky-900 text-center font-semibold">
 					Sẵn sàng triển khai Private Cloud?
 				</Typography>
-				<Typography className="text-[1.5rem] text-center w-2/3 mx-auto ">
+				<Typography className="text-[1rem] md:text-[1.5rem] text-center w-5/6 mx-auto ">
 					Dịch vụ Private Cloud hoạt động giống như trung tâm dữ liệu của riêng
 					bạn, có thể kiểm soát và định cấu hình theo nhu cầu của tổ chức mình.
 				</Typography>

@@ -249,6 +249,7 @@ export default function UserManagement() {
 								size="small">
 								<TableHead className="bg-slate-300">
 									<TableRow>
+										<TableCell>#</TableCell>
 										<TableCell>Username</TableCell>
 										<TableCell>Họ tên</TableCell>
 										<TableCell>Email</TableCell>
@@ -264,13 +265,16 @@ export default function UserManagement() {
 												page * rowsPerPage,
 												page * rowsPerPage + rowsPerPage
 											)
-											.map(user => (
+											.map((user, index) => (
 												<TableRow
 													key={user.id}
 													className="hover:bg-slate-100 cursor-pointer"
 													sx={{
 														"&:last-child td, &:last-child th": { border: 0 },
 													}}>
+													<TableCell className="font-semibold">
+														{index + 1}
+													</TableCell>
 													<TableCell> {user.login} </TableCell>
 													<TableCell>
 														{user.lastName + " " + user.firstName}

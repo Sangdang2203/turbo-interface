@@ -40,10 +40,10 @@ export default function CloudServer() {
 					</Typography>
 				</Box>
 
-				<Box className="container grid sm:grid-cols-3 gap-x-6 gap-y-6 mb-10">
-					<Card className="relative rounded-xl hover:shadow-lg cursor-pointer  text-sky-900">
+				<Box className="container grid sm:grid-cols-3 gap-3 mb-10">
+					<Card className="relative rounded-xl hover:shadow-lg cursor-pointer text-sky-900">
 						<Box className="flex flex-col justify-center items-center p-3">
-							<Typography className="text-[1.5rem] font-bold">
+							<Typography className="text-[1.25rem] font-bold lg:text-[1.5rem]">
 								Giao diện đơn giản
 							</Typography>
 							<Image
@@ -60,7 +60,7 @@ export default function CloudServer() {
 
 					<Card className="relative rounded-xl hover:shadow-lg cursor-pointer">
 						<Box className="flex flex-col justify-center items-center p-3  text-sky-900">
-							<Typography className="text-[1.5rem] font-bold">
+							<Typography className="text-[1.25rem] font-bold lg:text-[1.5rem]">
 								Hiệu năng vượt trội
 							</Typography>
 
@@ -79,7 +79,7 @@ export default function CloudServer() {
 
 					<Card className="rounded-xl hover:shadow-lg cursor-pointer">
 						<Box className="flex flex-col justify-center items-center p-3  text-sky-900">
-							<Typography className="text-[1.5rem] font-bold">
+							<Typography className="text-[1.25rem] font-bold lg:text-[1.5rem]">
 								IDC tiêu chuẩn 3
 							</Typography>
 							<Image
@@ -102,7 +102,7 @@ export default function CloudServer() {
 					alt="promotion"
 				/>
 
-				<Card className="rounded-2xl my-10">
+				<Card className="hidden lg:block rounded-2xl my-10">
 					<Grid
 						container
 						className="shadow-lg pb-5">
@@ -210,7 +210,7 @@ export default function CloudServer() {
 							<Typography> * Bảng giá chưa bao gồm 10% VAT </Typography>
 						</Box>
 
-						<Box className="grid sm:grid-cols-5 gap-3 mb-10 text-center">
+						<Box className="grid sm:grid-cols-3 xl:grid-cols-5 gap-3 mb-10 text-center">
 							{cloudServerPrices.map(item => {
 								return (
 									<Box
@@ -271,11 +271,11 @@ export default function CloudServer() {
 					</Box>
 
 					<Box className=" text-sky-900">
-						<Typography className="text-[2rem] font-semibold text-center py-5">
+						<Typography className="text-[1.75rem] font-semibold text-center py-5">
 							Bảng giá tài nguyên bổ sung
 						</Typography>
 
-						<Box className="grid sm:grid-cols-3 gap-3 mb-10">
+						<Box className="grid md:grid-cols-2 lg:grid-cols-3 gap-3 mb-10">
 							{bonusPrices.map(item => {
 								return (
 									<Box

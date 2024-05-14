@@ -243,7 +243,7 @@ export const cloudBackupPackage = [
 		id: 3,
 		title: "Enterise tiết kiệm 45%",
 		hyperv: "Hỗ trợ ảo hóa VMware/Hyper-V",
-		ram: "1500 GB dung lượng lưu trữ cloud",
+		ram: "1.5 TB dung lượng lưu trữ cloud",
 		server: "06 máy chủ ảo được sao lưu",
 		limit: "Không giới hạn bản sao lưu",
 	},

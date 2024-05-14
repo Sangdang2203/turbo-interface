@@ -27,37 +27,39 @@ import feedback_01 from "../../images/feedback_01.png";
 import feedback_02 from "../../images/feedback_02.png";
 import feedback_03 from "../../images/feedback_03.png";
 import { homeServices } from "app/libs/data";
-import CustomDialog from "@/components/CustomDialog";
 
 export default function HomePage() {
-	const [open, setOpen] = React.useState(false);
+	const [currentText, setCurrentText] = React.useState("Ứng dụng"); // Initial text
+	const [texts] = React.useState(["Ứng dụng", "Dịch vụ", "Giải pháp"]);
 
-	const handleClickOpen = () => {
-		setOpen(true);
-	};
+	React.useEffect(() => {
+		const intervalId = setInterval(() => {
+			const nextTextIndex = (texts.indexOf(currentText) + 1) % texts.length;
+			setCurrentText(texts[nextTextIndex]);
+		}, 2000); // 2 seconds interval
 
-	const handleClose = () => {
-		setOpen(false);
-	};
+		return () => clearInterval(intervalId); // Clear on component unmount
+	}, [currentText, texts]); // Dependency array to re-run on text change
+
 	return (
 		<Box>
 			<Box
 				textAlign="center"
 				my={5}
 				className="text-white themePolygonLuminary py-10">
-				<Typography className="text-[2.5rem] font-semibold">
-					Ứng dụng | Dịch vụ | Giải pháp
+				<Typography className="text-[2.5rem] font-semibold uppercase ">
+					{currentText}
 				</Typography>
 				<Typography className="text-[2rem] font-extralight">
 					điện toán đám mây chất lượng hàng đầu.
 				</Typography>
-				<Typography className="text-center text-[1.75rem] font-light w-3/4 mx-auto my-5">
+				<Typography className="text-center text-[1rem] md:text-[1.75rem] font-light w-3/4 mx-auto my-5">
 					Công ty Turbo Solutions chung tay cùng quý doanh nghiệp thực hiện
 					chuyển đổi số bằng cách tích hợp các công nghệ thông minh 4.0, cùng
 					đạt mục tiêu thắng lợi.
 				</Typography>
 
-				<Container className="container grid lg:grid-cols-4 gap-6 mt-10">
+				<Container className="container grid grid-cols-2 lg:grid-cols-4 gap-6 mt-10">
 					{homeServices.map(item => {
 						return (
 							<div
@@ -72,7 +74,7 @@ export default function HomePage() {
 
 									<div className="content">
 										<div className="h3">{item.sub}</div>
-										<p>{item.desc}</p>
+										<p className="desc md:text-[1rem]">{item.desc}</p>
 									</div>
 								</div>
 							</div>
@@ -93,7 +95,7 @@ export default function HomePage() {
 				<Typography className="py-3 px-5 bg-sky-50 text-sky-700 uppercase w-fit rounded-full">
 					dịch vụ điện toán đám mây
 				</Typography>
-				<Typography className="text-[1.75rem] font-light w-2/3 text-center mx-auto">
+				<Typography className="text-[1.25rem] md:text-[1.75rem] font-light w-2/3 text-center mx-auto">
 					Công ty Turbo Solutions cung cấp dịch vụ điện toán đám mây đa dạng và
 					các ứng dụng số phù hợp nhiều lĩnh vực.
 				</Typography>
@@ -120,7 +122,7 @@ export default function HomePage() {
 					</CardContent>
 					<CardActions className="absolute bottom-1 left-1">
 						<Button
-							href="https://ecocloud.vn/bang-gia-cloud-server/"
+							href="/services/cloud-server"
 							className="fancy hover:opacity-80">
 							<span className="top-key"></span>
 							<span className="text">Tìm hiểu thêm</span>
@@ -151,7 +153,7 @@ export default function HomePage() {
 					</CardContent>
 					<CardActions className="absolute bottom-1 left-1">
 						<Button
-							href="https://baas.ecocloud.vn/"
+							href="/services/cloud-backup-recovery"
 							className="fancy hover:opacity-80">
 							<span className="top-key"></span>
 							<span className="text">Tìm hiểu thêm</span>
@@ -180,7 +182,7 @@ export default function HomePage() {
 					</CardContent>
 					<CardActions className="absolute bottom-1 left-1">
 						<Button
-							href="/smart-cloud-camera"
+							href="https://v2.aivisionviet.vn/nhan-dien-khuon-mat/"
 							className="fancy hover:opacity-80">
 							<span className="top-key"></span>
 							<span className="text">Tìm hiểu thêm</span>
@@ -202,10 +204,10 @@ export default function HomePage() {
 
 			<Container className="shadow-lg rounded-2xl py-5 my-28">
 				<Box className="text-center">
-					<Typography className="text-[2rem] font-semibold">
+					<Typography className="text-[1.5rem] md:text-[2rem] font-semibold">
 						Được hàng trăm doanh nghiệp tin dùng cho đến nay
 					</Typography>
-					<Typography className="text-[1.25rem] pb-10 pt-3">
+					<Typography className="text-[14px] md:text-[1.25rem] pb-10 pt-3">
 						Khách hàng của chúng tôi đến từ khắp nơi trên thế giới.
 					</Typography>
 				</Box>
@@ -214,28 +216,28 @@ export default function HomePage() {
 					className="flex justify-between items-center text-center">
 					<Grid
 						item
-						xs={12}
+						xs={6}
 						md={3}>
 						<Typography className="text-[3rem] font-bold">250+</Typography>
 						<Typography>Dự án đã triển khai</Typography>
 					</Grid>
 					<Grid
 						item
-						xs={12}
+						xs={6}
 						md={3}>
 						<Typography className="text-[3rem] font-bold">10+</Typography>
 						<Typography>Hơn 10 năm kinh nghiệm</Typography>
 					</Grid>
 					<Grid
 						item
-						xs={12}
+						xs={6}
 						md={3}>
 						<Typography className="text-[3rem] font-bold">5</Typography>
 						<Typography>Quốc gia</Typography>
 					</Grid>
 					<Grid
 						item
-						xs={12}
+						xs={6}
 						md={3}>
 						<Typography className="text-[3rem] font-bold">50+</Typography>
 						<Typography>Thành viên</Typography>
@@ -246,7 +248,7 @@ export default function HomePage() {
 			{/* Why clients choose us, Khách hàng nói gì về chúng tôi */}
 			<Box className="themeGlobal min-h-[500px]">
 				<Box className="text-center py-10">
-					<Typography className="text-[2.5rem]">
+					<Typography className="text-[2rem] md:text-[2.5rem]">
 						Why clients choose us
 					</Typography>
 					<Typography>Because it’s good to work with good people!</Typography>
@@ -343,7 +345,7 @@ export default function HomePage() {
 					</Box>
 				</Container>
 
-				<Typography className="text-[2.5rem] font-semibold text-center py-10">
+				<Typography className="text-[2rem] w-5/6 mx-auto md:text-[2.5rem] text-center py-10">
 					Khách hàng nói gì về chúng tôi
 				</Typography>
 

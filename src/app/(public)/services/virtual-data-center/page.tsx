@@ -31,8 +31,8 @@ export default function VirtualDataCenter() {
 	return (
 		<>
 			<Container>
-				<Box sx={{ textAlign: "center", py: 10 }}>
-					<Typography className="text-[2.5rem] font-semibold text-sky-900">
+				<Box sx={{ textAlign: "center", py: 5 }}>
+					<Typography className="text-[1.5rem] md:text-[2.5rem] font-semibold text-sky-900">
 						Virtual Data Center <br /> Trung tâm dữ liệu công nghệ đám mây
 					</Typography>
 					<Typography>
@@ -50,14 +50,14 @@ export default function VirtualDataCenter() {
 					/>
 				</Box>
 
-				<Typography className="text-[2.5rem] font-semibold text-sky-900 text-center py-10">
+				<Typography className="text-[1.5rem] md:text-[2.5rem] font-semibold text-sky-900 text-center py-10">
 					Lợi ích của Virtual Data Center
 				</Typography>
 
 				<Box className="container grid sm:grid-cols-3 gap-6 mb-10">
 					<Card className="relative rounded-xl hover:shadow-lg cursor-pointer text-sky-900">
 						<Box className="flex flex-col justify-center items-center p-3">
-							<Typography className="text-[1.5rem] font-bold">
+							<Typography className="text-[1.2rem] lg:text-[1.5rem] font-bold">
 								Minh bạch chi phí
 							</Typography>
 							<Image
@@ -75,7 +75,7 @@ export default function VirtualDataCenter() {
 
 					<Card className="relative rounded-xl hover:shadow-lg cursor-pointer">
 						<Box className="flex flex-col justify-center items-center p-3  text-sky-900">
-							<Typography className="text-[1.5rem] font-bold">
+							<Typography className="text-[1.2rem] lg:text-[1.5rem] font-bold">
 								Hoạt động hiệu quả
 							</Typography>
 
@@ -94,7 +94,7 @@ export default function VirtualDataCenter() {
 
 					<Card className="rounded-xl hover:shadow-lg cursor-pointer">
 						<Box className="flex flex-col justify-center items-center p-3  text-sky-900">
-							<Typography className="text-[1.5rem] font-bold">
+							<Typography className="text-[1.2rem] lg:text-[1.5rem] font-bold">
 								Tối đa hóa lợi nhuận
 							</Typography>
 							<Image
@@ -167,7 +167,7 @@ export default function VirtualDataCenter() {
 							</Typography>
 							<Typography> * Bảng giá chưa bao gồm 10% VAT </Typography>
 						</Box>
-						<Box className="grid sm:grid-cols-4 gap-x-6 gap-y-6 mb-10 text-center">
+						<Box className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-10 text-center">
 							{vitualDataCenterPrices.map(item => {
 								return (
 									<Box
@@ -242,11 +242,11 @@ export default function VirtualDataCenter() {
 					</Box>
 
 					<Box className=" text-sky-900">
-						<Typography className="text-[2rem] font-semibold text-center py-5">
+						<Typography className="text-[1.75rem] font-semibold text-center py-5">
 							Bảng giá tài nguyên bổ sung
 						</Typography>
 
-						<Box className="grid sm:grid-cols-3 gap-3 mb-10">
+						<Box className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 mb-10">
 							{bonusPrices.map(item => {
 								return (
 									<Box

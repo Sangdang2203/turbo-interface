@@ -1,11 +1,20 @@
+import useS3 from "@/hooks/useS3";
 import { Session } from "next-auth";
 import { toast } from "sonner";
 import { ApiResponse, CreatePostRequest, POSTSCHEMA } from "types/interfaces";
 
 export default function AddNewPost(session: Session | null) {
+	const { handleFileUpload, ButtonUpload, preview } = useS3();
 	return async (data: POSTSCHEMA) => {
 		if (session) {
 			const message = toast.loading("Đang tạo bài viết mới");
+
+			const urlImage = await handleFileUpload();
+
+			// Xử lý lỗi nếu urlImage null
+			if (!urlImage) {
+				return;
+			}
 
 			const post: CreatePostRequest = {
 				title: data.title,
@@ -13,13 +22,11 @@ export default function AddNewPost(session: Session | null) {
 				user: {
 					id: data.userId,
 				},
-				urlImage: data.urlImage,
 				description: data.description,
 				content: data.content,
 				status: "ACTIVE",
+				urlImage: "",
 			};
-
-			console.log(post.urlImage);
 
 			try {
 				const res = await fetch("/api/posts", {
@@ -39,7 +46,7 @@ export default function AddNewPost(session: Session | null) {
 					toast.error(payload.message);
 				}
 			} catch (error) {
-				toast.error("Loi");
+				toast.error("Error: Lỗi khi tạo bài viết mới.");
 				console.log(error);
 			}
 			toast.dismiss(message);

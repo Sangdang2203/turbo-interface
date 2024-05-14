@@ -120,7 +120,8 @@ export default function TheFooter() {
 					<Grid
 						item
 						xs={12}
-						md={6}>
+						md={6}
+						className="hidden sm:block">
 						<Box sx={{ display: "flex", justifyContent: "center" }}>
 							<Box mx={2}>
 								<Typography className="text-lg uppercase">giải pháp</Typography>

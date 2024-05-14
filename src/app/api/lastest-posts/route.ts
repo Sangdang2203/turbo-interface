@@ -38,14 +38,14 @@ export async function GET(req: NextRequest) {
 export async function POST(req: NextRequest) {
 	const post = await req.json();
 
+	console.log(post);
+
 	try {
 		const response = await fetch(process.env.NEXT_PUBLIC_API_URL + "/posts", {
 			method: req.method,
 			headers: req.headers,
 			body: JSON.stringify(post),
 		});
-
-		// console.log(response);
 
 		let data = null;
 

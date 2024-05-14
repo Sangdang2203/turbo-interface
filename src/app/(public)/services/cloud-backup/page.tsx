@@ -92,31 +92,34 @@ export default function CloudBackup() {
 				</Box>
 
 				{/* cloud backup packages */}
-				<Box className="container grid sm:grid-cols-3 gap-x-6 gap-y-6 mb-10">
+				<Box className="container grid md:grid-cols-3 gap-3 mb-10">
 					{cloudBackupPackage.map(item => {
 						return (
 							<Card
 								key={item.id}
 								className="relative rounded-xl hover:shadow-lg cursor-pointer text-sky-900">
-								<Box className="flex flex-col justify-center items-center p-3">
-									<Image
-										src={theme_card}
-										className="w-full h-auto rounded-xl relative"
-										alt="Minh bạch chi phí"
-									/>
+								<Box className="themeCard flex flex-col justify-center items-center p-3">
 									<Box
 										key={item.id}
-										className="absolute text-center">
-										<Typography className="text-[1.5rem] font-bold pb-10">
+										className="text-center">
+										<Typography className="text-[1rem] lg:text-[1.5rem] font-bold pb-10">
 											{item.title}
 										</Typography>
-										<Typography className="text-justify px-3">
-											{" "}
-											{item.hyperv}{" "}
+										<Typography className="px-3 text-[12px] lg:text-[1rem]">
+											{item.hyperv}
 										</Typography>
-										<Typography className="px-3"> {item.ram} </Typography>
-										<Typography className="px-3"> {item.server} </Typography>
-										<Typography className="px-3"> {item.limit} </Typography>
+										<Typography className="px-3 text-[12px] lg:text-[1rem]">
+											{" "}
+											{item.ram}{" "}
+										</Typography>
+										<Typography className="px-3 text-[12px] lg:text-[1rem]">
+											{" "}
+											{item.server}{" "}
+										</Typography>
+										<Typography className="px-3 text-[12px] lg:text-[1rem]">
+											{" "}
+											{item.limit}{" "}
+										</Typography>
 									</Box>
 								</Box>
 							</Card>
@@ -199,11 +202,11 @@ export default function CloudBackup() {
 							xs={12}
 							md={7}
 							className=" text-sky-900">
-							<Grid>
+							<Grid className="pl-6 md:pl-24 lg:pl-0">
 								<Box sx={{ display: "flex", alignItems: "center", py: 1 }}>
 									<Image
 										src={cloudServer_icon_01}
-										className="w-16 h-auto mr-4"
+										className="w-16 h-auto mr-2"
 										alt="Chi phí phù hợp"
 									/>
 									<Box>
@@ -271,7 +274,7 @@ export default function CloudBackup() {
 							<Typography> * Bảng giá chưa bao gồm 10% VAT </Typography>
 						</Box>
 
-						<Box className="grid sm:grid-cols-3 gap-6 mb-10 text-center">
+						<Box className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 mb-10 text-center">
 							{cloudBackupPrices.map(item => {
 								return (
 									<Box
@@ -321,7 +324,7 @@ export default function CloudBackup() {
 							Bảng giá tài nguyên bổ sung
 						</Typography>
 
-						<Box className="grid md:grid-cols-4 gap-3 mb-10">
+						<Box className="grid sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-10">
 							{cloudBackupBonus.map(item => {
 								return (
 									<Box

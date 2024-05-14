@@ -136,14 +136,16 @@ export default function CategoryManagement() {
 
 								<TableBody>
 									{categories && categories.length > 0 ? (
-										categories.map(cate => (
+										categories.map((cate, index) => (
 											<TableRow
 												key={cate.id}
 												className="hover:bg-slate-100 cursor-pointer"
 												sx={{
 													"&:last-child td, &:last-child th": { border: 0 },
 												}}>
-												<TableCell> {cate.id} </TableCell>
+												<TableCell className="font-semibold">
+													{index + 1}
+												</TableCell>
 												<TableCell> {cate.name} </TableCell>
 												<TableCell>
 													<Tooltip
