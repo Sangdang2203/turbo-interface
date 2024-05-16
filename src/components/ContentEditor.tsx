@@ -1,7 +1,7 @@
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 
-const CustomEditor = (props: {
+const ContentEditor = (props: {
 	value: string | null | undefined;
 	onChange: (arg0: string) => void;
 }) => {
@@ -17,4 +17,4 @@ const CustomEditor = (props: {
 	);
 };
 
-export default CustomEditor;
+export default ContentEditor;

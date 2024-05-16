@@ -21,8 +21,10 @@
 		"paths": {
 			"@/styles/*": ["styles/*"],
 			"@/components/*": ["components/*"],
-			"@/hooks/*": ["hooks/*"]
-			// "@/helper/*": ["helper/*"]
+			"@/hooks/*": ["hooks/*"],
+			"@methods/*": ["app/methods/*"],
+			"@/*": ["*"],
+			"@/helper/*": ["helper/*"]
 		}
 	},
 	"include": [

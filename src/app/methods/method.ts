@@ -1,4 +1,32 @@
-import { ApiResponse, Post } from "types/interfaces";
+import { toast } from "sonner";
+import { ApiResponse, CustomerMessage } from "types/interfaces";
+
+// CREATE METHODS
+export async function CreateContact(contact: CustomerMessage) {
+	const message = toast.loading("Đang gửi thông tin ...");
+
+	try {
+		const res = await fetch(`/api/contacts`, {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({ ...contact, isNew: true }),
+		});
+
+		const payload = (await res.json()) as ApiResponse;
+
+		if (payload.ok) {
+			toast.success(payload.message);
+			//reset();
+		} else {
+			toast.error(payload.message);
+		}
+		toast.dismiss(message);
+	} catch (error) {
+		console.log(error);
+	}
+}
 
 // GET ALL METHODS
 export const fetchUsers = async (token: string) => {

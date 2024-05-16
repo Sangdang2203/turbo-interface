@@ -18,14 +18,14 @@ import {
 	Typography,
 } from "@mui/material";
 import { PublicRounded } from "@mui/icons-material";
-import logoTurbo from "../../images/logoTurbo.png";
-import cloudServer from "../../images/cloudServer.png";
-import cloudCamera from "../../images/cloudCamera.png";
-import Backup from "../../images/Backup.png";
-import promotion from "../../images/promotion.jpg";
-import feedback_01 from "../../images/feedback_01.png";
-import feedback_02 from "../../images/feedback_02.png";
-import feedback_03 from "../../images/feedback_03.png";
+import logoTurbo from "@/app/images/logoTurbo.png";
+import cloudServer from "@/app/images/cloudServer.png";
+import cloudCamera from "@/app/images/cloudCamera.png";
+import Backup from "@/app/images/Backup.png";
+import promotion from "@/app/images/promotion.jpg";
+import feedback_01 from "@/app/images/feedback_01.png";
+import feedback_02 from "@/app/images/feedback_02.png";
+import feedback_03 from "@/app/images/feedback_03.png";
 import { homeServices } from "app/libs/data";
 
 export default function HomePage() {

@@ -2,7 +2,6 @@
 
 import * as React from "react";
 import { toast } from "sonner";
-import { useSession } from "next-auth/react";
 import { useForm } from "react-hook-form";
 import { CloseOutlined } from "@mui/icons-material";
 import {
@@ -18,15 +17,16 @@ import {
 } from "@mui/material";
 import { CustomerMessage, ApiResponse } from "types/interfaces";
 import { services } from "app/libs/data";
+import { CreateContact } from "@methods/method";
 
-export default function CustomDialog() {
+export default function ContactPopup() {
 	const [service, setService] = React.useState<string[]>([]);
 	const [open, setOpen] = React.useState(false);
-	const { data: session } = useSession();
 
 	const {
 		register,
 		handleSubmit,
+		reset,
 		formState: { errors: errors },
 	} = useForm<CustomerMessage>();
 
@@ -44,34 +44,6 @@ export default function CustomDialog() {
 		} = event;
 		setService(typeof value === "string" ? value.split(",") : value);
 	};
-
-	async function CreateContact(contact: CustomerMessage) {
-		if (session) {
-			const message = toast.loading("Đang gửi thông tin ...");
-
-			try {
-				const res = await fetch(`/api/contacts`, {
-					method: "POST",
-					headers: {
-						Authorization: `Bearer ${session.user.id_token}`,
-						"Content-Type": "application/json",
-					},
-					body: JSON.stringify(contact),
-				});
-
-				const payload = (await res.json()) as ApiResponse;
-
-				if (payload.ok) {
-					toast.success(payload.message);
-				} else {
-					toast.success(payload.message);
-				}
-				toast.dismiss(message);
-			} catch (error) {
-				console.log(error);
-			}
-		}
-	}
 
 	return (
 		<React.Fragment>
@@ -168,6 +140,7 @@ export default function CustomDialog() {
 								fullWidth
 								displayEmpty
 								value={service}
+								defaultValue={[""]}
 								onChange={handleChange}
 								renderValue={selected => {
 									if (selected.length === 0) {

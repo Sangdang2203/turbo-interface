@@ -1,10 +1,10 @@
 import React from "react";
-import ecoPrivateCloud from "../../../images/privateCloud/eco_privatecloud.png";
-import cloudGPU_01 from "../../../images/cloudServer/cloudGPU_01.png";
-import cloudGPU_02 from "../../../images/cloudServer/cloudGPU_02.png";
-import cloudGPU_03 from "../../../images/cloudServer/cloudGPU_03.png";
-import vitualDataCenter from "../../../images/cloudServer/virtual_data_center.png";
-import cloudServer_icon_01 from "../../../images/cloudServer/cloudServer_icon_01.png";
+import ecoPrivateCloud from "@/app/images/privateCloud/eco_privatecloud.png";
+import cloudGPU_01 from "@/app/images/cloudServer/cloudGPU_01.png";
+import cloudGPU_02 from "@/app/images/cloudServer/cloudGPU_02.png";
+import cloudGPU_03 from "@/app/images/cloudServer/cloudGPU_03.png";
+import vitualDataCenter from "@/app/images/cloudServer/virtual_data_center.png";
+import cloudServer_icon_01 from "@/app/images/cloudServer/cloudServer_icon_01.png";
 import {
 	Container,
 	Box,
@@ -25,7 +25,7 @@ import {
 	vitualDataCenterPrices,
 } from "app/libs/data";
 import { TaskAltRounded } from "@mui/icons-material";
-import CustomDialog from "@/components/CustomDialog";
+import ContactPopup from "@/components/ContactPopup";
 
 export default function VirtualDataCenter() {
 	return (
@@ -40,7 +40,7 @@ export default function VirtualDataCenter() {
 						máy chủ và thiết bị mạng
 					</Typography>
 					<Box my={5}>
-						<CustomDialog />
+						<ContactPopup />
 					</Box>
 
 					<Image

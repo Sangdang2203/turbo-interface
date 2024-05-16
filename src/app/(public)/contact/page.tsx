@@ -7,8 +7,6 @@ import {
 	Link,
 	Paper,
 	Typography,
-	OutlinedInput,
-	Chip,
 	Select,
 	MenuItem,
 } from "@mui/material";
@@ -17,16 +15,17 @@ import {
 	LocationOnRounded,
 	MailOutlineRounded,
 	PhoneCallbackRounded,
+	ResetTv,
 	SendRounded,
 } from "@mui/icons-material";
 
 import { SelectChangeEvent } from "@mui/material/Select";
 import { CustomerMessage, ApiResponse } from "types/interfaces";
 import { useForm } from "react-hook-form";
+import { services } from "app/libs/data";
 import * as React from "react";
 import { toast } from "sonner";
-import { useSession } from "next-auth/react";
-import { services } from "app/libs/data";
+import { CreateContact } from "@methods/method";
 
 // export const metadata = () => {
 // 	return {
@@ -36,11 +35,11 @@ import { services } from "app/libs/data";
 
 const ContactPage = () => {
 	const [service, setService] = React.useState<string[]>([]);
-	const { data: session } = useSession();
 
 	const {
 		register,
 		handleSubmit,
+		reset,
 		formState: { errors: errors },
 	} = useForm<CustomerMessage>();
 
@@ -50,36 +49,6 @@ const ContactPage = () => {
 		} = event;
 		setService(typeof value === "string" ? value.split(",") : value);
 	};
-
-	async function CreateContact(contact: CustomerMessage) {
-		if (session) {
-			const message = toast.loading("Đang gửi thông tin ...");
-
-			try {
-				const res = await fetch(`/api/contacts`, {
-					method: "POST",
-					headers: {
-						Authorization: `Bearer ${session.user.id_token}`,
-						"Content-Type": "application/json",
-					},
-					body: JSON.stringify(contact),
-				});
-
-				console.log(contact);
-
-				const payload = (await res.json()) as ApiResponse;
-
-				if (payload.ok) {
-					toast.success(payload.message);
-				} else {
-					toast.error(payload.message);
-				}
-				toast.dismiss(message);
-			} catch (error) {
-				console.log(error);
-			}
-		}
-	}
 
 	return (
 		<Box>

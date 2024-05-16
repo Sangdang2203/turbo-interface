@@ -40,7 +40,6 @@ export async function GET(req: NextRequest) {
 
 export async function POST(req: NextRequest) {
 	const contact = await req.json();
-
 	try {
 		const response = await fetch(
 			process.env.NEXT_PUBLIC_API_URL + "/contacts",
@@ -67,7 +66,8 @@ export async function POST(req: NextRequest) {
 		return NextResponse.json({
 			ok: false,
 			status: "Error",
-			message: "Gửi thông tin thất bại.",
+			message:
+				"Gửi thông tin thất bại. Vui lòng bấm chọn dịch vụ bạn đang quan tâm.",
 		});
 	} catch (error) {
 		console.log(error);

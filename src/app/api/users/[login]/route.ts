@@ -27,7 +27,7 @@ export async function DELETE(
 		return NextResponse.json({
 			ok: false,
 			status: "Error",
-			message: "Xóa thất bại !",
+			message: "Xóa thất bại ! User đang được sử dụng.",
 		});
 	} catch (error) {
 		console.log(error);

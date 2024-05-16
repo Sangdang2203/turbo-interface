@@ -1,9 +1,9 @@
 "use client";
 
-import theme_card from "../../../images/theme_card.png";
-import cloudServer_icon_01 from "../../../images/cloudServer/cloudServer_icon_01.png";
-import cloudServer_icon_02 from "../../../images/cloudServer/cloudServer_icon_02.png";
-import cloudServer_icon_03 from "../../../images/cloudServer/cloudServer_icon_03.png";
+import theme_card from "@/app/images/theme_card.png";
+import cloudServer_icon_01 from "@/app/images/cloudServer/cloudServer_icon_01.png";
+import cloudServer_icon_02 from "@/app/images/cloudServer/cloudServer_icon_02.png";
+import cloudServer_icon_03 from "@/app/images/cloudServer/cloudServer_icon_03.png";
 import {
 	Container,
 	Box,
@@ -27,7 +27,7 @@ import {
 	cloudBackupPackage,
 } from "app/libs/data";
 import React from "react";
-import CustomDialog from "@/components/CustomDialog";
+import ContactPopup from "@/components/ContactPopup";
 
 interface TabPanelProps {
 	children?: React.ReactNode;
@@ -87,7 +87,7 @@ export default function CloudBackup() {
 					</Box>
 
 					<Box mt={5}>
-						<CustomDialog />
+						<ContactPopup />
 					</Box>
 				</Box>
 

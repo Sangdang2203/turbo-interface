@@ -65,7 +65,7 @@ export default function AdminLoginForm() {
 				}),
 				{
 					success(data) {
-						router.push("/dashboard");
+						router.push("/dashboard/contacts");
 						return "Đăng nhập thành công.";
 					},
 					loading: "Đang đăng nhập ...",

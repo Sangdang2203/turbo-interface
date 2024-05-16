@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import uploadFileS3 from "../../helper/uploadFileS3";
+import uploadFileS3 from "../../helpers/uploadFileS3";
 
 export async function POST(req: Request) {
 	try {
@@ -9,7 +9,8 @@ export async function POST(req: Request) {
 		if (!file) {
 			return NextResponse.json({ error: "File is required." }, { status: 400 });
 		}
-		const res = await uploadFileS3(file as File);
+		const res = uploadFileS3(file as File);
+		//@ts-ignore
 		const dataRes = JSON.parse(res);
 		// @ts-ignore
 		if (dataRes.status === "failed") {

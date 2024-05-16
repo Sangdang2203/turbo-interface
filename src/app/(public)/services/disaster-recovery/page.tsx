@@ -1,21 +1,18 @@
-"use client";
-
-import disasterRecoveryMap from "../../../images/disasterRecovery/disasterDecovery_01.png";
-import disasterRecoverySolution from "../../../images/CloudBackupRecovery.png";
-import remoteBackupServices from "../../../images/disasterRecovery/remoteBackupServices.webp";
-import disasterRecovery_02 from "../../../images/disasterRecovery/disasterDecovery_02.png";
-import disasterRecovery_03 from "../../../images/disasterRecovery/disasterDecovery_03.png";
-import disasterRecovery_04 from "../../../images/disasterRecovery/disasterDecovery_04.png";
-import Hyper_V from "../../../images/disasterRecovery/icon_01.webp";
-import Vmware from "../../../images/disasterRecovery/icon_02.webp";
-import SapHana from "../../../images/disasterRecovery/icon_03.webp";
-import Exchange from "../../../images/disasterRecovery/icon_04.webp";
-import ActiveDirectory from "../../../images/disasterRecovery/icon_05.webp";
-import SQLServer from "../../../images/disasterRecovery/icon_06.webp";
-import Oracle from "../../../images/disasterRecovery/icon_07.webp";
+import disasterRecoveryMap from "@/app/images/disasterRecovery/disasterDecovery_01.png";
+import disasterRecoverySolution from "@/app/images/CloudBackupRecovery.png";
+import remoteBackupServices from "@/app/images/disasterRecovery/remoteBackupServices.webp";
+import disasterRecovery_02 from "@/app/images/disasterRecovery/disasterDecovery_02.png";
+import disasterRecovery_03 from "@/app/images/disasterRecovery/disasterDecovery_03.png";
+import disasterRecovery_04 from "@/app/images/disasterRecovery/disasterDecovery_04.png";
+import Hyper_V from "@/app/images/disasterRecovery/icon_01.webp";
+import Vmware from "@/app/images/disasterRecovery/icon_02.webp";
+import SapHana from "@/app/images/disasterRecovery/icon_03.webp";
+import ActiveDirectory from "@/app/images/disasterRecovery/icon_05.webp";
+import SQLServer from "@/app/images/disasterRecovery/icon_06.webp";
+import Oracle from "@/app/images/disasterRecovery/icon_07.webp";
 import { Box, Button, Card, Container, Grid, Typography } from "@mui/material";
 import Image from "next/image";
-import CustomDialog from "@/components/CustomDialog";
+import ContactPopup from "@/components/ContactPopup";
 
 export default function DisasterRecovery() {
 	return (
@@ -51,7 +48,7 @@ export default function DisasterRecovery() {
 							chủ lên hạ tầng điện toán đám mây.
 						</Typography>
 						<Box my={3}>
-							<CustomDialog />
+							<ContactPopup />
 						</Box>
 					</Box>
 				</Grid>

@@ -1,13 +1,13 @@
 "use client";
 
-import cloudGPU_01 from "../../../images/cloudServer/cloudGPU_01.png";
-import cloudGPU_02 from "../../../images/cloudServer/cloudGPU_02.png";
-import cloudGPU_03 from "../../../images/cloudServer/cloudGPU_03.png";
-import cloudGPU from "../../../images/cloudServer/cloudGPU.png";
-import cloudServer_icon_01 from "../../../images/cloudServer/cloudServer_icon_01.png";
-import cloudServer_icon_02 from "../../../images/cloudServer/cloudServer_icon_02.png";
-import cloudServer_icon_03 from "../../../images/cloudServer/cloudServer_icon_03.png";
-import cloudServer_icon_04 from "../../../images/cloudServer/cloudServer_icon_04.png";
+import cloudGPU from "@/app/images/cloudServer/cloudGPU.png";
+import cloudGPU_01 from "@/app/images/cloudServer/cloudGPU_01.png";
+import cloudGPU_02 from "@/app/images/cloudServer/cloudGPU_02.png";
+import cloudGPU_03 from "@/app/images/cloudServer/cloudGPU_03.png";
+import cloudServer_icon_01 from "@/app/images/cloudServer/cloudServer_icon_01.png";
+import cloudServer_icon_02 from "@/app/images/cloudServer/cloudServer_icon_02.png";
+import cloudServer_icon_03 from "@/app/images/cloudServer/cloudServer_icon_03.png";
+import cloudServer_icon_04 from "@/app/images/cloudServer/cloudServer_icon_04.png";
 import {
 	Box,
 	Card,

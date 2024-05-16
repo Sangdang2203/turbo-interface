@@ -146,6 +146,7 @@ export default function CategoryManagement() {
 								size="small">
 								<TableHead className="bg-slate-300">
 									<TableRow>
+										<TableCell>#</TableCell>
 										<TableCell>Khách hàng</TableCell>
 										<TableCell>Email</TableCell>
 										<TableCell>Số điện thoại</TableCell>
@@ -155,13 +156,14 @@ export default function CategoryManagement() {
 
 								<TableBody>
 									{contacts && contacts.length > 0 ? (
-										contacts.map(item => (
+										contacts.map((item, index) => (
 											<TableRow
 												key={item.id}
 												className="hover:bg-slate-100 cursor-pointer"
 												sx={{
 													"&:last-child td, &:last-child th": { border: 0 },
 												}}>
+												<TableCell> {index + 1} </TableCell>
 												<TableCell className="capitalize">
 													{item.name}
 												</TableCell>

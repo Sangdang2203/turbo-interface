@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import * as React from "react";
-import { fetchPost, fetchPosts } from "../../../../methods/fetchApi";
+import { fetchPost, fetchPosts } from "@/app/methods/fetchApi";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import { Post } from "types/interfaces";
 import CustomRating from "@/components/CustomRating";

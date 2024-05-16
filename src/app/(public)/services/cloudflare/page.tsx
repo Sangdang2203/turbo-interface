@@ -1,9 +1,9 @@
 import Image from "next/image";
-import cloudFlare_01 from "../../../images/cloudFlare/cloudFlare_01.png";
-import cloudFlare_02 from "../../../images/cloudFlare/cloudFlare_02.jpg";
-import cloudFlare_03 from "../../../images/cloudFlare/cloudFlare_03.png";
-import cloudFlare_04 from "../../../images/cloudFlare/cloudFlare_04.png";
-import cloudServer_icon_01 from "../../../images/cloudServer/cloudServer_icon_01.png";
+import cloudFlare_01 from "@/app/images/cloudFlare/cloudFlare_01.png";
+import cloudFlare_02 from "@/app/images/cloudFlare/cloudFlare_02.jpg";
+import cloudFlare_03 from "@/app/images/cloudFlare/cloudFlare_03.png";
+import cloudFlare_04 from "@/app/images/cloudFlare/cloudFlare_04.png";
+import cloudServer_icon_01 from "@/app/images/cloudServer/cloudServer_icon_01.png";
 import { Box, Typography, Grid, Button, Paper } from "@mui/material";
 import {
 	cloudflarePackage,
@@ -11,7 +11,7 @@ import {
 	cloudflarePerformance,
 	cloudflareWAF,
 } from "app/libs/data";
-import CustomDialog from "@/components/CustomDialog";
+import CustomDialog from "@/components/ContactPopup";
 
 export const metadata = {
 	title: {

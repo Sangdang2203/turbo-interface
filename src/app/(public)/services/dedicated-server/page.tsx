@@ -1,9 +1,9 @@
-import mayChuVatLy from "../../../images/cloudServer/may_chu_vat_ly.jpg";
-import cloudGPU_01 from "../../../images/cloudServer/cloudGPU_01.png";
-import cloudGPU_02 from "../../../images/cloudServer/cloudGPU_02.png";
-import cloudGPU_03 from "../../../images/cloudServer/cloudGPU_03.png";
-import dedicateServer from "../../../images/cloudServer/dedicate_server.jpg";
-import cloudServer_icon_01 from "../../../images/cloudServer/cloudServer_icon_01.png";
+import mayChuVatLy from "@/app/images/cloudServer/may_chu_vat_ly.jpg";
+import cloudGPU_01 from "@/app/images/cloudServer/cloudGPU_01.png";
+import cloudGPU_02 from "@/app/images/cloudServer/cloudGPU_02.png";
+import cloudGPU_03 from "@/app/images/cloudServer/cloudGPU_03.png";
+import dedicateServer from "@/app/images/cloudServer/dedicate_server.jpg";
+import cloudServer_icon_01 from "@/app/images/cloudServer/cloudServer_icon_01.png";
 
 import { Container, Box, Typography, Card, Grid, Button } from "@mui/material";
 import {
@@ -14,7 +14,7 @@ import {
 
 import Image from "next/image";
 import { TaskAltRounded } from "@mui/icons-material";
-import CustomDialog from "@/components/CustomDialog";
+import ContactPopup from "@/components/ContactPopup";
 
 export default function DedicatedServer() {
 	return (
@@ -32,7 +32,7 @@ export default function DedicatedServer() {
 						chịu tải lớn
 					</Typography>
 					<Box my={5}>
-						<CustomDialog />
+						<ContactPopup />
 					</Box>
 					<Image
 						src={dedicateServer}

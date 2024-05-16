@@ -1,5 +1,5 @@
-import icon_01 from "../../../images/privateCloud/icon_01.png";
-import icon_02 from "../../../images/privateCloud/icon_02.png";
+import icon_01 from "@/app/images/privateCloud/icon_01.png";
+import icon_02 from "@/app/images/privateCloud/icon_02.png";
 import { ReadMoreRounded, TaskAltRounded } from "@mui/icons-material";
 import {
 	Box,
@@ -8,9 +8,7 @@ import {
 	CardActions,
 	CardContent,
 	Container,
-	Divider,
 	Grid,
-	TextField,
 	Typography,
 } from "@mui/material";
 import {
@@ -36,7 +34,7 @@ const PrivateCloud = () => {
 					<iframe
 						className="rounded-xl mx-auto"
 						width="100%"
-						height="400px"
+						height="500px"
 						title="Vaidio  AI Vision 7.0"
 						src="https://www.youtube.com/embed/vx24uYpn3hw?si=aO0F5ocLlAhjuBHp"
 						allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"

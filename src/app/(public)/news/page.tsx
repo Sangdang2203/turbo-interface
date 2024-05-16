@@ -17,7 +17,7 @@ import Link from "next/link";
 import Image from "next/image";
 import * as React from "react";
 import { ApiResponse, Post } from "types/interfaces";
-import { fetchPosts } from "app/methods/method";
+import { fetchPosts } from "@/app/methods/method";
 import Loading from "@/components/Loading";
 
 export default function NewsPage() {

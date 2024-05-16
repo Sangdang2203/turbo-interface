@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { styled } from "@mui/material/styles";
 import {
 	Box,
 	Button,
@@ -11,15 +10,15 @@ import {
 	Divider,
 } from "@mui/material";
 import Switch, { SwitchProps } from "@mui/material/Switch";
-import promotion from "../../../images/promotion.jpg";
-import cloudServer_icon_01 from "../../../images/cloudServer/cloudServer_icon_01.png";
-import cloudServer_icon_02 from "../../../images/cloudServer/cloudServer_icon_02.png";
-import cloudServer_icon_03 from "../../../images/cloudServer/cloudServer_icon_03.png";
-import cloudServer_icon_04 from "../../../images/cloudServer/cloudServer_icon_04.png";
-import cloudServer_01 from "../../../images/cloudServer/cloudServer_01.png";
-import cloudServer_02 from "../../../images/cloudServer/cloudServer_02.png";
-import cloudServer_03 from "../../../images/cloudServer/cloudServer_03.png";
-import cloudServer_07 from "../../../images/cloudServer/cloudServer_07.png";
+import promotion from "@/app/images/promotion.jpg";
+import cloudServer_icon_01 from "@/app/images/cloudServer/cloudServer_icon_01.png";
+import cloudServer_icon_02 from "@/app/images/cloudServer/cloudServer_icon_02.png";
+import cloudServer_icon_03 from "@/app/images/cloudServer/cloudServer_icon_03.png";
+import cloudServer_icon_04 from "@/app/images/cloudServer/cloudServer_icon_04.png";
+import cloudServer_01 from "@/app/images/cloudServer/cloudServer_01.png";
+import cloudServer_02 from "@/app/images/cloudServer/cloudServer_02.png";
+import cloudServer_03 from "@/app/images/cloudServer/cloudServer_03.png";
+import cloudServer_07 from "@/app/images/cloudServer/cloudServer_07.png";
 import { TaskAltRounded } from "@mui/icons-material";
 import {
 	cloudServerPrices,

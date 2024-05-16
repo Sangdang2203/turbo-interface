@@ -1,10 +1,9 @@
-import centralized_agent_deployment_and_management from "../../../images/veemBackup/centralized-agent-deployment-and-management.png.web_.1280.1280.webp";
-import veemBackup from "../../../images/veemBackup/veeam-1600x800-og-vbr.png";
-import veeam_img01 from "../../../images/veemBackup/veeam_img01-1.png";
-import icon_01 from "../../../images/veemBackup/icon_01.png";
-import icon_02 from "../../../images/veemBackup/icon_02.png";
-import veeam_azure from "../../../images/veemBackup/veeam-azure-img01.png";
-import manager_interface from "../../../images/veemBackup/manager_interface.png";
+import centralized_agent_deployment_and_management from "@/app/images/veemBackup/centralized-agent-deployment-and-management.png.web_.1280.1280.webp";
+import veeam_img01 from "@/app/images/veemBackup/veeam_img01-1.png";
+import icon_01 from "@/app/images/veemBackup/icon_01.png";
+import icon_02 from "@/app/images/veemBackup/icon_02.png";
+import veeam_azure from "@/app/images/veemBackup/veeam-azure-img01.png";
+import manager_interface from "@/app/images/veemBackup/manager_interface.png";
 import {
 	Box,
 	Button,
@@ -33,7 +32,7 @@ const CloudBackupPage = () => {
 					<iframe
 						className="rounded-xl mx-auto"
 						width="100%"
-						height="400px"
+						height="500px"
 						title="Vaidio  AI Vision 7.0"
 						src="https://www.youtube.com/embed/tLULNUPlFO0?si=qZlMCWYCM-Lh8QP7"
 						allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"

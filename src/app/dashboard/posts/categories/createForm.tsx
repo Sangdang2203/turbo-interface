@@ -50,6 +50,7 @@ export default function AddCategoryForm() {
 				if (payload.ok) {
 					setOpenDialog(false);
 					toast.success(payload.message);
+					reset();
 				} else {
 					toast.error(payload.message);
 				}
