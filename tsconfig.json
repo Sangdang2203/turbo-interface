@@ -19,11 +19,11 @@
 		],
 		"baseUrl": "src/",
 		"paths": {
+			"@/*": ["*"],
 			"@/styles/*": ["styles/*"],
 			"@/components/*": ["components/*"],
 			"@/hooks/*": ["hooks/*"],
 			"@methods/*": ["app/methods/*"],
-			"@/*": ["*"],
 			"@/helper/*": ["helper/*"]
 		}
 	},

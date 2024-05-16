@@ -30,8 +30,9 @@ import { fetchCategories, fetchUsers } from "app/methods/method";
 import { useSession } from "next-auth/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
-import { CKEditor } from "@ckeditor/ckeditor5-react";
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import dynamic from "next/dynamic";
+import { any } from "zod";
+import CKEditorWrapper from "@/components/ContentEditor";
 
 export default function CreatePost() {
 	const [categories, setCategories] = React.useState<Map<string, string>>(
@@ -55,11 +56,11 @@ export default function CreatePost() {
 	} = useForm<POSTSCHEMA>({
 		resolver: zodResolver(SCHEMA),
 		defaultValues: {
-			title: "",
+			title: undefined,
 			categories: [],
-			userId: "",
-			description: "",
-			content: "",
+			userId: undefined,
+			description: undefined,
+			content: undefined,
 		},
 	});
 
@@ -69,15 +70,9 @@ export default function CreatePost() {
 		}
 	}, [preview]);
 
-	// const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
-	// 	const file = event.target.files?.[0];
-	// 	if (file) {
-	// 		const url = URL.createObjectURL(file);
-	// 		setImageUrl(url);
-	// 	} else {
-	// 		console.log("No file selected !");
-	// 	}
-	// };
+	const handleContentChange = (newContent: React.SetStateAction<string>) => {
+		setContent(newContent);
+	};
 
 	async function handleCreatePost(data: POSTSCHEMA) {
 		if (session) {
@@ -87,7 +82,7 @@ export default function CreatePost() {
 				title: data.title,
 				categories: data.categories.map(item => ({ id: item })),
 				user: { id: data.userId },
-				urlImage: data.urlImage,
+				//urlImage: data.urlImage,
 				description: data.description,
 				content: data.content,
 				status: "ACTIVE",
@@ -100,16 +95,14 @@ export default function CreatePost() {
 						Authorization: `Bearer ${session.user.id_token}`,
 						"Content-Type": "application/json",
 					},
-					body: JSON.stringify({
-						...post,
-						urlImage: await handleFileUpload(),
-					}),
+					body: JSON.stringify(post),
 				});
 
 				const payload = (await res.json()) as ApiResponse;
 
 				if (payload.ok) {
 					toast.success(payload.message);
+					reset();
 				} else {
 					toast.error(payload.message);
 				}
@@ -171,7 +164,7 @@ export default function CreatePost() {
 					<Grid
 						container
 						mb={3}>
-						<Grid
+						{/* <Grid
 							item
 							md={4}>
 							<InputLabel className="font-semibold">Ảnh bài viết:</InputLabel>
@@ -206,7 +199,7 @@ export default function CreatePost() {
 							<Box width={180}>
 								<ButtonUpload />
 							</Box>
-						</Grid>
+						</Grid> */}
 
 						<Grid
 							item
@@ -295,23 +288,6 @@ export default function CreatePost() {
 						</Grid>
 					</Grid>
 
-					{/* <Box className="my-3">
-						<InputLabel className="font-semibold">Ảnh bài viết:</InputLabel>
-						<TextField
-							{...register("urlImage")}
-							type="file"
-							size="small"
-							variant="outlined"
-							fullWidth
-							className="cursor-pointer shadow-lg"
-							placeholder="Vui lòng bấm chọn ảnh"
-							onChange={handleImageUpload}
-						/>
-						<Typography className="text-red-700 p-2">
-							{errors.urlImage?.message}
-						</Typography>
-					</Box> */}
-
 					<Box className="my-3">
 						<InputLabel className="font-semibold">Mô tả ngắn:</InputLabel>
 						<TextField
@@ -333,28 +309,18 @@ export default function CreatePost() {
 							Nội dung bài viết:
 						</InputLabel>
 
-						{/* <CKEditor
-							{...register("content")}
-							editor={ClassicEditor}
-							onChange={(event, editor) => {
-								const data = editor.getData();
-								console.log("Data:", data);
-								setContent(data);
-							}}
-							onBlur={(event, editor) => {
-								console.log("Blur.", editor);
-							}}
-							onFocus={(event, editor) => {
-								console.log("Focus.", editor);
-							}}></CKEditor> */}
+						<CKEditorWrapper
+							content={content}
+							onChange={handleContentChange}
+						/>
 
-						<TextField
+						{/* <TextField
 							{...register("content")}
 							fullWidth
 							variant="outlined"
 							className="shadow-lg"
 							placeholder="Nhập nội dung bài viết"
-						/>
+						/> */}
 						<Typography className="text-red-700 p-2 ">
 							{errors.content?.message}
 						</Typography>

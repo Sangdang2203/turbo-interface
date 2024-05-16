@@ -25,7 +25,6 @@ export default function AddNewPost(session: Session | null) {
 				description: data.description,
 				content: data.content,
 				status: "ACTIVE",
-				urlImage: "",
 			};
 
 			try {

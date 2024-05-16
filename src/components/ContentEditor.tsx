@@ -1,20 +1,30 @@
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-import { CKEditor } from "@ckeditor/ckeditor5-react";
-
-const ContentEditor = (props: {
-	value: string | null | undefined;
-	onChange: (arg0: string) => void;
-}) => {
+import React from "react";
+import dynamic from "next/dynamic";
+//@ts-ignore
+const Editor = dynamic(() => import("@ckeditor/ckeditor5-react"), {
+	ssr: false,
+});
+const ClassicEditor = dynamic(
+	//@ts-ignore
+	() => import("@ckeditor/ckeditor5-build-classic"),
+	{ ssr: false }
+);
+//@ts-ignore
+const CKEditorWrapper = ({ content, onChange }) => {
 	return (
-		<CKEditor
+		<Editor
+			//@ts-ignore
 			editor={ClassicEditor}
-			data={props.value}
-			onChange={(event, editor) => {
+			data={content}
+			onReady={(editor: any) => {
+				// Custom initialization logic if needed
+			}}
+			onChange={(event: any, editor: { getData: () => any }) => {
 				const data = editor.getData();
-				props.onChange(data);
+				onChange(data);
 			}}
 		/>
 	);
 };
 
-export default ContentEditor;
+export default CKEditorWrapper;
