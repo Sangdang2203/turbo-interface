@@ -1,30 +1,43 @@
+// components/custom-editor.js
+
 import React from "react";
-import dynamic from "next/dynamic";
-//@ts-ignore
-const Editor = dynamic(() => import("@ckeditor/ckeditor5-react"), {
-	ssr: false,
-});
-const ClassicEditor = dynamic(
-	//@ts-ignore
-	() => import("@ckeditor/ckeditor5-build-classic"),
-	{ ssr: false }
-);
-//@ts-ignore
-const CKEditorWrapper = ({ content, onChange }) => {
+import { CKEditor } from "@ckeditor/ckeditor5-react";
+import Editor from "ckeditor5-custom-build";
+
+const editorConfiguration = {
+	toolbar: [
+		"heading",
+		"|",
+		"bold",
+		"italic",
+		"link",
+		"bulletedList",
+		"numberedList",
+		"|",
+		"outdent",
+		"indent",
+		"|",
+		"imageUpload",
+		"blockQuote",
+		"insertTable",
+		"mediaEmbed",
+		"undo",
+		"redo",
+	],
+};
+
+function CustomEditor(props: { initialData: string | null | undefined }) {
 	return (
-		<Editor
-			//@ts-ignore
-			editor={ClassicEditor}
-			data={content}
-			onReady={(editor: any) => {
-				// Custom initialization logic if needed
-			}}
-			onChange={(event: any, editor: { getData: () => any }) => {
+		<CKEditor
+			editor={Editor}
+			config={editorConfiguration}
+			data={props.initialData}
+			onChange={(event, editor) => {
 				const data = editor.getData();
-				onChange(data);
+				console.log({ event, editor, data });
 			}}
 		/>
 	);
-};
+}
 
-export default CKEditorWrapper;
+export default CustomEditor;

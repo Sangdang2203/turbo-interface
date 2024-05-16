@@ -59,7 +59,7 @@ export default function ContactPopup() {
 			<Dialog
 				open={open}
 				onClose={handleClose}
-				className="min-w-[900px] mx-auto">
+				className="min-w-[400px] lg:min-w-[900px] mx-auto">
 				<Tooltip title="Close">
 					<CloseOutlined
 						onClick={() => setOpen(false)}

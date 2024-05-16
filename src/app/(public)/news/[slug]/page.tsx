@@ -39,7 +39,7 @@ export default async function PostDetail({
 					<Box my={2}>
 						<CustomRating />
 					</Box>
-					<Box className="w-3/4 mx-auto py-5"> {post?.content} </Box>
+					<Box className="w-5/6 mx-auto py-5 text-justify">{post?.content}</Box>
 				</Container>
 
 				{/* <Typography className="my-10 text-center text-xl text-sky-600">

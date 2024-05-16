@@ -2,7 +2,6 @@
 
 import * as React from "react";
 import Image from "next/image";
-import useS3 from "@/hooks/useS3";
 import { useForm } from "react-hook-form";
 import {
 	Category,
@@ -27,12 +26,19 @@ import {
 	Grid,
 } from "@mui/material";
 import { fetchCategories, fetchUsers } from "app/methods/method";
+import { CKEditor } from "@ckeditor/ckeditor5-react";
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { useSession } from "next-auth/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
 import dynamic from "next/dynamic";
-import { any } from "zod";
-import CKEditorWrapper from "@/components/ContentEditor";
+
+const ContentEditor = dynamic(
+	() => {
+		return import("@/components/ContentEditor");
+	},
+	{ ssr: false }
+);
 
 export default function CreatePost() {
 	const [categories, setCategories] = React.useState<Map<string, string>>(
@@ -45,7 +51,6 @@ export default function CreatePost() {
 	const { data: session } = useSession();
 	//const [imageUrl, setImageUrl] = React.useState("");
 	const [content, setContent] = React.useState("");
-	const { handleFileUpload, ButtonUpload, preview } = useS3();
 
 	const {
 		register,
@@ -56,23 +61,13 @@ export default function CreatePost() {
 	} = useForm<POSTSCHEMA>({
 		resolver: zodResolver(SCHEMA),
 		defaultValues: {
-			title: undefined,
+			title: "",
 			categories: [],
-			userId: undefined,
-			description: undefined,
-			content: undefined,
+			userId: "",
+			description: "",
+			content: "",
 		},
 	});
-
-	const previewUrl = React.useMemo(() => {
-		if (preview) {
-			return URL.createObjectURL(preview);
-		}
-	}, [preview]);
-
-	const handleContentChange = (newContent: React.SetStateAction<string>) => {
-		setContent(newContent);
-	};
 
 	async function handleCreatePost(data: POSTSCHEMA) {
 		if (session) {
@@ -164,42 +159,9 @@ export default function CreatePost() {
 					<Grid
 						container
 						mb={3}>
-						{/* <Grid
+						<Grid
 							item
-							md={4}>
-							<InputLabel className="font-semibold">Ảnh bài viết:</InputLabel>
-							<div className="flex justify-between items-center mb-1">
-								{preview ? (
-									<Image
-										src={`${previewUrl}`}
-										width={0}
-										height={0}
-										alt={"preview"}
-										title={"preview"}
-										style={{
-											width: "clamp(180px, 100%, 180px)",
-											height: "auto",
-											marginTop: "10px",
-											borderRadius: "12px",
-										}}
-									/>
-								) : (
-									<Image
-										src="https://dummyimage.com/500x500/c3c3c3/FFF.png&text=UploadImage"
-										alt={"preview"}
-										title={"preview"}
-										priority
-										width={180}
-										height={180}
-										className="rounded-md"
-									/>
-								)}
-							</div>
-
-							<Box width={180}>
-								<ButtonUpload />
-							</Box>
-						</Grid> */}
+							md={4}></Grid>
 
 						<Grid
 							item
@@ -309,18 +271,13 @@ export default function CreatePost() {
 							Nội dung bài viết:
 						</InputLabel>
 
-						<CKEditorWrapper
-							content={content}
-							onChange={handleContentChange}
-						/>
-
-						{/* <TextField
+						<TextField
 							{...register("content")}
 							fullWidth
 							variant="outlined"
 							className="shadow-lg"
 							placeholder="Nhập nội dung bài viết"
-						/> */}
+						/>
 						<Typography className="text-red-700 p-2 ">
 							{errors.content?.message}
 						</Typography>

@@ -1,9 +1,5 @@
 "use client";
 
-import theme_card from "@/app/images/theme_card.png";
-import cloudServer_icon_01 from "@/app/images/cloudServer/cloudServer_icon_01.png";
-import cloudServer_icon_02 from "@/app/images/cloudServer/cloudServer_icon_02.png";
-import cloudServer_icon_03 from "@/app/images/cloudServer/cloudServer_icon_03.png";
 import {
 	Container,
 	Box,
@@ -18,7 +14,6 @@ import {
 	Button,
 } from "@mui/material";
 import Switch from "@mui/material/Switch";
-import Image from "next/image";
 import { TaskAltRounded } from "@mui/icons-material";
 import {
 	cloudBackupPrices,
@@ -109,16 +104,13 @@ export default function CloudBackup() {
 											{item.hyperv}
 										</Typography>
 										<Typography className="px-3 text-[12px] lg:text-[1rem]">
-											{" "}
-											{item.ram}{" "}
+											{item.ram}
 										</Typography>
 										<Typography className="px-3 text-[12px] lg:text-[1rem]">
-											{" "}
-											{item.server}{" "}
+											{item.server}
 										</Typography>
 										<Typography className="px-3 text-[12px] lg:text-[1rem]">
-											{" "}
-											{item.limit}{" "}
+											{item.limit}
 										</Typography>
 									</Box>
 								</Box>
@@ -136,7 +128,7 @@ export default function CloudBackup() {
 							xs={12}
 							md={5}
 							className="flex flex-col items-center justify-center">
-							<Typography className="text-[1.3rem] font-semibold pt-5">
+							<Typography className="text-[1rem] lg:text-[1.3rem] font-semibold pt-5">
 								Cần sao lưu trên 2TB+ dung lượng?
 							</Typography>
 							<Typography className="w-3/4 text-justify">
@@ -202,18 +194,13 @@ export default function CloudBackup() {
 							xs={12}
 							md={7}
 							className=" text-sky-900">
-							<Grid className="pl-6 md:pl-24 lg:pl-0">
+							<Grid className="pl-6 md:pl-24">
 								<Box sx={{ display: "flex", alignItems: "center", py: 1 }}>
-									<Image
-										src={cloudServer_icon_01}
-										className="w-16 h-auto mr-2"
-										alt="Chi phí phù hợp"
-									/>
-									<Box>
-										<Typography className="text-[1.3rem] font-semibold pt-5">
+									<Box pr={4}>
+										<Typography className="text-center lg:text-[1.3rem] font-semibold pt-5">
 											Chi phí phù hợp
 										</Typography>
-										<Typography className="w-3/4 text-justify">
+										<Typography className="mx-auto lg:mx-0 text-justify">
 											Không cần lo lắng ngân sách về các cấp giá. Lựa chọn gói
 											dung lượng lưu trữ đám mây phù hợp với nhu cầu sao lưu của
 											doanh nghiệp.
@@ -222,16 +209,11 @@ export default function CloudBackup() {
 								</Box>
 
 								<Box sx={{ display: "flex", alignItems: "center", py: 1 }}>
-									<Image
-										src={cloudServer_icon_02}
-										className="w-16 h-auto mr-4"
-										alt="Bảo mật đầu cuối"
-									/>
-									<Box>
-										<Typography className="text-[1.3rem] font-semibold">
+									<Box pr={4}>
+										<Typography className="text-center lg:text-[1.3rem] font-semibold">
 											Bảo mật đầu cuối
 										</Typography>
-										<Typography className="w-3/4 text-justify">
+										<Typography className="mx-auto lg:mx-0 text-justify">
 											Mục đích chính của sao lưu đám mây là bảo vệ tất cả dữ
 											liệu của bạn, vì vậy mã hóa đầu cuối là một tính năng quan
 											trọng được tích hợp sẵn.
@@ -240,16 +222,11 @@ export default function CloudBackup() {
 								</Box>
 
 								<Box sx={{ display: "flex", alignItems: "center", py: 1 }}>
-									<Image
-										src={cloudServer_icon_03}
-										className="w-16 h-auto mr-4"
-										alt="Ổn định và tin cậy"
-									/>
-									<Box>
-										<Typography className="text-[1.3rem] font-semibold">
+									<Box pr={4}>
+										<Typography className="text-center lg:text-[1.3rem] font-semibold">
 											Ổn định và tin cậy
 										</Typography>
-										<Typography className="w-3/4 text-justify">
+										<Typography className="mx-auto lg:mx-0 text-justify">
 											Giảm thời gian khôi phục (RPO) và tạo bản sao lưu cực
 											nhanh từ ảnh chụp với hệ thống lưu trữ mở rộng không giới
 											hạn.
@@ -268,8 +245,7 @@ export default function CloudBackup() {
 							my={5}
 							sx={{ textAlign: "center" }}>
 							<Typography className="text-[2rem] font-light text-sky-900">
-								{" "}
-								Bảng giá dịch vụ Cloud Backup (-35%){" "}
+								Bảng giá dịch vụ Cloud Backup (-35%)
 							</Typography>
 							<Typography> * Bảng giá chưa bao gồm 10% VAT </Typography>
 						</Box>

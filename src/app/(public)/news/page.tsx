@@ -169,7 +169,7 @@ export default function NewsPage() {
 																width={200}
 																height={130}
 																priority
-																className="card-image rounded-md"
+																className="min-h-[200px] w-full sm:min-h-[130px] card-image rounded-md"
 																alt={item.urlImage}
 															/>
 														</Link>

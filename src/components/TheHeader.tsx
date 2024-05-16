@@ -111,19 +111,19 @@ export default function TheHeader() {
 				<div className="hidden text-[1rem] lg:flex justify-between items-center ">
 					<Button
 						href="/home"
-						className=" no-underline p-3 hover:text-white hover:bg-sky-900 hover:ease-out hover:duration-700">
+						className=" no-underline py-3 hover:text-white hover:bg-sky-900 hover:ease-out hover:duration-700">
 						trang chủ
 					</Button>
 					<Button
 						href="/about-us"
-						className=" no-underline p-3 hover:text-white hover:bg-sky-900 hover:ease-out hover:duration-700">
+						className=" no-underline py-3 hover:text-white hover:bg-sky-900 hover:ease-out hover:duration-700">
 						giới thiệu
 					</Button>
 
 					<Button
 						onClick={handleClickService}
 						endIcon={<KeyboardArrowDownRounded />}
-						className=" p-3 hover:text-white hover:bg-sky-900 hover:ease-out hover:duration-700">
+						className=" py-3 hover:text-white hover:bg-sky-900 hover:ease-out hover:duration-700">
 						dịch vụ
 					</Button>
 					<Menu
@@ -148,7 +148,7 @@ export default function TheHeader() {
 					<Button
 						onClick={handleClickSolution}
 						endIcon={<KeyboardArrowDownRounded />}
-						className=" no-underline p-3 hover:text-white hover:bg-sky-900 hover:ease-out hover:duration-700">
+						className=" no-underline py-3 hover:text-white hover:bg-sky-900 hover:ease-out hover:duration-700">
 						giải pháp
 					</Button>
 					<Menu
@@ -172,12 +172,12 @@ export default function TheHeader() {
 
 					<Button
 						href="/news"
-						className=" no-underline p-3 hover:text-white hover:bg-sky-900 hover:ease-out hover:duration-700">
+						className=" no-underline py-3 hover:text-white hover:bg-sky-900 hover:ease-out hover:duration-700">
 						tin tức
 					</Button>
 					<Button
 						href="/contact"
-						className=" no-underline p-3 hover:text-white hover:bg-sky-900 hover:ease-out hover:duration-700">
+						className=" no-underline py-3 hover:text-white hover:bg-sky-900 hover:ease-out hover:duration-700">
 						liên hệ
 					</Button>
 				</div>
@@ -207,23 +207,23 @@ export default function TheHeader() {
 							: "lg:hidden absolute top-[10vh] right-0 left-[-100%] bottom-0 bg-slate-200 w-full h-screen ease-in duration-500"
 					}>
 					{/* navbar links */}
-					<ul className="text-center  text-[1rem] fond-bold mt-6">
-						<div className="text-[1rem] flex flex-col ">
+					<ul className="text-center text-[1rem] fond-bold mt-6">
+						<div className="text-[1rem] flex flex-col justify-center items-center">
 							<Button
 								href="/home"
-								className=" no-underline p-3 hover:text-sky-900">
+								className="no-underline font-semibold py-3 hover:text-sky-900">
 								trang chủ
 							</Button>
 							<Button
 								href="/about-us"
-								className=" no-underline p-3 hover:text-sky-900">
+								className="no-underline font-semibold py-3 hover:text-sky-900">
 								giới thiệu
 							</Button>
 
 							<Button
 								onClick={handleClickService}
-								endIcon={<KeyboardArrowDownRounded />}
-								className=" p-3 hover:text-sky-900">
+								// endIcon={<KeyboardArrowDownRounded />}
+								className="font-semibold py-3 hover:text-sky-900">
 								dịch vụ
 							</Button>
 							<Menu
@@ -237,7 +237,7 @@ export default function TheHeader() {
 										<MenuItem key={sub.path}>
 											<Link
 												href={sub.path}
-												className="capitalize no-underline text-[#378CE7] hover:text-sky-900">
+												className="capitalize no-underline font-semibold text-[#378CE7] hover:text-sky-900">
 												{sub.name}
 											</Link>
 										</MenuItem>
@@ -247,8 +247,8 @@ export default function TheHeader() {
 
 							<Button
 								onClick={handleClickSolution}
-								endIcon={<KeyboardArrowDownRounded />}
-								className=" no-underline p-3 hover:text-sky-900">
+								// endIcon={<KeyboardArrowDownRounded />}
+								className="no-underline font-semibold py-3 hover:text-sky-900">
 								giải pháp
 							</Button>
 							<Menu
@@ -262,7 +262,7 @@ export default function TheHeader() {
 										<MenuItem key={sub.path}>
 											<Link
 												href={sub.path}
-												className="capitalize no-underline text-[#378CE7] hover:text-sky-900">
+												className="capitalize no-underline font-semibold text-[#378CE7] hover:text-sky-900">
 												{sub.name}
 											</Link>
 										</MenuItem>
@@ -272,12 +272,12 @@ export default function TheHeader() {
 
 							<Button
 								href="/news"
-								className=" no-underline p-3 hover:text-sky-900">
+								className="no-underline font-semibold py-3 hover:text-sky-900">
 								tin tức
 							</Button>
 							<Button
 								href="/contact"
-								className=" no-underline p-3 hover:text-sky-900">
+								className="no-underline font-semibold py-3 hover:text-sky-900">
 								liên hệ
 							</Button>
 						</div>
