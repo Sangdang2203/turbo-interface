@@ -22,9 +22,15 @@ import {
 	Chip,
 	TextField,
 	TablePagination,
+	Button,
 } from "@mui/material";
-import { CloseOutlined, SearchOutlined, Visibility } from "@mui/icons-material";
-import { fetchContacts } from "app/methods/method";
+import {
+	CloseOutlined,
+	SearchOutlined,
+	Visibility,
+	CloudDownloadRounded,
+} from "@mui/icons-material";
+import { fetchContact, fetchContacts } from "app/methods/method";
 import { CustomerMessage } from "types/interfaces";
 
 export default function CategoryManagement() {
@@ -73,6 +79,16 @@ export default function CategoryManagement() {
 				);
 
 				setContacts(filterPosts);
+			}
+		}
+	}
+
+	async function convertPDF(contactId: string) {
+		if (session) {
+			const res = await fetchContact(session.user.id_token, contactId);
+
+			if (res.ok) {
+				const contactData = await res.data;
 			}
 		}
 	}
@@ -172,7 +188,7 @@ export default function CategoryManagement() {
 												<TableCell>
 													<Tooltip
 														title="See detail"
-														placement="right-start">
+														placement="top">
 														<IconButton
 															color="inherit"
 															onClick={() => {
@@ -180,6 +196,18 @@ export default function CategoryManagement() {
 																setOpenDialog(true);
 															}}>
 															<Visibility fontSize="medium" />
+														</IconButton>
+													</Tooltip>
+
+													<Tooltip
+														title="Tải file PDF"
+														placement="top">
+														<IconButton
+															color="primary"
+															onClick={() => {
+																convertPDF(item.id);
+															}}>
+															<CloudDownloadRounded fontSize="medium" />
 														</IconButton>
 													</Tooltip>
 												</TableCell>

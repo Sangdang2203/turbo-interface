@@ -754,3 +754,46 @@ export const services = [
 	"Private Cloud Service",
 	"Cloud Backup & Recovery",
 ];
+
+export const servicesLinks = [
+	{ path: "/services/cloudflare", name: "cloudflare" },
+	{ path: "/services/cloud-server", name: "cloud server" },
+	{ path: "/services/cloud-backup", name: "cloud backup" },
+	{ path: "/services/dedicated-server", name: "dedicated server" },
+	{ path: "/services/disaster-recovery", name: "disaster recovery" },
+	{ path: "/services/virtual-data-center", name: "vitual data center" },
+	{ path: "/services/private-cloud", name: "private cloud service" },
+	{ path: "/services/cloud-backup-recovery", name: "cloud backup & recovery" },
+];
+
+export const solutonLinks = [
+	{
+		path: "https://v2.aivisionviet.vn/ai-video-search",
+		name: "Video Search",
+	},
+	{ path: "https://aivisionviet.vn/vaidio-data", name: "Quản Lý Dữ Liệu" },
+	{
+		path: "https://aivisionviet.vn/vaidio-command-center",
+		name: "Quản Lý Tập Trung",
+	},
+	{
+		path: "https://v2.aivisionviet.vn/nhan-dien-bien-so",
+		name: "Nhận Dạng Biển Số",
+	},
+	{
+		path: "https://v2.aivisionviet.vn/nhan-dang-vat-the",
+		name: "Nhận Dạng Vật Thể",
+	},
+	{
+		path: "https://v2.aivisionviet.vn/kiem-soat-luu-luong",
+		name: "Kiểm Soát Lưu Lượng",
+	},
+	{
+		path: "https://v2.aivisionviet.vn/nhan-dien-khuon-mat",
+		name: "Nhận Diện Khuôn Mặt",
+	},
+	{
+		path: "https://v2.aivisionviet.vn/phat-hien-bat-thuong",
+		name: "Nhận Diện Bất Thường",
+	},
+];

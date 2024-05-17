@@ -15,7 +15,6 @@ import {
 	LocationOnRounded,
 	MailOutlineRounded,
 	PhoneCallbackRounded,
-	ResetTv,
 	SendRounded,
 } from "@mui/icons-material";
 
@@ -24,7 +23,6 @@ import { CustomerMessage, ApiResponse } from "types/interfaces";
 import { useForm } from "react-hook-form";
 import { services } from "app/libs/data";
 import * as React from "react";
-import { toast } from "sonner";
 import { CreateContact } from "@methods/method";
 
 // export const metadata = () => {
@@ -39,7 +37,6 @@ const ContactPage = () => {
 	const {
 		register,
 		handleSubmit,
-		reset,
 		formState: { errors: errors },
 	} = useForm<CustomerMessage>();
 
@@ -241,7 +238,7 @@ const ContactPage = () => {
 									startIcon={<SendRounded className="" />}
 									type="submit"
 									className="form-submit-btn">
-									Submit
+									đăng ký
 								</Button>
 							</form>
 						</div>

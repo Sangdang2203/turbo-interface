@@ -2,73 +2,21 @@
 
 import React from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import {
 	Close,
 	MenuRounded,
 	KeyboardArrowDownRounded,
+	HomeRounded,
+	ContactPhoneRounded,
+	BallotRounded,
+	ModelTrainingRounded,
+	NewspaperRounded,
+	InfoRounded,
 } from "@mui/icons-material";
 import EcoCloud from "../app/images/EcoCloud.png";
 import Image from "next/image";
 import { Button, Menu, MenuItem } from "@mui/material";
-
-// const navLinks = [
-// 	{ path: "/home", name: "trang chủ" },
-// 	{ path: "/about-us", name: "giới thiệu" },
-// 	{ path: "/our-services", name: "dịch vụ" },
-// 	{ path: "/software", name: "phần mềm" },
-// 	{ path: "/recruitment", name: "tuyển dụng" },
-// 	{ path: "/news", name: "tin tức" },
-// 	{ path: "/contact", name: "liên hệ" },
-// ];
-const subServicesLinks = [
-	{ path: "/services/cloud-server", name: "cloud server" },
-	{ path: "/services/cloud-gpu/", name: "cloud GPU" },
-	{ path: "/services/cloud-backup", name: "cloud backup" },
-	{ path: "/services/cloudflare", name: "cloudflare" },
-	{ path: "/services/dedicated-server", name: "dedicated server" },
-	{ path: "/services/disaster-recovery", name: "disaster recovery" },
-	{ path: "/services/virtual-data-center", name: "vitual data center" },
-	{ path: "/services/private-cloud", name: "private cloud service" },
-	{ path: "/services/cloud-backup-recovery", name: "cloud backup & recovery" },
-];
-const subSoftwareLinks = [
-	{ path: "/microsoft-office", name: "microsoft office 365" },
-	{ path: "/google-workspace", name: "google workspace" },
-	{ path: "cloud-backup-recovery", name: "veeam backup & replication" },
-];
-
-const subSolutonLinks = [
-	{
-		path: "https://v2.aivisionviet.vn/ai-video-search",
-		name: "AI - Video Search",
-	},
-	{
-		path: "https://v2.aivisionviet.vn/nhan-dien-khuon-mat",
-		name: "AI - Nhận Diện Khuôn Mặt",
-	},
-	{
-		path: "https://v2.aivisionviet.vn/nhan-dien-bien-so",
-		name: "AI - Nhận Dạng Biển Số",
-	},
-	{
-		path: "https://v2.aivisionviet.vn/nhan-dang-vat-the",
-		name: "AI - Nhận Dạng Vật Thể",
-	},
-	{
-		path: "https://v2.aivisionviet.vn/kiem-soat-luu-luong",
-		name: "AI - Kiểm Soát Lưu Lượng",
-	},
-	{
-		path: "https://v2.aivisionviet.vn/phat-hien-bat-thuong",
-		name: "AI - Nhận Diện Bất Thường",
-	},
-	{
-		path: "https://aivisionviet.vn/vaidio-command-center",
-		name: "AI - Quản Lý Tập Trung",
-	},
-	{ path: "https://aivisionviet.vn/vaidio-data", name: "AI - Quản Lý Dữ Liệu" },
-];
+import { servicesLinks, solutonLinks } from "@/app/libs/data";
 
 export default function TheHeader() {
 	const [navigation, setNavigation] = React.useState(false);
@@ -107,23 +55,24 @@ export default function TheHeader() {
 						/>
 					</Link>
 				</div>
+
 				{/* nav pc */}
 				<div className="hidden text-[1rem] lg:flex justify-between items-center ">
 					<Button
 						href="/home"
-						className=" no-underline py-3 hover:text-white hover:bg-sky-900 hover:ease-out hover:duration-700">
+						className="navLink">
 						trang chủ
 					</Button>
 					<Button
 						href="/about-us"
-						className=" no-underline py-3 hover:text-white hover:bg-sky-900 hover:ease-out hover:duration-700">
+						className=" navLink active">
 						giới thiệu
 					</Button>
 
 					<Button
 						onClick={handleClickService}
 						endIcon={<KeyboardArrowDownRounded />}
-						className=" py-3 hover:text-white hover:bg-sky-900 hover:ease-out hover:duration-700">
+						className="navLink py-3">
 						dịch vụ
 					</Button>
 					<Menu
@@ -132,12 +81,12 @@ export default function TheHeader() {
 						open={openService}
 						onClose={handleCloseService}
 						MenuListProps={{ "aria-labelledby": "basic-button" }}>
-						{subServicesLinks.map(sub => {
+						{servicesLinks.map(sub => {
 							return (
 								<MenuItem key={sub.path}>
 									<Link
 										href={sub.path}
-										className="capitalize no-underline text-sky-900">
+										className="navSubLink">
 										{sub.name}
 									</Link>
 								</MenuItem>
@@ -148,7 +97,7 @@ export default function TheHeader() {
 					<Button
 						onClick={handleClickSolution}
 						endIcon={<KeyboardArrowDownRounded />}
-						className=" no-underline py-3 hover:text-white hover:bg-sky-900 hover:ease-out hover:duration-700">
+						className=" navLink ">
 						giải pháp
 					</Button>
 					<Menu
@@ -157,12 +106,12 @@ export default function TheHeader() {
 						open={openSolution}
 						onClose={handleCloseSolution}
 						MenuListProps={{ "aria-labelledby": "basic-button" }}>
-						{subSolutonLinks.map(sub => {
+						{solutonLinks.map(sub => {
 							return (
 								<MenuItem key={sub.path}>
 									<Link
 										href={sub.path}
-										className="capitalize no-underline text-sky-900 ">
+										className="navSubLink ">
 										{sub.name}
 									</Link>
 								</MenuItem>
@@ -172,12 +121,12 @@ export default function TheHeader() {
 
 					<Button
 						href="/news"
-						className=" no-underline py-3 hover:text-white hover:bg-sky-900 hover:ease-out hover:duration-700">
+						className=" navLink ">
 						tin tức
 					</Button>
 					<Button
 						href="/contact"
-						className=" no-underline py-3 hover:text-white hover:bg-sky-900 hover:ease-out hover:duration-700">
+						className=" navLink ">
 						liên hệ
 					</Button>
 				</div>
@@ -193,7 +142,7 @@ export default function TheHeader() {
 						/>
 					) : (
 						<MenuRounded
-							fontSize="medium"
+							fontSize="large"
 							className="text-[#002D62] hover:opacity-80 cursor-pointer z-50"
 						/>
 					)}
@@ -208,22 +157,40 @@ export default function TheHeader() {
 					}>
 					{/* navbar links */}
 					<ul className="text-center text-[1rem] fond-bold mt-6">
-						<div className="text-[1rem] flex flex-col justify-center items-center">
+						<div className="text-[1rem] flex flex-col justify-center items-start px-[25%]">
 							<Button
+								startIcon={
+									<HomeRounded
+										className="opacity-60"
+										fontSize="small"
+									/>
+								}
 								href="/home"
-								className="no-underline font-semibold py-3 hover:text-sky-900">
+								className="navLink gradientText">
 								trang chủ
 							</Button>
 							<Button
+								startIcon={
+									<InfoRounded
+										className="opacity-60"
+										fontSize="small"
+									/>
+								}
 								href="/about-us"
-								className="no-underline font-semibold py-3 hover:text-sky-900">
+								className="navLink gradientText">
 								giới thiệu
 							</Button>
 
 							<Button
+								startIcon={
+									<ModelTrainingRounded
+										className="opacity-60"
+										fontSize="small"
+									/>
+								}
 								onClick={handleClickService}
 								// endIcon={<KeyboardArrowDownRounded />}
-								className="font-semibold py-3 hover:text-sky-900">
+								className="navLink gradientText">
 								dịch vụ
 							</Button>
 							<Menu
@@ -232,12 +199,12 @@ export default function TheHeader() {
 								open={openService}
 								onClose={handleCloseService}
 								MenuListProps={{ "aria-labelledby": "basic-button" }}>
-								{subServicesLinks.map(sub => {
+								{servicesLinks.map(sub => {
 									return (
 										<MenuItem key={sub.path}>
 											<Link
 												href={sub.path}
-												className="capitalize no-underline font-semibold text-[#378CE7] hover:text-sky-900">
+												className="navSubLink">
 												{sub.name}
 											</Link>
 										</MenuItem>
@@ -246,9 +213,15 @@ export default function TheHeader() {
 							</Menu>
 
 							<Button
+								startIcon={
+									<BallotRounded
+										className="opacity-60"
+										fontSize="small"
+									/>
+								}
 								onClick={handleClickSolution}
 								// endIcon={<KeyboardArrowDownRounded />}
-								className="no-underline font-semibold py-3 hover:text-sky-900">
+								className="navLink gradientText">
 								giải pháp
 							</Button>
 							<Menu
@@ -257,12 +230,12 @@ export default function TheHeader() {
 								open={openSolution}
 								onClose={handleCloseSolution}
 								MenuListProps={{ "aria-labelledby": "basic-button" }}>
-								{subSolutonLinks.map(sub => {
+								{solutonLinks.map(sub => {
 									return (
 										<MenuItem key={sub.path}>
 											<Link
 												href={sub.path}
-												className="capitalize no-underline font-semibold text-[#378CE7] hover:text-sky-900">
+												className="navSubLink">
 												{sub.name}
 											</Link>
 										</MenuItem>
@@ -271,13 +244,25 @@ export default function TheHeader() {
 							</Menu>
 
 							<Button
+								startIcon={
+									<NewspaperRounded
+										className="opacity-60"
+										fontSize="small"
+									/>
+								}
 								href="/news"
-								className="no-underline font-semibold py-3 hover:text-sky-900">
+								className="navLink gradientText">
 								tin tức
 							</Button>
 							<Button
+								startIcon={
+									<ContactPhoneRounded
+										className="opacity-60"
+										fontSize="small"
+									/>
+								}
 								href="/contact"
-								className="no-underline font-semibold py-3 hover:text-sky-900">
+								className="navLink gradientText">
 								liên hệ
 							</Button>
 						</div>

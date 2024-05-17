@@ -44,7 +44,7 @@ export async function PUT(
 	{ params }: { params: { postId: string } }
 ) {
 	const id = params.postId;
-	console.log("id: ", id);
+
 	const updatePost = await req.json();
 	try {
 		const response = await fetch(

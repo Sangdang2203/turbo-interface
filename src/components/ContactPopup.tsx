@@ -1,7 +1,6 @@
 "use client";
 
 import * as React from "react";
-import { toast } from "sonner";
 import { useForm } from "react-hook-form";
 import { CloseOutlined } from "@mui/icons-material";
 import {
@@ -15,8 +14,8 @@ import {
 	Select,
 	SelectChangeEvent,
 } from "@mui/material";
-import { CustomerMessage, ApiResponse } from "types/interfaces";
 import { services } from "app/libs/data";
+import { CustomerMessage } from "types/interfaces";
 import { CreateContact } from "@methods/method";
 
 export default function ContactPopup() {
@@ -64,7 +63,7 @@ export default function ContactPopup() {
 					<CloseOutlined
 						onClick={() => setOpen(false)}
 						color="error"
-						className="text-md absolute top-1 right-1 bg-slate-500 rounded hover:opacity-80 hover:bg-red-200 cursor-pointer"
+						className="text-white absolute top-1 right-1 bg-red-500 rounded hover:opacity-80 cursor-pointer"
 					/>
 				</Tooltip>
 				<DialogTitle
@@ -176,7 +175,7 @@ export default function ContactPopup() {
 							/>
 						</label>
 
-						<button className="submit my-5">Submit</button>
+						<button className="submit my-5 uppercase">đăng ký</button>
 					</form>
 				</DialogContent>
 			</Dialog>

@@ -1,8 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { CustomerMessage } from "types/interfaces";
+import { CreateContact } from "@methods/method";
 import PhoneInTalkIcon from "@mui/icons-material/PhoneInTalk";
+
 import {
 	Box,
 	Container,
@@ -10,60 +12,33 @@ import {
 	Tooltip,
 	Typography,
 	Button,
+	TextField,
 } from "@mui/material";
-import { Twitter, YouTube, LinkedIn, Facebook } from "@mui/icons-material";
 
-const solutonLinks = [
-	{
-		path: "https://v2.aivisionviet.vn/ai-video-search",
-		name: "Video Search",
-	},
-	{ path: "https://aivisionviet.vn/vaidio-data", name: "Quản Lý Dữ Liệu" },
-	{
-		path: "https://aivisionviet.vn/vaidio-command-center",
-		name: "Quản Lý Tập Trung",
-	},
-	{
-		path: "https://v2.aivisionviet.vn/nhan-dien-bien-so",
-		name: "Nhận Dạng Biển Số",
-	},
-	{
-		path: "https://v2.aivisionviet.vn/nhan-dang-vat-the",
-		name: "Nhận Dạng Vật Thể",
-	},
-	{
-		path: "https://v2.aivisionviet.vn/kiem-soat-luu-luong",
-		name: "Kiểm Soát Lưu Lượng",
-	},
-	{
-		path: "https://v2.aivisionviet.vn/nhan-dien-khuon-mat",
-		name: "Nhận Diện Khuôn Mặt",
-	},
-	{
-		path: "https://v2.aivisionviet.vn/phat-hien-bat-thuong",
-		name: "Nhận Diện Bất Thường",
-	},
-];
+import {
+	Twitter,
+	YouTube,
+	LinkedIn,
+	Facebook,
+	SendRounded,
+} from "@mui/icons-material";
 
-const servicesLinks = [
-	{ path: "/services/cloudflare", name: "cloudflare" },
-	{ path: "/services/cloud-server", name: "cloud server" },
-	{ path: "/services/cloud-backup", name: "cloud backup" },
-	{ path: "/services/dedicated-server", name: "dedicated server" },
-	{ path: "/services/disaster-recovery", name: "disaster recovery" },
-	{ path: "/services/virtual-data-center", name: "vitual data center" },
-	{ path: "/services/private-cloud", name: "private cloud service" },
-	{ path: "/services/cloud-backup-recovery", name: "cloud backup & recovery" },
-];
+import { servicesLinks, solutonLinks } from "@/app/libs/data";
+import { useForm } from "react-hook-form";
 
 export default function TheFooter() {
-	const pathname = usePathname();
+	const {
+		register,
+		handleSubmit,
+		formState: { errors: errors },
+	} = useForm<CustomerMessage>();
+
 	return (
 		<>
 			<Box className="bg-sky-100 text-center">
 				<Button
 					href="tel:0769999967"
-					className="font-bold text-[1.5rem]"
+					className="font-bold text-[1.5rem] pulse"
 					startIcon={<PhoneInTalkIcon fontSize="large" />}>
 					Hotline: +84 76 9999 967
 				</Button>
@@ -115,14 +90,8 @@ export default function TheFooter() {
 								</Link>
 							</Tooltip>
 						</Box>
-					</Grid>
 
-					<Grid
-						item
-						xs={12}
-						md={6}
-						className="hidden sm:block">
-						<Box sx={{ display: "flex", justifyContent: "center" }}>
+						<Box className="hidden lg:flex justify-center">
 							<Box mx={2}>
 								<Typography className="text-lg uppercase">giải pháp</Typography>
 								{solutonLinks.map(link => {
@@ -152,6 +121,83 @@ export default function TheFooter() {
 								})}
 							</Box>
 						</Box>
+					</Grid>
+
+					<Grid
+						item
+						xs={12}
+						md={6}
+						className="hidden lg:flex justify-end">
+						<form
+							className="footerForm form w-[80%] "
+							onSubmit={handleSubmit(CreateContact)}>
+							<p className="text-sky-900 mt-5">
+								(*) Liên hệ ngay với chúng tôi để nhận báo giá tốt nhất
+							</p>
+							<label>
+								<TextField
+									{...register("name", {
+										required: "Vui lòng điền thông tin.",
+										minLength: {
+											value: 8,
+											message: "Điền it nhất 8 ký tự.",
+										},
+										maxLength: {
+											value: 50,
+											message: "Điền tối đa 50 ký tự.",
+										},
+									})}
+									size="small"
+									name="name"
+									placeholder="(*) Họ và tên khách hàng | Doanh nghiệp"
+									type="text"
+									fullWidth
+								/>
+							</label>
+							<span className="text-red-700">{errors.name?.message}</span>
+
+							<label>
+								<TextField
+									{...register("email", {
+										required: "Vui lòng điền thông tin.",
+										pattern: {
+											value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+											message: "Email sai định dạng.",
+										},
+									})}
+									size="small"
+									name="email"
+									placeholder="(*) Email"
+									type="email"
+									fullWidth
+								/>
+							</label>
+							<span className="text-red-700">{errors.email?.message}</span>
+
+							<label>
+								<TextField
+									{...register("phone", {
+										required: "Vui lòng điền thông tin.",
+										pattern: {
+											value: /^\d{10}$/,
+											message: "Vui lòng nhập đủ 10 số.",
+										},
+									})}
+									size="small"
+									name="phone"
+									fullWidth
+									placeholder="(*) Số điện thoại"
+								/>
+							</label>
+							<span className="text-red-700">{errors.phone?.message}</span>
+
+							<Button
+								type="submit"
+								startIcon={<SendRounded className="" />}
+								className="submit my-5">
+								đăng ký
+							</Button>
+						</form>
 					</Grid>
 				</Grid>
 

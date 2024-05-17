@@ -1,5 +1,9 @@
 import { toast } from "sonner";
 import { ApiResponse, CustomerMessage } from "types/interfaces";
+import sendEmail from "./sendMail";
+
+import { NextApiRequest, NextApiResponse } from "next";
+import chromium from "puppeteer";
 
 // CREATE METHODS
 export async function CreateContact(contact: CustomerMessage) {
@@ -11,14 +15,14 @@ export async function CreateContact(contact: CustomerMessage) {
 			headers: {
 				"Content-Type": "application/json",
 			},
-			body: JSON.stringify({ ...contact, isNew: true }),
+			body: JSON.stringify(contact),
 		});
 
 		const payload = (await res.json()) as ApiResponse;
 
 		if (payload.ok) {
 			toast.success(payload.message);
-			//reset();
+			//sendEmail();
 		} else {
 			toast.error(payload.message);
 		}
@@ -106,3 +110,13 @@ export const fetchDeleteCategory = async (token: string, cateId: string) => {
 	});
 	return response.json() as Promise<ApiResponse>;
 };
+
+export async function fetchContact(token: string, contactId: string) {
+	const response = await fetch("/api/contacts/" + contactId, {
+		method: "GET",
+		headers: {
+			Authorization: `Bearer ${token}`,
+		},
+	});
+	return response.json() as Promise<ApiResponse>;
+}
