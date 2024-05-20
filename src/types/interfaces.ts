@@ -35,15 +35,6 @@ export interface CreatePostRequest
 	status: "ACTIVE";
 }
 
-// export interface CreatePostRequest {
-// 	title: string;
-// 	categories: { id: string }[];
-// 	userId: { id: string };
-// 	urlImage: string;
-// 	description: string;
-// 	content: string;
-// }
-
 export interface CreateCategoryRequest {
 	name: string;
 }
