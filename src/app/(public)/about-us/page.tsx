@@ -54,10 +54,11 @@ export default function AboutPage() {
 					gap={8}>
 					{images.map(item => (
 						<ImageListItem key={item.img}>
-							<img
+							<Image
 								className="rounded-xl"
-								srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
-								src={`${item.img}?w=248&fit=crop&auto=format`}
+								width={360}
+								height={200}
+								src={item.img}
 								alt={item.img}
 								loading="lazy"
 							/>
