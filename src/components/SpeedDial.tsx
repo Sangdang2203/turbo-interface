@@ -45,8 +45,7 @@ export default function BasicSpeedDial() {
 					<SpeedDialAction
 						key={action.name}
 						icon={action.icon}
-						tooltipTitle={action.name}
-						href={action.path}></SpeedDialAction>
+						tooltipTitle={action.name}></SpeedDialAction>
 				))}
 			</SpeedDial>
 		</Box>
