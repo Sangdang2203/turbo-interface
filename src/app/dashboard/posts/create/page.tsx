@@ -1,7 +1,6 @@
 "use client";
 
 import * as React from "react";
-import Image from "next/image";
 import { useForm } from "react-hook-form";
 
 import {
@@ -57,10 +56,10 @@ export default function CreatePost() {
 	} = useForm<POSTSCHEMA>({
 		resolver: zodResolver(SCHEMA),
 		defaultValues: {
-			title: undefined,
+			title: "",
 			categories: [],
-			userId: undefined,
-			description: undefined,
+			userId: "",
+			description: "",
 		},
 	});
 
