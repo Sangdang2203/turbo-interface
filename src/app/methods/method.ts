@@ -1,9 +1,6 @@
 import { toast } from "sonner";
 import { ApiResponse, CustomerMessage } from "types/interfaces";
-import sendEmail from "./sendMail";
-
 import { NextApiRequest, NextApiResponse } from "next";
-import chromium from "puppeteer";
 
 // CREATE METHODS
 export async function CreateContact(contact: CustomerMessage) {
