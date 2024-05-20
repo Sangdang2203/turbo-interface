@@ -73,6 +73,7 @@ export default function EditPost({ params }: { params: { postId: string } }) {
 			toast.dismiss(message);
 		}
 	}
+
 	React.useEffect(() => {
 		const fectchData = async () => {
 			const res = await fetch(`/api/posts/${params.postId}`, {
