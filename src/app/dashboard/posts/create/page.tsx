@@ -3,6 +3,7 @@
 import * as React from "react";
 import Image from "next/image";
 import { useForm } from "react-hook-form";
+
 import {
 	Category,
 	User,
@@ -11,7 +12,9 @@ import {
 	ApiResponse,
 	CreatePostRequest,
 } from "types/interfaces";
+
 import { DoneRounded, RotateLeftRounded } from "@mui/icons-material";
+
 import {
 	Box,
 	Button,
@@ -25,22 +28,17 @@ import {
 	Select,
 	Grid,
 } from "@mui/material";
+
 import { fetchCategories, fetchUsers } from "app/methods/method";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { useSession } from "next-auth/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
-import dynamic from "next/dynamic";
-
-const ContentEditor = dynamic(
-	() => {
-		return import("@/components/ContentEditor");
-	},
-	{ ssr: false }
-);
 
 export default function CreatePost() {
+	const { data: session } = useSession();
+
 	const [categories, setCategories] = React.useState<Map<string, string>>(
 		new Map<string, string>()
 	);
@@ -48,8 +46,6 @@ export default function CreatePost() {
 		new Map<string, string>()
 	);
 
-	const { data: session } = useSession();
-	//const [imageUrl, setImageUrl] = React.useState("");
 	const [content, setContent] = React.useState("");
 
 	const {
@@ -61,25 +57,22 @@ export default function CreatePost() {
 	} = useForm<POSTSCHEMA>({
 		resolver: zodResolver(SCHEMA),
 		defaultValues: {
-			title: "",
+			title: undefined,
 			categories: [],
-			userId: "",
-			description: "",
-			content: "",
+			userId: undefined,
+			description: undefined,
 		},
 	});
 
 	async function handleCreatePost(data: POSTSCHEMA) {
 		if (session) {
-			const message = toast.loading("Đang tạo bài viết mới");
+			const message = toast.loading("Đang tạo bài viết mới.");
 
 			const post: CreatePostRequest = {
 				title: data.title,
 				categories: data.categories.map(item => ({ id: item })),
 				user: { id: data.userId },
-				//urlImage: data.urlImage,
 				description: data.description,
-				content: data.content,
 				status: "ACTIVE",
 			};
 
@@ -90,7 +83,7 @@ export default function CreatePost() {
 						Authorization: `Bearer ${session.user.id_token}`,
 						"Content-Type": "application/json",
 					},
-					body: JSON.stringify(post),
+					body: JSON.stringify({ ...post, content: content }),
 				});
 
 				const payload = (await res.json()) as ApiResponse;
@@ -98,6 +91,7 @@ export default function CreatePost() {
 				if (payload.ok) {
 					toast.success(payload.message);
 					reset();
+					setContent("");
 				} else {
 					toast.error(payload.message);
 				}
@@ -182,7 +176,7 @@ export default function CreatePost() {
 											displayEmpty
 											value={watch("categories")}
 											renderValue={categoriesId => {
-												if (categoriesId.length === 0) {
+												if (categoriesId && categoriesId.length === 0) {
 													return (
 														<b className="text-gray-400 font-normal">
 															Vui lòng bấm chọn
@@ -190,11 +184,11 @@ export default function CreatePost() {
 													);
 												}
 
-												const categoriesName = categoriesId.map(id =>
-													categories.get(id)
-												);
+												const categoriesName =
+													categoriesId &&
+													categoriesId.map(id => categories.get(id));
 
-												return categoriesName.join(", ");
+												return categoriesName?.join(", ");
 											}}>
 											{Array.from(categories).map(item => (
 												<MenuItem
@@ -271,16 +265,14 @@ export default function CreatePost() {
 							Nội dung bài viết:
 						</InputLabel>
 
-						<TextField
-							{...register("content")}
-							fullWidth
-							variant="outlined"
-							className="shadow-lg"
-							placeholder="Nhập nội dung bài viết"
+						<CKEditor
+							editor={ClassicEditor}
+							data={content}
+							onChange={(event, editor) => {
+								const data = editor.getData();
+								setContent(data); // set the content state with the current data from the editor
+							}}
 						/>
-						<Typography className="text-red-700 p-2 ">
-							{errors.content?.message}
-						</Typography>
 					</Box>
 
 					<Box className="flex justify-center mb-2 mt-10 mx-auto">
@@ -298,7 +290,10 @@ export default function CreatePost() {
 							size="medium"
 							color="error"
 							className="w-[30%] mx-2"
-							onClick={() => reset()}
+							onClick={() => {
+								reset();
+								setContent("");
+							}}
 							startIcon={<RotateLeftRounded fontSize="medium" />}>
 							Hủy bỏ
 						</Button>

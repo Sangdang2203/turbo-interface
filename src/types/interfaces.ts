@@ -13,7 +13,7 @@ export const SCHEMA = z.object({
 			required_error: "Nhập tiêu đề bài viết.",
 		})
 		.min(10, "Tiêu đề phải nhập tối thiểu 10 ký tự")
-		.max(100, "Tiêu đề nhập tối đa 100 ký tự"),
+		.max(200, "Tiêu đề nhập tối đa 200 ký tự"),
 
 	categories: z.array(z.string()).min(1, "Vui lòng bấm chọn."),
 
@@ -24,12 +24,6 @@ export const SCHEMA = z.object({
 			required_error: "Nhập mô tả bài viết.",
 		})
 		.min(10, "Mô tả bài viết phải nhập tối thiểu 10 ký tự."),
-
-	content: z
-		.string({
-			required_error: "Nhập nội dung bài viết.",
-		})
-		.min(10, "Nội dung bài viết phải nhập tối thiểu 10 ký tự."),
 });
 
 export type POSTSCHEMA = z.infer<typeof SCHEMA>;

@@ -104,6 +104,7 @@ export default function AdminLoginForm() {
 				error={!!errors.username}>
 				<InputLabel htmlFor="username">Username</InputLabel>
 				<OutlinedInput
+					autoComplete="username"
 					size="medium"
 					label="Username"
 					type="text"

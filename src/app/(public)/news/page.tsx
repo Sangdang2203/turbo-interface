@@ -163,7 +163,7 @@ export default function NewsPage() {
 													key={item.id}
 													className="post_card max-h-[500px] shadow-sm hover:scale-105 hover:duration-700">
 													<div className="card-image">
-														<Link href={`news/${item.slug}`}>
+														{/* <Link href={`news/${item.slug}`}>
 															<Image
 																src={item.urlImage}
 																width={200}
@@ -172,7 +172,7 @@ export default function NewsPage() {
 																className="min-h-[200px] w-full sm:min-h-[130px] card-image rounded-md"
 																alt={item.urlImage}
 															/>
-														</Link>
+														</Link> */}
 													</div>
 
 													<div className="author">
