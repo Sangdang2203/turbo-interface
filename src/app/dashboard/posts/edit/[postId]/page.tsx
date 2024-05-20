@@ -4,7 +4,6 @@ import * as React from "react";
 import { toast } from "sonner";
 import Image from "next/image";
 import { useForm } from "react-hook-form";
-import dynamic from "next/dynamic";
 import { DoneRounded, RotateLeftRounded } from "@mui/icons-material";
 import {
 	Category,
@@ -21,23 +20,11 @@ import {
 	Paper,
 	TextField,
 	InputLabel,
-	FormControl,
-	ListItemText,
-	MenuItem,
-	Select,
-	Chip,
 } from "@mui/material";
 import { fetchCategories, fetchUsers } from "app/methods/method";
 import { useSession } from "next-auth/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Loading from "@/components/Loading";
-
-const CustomEditor = dynamic(
-	() => {
-		return import("@/components/CustomEditor");
-	},
-	{ ssr: false }
-);
 
 export default function EditPost({ params }: { params: { postId: string } }) {
 	const [loading, setLoading] = React.useState(true);
@@ -257,13 +244,8 @@ export default function EditPost({ params }: { params: { postId: string } }) {
 							<InputLabel className="font-semibold">
 								Nội dung bài viết:
 							</InputLabel>
-							{/* <CustomEditor
-              {...register("content")}
-              fullWidth
-              variant="outlined"
-              className="shadow-lg"
-              placeholder="Nhập nội dung bài viết" /> */}
-							<TextField
+
+							{/* <TextField
 								{...register("content")}
 								fullWidth
 								variant="outlined"
@@ -273,7 +255,7 @@ export default function EditPost({ params }: { params: { postId: string } }) {
 							/>
 							<Typography className="text-red-700 p-2 ">
 								{errors.content?.message}
-							</Typography>
+							</Typography> */}
 						</Box>
 
 						<Box className="flex justify-center mb-2 mt-10 mx-auto">
