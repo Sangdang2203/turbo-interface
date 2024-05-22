@@ -1,12 +1,13 @@
 "use server";
 
 import * as React from "react";
+import createDOMPurify from "dompurify";
+import { JSDOM } from "jsdom";
 import { fetchPost, fetchPosts } from "@/app/methods/fetchApi";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import { Post } from "types/interfaces";
 import CustomRating from "@/components/CustomRating";
 import { Box, Container, Typography } from "@mui/material";
-import DOMPurify from "dompurify";
 
 export default async function PostDetail({
 	params,
@@ -25,6 +26,11 @@ export default async function PostDetail({
 		post = await fetchPost(id);
 	}
 
+	const window = new JSDOM("").window;
+	const DOMPurify = createDOMPurify(window);
+
+	const sanitizedContent = DOMPurify.sanitize(post?.content || "");
+
 	return (
 		<>
 			<Box>
@@ -38,7 +44,10 @@ export default async function PostDetail({
 					<Box my={2}>
 						<CustomRating />
 					</Box>
-					<Box className="w-5/6 mx-auto py-5 text-justify">{post?.content}</Box>
+					<Box
+						className="w-5/6 mx-auto py-5 text-justify"
+						dangerouslySetInnerHTML={{ __html: sanitizedContent }}
+					/>
 				</Container>
 			</Box>
 		</>

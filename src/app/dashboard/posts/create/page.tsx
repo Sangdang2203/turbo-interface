@@ -67,6 +67,10 @@ export default function CreatePost() {
 		if (session) {
 			const message = toast.loading("Đang tạo bài viết mới.");
 
+			const text = document.createElement("div");
+			text.innerHTML = content;
+			const plainText = text.innerText;
+
 			const post: CreatePostRequest = {
 				title: data.title,
 				categories: data.categories.map(item => ({ id: item })),
