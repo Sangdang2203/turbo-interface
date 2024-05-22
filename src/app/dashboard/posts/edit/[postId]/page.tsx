@@ -25,32 +25,39 @@ import { fetchCategories, fetchUsers } from "app/methods/method";
 import { useSession } from "next-auth/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Loading from "@/components/Loading";
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import { CKEditor } from "@ckeditor/ckeditor5-react";
 
 export default function EditPost({ params }: { params: { postId: string } }) {
+	const { data: session } = useSession();
 	const [loading, setLoading] = React.useState(true);
 	const [post, setPost] = React.useState<Post>();
+	const [content, setContent] = React.useState("");
+
 	const [categories, setCategories] = React.useState<Map<string, string>>(
 		new Map<string, string>()
 	);
+
 	const [users, setUsers] = React.useState<Map<string, string>>(
 		new Map<string, string>()
 	);
-
-	const { data: session } = useSession();
 
 	const {
 		register,
 		handleSubmit,
 		formState: { errors },
-		watch,
 		reset,
-	} = useForm<POSTSCHEMA>({
-		resolver: zodResolver(SCHEMA),
-	});
+	} = useForm<updatedPost>();
 
-	async function UpdatePost(updatedPost: POSTSCHEMA) {
+	interface updatedPost {
+		title: string;
+		description: string;
+	}
+
+	async function UpdatePost(updatedPost: updatedPost) {
 		if (session) {
 			const message = toast.loading("Đang cập nhật bài viết ...");
+
 			try {
 				const res = await fetch(`/api/posts/${params.postId}`, {
 					method: "PUT",
@@ -58,15 +65,18 @@ export default function EditPost({ params }: { params: { postId: string } }) {
 						Authorization: `Bearer ${session?.user.id_token}`,
 						"Content-Type": "application/json",
 					},
-					body: JSON.stringify(updatedPost),
+					body: JSON.stringify({ ...updatedPost, content: content }),
 				});
+
+				console.log({ ...updatedPost, content: content });
 
 				const payload = (await res.json()) as ApiResponse;
 
 				if (payload.ok) {
 					toast.success(payload.message);
+				} else {
+					toast.error(payload.message);
 				}
-				toast.error(payload.message);
 			} catch (error) {
 				console.log(error);
 			}
@@ -74,6 +84,7 @@ export default function EditPost({ params }: { params: { postId: string } }) {
 		}
 	}
 
+	// get one post
 	React.useEffect(() => {
 		const fectchData = async () => {
 			const res = await fetch(`/api/posts/${params.postId}`, {
@@ -144,86 +155,6 @@ export default function EditPost({ params }: { params: { postId: string } }) {
 							</Typography>
 						</Box>
 
-						{/* <Box className="my-3 flex justify-between">
-							<Box>
-								<InputLabel className="font-semibold">
-									Loại bài viết:
-								</InputLabel>
-								<FormControl sx={{ width: 300 }}>
-									<Select
-										{...register("categories")}
-										labelId="categories"
-										id="categories"
-										size="small"
-										className="shadow-lg"
-										multiple
-										displayEmpty
-										value={watch("categories")}
-										renderValue={categoriesId => {
-											if (categoriesId && categoriesId.length === 0) {
-												return (
-													<i className="text-gray-400">Vui lòng bấm chọn</i>
-												);
-											}
-
-											const categoriesName =
-												categoriesId &&
-												categoriesId.map(id => categories.get(id));
-
-											return categoriesName;
-										}}>
-										{Array.from(categories).map(item => (
-											<MenuItem
-												key={item[0]}
-												value={item[0]}>
-												<ListItemText primary={item[1]} />
-											</MenuItem>
-										))}
-									</Select>
-								</FormControl>
-								<Typography className="text-red-700 p-2">
-									{errors.categories?.message}
-								</Typography>
-							</Box>
-
-							<Box>
-								<InputLabel className="font-semibold">Tác giả:</InputLabel>
-								<FormControl
-									sx={{ width: 300 }}
-									size="small">
-									<Select
-										{...register("userId")}
-										labelId="demo-select-small-label"
-										id="demo-select-small"
-										size="small"
-										className="shadow-lg"
-										displayEmpty
-										value={watch("userId")}
-										renderValue={userId => {
-											if (!userId) {
-												return (
-													<i className="text-gray-400">Vui lòng bấm chọn</i>
-												);
-											}
-											return users.get(userId);
-										}}>
-										{Array.from(users).map(item => {
-											return (
-												<MenuItem
-													key={item[0]}
-													value={item[0]}>
-													{item[1]}
-												</MenuItem>
-											);
-										})}
-									</Select>
-								</FormControl>
-								<Typography className="text-red-700 p-2">
-									{errors.userId?.message}
-								</Typography>
-							</Box>
-						</Box> */}
-
 						<Box className="my-3">
 							<InputLabel className="font-semibold">Mô tả ngắn:</InputLabel>
 							<TextField
@@ -246,17 +177,14 @@ export default function EditPost({ params }: { params: { postId: string } }) {
 								Nội dung bài viết:
 							</InputLabel>
 
-							{/* <TextField
-								{...register("content")}
-								fullWidth
-								variant="outlined"
-								className="shadow-lg"
-								placeholder="Nhập nội dung bài viết"
-								defaultValue={post?.content}
+							<CKEditor
+								editor={ClassicEditor}
+								data={post?.content}
+								onChange={(event, editor) => {
+									const data = editor.getData();
+									setContent(data); // set the content state with the current data from the editor
+								}}
 							/>
-							<Typography className="text-red-700 p-2 ">
-								{errors.content?.message}
-							</Typography> */}
 						</Box>
 
 						<Box className="flex justify-center mb-2 mt-10 mx-auto">

@@ -45,8 +45,6 @@ export async function POST(req: NextRequest) {
 			body: JSON.stringify(post),
 		});
 
-		// console.log(response);
-
 		let data = null;
 
 		if (response.ok) {
