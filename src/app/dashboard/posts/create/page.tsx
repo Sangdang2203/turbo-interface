@@ -130,7 +130,7 @@ export default function CreatePost() {
 	}, [session]);
 
 	return (
-		<>
+		<React.Fragment>
 			<Paper sx={{ p: 5 }}>
 				<form onSubmit={handleSubmit(handleCreatePost)}>
 					<Box className="my-3">
@@ -299,6 +299,6 @@ export default function CreatePost() {
 					</Box>
 				</form>
 			</Paper>
-		</>
+		</React.Fragment>
 	);
 }
