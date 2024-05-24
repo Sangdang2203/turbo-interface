@@ -3,6 +3,7 @@
 import React from "react";
 import Image from "next/image";
 import Switch from "@mui/material/Switch";
+
 import {
 	Box,
 	Button,
@@ -17,19 +18,18 @@ import {
 	Link,
 	Typography,
 } from "@mui/material";
+
 import { PublicRounded } from "@mui/icons-material";
 import logoTurbo from "@/app/images/logoTurbo.png";
 import cloudServer from "@/app/images/cloudServer.png";
 import cloudCamera from "@/app/images/cloudCamera.png";
 import Backup from "@/app/images/Backup.png";
 import promotion from "@/app/images/promotion.jpg";
-import feedback_01 from "@/app/images/feedback_01.png";
-import feedback_02 from "@/app/images/feedback_02.png";
-import feedback_03 from "@/app/images/feedback_03.png";
-import { homeServices } from "app/libs/data";
+import { cloudServices, feedbacks, homeServices } from "app/libs/data";
+import { it } from "node:test";
 
 export default function HomePage() {
-	const [currentText, setCurrentText] = React.useState("Ứng dụng"); // Initial text
+	const [currentText, setCurrentText] = React.useState("Ứng dụng");
 	const [texts] = React.useState(["Ứng dụng", "Dịch vụ", "Giải pháp"]);
 
 	React.useEffect(() => {
@@ -83,115 +83,53 @@ export default function HomePage() {
 				</Container>
 			</Box>
 
-			<Box
-				my={10}
-				sx={{
-					display: "flex",
-					flexDirection: "column",
-					justifyContent: "center",
-					alignItems: "center",
-					textAlign: "center",
-				}}>
-				<Typography className="py-3 px-5 bg-sky-50 text-sky-700 uppercase w-fit rounded-full">
-					dịch vụ điện toán đám mây
-				</Typography>
-				<Typography className="text-[1.25rem] md:text-[1.75rem] font-light w-2/3 text-center mx-auto">
-					Công ty Turbo Solutions cung cấp dịch vụ điện toán đám mây đa dạng và
-					các ứng dụng số phù hợp nhiều lĩnh vực.
-				</Typography>
+			<Box className="animated-element">
+				<Box className="my-10 flex flex-col justify-center items-center text-center">
+					<Typography className="py-3 px-5 bg-sky-50 text-sky-700 uppercase w-fit rounded-full">
+						dịch vụ điện toán đám mây
+					</Typography>
+					<Typography className="text-[1.25rem] md:text-[1.75rem] font-light w-2/3 text-center mx-auto">
+						Công ty Turbo Solutions cung cấp dịch vụ điện toán đám mây đa dạng
+						và các ứng dụng số phù hợp nhiều lĩnh vực.
+					</Typography>
+				</Box>
+
+				<Container className="container grid sm:grid-cols-3 gap-x-6 gap-y-6 mb-10">
+					{cloudServices.map(item => {
+						return (
+							<Card
+								key={item.id}
+								className="relative rounded-xl hover:shadow-lg cursor-pointer">
+								<CardContent className="mb-16">
+									<Box className="flex items-start">
+										<Image
+											src={item.image}
+											className="w-28 h-28"
+											alt=""
+										/>
+										<Box>
+											<Typography className="text-[1.5rem]">
+												{item.name}
+											</Typography>
+											<Typography>{item.describe}</Typography>
+										</Box>
+									</Box>
+								</CardContent>
+								<CardActions className="absolute bottom-1 left-1">
+									<Button
+										href={item.link}
+										className="fancy hover:opacity-80">
+										<span className="top-key"></span>
+										<span className="text">Tìm hiểu thêm</span>
+										<span className="bottom-key-1"></span>
+										<span className="bottom-key-2"></span>
+									</Button>
+								</CardActions>
+							</Card>
+						);
+					})}
+				</Container>
 			</Box>
-
-			<Container className="container grid sm:grid-cols-3 gap-x-6 gap-y-6 mb-10">
-				<Card className="relative rounded-xl hover:shadow-lg cursor-pointer">
-					<CardContent className="mb-16">
-						<Box className="flex items-start">
-							<Image
-								src={cloudServer}
-								className="w-28 h-28"
-								alt="cloudServer"
-							/>
-							<Box>
-								<Typography className="text-[1.5rem]">Cloud Server</Typography>
-								<Typography>
-									Cụm máy chủ Cloud với Firewall cùng mạng nội bộ riêng biệt,
-									trở thành trung tâm dữ liệu ảo cho doanh nghiệp thực hiện
-									chuyển đổi số.
-								</Typography>
-							</Box>
-						</Box>
-					</CardContent>
-					<CardActions className="absolute bottom-1 left-1">
-						<Button
-							href="/services/cloud-server"
-							className="fancy hover:opacity-80">
-							<span className="top-key"></span>
-							<span className="text">Tìm hiểu thêm</span>
-							<span className="bottom-key-1"></span>
-							<span className="bottom-key-2"></span>
-						</Button>
-					</CardActions>
-				</Card>
-
-				<Card className="relative rounded-xl hover:shadow-lg cursor-pointer">
-					<CardContent className="mb-16">
-						<Box className="flex items-start">
-							<Image
-								src={Backup}
-								className="w-32 h-32"
-								alt="backupDR"
-							/>
-							<Box>
-								<Typography className="text-[1.5rem]">
-									Backup & DR Site
-								</Typography>
-								<Typography>
-									Sao lưu và khôi phục dữ liệu trên Cloud. Thực hiện Disaster
-									Recovery Site với chi phí thấp.
-								</Typography>
-							</Box>
-						</Box>
-					</CardContent>
-					<CardActions className="absolute bottom-1 left-1">
-						<Button
-							href="/services/cloud-backup-recovery"
-							className="fancy hover:opacity-80">
-							<span className="top-key"></span>
-							<span className="text">Tìm hiểu thêm</span>
-							<span className="bottom-key-1"></span>
-							<span className="bottom-key-2"></span>
-						</Button>
-					</CardActions>
-				</Card>
-
-				<Card className="relative rounded-xl hover:shadow-lg cursor-pointer">
-					<CardContent className="mb-16">
-						<Box className="flex items-start">
-							<Image
-								src={cloudCamera}
-								className="w-32 h-32"
-								alt="cloudCamera"
-							/>
-							<Box>
-								<Typography className="text-[1.5rem]">Cloud Camera</Typography>
-								<Typography>
-									Quản lý và lưu trữ Video Camera từ nhiều chi nhánh trên nền
-									tảng đám mây
-								</Typography>
-							</Box>
-						</Box>
-					</CardContent>
-					<CardActions className="absolute bottom-1 left-1">
-						<Button
-							href="https://v2.aivisionviet.vn/nhan-dien-khuon-mat/"
-							className="fancy hover:opacity-80">
-							<span className="top-key"></span>
-							<span className="text">Tìm hiểu thêm</span>
-							<span className="bottom-key-1"></span>
-							<span className="bottom-key-2"></span>
-						</Button>
-					</CardActions>
-				</Card>
-			</Container>
 
 			<Box my={10}>
 				<Image
@@ -350,68 +288,29 @@ export default function HomePage() {
 				</Typography>
 
 				<Container className="grid sm:grid-cols-3 gap-x-6 gap-y-6 pb-10">
-					<div className="notification">
-						<div className="notiglow"></div>
-						<div className="notiborderglow"></div>
-						<div className="notititle flex items-center">
-							<Image
-								src={feedback_01}
-								alt="customer feedback"
-								className="w-16 h-16 rounded-full mr-2"
-							/>
-							<div>
-								<Typography>Mr. Tài</Typography>
-								<Typography>Technical Manager - GOSU</Typography>
+					{feedbacks.map(item => {
+						return (
+							<div
+								key={item.id}
+								className="notification">
+								<div className="notiglow"></div>
+								<div className="notiborderglow"></div>
+								<div className="notititle flex items-center">
+									<Image
+										src={item.avatar}
+										alt="customer feedback"
+										className="w-16 h-16 rounded-full mr-2"
+									/>
+									<div>
+										<Typography>{item.name}</Typography>
+										<Typography>{item.position}</Typography>
+									</div>
+								</div>
+
+								<div className="notibody">{item.feedback}</div>
 							</div>
-						</div>
-
-						<div className="notibody">
-							Thay vì phải chờ đợi cấu hình từng máy chủ thì nay chỉ cần 3 phút
-							là có Cloud Server để sử dụng cho các dự án của công ty.
-						</div>
-					</div>
-
-					<div className="notification">
-						<div className="notiglow"></div>
-						<div className="notiborderglow"></div>
-						<Box className="notititle flex items-center">
-							<Image
-								src={feedback_03}
-								alt="customer feedback"
-								className="w-16 h-16 rounded-full mr-2"
-							/>
-							<Box>
-								<Typography>Mr. Nguyên</Typography>
-								<Typography>IT Manager - Bell Technology</Typography>
-							</Box>
-						</Box>
-
-						<div className="notibody">
-							Đội ngũ EcoCloud rất nhiệt tình đã không ngại đường xa hỗ trợ demo
-							những giải pháp và hỗ trợ chúng tôi Backup dữ liệu.
-						</div>
-					</div>
-
-					<div className="notification">
-						<div className="notiglow"></div>
-						<div className="notiborderglow"></div>
-						<div className="notititle flex items-center">
-							<Image
-								src={feedback_02}
-								alt="customer feedback"
-								className="w-16 h-16 rounded-full mr-2"
-							/>
-							<div>
-								<Typography>Mr. Phú</Typography>
-								<Typography>IT Consultant - Viet An Group</Typography>
-							</div>
-						</div>
-
-						<div className="notibody">
-							Đội ngũ EcoCloud rất nhiệt tình đã không ngại đường xa hỗ trợ demo
-							những giải pháp và hỗ trợ chúng tôi Backup dữ liệu.
-						</div>
-					</div>
+						);
+					})}
 				</Container>
 
 				<Box className="text-center pb-10">

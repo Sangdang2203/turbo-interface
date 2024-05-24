@@ -19,6 +19,8 @@ export const SCHEMA = z.object({
 
 	userId: z.string().min(1, "Vui lòng bấm chọn."),
 
+	urlImage: z.string(),
+
 	description: z
 		.string({
 			required_error: "Nhập mô tả bài viết.",

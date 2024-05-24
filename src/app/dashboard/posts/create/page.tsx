@@ -34,6 +34,8 @@ import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { useSession } from "next-auth/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
+import useS3 from "@/hooks/useS3";
+import Image from "next/image";
 
 export default function CreatePost() {
 	const { data: session } = useSession();
@@ -46,6 +48,14 @@ export default function CreatePost() {
 	);
 
 	const [content, setContent] = React.useState("");
+	const [urlImage, setUrlImage] = React.useState("");
+
+	const { handleFileUpload, ButtonUpload, preview } = useS3();
+	const previewUrl = React.useMemo(() => {
+		if (preview) {
+			return URL.createObjectURL(preview);
+		}
+	}, [preview]);
 
 	const {
 		register,
@@ -59,6 +69,7 @@ export default function CreatePost() {
 			title: "",
 			categories: [],
 			userId: "",
+			urlImage: "",
 			description: "",
 		},
 	});
@@ -67,15 +78,15 @@ export default function CreatePost() {
 		if (session) {
 			const message = toast.loading("Đang tạo bài viết mới.");
 
-			const text = document.createElement("div");
-			text.innerHTML = content;
-			const plainText = text.innerText;
+			// const text = document.createElement("div");
+			// text.innerHTML = content;
 
 			const post: CreatePostRequest = {
 				title: data.title,
 				categories: data.categories.map(item => ({ id: item })),
 				user: { id: data.userId },
 				description: data.description,
+				urlImage: data.urlImage,
 				status: "ACTIVE",
 			};
 
@@ -86,7 +97,11 @@ export default function CreatePost() {
 						Authorization: `Bearer ${session.user.id_token}`,
 						"Content-Type": "application/json",
 					},
-					body: JSON.stringify({ ...post, content: content }),
+					body: JSON.stringify({
+						...post,
+						content: content,
+						urlImage: await handleFileUpload(),
+					}),
 				});
 
 				const payload = (await res.json()) as ApiResponse;
@@ -158,7 +173,36 @@ export default function CreatePost() {
 						mb={3}>
 						<Grid
 							item
-							md={4}></Grid>
+							md={4}>
+							{preview ? (
+								<Image
+									src={`${previewUrl}`}
+									width={250}
+									height={200}
+									objectFit="contain"
+									alt={"preview"}
+									title={"preview"}
+									style={{
+										borderRadius: "4px",
+									}}
+								/>
+							) : (
+								<Image
+									{...register("urlImage")}
+									src={
+										"https://dummyimage.com/500x500/c3c3c3/FFF.png&text=UploadImage"
+									}
+									alt={"preview"}
+									title={"preview"}
+									width={250}
+									height={200}
+									className="rounded-md"
+								/>
+							)}
+							<div className="w-[250px]">
+								<ButtonUpload />
+							</div>
+						</Grid>
 
 						<Grid
 							item
@@ -273,7 +317,7 @@ export default function CreatePost() {
 							data={content}
 							onChange={(event, editor) => {
 								const data = editor.getData();
-								setContent(data); // set the content state with the current data from the editor
+								setContent(data);
 							}}
 						/>
 					</Box>

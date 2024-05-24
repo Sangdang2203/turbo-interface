@@ -9,15 +9,14 @@ export async function POST(req: Request) {
 		if (!file) {
 			return NextResponse.json({ error: "File is required." }, { status: 400 });
 		}
-		const res = uploadFileS3(file as File);
-		//@ts-ignore
+		const res = await uploadFileS3(file as File);
+
 		const dataRes = JSON.parse(res);
-		// @ts-ignore
+
 		if (dataRes.status === "failed") {
-			// @ts-ignore
 			return NextResponse.json({ error: dataRes.message });
 		}
-		// @ts-ignore
+
 		return NextResponse.json({ fileLink: dataRes.fileLink });
 	} catch (error) {
 		return NextResponse.json({ error: "api backend error" });

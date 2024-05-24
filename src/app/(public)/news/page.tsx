@@ -27,10 +27,6 @@ export default function NewsPage() {
 	const [page, setPage] = React.useState(0);
 	const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
-	const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
-		setPage(value);
-	};
-
 	function handleSearch(event: React.FormEvent<HTMLFormElement>) {
 		event.preventDefault();
 		const nameInput = document.getElementById(
@@ -151,7 +147,7 @@ export default function NewsPage() {
 							item
 							xs={12}
 							sm={8}
-							className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3  my-10">
+							className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 my-10">
 							{posts &&
 								posts
 									.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
@@ -163,16 +159,18 @@ export default function NewsPage() {
 													key={item.id}
 													className="post_card max-h-[500px] shadow-sm hover:scale-105 hover:duration-700">
 													<div className="card-image">
-														{/* <Link href={`news/${item.slug}`}>
-															<Image
-																src={item.urlImage}
-																width={200}
-																height={130}
-																priority
-																className="min-h-[200px] w-full sm:min-h-[130px] card-image rounded-md"
-																alt={item.urlImage}
-															/>
-														</Link> */}
+														<Link href={`news/${item.slug}`}>
+															{item.urlImage && (
+																<Image
+																	src={item.urlImage}
+																	width={200}
+																	height={130}
+																	priority
+																	className="min-h-[200px] w-full sm:min-h-[130px] card-image rounded-md"
+																	alt={item.urlImage}
+																/>
+															)}
+														</Link>
 													</div>
 
 													<div className="author">

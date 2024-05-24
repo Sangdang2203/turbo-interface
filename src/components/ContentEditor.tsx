@@ -10,6 +10,7 @@ const editorConfiguration = {
 		"|",
 		"bold",
 		"italic",
+		"underline",
 		"link",
 		"bulletedList",
 		"numberedList",

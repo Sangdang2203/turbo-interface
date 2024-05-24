@@ -1283,3 +1283,17 @@ strong {
 	box-sizing: border-box;
 	border-radius: 16px;
 }
+
+/* animation */
+.animated-element {
+	animation: move-from-left 2s ease-in-out forwards;
+}
+
+@keyframes move-from-left {
+	from {
+		transform: translateX(-100%);
+	}
+	to {
+		transform: translateX(0);
+	}
+}

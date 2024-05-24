@@ -1,3 +1,11 @@
+import feedback_01 from "@/app/images/feedback_01.png";
+import feedback_02 from "@/app/images/feedback_02.png";
+import feedback_03 from "@/app/images/feedback_03.png";
+
+import cloudServer from "@/app/images/cloudServer.png";
+import cloudCamera from "@/app/images/cloudCamera.png";
+import Backup from "@/app/images/Backup.png";
+
 export const homeServices = [
 	{
 		id: 1,
@@ -795,5 +803,59 @@ export const solutonLinks = [
 	{
 		path: "https://v2.aivisionviet.vn/phat-hien-bat-thuong",
 		name: "Nhận Diện Bất Thường",
+	},
+];
+
+export const feedbacks = [
+	{
+		id: 1,
+		name: "Mr. Tài",
+		position: "Technical Manager - GOSU",
+		avatar: feedback_01,
+		feedback:
+			"Thay vì phải chờ đợi cấu hình từng máy chủ thì nay chỉ cần 3 phút là có Cloud Server để sử dụng cho các dự án của công ty.",
+	},
+	{
+		id: 2,
+		name: "Mr. Nguyên",
+		position: "IT Manager - Bell Technology",
+		avatar: feedback_02,
+		feedback:
+			"Đội ngũ EcoCloud rất nhiệt tình đã không ngại đường xa hỗ trợ demo những giải pháp và hỗ trợ chúng tôi Backup dữ liệu.",
+	},
+	{
+		id: 3,
+		name: "Mr. Phú",
+		position: "IT Consultant - Viet An Group",
+		avatar: feedback_03,
+		feedback:
+			"Đội ngũ EcoCloud rất nhiệt tình đã không ngại đường xa hỗ trợ demo những giải pháp và hỗ trợ chúng tôi Backup dữ liệu.",
+	},
+];
+
+export const cloudServices = [
+	{
+		id: 1,
+		name: "Cloud Server",
+		describe:
+			"Cụm máy chủ Cloud với Firewall cùng mạng nội bộ riêng biệt, trở thành trung tâm dữ liệu ảo cho doanh nghiệp thực hiện chuyển đổi số.",
+		link: "/services/cloud-server",
+		image: cloudServer,
+	},
+	{
+		id: 2,
+		name: "Cloud Camera",
+		describe:
+			"Quản lý và lưu trữ Video Camera từ nhiều chi nhánh trên nền tảng đám mây",
+		link: "https://v2.aivisionviet.vn/nhan-dien-khuon-mat/",
+		image: cloudCamera,
+	},
+	{
+		id: 3,
+		name: "Backup & DR Site",
+		describe:
+			"Sao lưu và khôi phục dữ liệu trên Cloud. Thực hiện Disaster Recovery Site với chi phí thấp.",
+		link: "/services/cloud-backup-recovery",
+		image: Backup,
 	},
 ];
