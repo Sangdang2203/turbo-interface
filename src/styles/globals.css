@@ -1209,11 +1209,7 @@ strong {
 
 .card-image {
 	width: 100%;
-	border-radius: 12px;
-}
-
-.card-image:hover {
-	transform: scale(0.98);
+	border-radius: 6px;
 }
 
 .category {

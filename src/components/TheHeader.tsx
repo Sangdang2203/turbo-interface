@@ -133,7 +133,7 @@ export default function TheHeader() {
 
 				{/* Handle the menu icon */}
 				<div
-					className="flex lg:hidden z-10"
+					className="flex lg:hidden z-50"
 					onClick={handleNavigation}>
 					{navigation ? (
 						<Close

@@ -162,7 +162,10 @@ export default function NewsPage() {
 														<Link href={`news/${item.slug}`}>
 															{item.urlImage && (
 																<Image
-																	src={item.urlImage}
+																	src={
+																		"https://project-sem3.s3.ap-southeast-1.amazonaws.com/" +
+																		item.urlImage
+																	}
 																	width={200}
 																	height={130}
 																	priority

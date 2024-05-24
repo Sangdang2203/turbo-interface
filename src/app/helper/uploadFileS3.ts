@@ -4,9 +4,13 @@ import sharp from "sharp";
 import moment from "moment";
 import path from "path";
 
-const uploadFileS3 = async (file: any) => {
+const uploadFileS3 = async (file: File) => {
 	try {
-		if (file.type !== "image/jpeg" && file.type !== "image/png") {
+		if (
+			file.type !== "image/jpeg" &&
+			file.type !== "image/png" &&
+			file.type !== "image/jpg"
+		) {
 			return JSON.stringify({
 				message: "File type not supported",
 				status: "failed",
@@ -21,12 +25,12 @@ const uploadFileS3 = async (file: any) => {
 		const convertedImage = await sharp(Buffer.from(fileData)).webp().toBuffer();
 
 		const fileParams = {
-			Bucket: process.env.AWS_S3_BUCKET_NAME || "",
+			Bucket: process.env.S3_BUCKET_NAME || "",
 			Key: uniqueFileName,
 			Body: convertedImage,
 			ContentType: "image/webp",
 		};
-
+		console.log("File: ", fileParams);
 		await s3Client.send(new PutObjectCommand(fileParams));
 
 		return JSON.stringify({ fileLink: uniqueFileName, status: "ok" });

@@ -4,7 +4,7 @@ import s3Client from "./aws-config";
 const deleteFileS3 = async (file: string) => {
 	try {
 		const fileParams = {
-			Bucket: process.env.AWS_S3_BUCKET_NAME || "",
+			Bucket: process.env.S3_BUCKET_NAME || "",
 			Key: file,
 		};
 

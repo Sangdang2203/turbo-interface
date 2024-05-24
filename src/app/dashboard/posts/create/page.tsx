@@ -78,15 +78,12 @@ export default function CreatePost() {
 		if (session) {
 			const message = toast.loading("Đang tạo bài viết mới.");
 
-			// const text = document.createElement("div");
-			// text.innerHTML = content;
-
 			const post: CreatePostRequest = {
 				title: data.title,
 				categories: data.categories.map(item => ({ id: item })),
 				user: { id: data.userId },
 				description: data.description,
-				urlImage: data.urlImage,
+				urlImage: await handleFileUpload(),
 				status: "ACTIVE",
 			};
 
@@ -152,33 +149,18 @@ export default function CreatePost() {
 		<React.Fragment>
 			<Paper sx={{ p: 5 }}>
 				<form onSubmit={handleSubmit(handleCreatePost)}>
-					<Box className="my-3">
-						<InputLabel className="font-semibold">Tiêu đề bài viết:</InputLabel>
-						<TextField
-							{...register("title")}
-							type="text"
-							size="small"
-							variant="outlined"
-							fullWidth
-							className="cursor-pointer shadow-lg"
-							placeholder="Nhập tiêu đề bài viết "
-						/>
-						<Typography className="text-red-700 p-2">
-							{errors.title?.message}
-						</Typography>
-					</Box>
-
 					<Grid
 						container
-						mb={3}>
+						mb={3}
+						height={250}>
 						<Grid
 							item
 							md={4}>
 							{preview ? (
 								<Image
 									src={`${previewUrl}`}
-									width={250}
-									height={200}
+									width={220}
+									height={190}
 									objectFit="contain"
 									alt={"preview"}
 									title={"preview"}
@@ -194,19 +176,37 @@ export default function CreatePost() {
 									}
 									alt={"preview"}
 									title={"preview"}
-									width={250}
-									height={200}
+									width={220}
+									height={190}
 									className="rounded-md"
 								/>
 							)}
-							<div className="w-[250px]">
+							<div className="w-[220px]">
 								<ButtonUpload />
 							</div>
 						</Grid>
 
 						<Grid
 							item
-							md={8}>
+							md={8}
+							className="flex flex-col justify-between">
+							<Box className="my-3">
+								<InputLabel className="font-semibold">
+									Tiêu đề bài viết:
+								</InputLabel>
+								<TextField
+									{...register("title")}
+									type="text"
+									size="small"
+									variant="outlined"
+									fullWidth
+									className="cursor-pointer shadow-lg"
+									placeholder="Nhập tiêu đề bài viết "
+								/>
+								<Typography className="text-red-700 p-2">
+									{errors.title?.message}
+								</Typography>
+							</Box>
 							<Box className="flex justify-between items-center">
 								<Box>
 									<InputLabel className="font-semibold">

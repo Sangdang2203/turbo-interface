@@ -31,6 +31,7 @@ const useS3 = () => {
 
 				if (response.ok) {
 					const data = await response.json();
+					console.log(data);
 					return data.fileLink;
 				} else {
 					console.error("Lỗi upload ảnh:", response.statusText);
@@ -51,7 +52,7 @@ const useS3 = () => {
 				variant="contained"
 				tabIndex={-1}
 				startIcon={<CloudUploadIcon />}>
-				Tải ảnh
+				Tải ảnh đại diện
 				<VisuallyHiddenInput
 					type="file"
 					onChange={e => {

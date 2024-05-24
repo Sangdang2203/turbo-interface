@@ -32,24 +32,22 @@ export default async function PostDetail({
 	const sanitizedContent = DOMPurify.sanitize(post?.content || "");
 
 	return (
-		<>
-			<Box>
-				<Box className="text-white w-3/4 themePost flex justify-center items-center">
-					<Typography className="text-xl w-3/4 leading-10 font-bold uppercase text-center text-with-shadow">
-						{post?.title}
-					</Typography>
-				</Box>
-
-				<Container>
-					<Box my={2}>
-						<CustomRating />
-					</Box>
-					<Box
-						className="w-5/6 mx-auto py-5 text-justify"
-						dangerouslySetInnerHTML={{ __html: sanitizedContent }}
-					/>
-				</Container>
+		<Box className="w-full">
+			<Box className="text-white themePost flex justify-center items-center">
+				<Typography className="text-xl w-3/4 leading-10 font-bold uppercase text-center text-with-shadow">
+					{post?.title}
+				</Typography>
 			</Box>
-		</>
+
+			<Container>
+				<Box my={2}>
+					<CustomRating />
+				</Box>
+				<Box
+					className="w-full lg:w-[78%] mx-auto py-5 text-justify"
+					dangerouslySetInnerHTML={{ __html: sanitizedContent }}
+				/>
+			</Container>
+		</Box>
 	);
 }
