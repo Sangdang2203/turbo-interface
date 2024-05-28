@@ -1,4 +1,5 @@
 /** @type {import('next').NextConfig} */
+
 const nextConfig = {
 	webpack: (config, { isServer }) => {
 		if (!isServer) {
@@ -9,8 +10,11 @@ const nextConfig = {
 		}
 		return config;
 	},
+
 	reactStrictMode: true,
+
 	output: "standalone",
+
 	images: {
 		remotePatterns: [
 			{
@@ -50,6 +54,9 @@ const nextConfig = {
 				pathname: "/**",
 			},
 		],
+	},
+	compiler: {
+		styledComponents: true,
 	},
 };
 

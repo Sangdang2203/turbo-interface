@@ -81,7 +81,7 @@ export default function CreateUserForm() {
 
 	React.useEffect(() => {
 		if (session) {
-			Promise.all([fetchAuthorities(session.user.id_token)]).then(data => {
+			Promise.all([fetchAuthorities()]).then(data => {
 				const [resAuth] = data;
 
 				if (resAuth.ok) {

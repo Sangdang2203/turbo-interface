@@ -66,7 +66,7 @@ export default function UserManagement() {
 			const name = nameInput.value.trim();
 
 			if (name === "") {
-				fetchUsers(session.user.id_token).then(data => {
+				fetchUsers().then(data => {
 					if (data.ok) {
 						setUsers(data.data.reverse());
 					}
@@ -97,7 +97,7 @@ export default function UserManagement() {
 				const payload = (await res.json()) as ApiResponse;
 
 				if (payload.ok) {
-					const response = await fetchUsers(session.user.id_token);
+					const response = await fetchUsers();
 					setUsers(await response.data.reverse());
 					setModalUpdate(false);
 					toast.success(payload.message);
@@ -114,7 +114,7 @@ export default function UserManagement() {
 	async function handleDelete(login: string) {
 		if (session) {
 			const message = toast.loading("Đang thực thao tác hiện xóa.");
-			const response = await fetchDeleteUser(session.user.id_token, login);
+			const response = await fetchDeleteUser(login);
 
 			if (response.ok) {
 				setUsers(pre => pre.filter(user => user.login !== login));
@@ -130,10 +130,7 @@ export default function UserManagement() {
 	// fetch data
 	React.useEffect(() => {
 		if (session) {
-			Promise.all([
-				fetchUsers(session.user.id_token),
-				fetchAuthorities(session.user.id_token),
-			]).then(data => {
+			Promise.all([fetchUsers(), fetchAuthorities()]).then(data => {
 				const [resUser, resAuth] = data;
 
 				if (resUser.ok) {

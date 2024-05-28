@@ -213,7 +213,7 @@ export default function CreatePost() {
 											displayEmpty
 											value={watch("categories")}
 											renderValue={categoriesId => {
-												if (categoriesId && categoriesId.length === 0) {
+												if (!categoriesId || categoriesId.length === 0) {
 													return (
 														<b className="text-gray-400 font-normal">
 															Vui lòng bấm chọn
