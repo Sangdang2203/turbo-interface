@@ -34,8 +34,6 @@ export default function DrawerMenu() {
 	const menu = [
 		createMenu("Trang quản trị", AppsOutlined, "/dashboard", "app.view"),
 
-		createMenu("Nhân viên", BadgeOutlined, "/dashboard/users", "emp.view"),
-
 		createMenu(
 			"Quản lý bài viết",
 			ArticleOutlined,
@@ -64,11 +62,6 @@ export default function DrawerMenu() {
 		),
 
 		createMenu("Khách hàng", RecentActors, "/dashboard/contacts", "emp.view"),
-
-		// createMenu('Tuyển Dụng', NewspaperOutlined, '/dashboard/recruitment', 'recruitment.view', [
-		// 	createMenu('Quản lý', ManageSearchRounded, '/dashboard/recruitment/management', 'recruitment.view'),
-		// 	createMenu('Tạo mới', AddCircleOutlineOutlined, '/dashboard/recruitment/create', 'recruitment.create')
-		// ]),
 	];
 
 	return (

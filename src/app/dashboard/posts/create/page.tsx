@@ -48,7 +48,6 @@ export default function CreatePost() {
 	);
 
 	const [content, setContent] = React.useState("");
-	const [urlImage, setUrlImage] = React.useState("");
 
 	const { handleFileUpload, ButtonUpload, preview } = useS3();
 	const previewUrl = React.useMemo(() => {

@@ -6,7 +6,7 @@ export async function DELETE(
 ) {
 	try {
 		const id = params.login;
-		console.log("id: ", id);
+
 		const res = await fetch(
 			process.env.NEXT_PUBLIC_API_URL + `/admin/users/${id}`,
 			{

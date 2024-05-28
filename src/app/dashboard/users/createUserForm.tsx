@@ -8,7 +8,6 @@ import {
 	Box,
 	TextField,
 	FormHelperText,
-	InputLabel,
 	Select,
 	SelectChangeEvent,
 	MenuItem,
@@ -24,6 +23,7 @@ import React from "react";
 import { toast } from "sonner";
 import { useForm } from "react-hook-form";
 import { CreateUserRequest, ApiResponse, Authority } from "types/interfaces";
+import { fetchAuthorities } from "@/app/methods/method";
 
 export default function CreateUserForm() {
 	const [openDialog, setOpenDialog] = React.useState(false);
@@ -79,6 +79,18 @@ export default function CreateUserForm() {
 		}
 	}
 
+	React.useEffect(() => {
+		if (session) {
+			Promise.all([fetchAuthorities(session.user.id_token)]).then(data => {
+				const [resAuth] = data;
+
+				if (resAuth.ok) {
+					setAuthorities(resAuth.data);
+				}
+			});
+		}
+	}, [session]);
+
 	return (
 		<React.Fragment>
 			<Button
@@ -103,7 +115,9 @@ export default function CreateUserForm() {
 					<h2 className="title">Tạo tài khoản</h2>
 				</DialogTitle>
 				<DialogContent>
-					<form onSubmit={handleSubmit(AddUser)}>
+					<form
+						className="min-w-[300px]"
+						onSubmit={handleSubmit(AddUser)}>
 						<Box className="my-3">
 							<TextField
 								{...register("login", {

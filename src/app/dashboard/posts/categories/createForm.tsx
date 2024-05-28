@@ -22,8 +22,8 @@ import { toast } from "sonner";
 import { CreateCategoryRequest, ApiResponse } from "types/interfaces";
 
 export default function AddCategoryForm() {
-	const [openDialog, setOpenDialog] = React.useState(false);
 	const { data: session } = useSession();
+	const [openDialog, setOpenDialog] = React.useState(false);
 
 	const {
 		register,

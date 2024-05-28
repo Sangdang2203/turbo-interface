@@ -56,15 +56,15 @@ export default function TheHeader() {
 					</Link>
 				</div>
 
-				{/* nav pc */}
+				{/* navbar for PC */}
 				<div className="hidden text-[1rem] lg:flex justify-between items-center ">
 					<Button
-						href="/home"
+						href="/trang-chu"
 						className="navLink">
 						trang chủ
 					</Button>
 					<Button
-						href="/about-us"
+						href="/gioi-thieu"
 						className=" navLink active">
 						giới thiệu
 					</Button>
@@ -120,12 +120,12 @@ export default function TheHeader() {
 					</Menu>
 
 					<Button
-						href="/news"
+						href="/tin-tuc"
 						className=" navLink ">
 						tin tức
 					</Button>
 					<Button
-						href="/contact"
+						href="/lien-he"
 						className=" navLink ">
 						liên hệ
 					</Button>
@@ -148,7 +148,7 @@ export default function TheHeader() {
 					)}
 				</div>
 
-				{/* Smaller screen */}
+				{/* Smaller screen: IPAD, PHONE */}
 				<div
 					className={
 						navigation
@@ -165,7 +165,7 @@ export default function TheHeader() {
 										fontSize="small"
 									/>
 								}
-								href="/home"
+								href="/trang-chu"
 								className="navLink gradientText">
 								trang chủ
 							</Button>
@@ -176,7 +176,7 @@ export default function TheHeader() {
 										fontSize="small"
 									/>
 								}
-								href="/about-us"
+								href="/gioi-thieu"
 								className="navLink gradientText">
 								giới thiệu
 							</Button>
@@ -189,7 +189,6 @@ export default function TheHeader() {
 									/>
 								}
 								onClick={handleClickService}
-								// endIcon={<KeyboardArrowDownRounded />}
 								className="navLink gradientText">
 								dịch vụ
 							</Button>
@@ -220,7 +219,6 @@ export default function TheHeader() {
 									/>
 								}
 								onClick={handleClickSolution}
-								// endIcon={<KeyboardArrowDownRounded />}
 								className="navLink gradientText">
 								giải pháp
 							</Button>
@@ -245,23 +243,12 @@ export default function TheHeader() {
 
 							<Button
 								startIcon={
-									<NewspaperRounded
-										className="opacity-60"
-										fontSize="small"
-									/>
-								}
-								href="/news"
-								className="navLink gradientText">
-								tin tức
-							</Button>
-							<Button
-								startIcon={
 									<ContactPhoneRounded
 										className="opacity-60"
 										fontSize="small"
 									/>
 								}
-								href="/contact"
+								href="/lien-he"
 								className="navLink gradientText">
 								liên hệ
 							</Button>

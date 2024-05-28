@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Typography, Box, Stack, Rating } from "@mui/material";
+import { Typography, Box, Rating } from "@mui/material";
 
 function getRandomRating() {
 	const randomValue = Math.random() * (5 - 3.5) + 3.5;

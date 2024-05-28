@@ -172,47 +172,55 @@ export default function CategoryManagement() {
 
 								<TableBody>
 									{contacts && contacts.length > 0 ? (
-										contacts.map((item, index) => (
-											<TableRow
-												key={item.id}
-												className="hover:bg-slate-100 cursor-pointer"
-												sx={{
-													"&:last-child td, &:last-child th": { border: 0 },
-												}}>
-												<TableCell> {index + 1} </TableCell>
-												<TableCell className="capitalize">
-													{item.name}
-												</TableCell>
-												<TableCell> {item.email} </TableCell>
-												<TableCell> {item.phone} </TableCell>
-												<TableCell>
-													<Tooltip
-														title="See detail"
-														placement="top">
-														<IconButton
-															color="inherit"
-															onClick={() => {
-																setContact(item);
-																setOpenDialog(true);
-															}}>
-															<Visibility fontSize="medium" />
-														</IconButton>
-													</Tooltip>
+										contacts
+											.slice(
+												page * rowsPerPage,
+												page * rowsPerPage + rowsPerPage
+											)
+											.map((item, index) => (
+												<TableRow
+													key={item.id}
+													className="hover:bg-slate-100 cursor-pointer"
+													sx={{
+														"&:last-child td, &:last-child th": { border: 0 },
+													}}>
+													<TableCell className="font-semibold">
+														{" "}
+														{index + 1}{" "}
+													</TableCell>
+													<TableCell className="capitalize">
+														{item.name}
+													</TableCell>
+													<TableCell> {item.email} </TableCell>
+													<TableCell> {item.phone} </TableCell>
+													<TableCell>
+														<Tooltip
+															title="See detail"
+															placement="top">
+															<IconButton
+																color="inherit"
+																onClick={() => {
+																	setContact(item);
+																	setOpenDialog(true);
+																}}>
+																<Visibility fontSize="medium" />
+															</IconButton>
+														</Tooltip>
 
-													<Tooltip
-														title="Tải file PDF"
-														placement="top">
-														<IconButton
-															color="primary"
-															onClick={() => {
-																convertPDF(item.id);
-															}}>
-															<CloudDownloadRounded fontSize="medium" />
-														</IconButton>
-													</Tooltip>
-												</TableCell>
-											</TableRow>
-										))
+														<Tooltip
+															title="Tải file PDF"
+															placement="top">
+															<IconButton
+																color="primary"
+																onClick={() => {
+																	convertPDF(item.id);
+																}}>
+																<CloudDownloadRounded fontSize="medium" />
+															</IconButton>
+														</Tooltip>
+													</TableCell>
+												</TableRow>
+											))
 									) : (
 										<TableRow>
 											<TableCell

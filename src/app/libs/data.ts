@@ -764,14 +764,14 @@ export const services = [
 ];
 
 export const servicesLinks = [
-	{ path: "/services/cloudflare", name: "cloudflare" },
-	{ path: "/services/cloud-server", name: "cloud server" },
-	{ path: "/services/cloud-backup", name: "cloud backup" },
-	{ path: "/services/dedicated-server", name: "dedicated server" },
-	{ path: "/services/disaster-recovery", name: "disaster recovery" },
-	{ path: "/services/virtual-data-center", name: "vitual data center" },
-	{ path: "/services/private-cloud", name: "private cloud service" },
-	{ path: "/services/cloud-backup-recovery", name: "cloud backup & recovery" },
+	{ path: "/dich-vu/cloudflare", name: "cloudflare" },
+	{ path: "/dich-vu/cloud-server", name: "cloud server" },
+	{ path: "/dich-vu/cloud-backup", name: "cloud backup" },
+	{ path: "/dich-vu/dedicated-server", name: "dedicated server" },
+	{ path: "/dich-vu/disaster-recovery", name: "disaster recovery" },
+	{ path: "/dich-vu/virtual-data-center", name: "vitual data center" },
+	{ path: "/dich-vu/private-cloud", name: "private cloud service" },
+	{ path: "/dich-vu/cloud-backup-recovery", name: "cloud backup & recovery" },
 ];
 
 export const solutonLinks = [

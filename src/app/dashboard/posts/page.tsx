@@ -2,7 +2,6 @@
 
 import {
 	Button,
-	Chip,
 	Grid,
 	IconButton,
 	Paper,
@@ -17,6 +16,7 @@ import {
 	TextField,
 	Tooltip,
 } from "@mui/material";
+
 import {
 	SearchOutlined,
 	AddCircleOutlineRounded,
@@ -28,6 +28,7 @@ import Loading from "@/components/Loading";
 import { Post } from "types/interfaces";
 import { fetchPosts, fetchDeletePost } from "app/methods/method";
 import { useSession } from "next-auth/react";
+import Image from "next/image";
 import { toast } from "sonner";
 import * as React from "react";
 
@@ -136,7 +137,7 @@ export default function PostManagement() {
 										name="search"
 										id="searchInput"
 										className="cursor-pointer shadow-md text-sm rounded-lg min-w-[300px] mr-3"
-										placeholder="Enter title to search"
+										placeholder="Nhập tiêu đề bài viết ..."
 									/>
 									<div className="absolute inset-y-0 right-0 flex items-center">
 										<IconButton className="relative mr-5">
@@ -164,7 +165,7 @@ export default function PostManagement() {
 										<TableCell>#</TableCell>
 										<TableCell>Tiêu đề</TableCell>
 										<TableCell>Mô tả</TableCell>
-										<TableCell>Thể loại</TableCell>
+										<TableCell>Hình ảnh</TableCell>
 										<TableCell>Tình trạng</TableCell>
 										<TableCell>Thao tác</TableCell>
 									</TableRow>
@@ -209,17 +210,17 @@ export default function PostManagement() {
 													</Tooltip>
 
 													<TableCell className="w-[20%]">
-														{post.categories.map(item => {
-															return (
-																<Chip
-																	key={item.id}
-																	label={item.name}
-																	size="small"
-																	color="secondary"
-																	className="mr-1"
-																/>
-															);
-														})}
+														<Image
+															src={
+																"https://project-sem3.s3.ap-southeast-1.amazonaws.com/" +
+																post.urlImage
+															}
+															title={post.title}
+															alt={post.urlImage}
+															width={60}
+															height={40}
+															className="rounded-md"
+														/>
 													</TableCell>
 
 													<TableCell className="w-[13%]">
@@ -269,7 +270,7 @@ export default function PostManagement() {
 												colSpan={7}
 												align="center"
 												className="text-sm">
-												No Data
+												Không tìm thấy dữ liệu
 											</TableCell>
 										</TableRow>
 									)}
