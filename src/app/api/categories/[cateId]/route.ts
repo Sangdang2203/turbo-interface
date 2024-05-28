@@ -1,15 +1,30 @@
 import { NextRequest, NextResponse } from "next/server";
+import { authOptions } from "../../auth/[...nextauth]/authOptions";
+import { getServerSession } from "next-auth/next";
 
 export async function GET(
 	req: NextRequest,
 	{ params }: { params: { postId: string } }
 ) {
+	const session = await getServerSession(authOptions);
+	const id = params.postId;
+
+	if (!session) {
+		return NextResponse.json({
+			ok: false,
+			status: "Error",
+			message: "Failed to get post",
+		});
+	}
+
 	try {
-		const id = params.postId;
 		const res = await fetch(
 			process.env.NEXT_PUBLIC_API_URL + `/categories/${id}`,
 			{
 				method: "GET",
+				headers: {
+					Authorization: `Bearer ${session.user.id_token}`,
+				},
 				cache: "no-cache",
 			}
 		);
@@ -26,12 +41,6 @@ export async function GET(
 				data,
 			});
 		}
-
-		return NextResponse.json({
-			ok: false,
-			status: "Error",
-			message: "Failed to get post",
-		});
 	} catch (error) {
 		console.log(error);
 		return NextResponse.json({
@@ -47,27 +56,34 @@ export async function PATCH(
 	{ params }: { params: { cateId: string } }
 ) {
 	const id = params.cateId;
-
+	const session = await getServerSession(authOptions);
 	const updateCategory = await req.json();
+
+	if (!session) {
+		return NextResponse.json({
+			ok: false,
+			status: "Error",
+			message: "Cập nhật thất bại.",
+		});
+	}
 
 	try {
 		const response = await fetch(
 			process.env.NEXT_PUBLIC_API_URL + `/categories/${id} `,
 			{
 				method: req.method,
-				headers: req.headers,
+				headers: {
+					Authorization: `Bearer ${session.user.id_token}`,
+					"Content-Type": "application/json",
+				},
 				body: JSON.stringify(updateCategory),
 			}
 		);
 
-		console.log(updateCategory);
 		let data = null;
 
 		if (response.ok) {
 			data = await response.json();
-		}
-
-		if (response.ok) {
 			return NextResponse.json({
 				ok: true,
 				status: "Success",
@@ -75,11 +91,6 @@ export async function PATCH(
 				data,
 			});
 		}
-		return NextResponse.json({
-			ok: false,
-			status: "Error",
-			message: "Cập nhật thất bại.",
-		});
 	} catch (error) {
 		console.log(error);
 		return NextResponse.json({
@@ -94,14 +105,24 @@ export async function DELETE(
 	req: NextRequest,
 	{ params }: { params: { cateId: string } }
 ) {
-	try {
-		const id = params.cateId;
+	const id = params.cateId;
+	const session = await getServerSession(authOptions);
 
+	if (!session) {
+		return NextResponse.json({
+			ok: false,
+			status: "Error",
+			message: "Xóa thất bại !",
+		});
+	}
+	try {
 		const res = await fetch(
 			process.env.NEXT_PUBLIC_API_URL + `/categories/${id}`,
 			{
 				method: req.method,
-				headers: req.headers,
+				headers: {
+					Authorization: `Bearer ${session.user.id_token}`,
+				},
 				cache: "no-cache",
 			}
 		);
@@ -113,12 +134,6 @@ export async function DELETE(
 				message: "Xóa thành công.",
 			});
 		}
-
-		return NextResponse.json({
-			ok: false,
-			status: "Error",
-			message: "Xóa thất bại !",
-		});
 	} catch (error) {
 		console.log(error);
 		return NextResponse.json({

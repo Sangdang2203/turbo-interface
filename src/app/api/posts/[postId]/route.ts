@@ -1,4 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
+import { authOptions } from "../../auth/[...nextauth]/authOptions";
+import { getServerSession } from "next-auth/next";
 
 export async function GET(
 	req: NextRequest,
@@ -43,18 +45,34 @@ export async function PUT(
 	req: NextRequest,
 	{ params }: { params: { postId: string } }
 ) {
+	const id = params.postId;
+
+	const session = await getServerSession(authOptions);
 	const updatePost = await req.json();
+
+	if (!session) {
+		return NextResponse.json({
+			ok: false,
+			status: "Error",
+			message: "Cập nhật thất bại.",
+		});
+	}
 
 	try {
 		const response = await fetch(
-			process.env.NEXT_PUBLIC_API_URL + `/posts/${params.postId} `,
+			process.env.NEXT_PUBLIC_API_URL + `/posts/${id} `,
 			{
 				method: req.method,
-				headers: req.headers,
+				headers: {
+					"Content-Type": "application/json",
+					Authorization: `Bearer ${session.user.id_token}`,
+				},
 				body: JSON.stringify(updatePost),
 			}
 		);
-		console.log(response);
+
+		console.log("Respone: ", response);
+
 		let data = null;
 
 		if (response.ok) {
@@ -66,11 +84,6 @@ export async function PUT(
 				data,
 			});
 		}
-		return NextResponse.json({
-			ok: false,
-			status: "Error",
-			message: "Cập nhật thất bại.",
-		});
 	} catch (error) {
 		console.log(error);
 		return NextResponse.json({
@@ -79,18 +92,30 @@ export async function PUT(
 			message: "Oops ! Something went wrong while trying update post.",
 		});
 	}
+	return NextResponse.json({ message: "Server Error" }, { status: 500 });
 }
 
 export async function DELETE(
 	req: NextRequest,
 	{ params }: { params: { postId: string } }
 ) {
-	try {
-		const id = params.postId;
+	const id = params.postId;
+	const session = await getServerSession(authOptions);
 
+	if (!session) {
+		return NextResponse.json({
+			ok: false,
+			status: "Error",
+			message: "Xóa bài viết thất bại !",
+		});
+	}
+
+	try {
 		const res = await fetch(process.env.NEXT_PUBLIC_API_URL + `/posts/${id}`, {
 			method: req.method,
-			headers: req.headers,
+			headers: {
+				Authorization: `Bearer ${session.user.id_token}`,
+			},
 			cache: "no-cache",
 		});
 
@@ -101,12 +126,6 @@ export async function DELETE(
 				message: "Xóa bài viết thành công.",
 			});
 		}
-
-		return NextResponse.json({
-			ok: false,
-			status: "Error",
-			message: "Xóa bài viết thất bại !",
-		});
 	} catch (error) {
 		console.log(error);
 		return NextResponse.json({

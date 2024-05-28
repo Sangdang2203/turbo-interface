@@ -1,17 +1,30 @@
 import { NextRequest, NextResponse } from "next/server";
+import { authOptions } from "../../auth/[...nextauth]/authOptions";
+import { getServerSession } from "next-auth/next";
 
 export async function DELETE(
 	req: NextRequest,
 	{ params }: { params: { login: string } }
 ) {
-	try {
-		const id = params.login;
+	const id = params.login;
+	const session = await getServerSession(authOptions);
 
+	if (!session) {
+		return NextResponse.json({
+			ok: false,
+			status: "Error",
+			message: "Xóa thất bại ! User đang được sử dụng.",
+		});
+	}
+
+	try {
 		const res = await fetch(
 			process.env.NEXT_PUBLIC_API_URL + `/admin/users/${id}`,
 			{
 				method: req.method,
-				headers: req.headers,
+				headers: {
+					Authorization: `Bearer ${session.user.id_token}`,
+				},
 				cache: "no-cache",
 			}
 		);
@@ -23,12 +36,6 @@ export async function DELETE(
 				message: "Xóa thành công.",
 			});
 		}
-
-		return NextResponse.json({
-			ok: false,
-			status: "Error",
-			message: "Xóa thất bại ! User đang được sử dụng.",
-		});
 	} catch (error) {
 		console.log(error);
 		return NextResponse.json({
@@ -43,10 +50,21 @@ export async function PUT(
 	request: Request,
 	{ params }: { params: { login: string } }
 ) {
+	const id = params.login;
 	const updatedUser = await request.json();
+	const session = await getServerSession(authOptions);
+
+	if (!session) {
+		return NextResponse.json({
+			ok: true,
+			status: "Error",
+			message: "Cập nhật thất bại.",
+		});
+	}
+
 	try {
 		const response = await fetch(
-			process.env.NEXT_PUBLIC_API_URL + "/admin/users" + params.login,
+			process.env.NEXT_PUBLIC_API_URL + "/admin/users" + id,
 			{
 				method: request.method,
 				headers: request.headers,
@@ -58,9 +76,6 @@ export async function PUT(
 
 		if (response.ok) {
 			data = await response.json();
-		}
-
-		if (response.ok) {
 			return NextResponse.json({
 				ok: true,
 				status: "Success",
@@ -68,12 +83,6 @@ export async function PUT(
 				data,
 			});
 		}
-
-		return NextResponse.json({
-			ok: true,
-			status: "Error",
-			message: "Cập nhật thất bại.",
-		});
 	} catch (error) {
 		console.log(error);
 		return NextResponse.json({

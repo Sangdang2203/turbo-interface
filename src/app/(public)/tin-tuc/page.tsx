@@ -131,7 +131,7 @@ export default function NewsPage() {
 												my={2}
 												className="w-[90%]">
 												<Link
-													href={`news/${item.slug}`}
+													href={`tin-tuc/${item.slug}`}
 													className="line-clamp-2 text-sky-700 no-underline text-sm hover:text-yellow-600 duration-500"
 													title={item.title}>
 													{item.title}
@@ -198,7 +198,7 @@ export default function NewsPage() {
 													</div>
 
 													<Link
-														href={`news/${item.slug}`}
+														href={`tin-tuc/${item.slug}`}
 														className="text-sky-700 text-[0.85rem] pl-2 no-underline hover:text-sky-500">
 														Đọc thêm &gt;&gt;
 													</Link>

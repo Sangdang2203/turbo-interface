@@ -1,12 +1,26 @@
 import { NextRequest, NextResponse } from "next/server";
+import { authOptions } from "../auth/[...nextauth]/authOptions";
+import { getServerSession } from "next-auth/next";
 
 export async function GET(req: NextRequest) {
+	const session = await getServerSession(authOptions);
+
+	if (!session) {
+		return NextResponse.json({
+			ok: false,
+			status: "Error",
+			message: "Failed to get all categories.",
+		});
+	}
+
 	try {
 		const response = await fetch(
 			process.env.NEXT_PUBLIC_API_URL + "/categories",
 			{
 				method: req.method,
-				headers: req.headers,
+				headers: {
+					Authorization: `Bearer ${session.user.id_token}`,
+				},
 				cache: "no-cache",
 			}
 		);
@@ -40,11 +54,23 @@ export async function GET(req: NextRequest) {
 
 export async function POST(request: NextRequest) {
 	const category = await request.json();
+	const session = await getServerSession(authOptions);
+
+	if (!session) {
+		return NextResponse.json({
+			ok: false,
+			status: "Error",
+			message: "Thao tác tạo mới thất bại.",
+		});
+	}
 
 	try {
 		const res = await fetch(process.env.NEXT_PUBLIC_API_URL + "/categories", {
 			method: request.method,
-			headers: request.headers,
+			headers: {
+				Authorization: `Bearer ${session.user.id_token}`,
+				"Content-Type": "application/json",
+			},
 			body: JSON.stringify(category),
 		});
 

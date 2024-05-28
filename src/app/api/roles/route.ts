@@ -1,11 +1,25 @@
 import { NextRequest, NextResponse } from "next/server";
+import { authOptions } from "../auth/[...nextauth]/authOptions";
+import { getServerSession } from "next-auth/next";
 
 export async function GET(req: NextRequest) {
+	const session = await getServerSession(authOptions);
+
+	if (!session) {
+		return NextResponse.json({
+			ok: false,
+			status: "Error",
+			message: "Failed to get authorities.",
+		});
+	}
+
 	try {
 		const response = await fetch(
 			process.env.NEXT_PUBLIC_API_URL + "/authorities",
 			{
-				headers: req.headers,
+				headers: {
+					Authorization: `Bearer ${session.user.id_token}`,
+				},
 				method: req.method,
 				cache: "no-cache",
 			}
@@ -21,12 +35,6 @@ export async function GET(req: NextRequest) {
 				data,
 			});
 		}
-
-		return NextResponse.json({
-			ok: false,
-			status: "Error",
-			message: "Failed to get authorities.",
-		});
 	} catch (error) {
 		return NextResponse.json({
 			ok: false,
@@ -38,6 +46,15 @@ export async function GET(req: NextRequest) {
 
 export async function POST(request: Request) {
 	const newAuth = await request.json();
+	const session = await getServerSession(authOptions);
+	if (!session) {
+		return NextResponse.json({
+			ok: false,
+			status: "Error",
+			message: "Failed to get authorities.",
+		});
+	}
+
 	try {
 		const response = await fetch(
 			process.env.NEXT_PUBLIC_API_URL + "/authorities",
@@ -45,6 +62,7 @@ export async function POST(request: Request) {
 				method: "GET",
 				headers: {
 					"Content-Type": "application/json",
+					Authorization: `Bearer ${session.user.id_token}`,
 				},
 				body: JSON.stringify(newAuth),
 			}
@@ -54,10 +72,6 @@ export async function POST(request: Request) {
 
 		if (response.ok) {
 			data = response.json();
-			console.log("Auth :", data);
-		}
-
-		if (response.ok) {
 			return NextResponse.json({
 				ok: true,
 				status: "Success",
@@ -65,12 +79,6 @@ export async function POST(request: Request) {
 				data,
 			});
 		}
-
-		return NextResponse.json({
-			ok: false,
-			status: "Error",
-			message: "Failed to get authorities.",
-		});
 	} catch (error) {
 		return NextResponse.json({
 			ok: false,

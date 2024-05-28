@@ -1,12 +1,26 @@
 import { NextRequest, NextResponse } from "next/server";
+import { authOptions } from "../auth/[...nextauth]/authOptions";
+import { getServerSession } from "next-auth/next";
 
 export async function GET(req: NextRequest) {
+	const session = await getServerSession(authOptions);
+
+	if (!session) {
+		return NextResponse.json({
+			ok: false,
+			status: "Error",
+			message: "Failed to get users.",
+		});
+	}
+
 	try {
 		const response = await fetch(
 			process.env.NEXT_PUBLIC_API_URL + "/admin/users",
 			{
 				method: req.method,
-				headers: req.headers,
+				headers: {
+					Authorization: `Bearer ${session.user.id_token}`,
+				},
 				cache: "no-cache",
 			}
 		);
@@ -22,12 +36,6 @@ export async function GET(req: NextRequest) {
 				data,
 			});
 		}
-
-		return NextResponse.json({
-			ok: false,
-			status: "Error",
-			message: "Failed to get users.",
-		});
 	} catch (error) {
 		console.log(error);
 		return NextResponse.json({
@@ -40,24 +48,32 @@ export async function GET(req: NextRequest) {
 
 export async function POST(req: NextRequest) {
 	const user = await req.json();
+	const session = await getServerSession(authOptions);
+	if (!session) {
+		return NextResponse.json({
+			ok: false,
+			status: "Error",
+			message: "Tạo mới thất bại.",
+		});
+	}
 
 	try {
 		const response = await fetch(
 			process.env.NEXT_PUBLIC_API_URL + "/admin/users",
 			{
 				method: req.method,
-				headers: req.headers,
+				headers: {
+					"Content-Type": "application/json",
+					Authorization: `Bearer ${session.user.id_token}`,
+				},
 				body: JSON.stringify(user),
 			}
 		);
-		console.log(response);
+
 		let data = null;
 
 		if (response.ok) {
 			data = await response.json();
-		}
-
-		if (response.ok) {
 			return NextResponse.json({
 				ok: true,
 				status: "Success",
@@ -65,12 +81,6 @@ export async function POST(req: NextRequest) {
 				data,
 			});
 		}
-
-		return NextResponse.json({
-			ok: false,
-			status: "Error",
-			message: "Tạo mới thất bại.",
-		});
 	} catch (error) {
 		console.log(error);
 		return NextResponse.json({

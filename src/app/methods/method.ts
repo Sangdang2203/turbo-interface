@@ -1,10 +1,5 @@
 import { toast } from "sonner";
-import {
-	ApiResponse,
-	CustomerMessage,
-	updatedPostRequest,
-} from "types/interfaces";
-import { NextApiRequest, NextApiResponse } from "next";
+import { ApiResponse, CustomerMessage } from "types/interfaces";
 
 // CREATE METHODS
 export async function CreateContact(contact: CustomerMessage) {
@@ -13,9 +8,6 @@ export async function CreateContact(contact: CustomerMessage) {
 	try {
 		const res = await fetch(`/api/contacts`, {
 			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-			},
 			body: JSON.stringify(contact),
 		});
 
@@ -23,7 +15,6 @@ export async function CreateContact(contact: CustomerMessage) {
 
 		if (payload.ok) {
 			toast.success(payload.message);
-			//sendEmail();
 		} else {
 			toast.error(payload.message);
 		}
@@ -34,32 +25,23 @@ export async function CreateContact(contact: CustomerMessage) {
 }
 
 // GET ALL METHODS
-export const fetchUsers = async (token: string) => {
+export const fetchUsers = async () => {
 	const response = await fetch("/api/users", {
 		method: "GET",
-		headers: {
-			Authorization: `Bearer ${token}`,
-		},
 	});
 	return response.json() as Promise<ApiResponse>;
 };
 
-export const fetchAuthorities = async (token: string) => {
+export const fetchAuthorities = async () => {
 	const response = await fetch("/api/roles", {
 		method: "GET",
-		headers: {
-			Authorization: `Bearer ${token}`,
-		},
 	});
 	return response.json() as Promise<ApiResponse>;
 };
 
-export const fetchCategories = async (token: string) => {
+export const fetchCategories = async () => {
 	const response = await fetch("/api/categories", {
 		method: "GET",
-		headers: {
-			Authorization: `Bearer ${token}`,
-		},
 	});
 	return response.json() as Promise<ApiResponse>;
 };
@@ -71,65 +53,45 @@ export const fetchPosts = async () => {
 	return response.json() as Promise<ApiResponse>;
 };
 
-export const fetchContacts = async (token: string) => {
+export const fetchContacts = async () => {
 	const response = await fetch(`/api/contacts`, {
 		method: "GET",
-		headers: {
-			Authorization: `Bearer ${token}`,
-		},
 	});
 	return response.json() as Promise<ApiResponse>;
 };
 
 // DELETE METHODS
-export const fetchDeleteUser = async (token: string, userId: string) => {
+export const fetchDeleteUser = async (userId: string) => {
 	const response = await fetch(`/api/users/${userId}`, {
 		method: "DELETE",
-		headers: {
-			Authorization: `Bearer ${token}`,
-		},
 	});
 	return response.json() as Promise<ApiResponse>;
 };
 
-export const fetchDeletePost = async (token: string, postId: string) => {
+export const fetchDeletePost = async (postId: string) => {
 	const response = await fetch(`/api/posts/${postId}`, {
 		method: "DELETE",
-		headers: {
-			Authorization: `Bearer ${token}`,
-		},
 	});
 	return response.json() as Promise<ApiResponse>;
 };
 
-export const fetchDeleteCategory = async (token: string, cateId: string) => {
+export const fetchDeleteContact = async (contactId: string) => {
+	const response = await fetch(`/api/contacts/${contactId}`, {
+		method: "DELETE",
+	});
+	return response.json() as Promise<ApiResponse>;
+};
+
+export const fetchDeleteCategory = async (cateId: string) => {
 	const response = await fetch(`/api/categories/${cateId}`, {
 		method: "DELETE",
-		headers: {
-			Authorization: `Bearer ${token}`,
-		},
 	});
 	return response.json() as Promise<ApiResponse>;
 };
 
-export async function fetchContact(token: string, contactId: string) {
+export async function fetchContact(contactId: string) {
 	const response = await fetch("/api/contacts/" + contactId, {
 		method: "GET",
-		headers: {
-			Authorization: `Bearer ${token}`,
-		},
 	});
 	return response.json() as Promise<ApiResponse>;
 }
-
-// UPDATE METHODS
-
-export const updatePost = async (token: string, postId: string) => {
-	const response = await fetch(`/api/posts/${postId}`, {
-		method: "PUT",
-		headers: {
-			Authorization: `Bearer ${token}`,
-		},
-	});
-	return response.json() as Promise<ApiResponse>;
-};

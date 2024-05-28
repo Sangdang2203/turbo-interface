@@ -27,7 +27,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 export default function EditPost({ params }: { params: { postId: string } }) {
 	const { data: session } = useSession();
-	const [loading, setLoading] = React.useState(false);
+	const [loading, setLoading] = React.useState(true);
 	const [post, setPost] = React.useState<Post>();
 
 	const [title, setTitle] = React.useState("");
@@ -55,39 +55,30 @@ export default function EditPost({ params }: { params: { postId: string } }) {
 		},
 	});
 
+	// UPDATE POST
 	async function UpdatePost(updatedPost: updatedPostSchema) {
-		if (session) {
-			const message = toast.loading("Đang cập nhật bài viết ...");
+		const message = toast.loading("Đang cập nhật bài viết ...");
 
-			const headers = new Headers({
-				Authorization: `Bearer ${session?.user.id_token}`,
-				"Content-Type": "application/json",
+		try {
+			const res = await fetch(`/api/posts/${params.postId}`, {
+				method: "PUT",
+				body: JSON.stringify({ ...updatedPost, content: content }),
 			});
-			try {
-				const res = await fetch(`/api/posts/${params.postId}`, {
-					method: "PUT",
-					headers: headers,
-					body: JSON.stringify({ ...updatedPost, content: content }),
-				});
-
-				console.log({ ...updatedPost, content: content });
-
-				const payload = (await res.json()) as ApiResponse;
-
-				if (payload.ok) {
-					toast.success(payload.message);
-					reset();
-				} else {
-					toast.error(payload.message);
-				}
-			} catch (error) {
-				console.log(error);
+			console.log({ ...updatedPost, content: content });
+			const payload = (await res.json()) as ApiResponse;
+			if (payload.ok) {
+				toast.success(payload.message);
+				reset();
+			} else {
+				toast.error(payload.message);
 			}
-			toast.dismiss(message);
+		} catch (error) {
+			console.log(error);
 		}
+		toast.dismiss(message);
 	}
 
-	// get one post
+	// FETCH DATA
 	React.useEffect(() => {
 		const fectchData = async () => {
 			const res = await fetch(`/api/posts/${params.postId}`, {
@@ -103,34 +94,8 @@ export default function EditPost({ params }: { params: { postId: string } }) {
 		};
 
 		fectchData();
+		setLoading(false);
 	}, [params.postId]);
-
-	// React.useEffect(() => {
-	// 	if (session) {
-	// 		Promise.all([
-	// 			fetchCategories(session.user.id_token),
-	// 			fetchUsers(session.user.id_token),
-	// 		]).then(data => {
-	// 			const [resCate, resUser] = data;
-
-	// 			if (resCate.ok) {
-	// 				setCategories(
-	// 					new Map<string, string>(
-	// 						resCate.data.map((item: Category) => [item.id, item.name])
-	// 					)
-	// 				);
-	// 			}
-
-	// 			if (resUser.ok) {
-	// 				setUsers(
-	// 					new Map<string, string>(
-	// 						resUser.data.map((item: User) => [item.id, item.login])
-	// 					)
-	// 				);
-	// 			}
-	// 		});
-	// 	}
-	// }, [session]);
 
 	return (
 		<>

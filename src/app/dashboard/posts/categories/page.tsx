@@ -27,7 +27,7 @@ export default function CategoryManagement() {
 	// fetch data
 	React.useEffect(() => {
 		if (session) {
-			Promise.all([fetchCategories(session.user.id_token)]).then(data => {
+			Promise.all([fetchCategories()]).then(data => {
 				const [resCate] = data;
 
 				if (resCate.ok) {

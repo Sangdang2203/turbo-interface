@@ -61,11 +61,6 @@ const paths = [
 		path: "/dashboard",
 		//permission: ["app.view"],
 	},
-
-	{
-		path: "/dashboard/users",
-		//permission: ["emp.view"],
-	},
 	{
 		path: "/dashboard/posts/categories",
 		//permission: ["emp.view"],

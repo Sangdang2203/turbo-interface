@@ -1,4 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
+import { authOptions } from "../auth/[...nextauth]/authOptions";
+import { getServerSession } from "next-auth/next";
 
 export async function GET(req: NextRequest) {
 	try {
@@ -37,11 +39,23 @@ export async function GET(req: NextRequest) {
 
 export async function POST(req: NextRequest) {
 	const post = await req.json();
+	const session = await getServerSession(authOptions);
+
+	if (!session) {
+		return NextResponse.json({
+			ok: false,
+			status: "Error",
+			message: "Tạo bài viết mới thất bại.",
+		});
+	}
 
 	try {
 		const response = await fetch(process.env.NEXT_PUBLIC_API_URL + "/posts", {
 			method: req.method,
-			headers: req.headers,
+			headers: {
+				"Content-Type": "application/json",
+				Authorization: `Bearer ${session.user.id_token}`,
+			},
 			body: JSON.stringify(post),
 		});
 
@@ -56,12 +70,6 @@ export async function POST(req: NextRequest) {
 				data,
 			});
 		}
-
-		return NextResponse.json({
-			ok: false,
-			status: "Error",
-			message: "Tạo bài viết mới thất bại.",
-		});
 	} catch (error) {
 		console.log(error);
 		return NextResponse.json({

@@ -30,10 +30,15 @@ import {
 	CloseOutlined,
 	SearchOutlined,
 	Visibility,
-	CloudDownloadRounded,
+	DeleteOutline,
 } from "@mui/icons-material";
-import { fetchContact, fetchContacts } from "app/methods/method";
+import {
+	fetchContact,
+	fetchContacts,
+	fetchDeleteContact,
+} from "app/methods/method";
 import { CustomerMessage } from "types/interfaces";
+import { toast } from "sonner";
 
 export default function CategoryManagement() {
 	const [loading, setLoading] = React.useState(true);
@@ -58,7 +63,7 @@ export default function CategoryManagement() {
 		setRowsPerPage(parseInt(event.target.value, 10));
 		setPage(0);
 	};
-
+	// SEARCH
 	function handleSearch(event: React.FormEvent<HTMLFormElement>) {
 		event.preventDefault();
 		if (session) {
@@ -68,7 +73,7 @@ export default function CategoryManagement() {
 			const name = nameInput.value.trim();
 
 			if (name === "") {
-				fetchContacts(session.user.id_token).then(data => {
+				fetchContacts().then(data => {
 					if (data.ok) {
 						setContacts(data.data.reverse());
 					}
@@ -85,10 +90,25 @@ export default function CategoryManagement() {
 		}
 	}
 
-	// fetch data
+	// DELETE CONTACT
+	async function handleDelete(contactId: string) {
+		const message = toast.loading("Đang thực hiện xóa bài viết.");
+		const response = await fetchDeleteContact(contactId);
+
+		if (response.ok) {
+			setContacts(pre => pre.filter(contact => contact.id !== contactId));
+			toast.success(response.message);
+		} else {
+			toast.error(response.message);
+		}
+
+		toast.dismiss(message);
+	}
+
+	// FETCH DATA
 	React.useEffect(() => {
 		if (session) {
-			Promise.all([fetchContacts(session.user.id_token)]).then(data => {
+			Promise.all([fetchContacts()]).then(data => {
 				const [resContact] = data;
 
 				if (resContact.ok) {
@@ -177,7 +197,6 @@ export default function CategoryManagement() {
 														"&:last-child td, &:last-child th": { border: 0 },
 													}}>
 													<TableCell className="font-semibold">
-														{" "}
 														{index + 1}{" "}
 													</TableCell>
 													<TableCell className="capitalize">
@@ -199,13 +218,17 @@ export default function CategoryManagement() {
 															</IconButton>
 														</Tooltip>
 
-														<Tooltip
-															title="Tải file PDF"
-															placement="top">
+														<Tooltip title="Remove">
 															<IconButton
-																color="primary"
-																onClick={() => {}}>
-																<CloudDownloadRounded fontSize="medium" />
+																color="error"
+																onClick={() => {
+																	if (
+																		window.confirm("Bạn chắc chắn muốn xóa ?")
+																	) {
+																		handleDelete(item.id);
+																	}
+																}}>
+																<DeleteOutline fontSize="small" />
 															</IconButton>
 														</Tooltip>
 													</TableCell>

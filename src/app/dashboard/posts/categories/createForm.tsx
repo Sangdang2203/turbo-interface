@@ -38,10 +38,6 @@ export default function AddCategoryForm() {
 				const message = toast.loading("Đang tạo mới ...");
 				const res = await fetch("/api/categories", {
 					method: "POST",
-					headers: {
-						Authorization: `Bearer ${session.user.id_token}`,
-						"Content-Type": "application/json",
-					},
 					body: JSON.stringify(category),
 				});
 

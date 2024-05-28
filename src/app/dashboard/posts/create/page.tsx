@@ -74,55 +74,46 @@ export default function CreatePost() {
 	});
 
 	async function handleCreatePost(data: POSTSCHEMA) {
-		if (session) {
-			const message = toast.loading("Đang tạo bài viết mới.");
+		const message = toast.loading("Đang tạo bài viết mới.");
 
-			const post: CreatePostRequest = {
-				title: data.title,
-				categories: data.categories.map(item => ({ id: item })),
-				user: { id: data.userId },
-				description: data.description,
-				urlImage: await handleFileUpload(),
-				status: "ACTIVE",
-			};
+		const post: CreatePostRequest = {
+			title: data.title,
+			categories: data.categories.map(item => ({ id: item })),
+			user: { id: data.userId },
+			description: data.description,
+			urlImage: await handleFileUpload(),
+			status: "ACTIVE",
+		};
 
-			try {
-				const res = await fetch("/api/posts", {
-					method: "POST",
-					headers: {
-						Authorization: `Bearer ${session.user.id_token}`,
-						"Content-Type": "application/json",
-					},
-					body: JSON.stringify({
-						...post,
-						content: content,
-						urlImage: await handleFileUpload(),
-					}),
-				});
+		try {
+			const res = await fetch("/api/posts", {
+				method: "POST",
+				body: JSON.stringify({
+					...post,
+					content: content,
+					urlImage: await handleFileUpload(),
+				}),
+			});
 
-				const payload = (await res.json()) as ApiResponse;
+			const payload = (await res.json()) as ApiResponse;
 
-				if (payload.ok) {
-					toast.success(payload.message);
-					reset();
-					setContent("");
-				} else {
-					toast.error(payload.message);
-				}
-			} catch (error) {
-				toast.error("Error: Lỗi khi tạo bài viết mới.");
-				console.log(error);
+			if (payload.ok) {
+				toast.success(payload.message);
+				reset();
+				setContent("");
+			} else {
+				toast.error(payload.message);
 			}
-			toast.dismiss(message);
+		} catch (error) {
+			toast.error("Error: Lỗi khi tạo bài viết mới.");
+			console.log(error);
 		}
+		toast.dismiss(message);
 	}
 
 	React.useEffect(() => {
 		if (session) {
-			Promise.all([
-				fetchCategories(session.user.id_token),
-				fetchUsers(session.user.id_token),
-			]).then(data => {
+			Promise.all([fetchCategories(), fetchUsers()]).then(data => {
 				const [resCate, resUser] = data;
 
 				if (resCate.ok) {

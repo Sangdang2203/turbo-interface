@@ -79,6 +79,7 @@ export interface CustomerMessage {
 	phone: string;
 	services: string[];
 	message: string;
+	createdDate: string;
 }
 
 export interface User {

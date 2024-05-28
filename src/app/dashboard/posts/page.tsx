@@ -38,8 +38,6 @@ export default function PostManagement() {
 	const [page, setPage] = React.useState(0);
 	const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
-	const { data: session } = useSession();
-
 	// SEARCH POST
 	function handleSearch(event: React.FormEvent<HTMLFormElement>) {
 		event.preventDefault();
@@ -60,19 +58,17 @@ export default function PostManagement() {
 	}
 	// DELETE POST
 	async function handleDelete(postId: string) {
-		if (session) {
-			const message = toast.loading("Đang thực hiện xóa bài viết.");
-			const response = await fetchDeletePost(session.user.id_token, postId);
+		const message = toast.loading("Đang thực hiện xóa bài viết.");
+		const response = await fetchDeletePost(postId);
 
-			if (response.ok) {
-				setPosts(pre => pre.filter(post => post.id !== postId));
-				toast.success(response.message);
-			} else {
-				toast.error(response.message);
-			}
-
-			toast.dismiss(message);
+		if (response.ok) {
+			setPosts(pre => pre.filter(post => post.id !== postId));
+			toast.success(response.message);
+		} else {
+			toast.error(response.message);
 		}
+
+		toast.dismiss(message);
 	}
 	// PAGINATION
 	const handleChangePage = (
@@ -88,6 +84,7 @@ export default function PostManagement() {
 		setRowsPerPage(parseInt(event.target.value, 10));
 		setPage(0);
 	};
+
 	// FETCH DATA
 	React.useEffect(() => {
 		Promise.all([fetchPosts()]).then(data => {

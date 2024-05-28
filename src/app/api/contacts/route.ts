@@ -1,13 +1,26 @@
-import { NextApiRequest, NextApiResponse } from "next";
 import { NextRequest, NextResponse } from "next/server";
+import { authOptions } from "../auth/[...nextauth]/authOptions";
+import { getServerSession } from "next-auth/next";
 
 export async function GET(req: NextRequest) {
+	const session = await getServerSession(authOptions);
+
+	if (!session) {
+		return NextResponse.json({
+			ok: false,
+			status: "Error",
+			message: "Failed to get contacts.",
+		});
+	}
+
 	try {
 		const response = await fetch(
 			process.env.NEXT_PUBLIC_API_URL + "/contacts",
 			{
 				method: req.method,
-				headers: req.headers,
+				headers: {
+					Authorization: `Bearer ${session.user.id_token}`,
+				},
 				cache: "no-cache",
 			}
 		);
@@ -23,12 +36,6 @@ export async function GET(req: NextRequest) {
 				data,
 			});
 		}
-
-		return NextResponse.json({
-			ok: false,
-			status: "Error",
-			message: "Failed to get contacts.",
-		});
 	} catch (error) {
 		console.log(error);
 		return NextResponse.json({
@@ -41,12 +48,15 @@ export async function GET(req: NextRequest) {
 
 export async function POST(req: NextRequest) {
 	const contact = await req.json();
+
 	try {
 		const response = await fetch(
 			process.env.NEXT_PUBLIC_API_URL + "/contacts",
 			{
 				method: req.method,
-				headers: req.headers,
+				headers: {
+					"Content-Type": "application/json",
+				},
 				body: JSON.stringify(contact),
 			}
 		);
@@ -67,8 +77,7 @@ export async function POST(req: NextRequest) {
 		return NextResponse.json({
 			ok: false,
 			status: "Error",
-			message:
-				"Gửi thông tin thất bại. Vui lòng bấm chọn dịch vụ bạn đang quan tâm.",
+			message: "Vui lòng bấm chọn dịch vụ bạn đang quan tâm.",
 		});
 	} catch (error) {
 		console.log(error);
@@ -79,33 +88,3 @@ export async function POST(req: NextRequest) {
 		});
 	}
 }
-
-// export async function handler(req: NextApiRequest, res: NextApiResponse) {
-// 	if (req.method !== "POST") {
-// 		return res.status(405).json({ message: "Chỉ hỗ trợ phương thức POST." });
-// 	}
-
-// 	const { name, email, phone } = req.body;
-
-// 	// Validate and sanitize data (if necessary)
-
-// 	const to = "dangsang2203@gmail.com"; // Replace with your recipient email
-// 	const subject = "Liên hệ từ website";
-// 	const message = `Tên: ${name}\nEmail: ${email}\nSố điện thoại: ${phone}`;
-// 	const headers = "From: noreply@turbo.com\n"; // Replace with your website's email
-
-// 	try {
-// 		await sendEmail({ to, subject, message, headers }); // Replace with your email sending logic
-// 		res.status(200).json({ message: "Thông tin liên hệ đã được gửi!" });
-// 	} catch (error) {
-// 		console.error(error);
-// 		res.status(500).json({ message: "Có lỗi khi gửi thông tin liên hệ." });
-// 	}
-// }
-
-// // Replace with your actual email sending function
-// async function sendEmail({ to, subject, message, headers }: any) {
-// 	// Implement email sending using a library or your preferred method
-// 	console.log("Sending email:", { to, subject, message, headers });
-// 	// Replace with actual email sending logic
-// }
