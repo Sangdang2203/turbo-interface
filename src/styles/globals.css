@@ -32,7 +32,7 @@ html:focus-within {
 	transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
 }
 
-.navLink.active {
+.navLink:active {
 	border-bottom: 4px solid #1a66b8;
 	transition-duration: 2000ms;
 	transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
@@ -53,7 +53,7 @@ html:focus-within {
 /* Loading component */
 #wifi-loader {
 	--background: #62abff;
-	--front-color: #4f29f0;
+	--front-color: #295ef0;
 	--back-color: #c3c8de;
 	--text-color: #414856;
 	width: 64px;
@@ -147,7 +147,7 @@ html:focus-within {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	text-transform: lowercase;
+	text-transform: capitalize;
 	font-weight: 500;
 	font-size: 14px;
 	letter-spacing: 0.2px;

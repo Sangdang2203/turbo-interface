@@ -37,6 +37,27 @@ export interface CreatePostRequest
 	status: "ACTIVE";
 }
 
+export const updateSchema = z.object({
+	title: z
+		.string({
+			required_error: "Nhập tiêu đề bài viết.",
+		})
+		.min(10, "Tiêu đề phải nhập tối thiểu 10 ký tự")
+		.max(200, "Tiêu đề nhập tối đa 200 ký tự"),
+
+	description: z
+		.string({
+			required_error: "Nhập mô tả bài viết.",
+		})
+		.min(10, "Mô tả bài viết phải nhập tối thiểu 10 ký tự."),
+});
+
+export type updatedPostSchema = z.infer<typeof updateSchema>;
+
+export interface updatedPostRequest extends updatedPostSchema {
+	status: "ACTIVE";
+}
+
 export interface CreateCategoryRequest {
 	name: string;
 }

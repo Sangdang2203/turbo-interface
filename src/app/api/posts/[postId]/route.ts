@@ -43,19 +43,18 @@ export async function PUT(
 	req: NextRequest,
 	{ params }: { params: { postId: string } }
 ) {
-	const id = params.postId;
-
 	const updatePost = await req.json();
+
 	try {
 		const response = await fetch(
-			process.env.NEXT_PUBLIC_API_URL + `/posts/${id} `,
+			process.env.NEXT_PUBLIC_API_URL + `/posts/${params.postId} `,
 			{
 				method: req.method,
 				headers: req.headers,
 				body: JSON.stringify(updatePost),
 			}
 		);
-
+		console.log(response);
 		let data = null;
 
 		if (response.ok) {

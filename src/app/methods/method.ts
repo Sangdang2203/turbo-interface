@@ -1,5 +1,9 @@
 import { toast } from "sonner";
-import { ApiResponse, CustomerMessage } from "types/interfaces";
+import {
+	ApiResponse,
+	CustomerMessage,
+	updatedPostRequest,
+} from "types/interfaces";
 import { NextApiRequest, NextApiResponse } from "next";
 
 // CREATE METHODS
@@ -77,7 +81,7 @@ export const fetchContacts = async (token: string) => {
 	return response.json() as Promise<ApiResponse>;
 };
 
-// DELE METHODS
+// DELETE METHODS
 export const fetchDeleteUser = async (token: string, userId: string) => {
 	const response = await fetch(`/api/users/${userId}`, {
 		method: "DELETE",
@@ -117,3 +121,15 @@ export async function fetchContact(token: string, contactId: string) {
 	});
 	return response.json() as Promise<ApiResponse>;
 }
+
+// UPDATE METHODS
+
+export const updatePost = async (token: string, postId: string) => {
+	const response = await fetch(`/api/posts/${postId}`, {
+		method: "PUT",
+		headers: {
+			Authorization: `Bearer ${token}`,
+		},
+	});
+	return response.json() as Promise<ApiResponse>;
+};

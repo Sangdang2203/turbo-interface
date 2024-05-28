@@ -2,16 +2,13 @@
 
 import * as React from "react";
 import { toast } from "sonner";
-import Image from "next/image";
 import { useForm } from "react-hook-form";
 import { DoneRounded, RotateLeftRounded } from "@mui/icons-material";
 import {
-	Category,
 	ApiResponse,
-	User,
-	POSTSCHEMA,
-	SCHEMA,
 	Post,
+	updateSchema,
+	updatedPostSchema,
 } from "types/interfaces";
 import {
 	Box,
@@ -23,15 +20,18 @@ import {
 } from "@mui/material";
 import { fetchCategories, fetchUsers } from "app/methods/method";
 import { useSession } from "next-auth/react";
-import { zodResolver } from "@hookform/resolvers/zod";
 import Loading from "@/components/Loading";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 export default function EditPost({ params }: { params: { postId: string } }) {
 	const { data: session } = useSession();
-	const [loading, setLoading] = React.useState(true);
+	const [loading, setLoading] = React.useState(false);
 	const [post, setPost] = React.useState<Post>();
+
+	const [title, setTitle] = React.useState("");
+	const [description, setDescription] = React.useState("");
 	const [content, setContent] = React.useState("");
 
 	const [categories, setCategories] = React.useState<Map<string, string>>(
@@ -47,24 +47,26 @@ export default function EditPost({ params }: { params: { postId: string } }) {
 		handleSubmit,
 		formState: { errors },
 		reset,
-	} = useForm<updatedPost>();
+	} = useForm<updatedPostSchema>({
+		resolver: zodResolver(updateSchema),
+		defaultValues: {
+			title: post?.title,
+			description: post?.description,
+		},
+	});
 
-	interface updatedPost {
-		title: string;
-		description: string;
-	}
-
-	async function UpdatePost(updatedPost: updatedPost) {
+	async function UpdatePost(updatedPost: updatedPostSchema) {
 		if (session) {
 			const message = toast.loading("Đang cập nhật bài viết ...");
 
+			const headers = new Headers({
+				Authorization: `Bearer ${session?.user.id_token}`,
+				"Content-Type": "application/json",
+			});
 			try {
 				const res = await fetch(`/api/posts/${params.postId}`, {
 					method: "PUT",
-					headers: {
-						Authorization: `Bearer ${session?.user.id_token}`,
-						"Content-Type": "application/json",
-					},
+					headers: headers,
 					body: JSON.stringify({ ...updatedPost, content: content }),
 				});
 
@@ -74,6 +76,7 @@ export default function EditPost({ params }: { params: { postId: string } }) {
 
 				if (payload.ok) {
 					toast.success(payload.message);
+					reset();
 				} else {
 					toast.error(payload.message);
 				}
@@ -102,36 +105,36 @@ export default function EditPost({ params }: { params: { postId: string } }) {
 		fectchData();
 	}, [params.postId]);
 
-	React.useEffect(() => {
-		if (session) {
-			Promise.all([
-				fetchCategories(session.user.id_token),
-				fetchUsers(session.user.id_token),
-			]).then(data => {
-				const [resCate, resUser] = data;
+	// React.useEffect(() => {
+	// 	if (session) {
+	// 		Promise.all([
+	// 			fetchCategories(session.user.id_token),
+	// 			fetchUsers(session.user.id_token),
+	// 		]).then(data => {
+	// 			const [resCate, resUser] = data;
 
-				if (resCate.ok) {
-					setCategories(
-						new Map<string, string>(
-							resCate.data.map((item: Category) => [item.id, item.name])
-						)
-					);
-				}
+	// 			if (resCate.ok) {
+	// 				setCategories(
+	// 					new Map<string, string>(
+	// 						resCate.data.map((item: Category) => [item.id, item.name])
+	// 					)
+	// 				);
+	// 			}
 
-				if (resUser.ok) {
-					setUsers(
-						new Map<string, string>(
-							resUser.data.map((item: User) => [item.id, item.login])
-						)
-					);
-				}
-			});
-		}
-	}, [session]);
+	// 			if (resUser.ok) {
+	// 				setUsers(
+	// 					new Map<string, string>(
+	// 						resUser.data.map((item: User) => [item.id, item.login])
+	// 					)
+	// 				);
+	// 			}
+	// 		});
+	// 	}
+	// }, [session]);
 
 	return (
 		<>
-			{!loading ? (
+			{loading ? (
 				<Loading />
 			) : (
 				<Paper sx={{ p: 5 }}>

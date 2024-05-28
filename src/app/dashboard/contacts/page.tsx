@@ -3,6 +3,7 @@
 import React from "react";
 import { useSession } from "next-auth/react";
 import Loading from "@/components/Loading";
+
 import {
 	Box,
 	IconButton,
@@ -24,6 +25,7 @@ import {
 	TablePagination,
 	Button,
 } from "@mui/material";
+
 import {
 	CloseOutlined,
 	SearchOutlined,
@@ -79,16 +81,6 @@ export default function CategoryManagement() {
 				);
 
 				setContacts(filterPosts);
-			}
-		}
-	}
-
-	async function convertPDF(contactId: string) {
-		if (session) {
-			const res = await fetchContact(session.user.id_token, contactId);
-
-			if (res.ok) {
-				const contactData = await res.data;
 			}
 		}
 	}
@@ -212,9 +204,7 @@ export default function CategoryManagement() {
 															placement="top">
 															<IconButton
 																color="primary"
-																onClick={() => {
-																	convertPDF(item.id);
-																}}>
+																onClick={() => {}}>
 																<CloudDownloadRounded fontSize="medium" />
 															</IconButton>
 														</Tooltip>
@@ -226,7 +216,7 @@ export default function CategoryManagement() {
 											<TableCell
 												colSpan={6}
 												align="center">
-												No Data
+												Không tìm thấy dữ liệu ...
 											</TableCell>
 										</TableRow>
 									)}
@@ -286,7 +276,6 @@ export default function CategoryManagement() {
 							</Typography>
 							<b>Ghi chú:</b>
 							<Typography className="mb-5 line-clamp-2">
-								{" "}
 								{contact.message}
 							</Typography>
 						</Box>
