@@ -29,10 +29,9 @@ export default function AvatarMenu() {
 						aria-haspopup="true"
 						aria-expanded={open ? "true" : undefined}
 						onClick={handleClick}>
-						{/* <Avatar src="@/app/images/logoTurbo.png"></Avatar> */}
 						<Image
 							alt="admin"
-							src={logo}
+							src={session ? logo : ""}
 							width={50}
 							height={50}
 							className="rounded-full"
@@ -49,9 +48,7 @@ export default function AvatarMenu() {
 					MenuListProps={{
 						"aria-labelledby": "basic-button",
 					}}>
-					<MenuItem>
-						<p>Administrator</p>
-					</MenuItem>
+					<MenuItem>Administrator</MenuItem>
 					<MenuItem
 						color="black"
 						onClick={handleClose}></MenuItem>

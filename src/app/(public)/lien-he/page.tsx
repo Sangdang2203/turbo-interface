@@ -229,10 +229,7 @@ const ContactPage = () => {
 										cols={50}
 										rows={10}
 										id="textarea"
-										name="textarea"></textarea>
-									<span className="text-red-700">
-										{errors.message?.message}
-									</span>
+										name="message"></textarea>
 								</div>
 								<Button
 									startIcon={<SendRounded className="" />}

@@ -32,7 +32,7 @@ html:focus-within {
 	transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
 }
 
-.navLink:active {
+.navLink .active {
 	border-bottom: 4px solid #1a66b8;
 	transition-duration: 2000ms;
 	transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
@@ -611,6 +611,84 @@ html:focus-within {
 	100% {
 		transform: rotate(360deg);
 	}
+}
+
+/* Service price */
+.service-card {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: stretch;
+	margin-bottom: 2rem;
+	width: auto;
+	display: flex;
+	flex-direction: column;
+	border-radius: 0.25rem;
+	background-color: rgba(17, 24, 39, 1);
+	padding: 1rem;
+}
+
+.service-card .header {
+	display: flex;
+	flex-direction: column;
+}
+
+.service-card .title {
+	font-size: 1.5rem;
+	line-height: 2rem;
+	font-weight: 700;
+	color: #fff;
+}
+
+.service-card .price {
+	font-size: 1.5rem;
+	padding-top: 1rem;
+	line-height: 1;
+	font-weight: 700;
+	color: #fff;
+}
+
+.service-card .desc {
+	margin-top: 0.75rem;
+	margin-bottom: 0.75rem;
+	line-height: 1.625;
+	color: rgba(156, 163, 175, 1);
+}
+
+.service-card .lists {
+	margin-bottom: 1.5rem;
+	margin-left: -2.5rem;
+	flex: 1 1 0%;
+	color: rgba(156, 163, 175, 1);
+}
+
+.service-card .lists .list {
+	margin-bottom: 0.5rem;
+	display: flex;
+	margin-left: 0.5rem;
+}
+
+.service-card .lists .list svg {
+	height: 1.5rem;
+	width: 1.5rem;
+	flex-shrink: 0;
+	margin-right: 0.5rem;
+	color: rgba(167, 139, 250, 1);
+}
+
+.service-card .action {
+	border: none;
+	outline: none;
+	display: inline-block;
+	border-radius: 0.25rem;
+	background-color: rgba(167, 139, 250, 1);
+	padding-left: 1.25rem;
+	padding-right: 1.25rem;
+	padding-top: 0.75rem;
+	padding-bottom: 0.75rem;
+	text-align: center;
+	font-weight: 600;
+	letter-spacing: 0.05em;
+	color: rgba(17, 24, 39, 1);
 }
 
 /* Card price */

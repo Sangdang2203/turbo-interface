@@ -162,58 +162,40 @@ export default function DedicatedServer() {
 						<Box className="grid sm:grid-cols-2 xl:grid-cols-4 gap-3 mb-10 text-center">
 							{decicatedServerPrices.map(item => {
 								return (
-									<Box
+									<div
 										key={item.id}
-										className="card_price h-fit">
-										<Box className="card__border"></Box>
-										<Box className="card_title__container">
-											<span className="card_title">{item.title}</span>
-											<p className="card_paragraph">{item.price}</p>
-										</Box>
-										<hr className="line" />
-										<ul className="card__list">
-											<li className="card__list_item">
-												<TaskAltRounded
-													color="secondary"
-													fontSize="small"
-												/>
-												<span className="list_text">{item.intel}</span>
-											</li>
-											<li className="card__list_item">
-												<TaskAltRounded
-													color="secondary"
-													fontSize="small"
-												/>
-												<span className="list_text">{item.ram}</span>
-											</li>
-											<li className="card__list_item">
-												<TaskAltRounded
-													color="secondary"
-													fontSize="small"
-												/>
-												<span className="list_text">{item.ssd}</span>
-											</li>
-											<li className="card__list_item">
-												<TaskAltRounded
-													color="secondary"
-													fontSize="small"
-												/>
-												<span className="list_text">{item.ipv4}</span>
-											</li>
-											<li className="card__list_item">
-												<TaskAltRounded
-													color="secondary"
-													fontSize="small"
-												/>
-												<span className="list_text">{item.network}</span>
-											</li>
+										className="service-card h-fit">
+										<div className="header">
+											<span className="title">{item.title}</span>
+											<span className="price">{item.price}</span>
+										</div>
+										<ul className="lists">
+											{item.details.map(detail => {
+												return (
+													<li
+														key={detail.name}
+														className="list">
+														<svg
+															xmlns="http://www.w3.org/2000/svg"
+															viewBox="0 0 20 20"
+															fill="currentColor">
+															<path
+																fillRule="evenodd"
+																d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+																clipRule="evenodd"></path>
+														</svg>
+														<span>{detail.name}</span>
+													</li>
+												);
+											})}
 										</ul>
 										<Button
 											href="tel:0769999967"
-											className="button">
+											type="button"
+											className="action">
 											Liên hệ ngay
 										</Button>
-									</Box>
+									</div>
 								);
 							})}
 						</Box>

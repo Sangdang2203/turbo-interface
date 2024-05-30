@@ -10,6 +10,8 @@ import {
 	YAxis,
 	Tooltip,
 	ResponsiveContainer,
+	LineChart,
+	Line,
 } from "recharts";
 
 import { fetchContacts, fetchPosts } from "../methods/method";
@@ -223,63 +225,68 @@ const Dashboard = () => {
 			{loading ? (
 				<Loading />
 			) : (
-				<div className="my-10">
-					<div className=" post_card max-h-[500px] shadow-sm my-3">
-						<div className=" flex justify-between px-4">
-							<div>
-								<p className="text-[2rem] font-semibold">{contacts.length}</p>
-								<p className="-mt-8">Khách hàng phát sinh</p>
+				<>
+					{/* Linechart show the number of customers who registered contact form */}
+					<div className="my-10">
+						<div className=" post_card max-h-[500px] shadow-sm my-3">
+							<div className=" flex justify-between px-4">
+								<div>
+									<p className="text-[2rem] font-semibold">{contacts.length}</p>
+									<p className="-mt-8">Khách hàng phát sinh</p>
+								</div>
+								<div className="pt-4">
+									<SettingsIcon />
+								</div>
 							</div>
-							<div className="pt-4">
-								<SettingsIcon />
-							</div>
+							<ResponsiveContainer
+								width="100%"
+								height={300}
+								className="mt-5">
+								<LineChart data={contactsEachMonth}>
+									<XAxis dataKey="month" />
+									<YAxis />
+									<Line
+										dataKey="Customer"
+										fill="8884d8" // Remove fill for line chart
+										strokeWidth={2} // Adjust line thickness
+										className="cursor-pointer"
+									/>
+									<Tooltip />
+								</LineChart>
+							</ResponsiveContainer>
 						</div>
-						<ResponsiveContainer
-							width="100%"
-							height={300}
-							className="mt-5">
-							<BarChart data={contactsEachMonth}>
-								<XAxis dataKey="month" />
-								<YAxis />
-								<Bar
-									dataKey="Customer"
-									fill="#8884d8"
-									className="cursor-pointer"
-								/>
-								<Tooltip />
-							</BarChart>
-						</ResponsiveContainer>
-					</div>
-
-					<div className="post_card max-h-[500px] shadow-sm my-3">
-						<div className=" flex justify-between px-4">
-							<div>
-								<p className="text-[2rem] font-semibold">{posts.length}</p>
-								<p className="-mt-8">Số lượng bài viết</p>
+						{/* Barchart show the amount of posts. */}
+						<div className="post_card max-h-[500px] shadow-sm my-3">
+							<div className=" flex justify-between px-4">
+								<div>
+									<p className="text-[2rem] font-semibold">{posts.length}</p>
+									<p className="-mt-8">Số lượng bài viết</p>
+								</div>
+								<div className="pt-4">
+									<SettingsIcon />
+								</div>
 							</div>
-							<div className="pt-4">
-								<SettingsIcon />
-							</div>
+							<ResponsiveContainer
+								width="100%"
+								height={300}
+								className="mt-5">
+								<BarChart
+									data={postsEachMonth}
+									barSize={30}
+									barGap={10}>
+									<XAxis dataKey="month" />
+									<Bar
+										dataKey="Amount"
+										fill="#006769"
+										strokeWidth={2}
+										className="cursor-pointer"
+									/>
+									<Tooltip />
+								</BarChart>
+							</ResponsiveContainer>
 						</div>
-						<ResponsiveContainer
-							width="100%"
-							height={300}
-							className="mt-5">
-							<BarChart
-								data={postsEachMonth}
-								barSize={30}
-								barGap={10}>
-								<XAxis dataKey="month" />
-								<Bar
-									dataKey="Amount"
-									fill="#006769"
-									className="cursor-pointer"
-								/>
-								<Tooltip />
-							</BarChart>
-						</ResponsiveContainer>
 					</div>
-				</div>
+				</>
 			)}
 		</React.Fragment>
 	);

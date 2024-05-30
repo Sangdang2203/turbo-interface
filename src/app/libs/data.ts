@@ -66,6 +66,266 @@ export const cloudGPUPrices = [
 	},
 ];
 
+export const privateCloudPrices = [
+	{
+		id: 1,
+		title: "GÓI PRIVATE 01",
+		price: "7.600.000 VND",
+		details: [
+			{ id: 1, name: "1 Intel Xeon Silver 4410" },
+			{ id: 2, name: "16 GB RAM" },
+			{ id: 3, name: "480 GB SSD" },
+			{ id: 4, name: "1 ipv4" },
+			{ id: 5, name: "100 Mbps network" },
+		],
+	},
+	{
+		id: 2,
+		title: "GÓI PRIVATE 02",
+		price: "8.300.000 VND",
+		details: [
+			{ id: 1, name: "1 Intel Xeon Silver 4410" },
+			{ id: 2, name: "32 GB RAM" },
+			{ id: 3, name: "960 GB SSD" },
+			{ id: 4, name: "1 ipv4" },
+			{ id: 5, name: "100 Mbps network" },
+		],
+	},
+	{
+		id: 3,
+		title: "GÓI PRIVATE 03",
+		price: "9.300.000 VND",
+		details: [
+			{ id: 1, name: "2 Intel Xeon Silver 4410" },
+			{ id: 2, name: "2 x 32 GB RAM" },
+			{ id: 3, name: "1.9 TB SSD" },
+			{ id: 4, name: "1 ipv4" },
+			{ id: 5, name: "100 Mbps network" },
+		],
+	},
+	{
+		id: 4,
+		title: "GÓI PRIVATE 04",
+		price: "9.999.000 VND",
+		details: [
+			{ id: 1, name: "2 Intel Xeon Silver 4410" },
+			{ id: 2, name: "2 x 32 GB RAM" },
+			{ id: 3, name: "3.8 TB SSD" },
+			{ id: 4, name: "1 ipv4" },
+			{ id: 5, name: "100 Mbps network" },
+		],
+	},
+];
+
+export const cloudServerPrices = [
+	{
+		id: 1,
+		title: "GÓI GPU 01",
+		price: "260.000 VND",
+		details: [
+			{ id: 1, name: "2 vCPU" },
+			{ id: 2, name: "1 GB RAM" },
+			{ id: 3, name: "20 GB SSD" },
+			{ id: 5, name: "1 IPv4" },
+			{ id: 5, name: "200 Mbps Network" },
+		],
+	},
+	{
+		id: 2,
+		title: "GÓI GPU 02",
+		price: "470.000 VND",
+		details: [
+			{ id: 1, name: "3 vCPU" },
+			{ id: 2, name: "2 GB RAM" },
+			{ id: 3, name: "40 GB SSD" },
+			{ id: 5, name: "1 IPv4" },
+			{ id: 5, name: "200 Mbps Network" },
+		],
+	},
+	{
+		id: 3,
+		title: "GÓI GPU 03",
+		price: "780.000 VND",
+		details: [
+			{ id: 1, name: "4 vCPU" },
+			{ id: 2, name: "3 GB RAM" },
+			{ id: 3, name: "60 GB SSD" },
+			{ id: 5, name: "1 IPv4" },
+			{ id: 5, name: "200 Mbps Network" },
+		],
+	},
+	{
+		id: 4,
+		title: "GÓI GPU 04",
+		price: "1.090.000 VND",
+		details: [
+			{ id: 1, name: "5 vCPU" },
+			{ id: 2, name: "4 GB RAM" },
+			{ id: 3, name: "80 GB SSD" },
+			{ id: 5, name: "1 IPv4" },
+			{ id: 5, name: "200 Mbps Network" },
+		],
+	},
+	{
+		id: 5,
+		title: "GÓI GPU 05",
+		price: "1.350.000 VND",
+		details: [
+			{ id: 1, name: "6 vCPU" },
+			{ id: 2, name: "5 GB RAM" },
+			{ id: 3, name: "100 GB SSD" },
+			{ id: 5, name: "1 IPv4" },
+			{ id: 5, name: "200 Mbps Network" },
+		],
+	},
+];
+
+export const cloudBackupPrices = [
+	{
+		id: 1,
+		title: "BUSINESS STARTER",
+		price: "500.000 VND",
+		details: [
+			{ id: 1, name: "Hỗ trợ ảo hóa VMware/Hyper-V" },
+			{ id: 2, name: "300 GB dung lượng lưu trữ Cloud" },
+			{ id: 3, name: "1 máy chủ ảo được sao lưu" },
+			{ id: 4, name: "Không giới hạn số bản sao lưu" },
+		],
+	},
+	{
+		id: 2,
+		title: "BUSINESS STANDARD",
+		price: "980.000 VND",
+		details: [
+			{ id: 1, name: "Hỗ trợ ảo hóa VMware/Hyper-V" },
+			{ id: 2, name: "300 GB dung lượng lưu trữ Cloud" },
+			{ id: 3, name: "1 máy chủ ảo được sao lưu" },
+			{ id: 4, name: "Không giới hạn số bản sao lưu" },
+		],
+	},
+	{
+		id: 3,
+		title: "BUSINESS PLUS",
+		price: "2.015.000 VND",
+		details: [
+			{ id: 1, name: "Hỗ trợ ảo hóa VMware/Hyper-V" },
+			{ id: 2, name: "300 GB dung lượng lưu trữ Cloud" },
+			{ id: 3, name: "1 máy chủ ảo được sao lưu" },
+			{ id: 4, name: "Không giới hạn số bản sao lưu" },
+		],
+	},
+];
+
+export const decicatedServerPrices = [
+	{
+		id: 1,
+		title: "GÓI PRIVATE 01",
+		price: "7.600.000 VND",
+		details: [
+			{ id: 1, name: "1 Intel Xeon Silver 4410" },
+			{ id: 2, name: "16 GB RAM" },
+			{ id: 3, name: "480 GB SSD" },
+			{ id: 4, name: "1 ipv4" },
+			{ id: 5, name: "100 Mbps network" },
+		],
+	},
+	{
+		id: 2,
+		title: "GÓI PRIVATE 02",
+		price: "8.300.000 VND",
+		details: [
+			{ id: 1, name: "1 Intel Xeon Silver 4410" },
+			{ id: 2, name: "32 GB RAM" },
+			{ id: 3, name: "960 GB SSD" },
+			{ id: 4, name: "1 ipv4" },
+			{ id: 5, name: "400 Mbps network" },
+		],
+	},
+	{
+		id: 3,
+		title: "GÓI PRIVATE 03",
+		price: "9.300.000 VND",
+		details: [
+			{ id: 1, name: "2 Intel Xeon Silver 4410" },
+			{ id: 2, name: "2 x 32 GB RAM" },
+			{ id: 3, name: "1.9 TB SSD" },
+			{ id: 4, name: "1 ipv4" },
+			{ id: 5, name: "500 Mbps network" },
+		],
+	},
+	{
+		id: 4,
+		title: "GÓI PRIVATE 04",
+		price: "9.999.000 VND",
+		details: [
+			{ id: 1, name: "2 Intel Xeon Silver 4410" },
+			{ id: 2, name: "2 x 32 GB RAM" },
+			{ id: 3, name: "3.8 TB SSD" },
+			{ id: 4, name: "1 ipv4" },
+			{ id: 5, name: "500 Mbps network" },
+		],
+	},
+];
+
+export const vitualDataCenterPrices = [
+	{
+		id: 1,
+		title: "GÓI VDC 01",
+		price: "9.600.000 VND",
+		details: [
+			{ id: 1, name: "20 vCPU" },
+			{ id: 2, name: "48 GB RAM" },
+			{ id: 3, name: "600 GB SSD" },
+			{ id: 4, name: "6 ipv4" },
+			{ id: 5, name: "400 Mbps network" },
+			{ id: 6, name: "1 User Group" },
+			{ id: 7, name: "16 IPv4 Private LAN" },
+		],
+	},
+	{
+		id: 2,
+		title: "GÓI VDC 02",
+		price: "14.400.000 VND",
+		details: [
+			{ id: 1, name: "30 vCPU" },
+			{ id: 2, name: "64 GB RAM" },
+			{ id: 3, name: "1000 GB SSD" },
+			{ id: 4, name: "9 ipv4" },
+			{ id: 5, name: "400 Mbps network" },
+			{ id: 6, name: "1 User Group" },
+			{ id: 7, name: "32 IPv4 Private LAN" },
+		],
+	},
+	{
+		id: 3,
+		title: "GÓI VDC 03",
+		price: "21.100.000 VND",
+		details: [
+			{ id: 1, name: "40 vCPU" },
+			{ id: 2, name: "96 GB RAM" },
+			{ id: 3, name: "1500 GB SSD" },
+			{ id: 4, name: "12 ipv4" },
+			{ id: 5, name: "500 Mbps network" },
+			{ id: 6, name: "1 User Group" },
+			{ id: 7, name: "48 IPv4 Private LAN" },
+		],
+	},
+	{
+		id: 4,
+		title: "GÓI VDC 04",
+		price: "27.800.000 VND",
+		details: [
+			{ id: 1, name: "50 vCPU" },
+			{ id: 2, name: "128 GB RAM" },
+			{ id: 3, name: "2000 GB SSD" },
+			{ id: 4, name: "16 ipv4" },
+			{ id: 5, name: "500 Mbps network" },
+			{ id: 6, name: "1 User Group" },
+			{ id: 7, name: "64 IPv4 Private LAN" },
+		],
+	},
+];
+
 export const bonusPrices = [
 	{
 		title: "vCPU",
@@ -138,59 +398,6 @@ export const cloudGPUQuestions = [
 	},
 ];
 
-export const cloudServerPrices = [
-	{
-		id: 1,
-		title: "GÓI GPU 01",
-		price: "260.000 VND",
-		cpu: "2 vCPU",
-		ram: "1 GB RAM",
-		ssd: "20 GB SSD",
-		ipv4: "1 IPv4",
-		network: "200 Mbps Network",
-	},
-	{
-		id: 2,
-		title: "GÓI GPU 02",
-		price: "470.000 VND",
-		cpu: "3 vCPU",
-		ram: "2 GB RAM",
-		ssd: "40 GB SSD",
-		ipv4: "1 IPv4",
-		network: "200 Mbps Network",
-	},
-	{
-		id: 3,
-		title: "GÓI GPU 03",
-		price: "780.000 VND",
-		cpu: "4 vCPU",
-		ram: "3 GB RAM",
-		ssd: "60 GB SSD",
-		ipv4: "1 IPv4",
-		network: "200 Mbps Network",
-	},
-	{
-		id: 4,
-		title: "GÓI GPU 04",
-		price: "1.090.000 VND",
-		cpu: "5 vCPU",
-		ram: "4 GB RAM",
-		ssd: "80 GB SSD",
-		ipv4: "1 IPv4",
-		network: "200 Mbps Network",
-	},
-	{
-		id: 5,
-		title: "GÓI GPU 05",
-		price: "1.350.000 VND",
-		cpu: "6 vCPU",
-		ram: "5 GB RAM",
-		ssd: "100 GB SSD",
-		ipv4: "1 IPv4",
-		network: "200 Mbps Network",
-	},
-];
-
 export const cloudServerQuestions = [
 	{
 		id: 1,
@@ -254,36 +461,6 @@ export const cloudBackupPackage = [
 		ram: "1.5 TB dung lượng lưu trữ cloud",
 		server: "06 máy chủ ảo được sao lưu",
 		limit: "Không giới hạn bản sao lưu",
-	},
-];
-
-export const cloudBackupPrices = [
-	{
-		id: 1,
-		title: "BUSINESS STARTER",
-		price: "500.000 VND",
-		hyperv: "Hỗ trợ ảo hóa VMware/Hyper-V",
-		ram: "300 GB dung lượng lưu trữ Cloud",
-		server: "1 máy chủ ảo được sao lưu",
-		limit: "Không giới hạn số bản sao lưu",
-	},
-	{
-		id: 2,
-		title: "BUSINESS STANDARD",
-		price: "980.000 VND",
-		hyperv: "Hỗ trợ ảo hóa VMware/Hyper-V",
-		ram: "300 GB dung lượng lưu trữ Cloud",
-		server: "1 máy chủ ảo được sao lưu",
-		limit: "Không giới hạn số bản sao lưu",
-	},
-	{
-		id: 3,
-		title: "BUSINESS PLUS",
-		price: "2.015.000 VND",
-		hyperv: "Hỗ trợ ảo hóa VMware/Hyper-V",
-		ram: "300 GB dung lượng lưu trữ Cloud",
-		server: "1 máy chủ ảo được sao lưu",
-		limit: "Không giới hạn số bản sao lưu",
 	},
 ];
 
@@ -477,49 +654,6 @@ export const dedicatedServerBenefits = [
 	},
 ];
 
-export const decicatedServerPrices = [
-	{
-		id: 1,
-		title: "GÓI PRIVATE 01",
-		price: "7.600.000 VND",
-		intel: "1 Intel Xeon Silver 4410",
-		ram: "16 GB RAM",
-		ssd: "480 GB SSD",
-		ipv4: "1 ipv4",
-		network: "100 Mbps network",
-	},
-	{
-		id: 2,
-		title: "GÓI PRIVATE 02",
-		price: "8.300.000 VND",
-		intel: "1 Intel Xeon Silver 4410",
-		ram: "32 GB RAM",
-		ssd: "960 GB SSD",
-		ipv4: "1 ipv4",
-		network: "400 Mbps network",
-	},
-	{
-		id: 3,
-		title: "GÓI PRIVATE 03",
-		price: "9.300.000 VND",
-		intel: "2 Intel Xeon Silver 4410",
-		ram: "2 x 32 GB RAM",
-		ssd: "1.9 TB SSD",
-		ipv4: "1 ipv4",
-		network: "500 Mbps network",
-	},
-	{
-		id: 4,
-		title: "GÓI PRIVATE 04",
-		price: "9.999.000 VND",
-		intel: "2 Intel Xeon Silver 4410",
-		ram: "2 x 32 GB RAM",
-		ssd: "3.8 TB SSD",
-		ipv4: "1 IPv4",
-		network: "500 Mbps network",
-	},
-];
-
 export const dedicatedServerQuestions = [
 	{
 		id: 1,
@@ -556,57 +690,6 @@ export const dedicatedServerQuestions = [
 		question: "Nhà cung cấp cũ không hợp tác chuyển đổi máy chủ ?",
 		answer:
 			"Chúng tôi rất lấy làm tiếc vì sự không hợp tác từ nhà cung cấp cũ. Chúng tôi có những công nghệ khác biệt, giúp khách hàng chuyển đổi hệ thống mà không cần thao tác từ tầng vật lý. Hãy liên hệ với chúng tôi để được tư vấn hỗ trợ.",
-	},
-];
-
-export const vitualDataCenterPrices = [
-	{
-		id: 1,
-		title: "GÓI VDC 01",
-		price: "9.600.000 VND",
-		cpu: "20 vCPU",
-		ram: "48 GB RAM",
-		ssd: "600 GB SSD",
-		ipv4: "6 ipv4",
-		network: "400 Mbps network",
-		userGroup: "1 User Group",
-		privateLAN: "16 IPv4 Private LAN",
-	},
-	{
-		id: 2,
-		title: "GÓI VDC 02",
-		price: "14.400.000 VND",
-		cpu: "30 vCPU",
-		ram: "64 GB RAM",
-		ssd: "1000 GB SSD",
-		ipv4: "9 ipv4",
-		network: "400 Mbps network",
-		userGroup: "1 User Group",
-		privateLAN: "32 IPv4 Private LAN",
-	},
-	{
-		id: 3,
-		title: "GÓI VDC 03",
-		price: "21.100.000 VND",
-		cpu: "40 vCPU",
-		ram: "96 GB RAM",
-		ssd: "1500 GB SSD",
-		ipv4: "12 ipv4",
-		network: "500 Mbps network",
-		userGroup: "1 User Group",
-		privateLAN: "48 IPv4 Private LAN",
-	},
-	{
-		id: 4,
-		title: "GÓI VDC 04",
-		price: "27.800.000 VND",
-		cpu: "50 vCPU",
-		ram: "128 GB RAM",
-		ssd: "2000 GB SSD",
-		ipv4: "16 IPv4",
-		network: "500 Mbps network",
-		userGroup: "1 User Group",
-		privateLAN: "64 IPv4 Private LAN",
 	},
 ];
 
@@ -669,49 +752,6 @@ export const vitualDataCenterQuestions = [
 		question: "Nhà cung cấp cũ không hợp tác chuyển đổi máy chủ ?",
 		answer:
 			"Chúng tôi rất lấy làm tiếc vì sự không hợp tác từ nhà cung cấp cũ. Chúng tôi có những công nghệ khác biệt, giúp khách hàng chuyển đổi hệ thống mà không cần thao tác từ tầng vật lý. Hãy liên hệ với chúng tôi để được tư vấn hỗ trợ.",
-	},
-];
-
-export const privateCloudPrices = [
-	{
-		id: 1,
-		title: "GÓI PRIVATE 01",
-		price: "7.600.000 VND",
-		intel: "1 Intel Xeon Silver 4410",
-		ram: "16 GB RAM",
-		ssd: "480 GB SSD",
-		ipv4: "1 ipv4",
-		network: "100 Mbps network",
-	},
-	{
-		id: 2,
-		title: "GÓI PRIVATE 02",
-		price: "8.300.000 VND",
-		intel: "1 Intel Xeon Silver 4410",
-		ram: "32 GB RAM",
-		ssd: "960 GB SSD",
-		ipv4: "1 ipv4",
-		network: "100 Mbps network",
-	},
-	{
-		id: 3,
-		title: "GÓI PRIVATE 03",
-		price: "9.300.000 VND",
-		intel: "2 Intel Xeon Silver 4410",
-		ram: "2 x 32 GB RAM",
-		ssd: "1.9 TB SSD",
-		ipv4: "1 ipv4",
-		network: "100 Mbps network",
-	},
-	{
-		id: 4,
-		title: "GÓI PRIVATE 04",
-		price: "9.999.000 VND",
-		intel: "2 Intel Xeon Silver 4410",
-		ram: "2 x 32 GB RAM",
-		ssd: "3.8 TB SSD",
-		ipv4: "1 IPv4",
-		network: "100 Mbps network",
 	},
 ];
 

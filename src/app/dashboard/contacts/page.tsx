@@ -268,7 +268,7 @@ export default function CategoryManagement() {
 						<CloseOutlined
 							onClick={() => setOpenDialog(false)}
 							color="error"
-							className="text-md absolute top-1 right-1 bg-slate-500 rounded hover:opacity-80 hover:bg-red-200 cursor-pointer"
+							className="text-white absolute top-1 right-1 bg-red-500 rounded hover:opacity-80 cursor-pointer"
 						/>
 					</Tooltip>
 
@@ -287,14 +287,7 @@ export default function CategoryManagement() {
 							<b>Dịch vụ đang cần tư vấn:</b>
 							<Typography className="mb-5 line-clamp-2">
 								{contact.services.slice(0, 2).map(sv => {
-									return (
-										<Chip
-											key={sv}
-											label={sv}
-											color="secondary"
-											size="small"
-										/>
-									);
+									return <p key={sv}>{sv}</p>;
 								})}
 							</Typography>
 							<b>Ghi chú:</b>
