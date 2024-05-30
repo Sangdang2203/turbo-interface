@@ -31,7 +31,6 @@ const useS3 = () => {
 
 				if (response.ok) {
 					const data = await response.json();
-					console.log(data);
 					return data.fileLink;
 				} else {
 					console.error("Lỗi upload ảnh:", response.statusText);

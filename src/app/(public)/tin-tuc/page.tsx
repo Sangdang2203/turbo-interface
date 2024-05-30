@@ -167,7 +167,7 @@ export default function NewsPage() {
 																		item.urlImage
 																	}
 																	width={200}
-																	height={130}
+																	height={150}
 																	priority
 																	className="min-h-[200px] w-full sm:min-h-[130px] card-image rounded-md"
 																	alt={item.urlImage}
@@ -180,7 +180,13 @@ export default function NewsPage() {
 														<div className="name flex items-center">
 															<AccessTimeIcon fontSize="small" />
 															<p className="px-1">
-																{item.createdDate.slice(0, 10)}
+																{new Date(item.createdDate)
+																	.toLocaleDateString("en-GB", {
+																		day: "2-digit",
+																		month: "2-digit",
+																		year: "numeric",
+																	})
+																	.slice(0, 10)}
 															</p>
 														</div>
 													</div>

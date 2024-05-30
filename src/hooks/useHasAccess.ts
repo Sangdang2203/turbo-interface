@@ -13,16 +13,6 @@ const useHasAccess = (permission: string) => {
 		return false;
 	}
 
-	// if (session.user.role.permissions.includes(permission)) {
-	// 	return true;
-	// }
-
-	// const entity = permission.split(".")[0];
-
-	// if (session.user.role.permissions.includes(`${entity}.all`)) {
-	// 	return true;
-	// }
-
 	return false;
 };
 

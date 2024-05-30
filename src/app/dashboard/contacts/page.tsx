@@ -3,7 +3,6 @@
 import React from "react";
 import { useSession } from "next-auth/react";
 import Loading from "@/components/Loading";
-
 import {
 	Box,
 	IconButton,
@@ -20,10 +19,8 @@ import {
 	DialogContent,
 	DialogTitle,
 	Typography,
-	Chip,
 	TextField,
 	TablePagination,
-	Button,
 } from "@mui/material";
 
 import {
@@ -32,23 +29,23 @@ import {
 	Visibility,
 	DeleteOutline,
 } from "@mui/icons-material";
-import {
-	fetchContact,
-	fetchContacts,
-	fetchDeleteContact,
-} from "app/methods/method";
+import { fetchContacts, fetchDeleteContact } from "app/methods/method";
 import { CustomerMessage } from "types/interfaces";
 import { toast } from "sonner";
 
 export default function CategoryManagement() {
+	const { data: session } = useSession();
 	const [loading, setLoading] = React.useState(true);
 	const [contact, setContact] = React.useState<CustomerMessage>();
 	const [contacts, setContacts] = React.useState<CustomerMessage[]>([]);
 	const [openDialog, setOpenDialog] = React.useState(false);
 	const [page, setPage] = React.useState(0);
 	const [rowsPerPage, setRowsPerPage] = React.useState(10);
+	const [modal, setModal] = React.useState(false);
 
-	const { data: session } = useSession();
+	const handleClose = () => {
+		setModal(false);
+	};
 
 	const handleChangePage = (
 		event: React.MouseEvent<HTMLButtonElement> | null,
@@ -92,7 +89,7 @@ export default function CategoryManagement() {
 
 	// DELETE CONTACT
 	async function handleDelete(contactId: string) {
-		const message = toast.loading("Đang thực hiện xóa bài viết.");
+		const message = toast.loading("Đang thực hiện xóa...");
 		const response = await fetchDeleteContact(contactId);
 
 		if (response.ok) {
@@ -222,15 +219,55 @@ export default function CategoryManagement() {
 															<IconButton
 																color="error"
 																onClick={() => {
-																	if (
-																		window.confirm("Bạn chắc chắn muốn xóa ?")
-																	) {
-																		handleDelete(item.id);
-																	}
+																	setModal(true);
 																}}>
 																<DeleteOutline fontSize="small" />
 															</IconButton>
 														</Tooltip>
+														{/* Delete Confirm Modal */}
+														<Dialog
+															open={modal}
+															onClose={handleClose}
+															className="min-w-[400px] lg:min-w-[900px] mx-auto rounded">
+															<div className="group select-none w-[250px] flex flex-col p-4 relative items-center justify-center bg-gray-800 border border-gray-800 shadow-lg rounded">
+																<div className="">
+																	<div className="text-center p-3 flex-auto justify-center">
+																		<svg
+																			fill="currentColor"
+																			viewBox="0 0 20 20"
+																			className="group-hover:animate-bounce w-12 h-12 flex items-center text-gray-600 fill-red-500 mx-auto"
+																			xmlns="http://www.w3.org/2000/svg">
+																			<path
+																				clipRule="evenodd"
+																				d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
+																				fillRule="evenodd"></path>
+																		</svg>
+																		<h2 className="text-xl font-bold py-4 text-gray-200">
+																			Are you sure?
+																		</h2>
+																		<p className="font-bold text-sm text-gray-500 px-2">
+																			Do you really want to continue ? This
+																			process cannot be undone
+																		</p>
+																	</div>
+																	<div className="p-2 mt-2 text-center space-x-1 md:block">
+																		<button
+																			onClick={handleClose}
+																			className="cursor-pointer mb-2 md:mb-0 bg-gray-700 px-5 py-2 text-sm shadow-sm font-medium tracking-wider border-2 border-gray-600 hover:border-gray-700 text-gray-300 rounded-full hover:shadow-lg hover:bg-gray-800 transition ease-in duration-300">
+																			Cancel
+																		</button>
+																		<button
+																			onClick={() => {
+																				handleClose();
+																				handleDelete(item.id);
+																			}}
+																			className="cursor-pointer bg-red-500 hover:bg-transparent px-5 ml-4 py-2 text-sm shadow-sm hover:shadow-lg font-medium tracking-wider border-2 border-red-500 hover:border-red-500 text-white hover:text-red-500 rounded-full transition ease-in duration-300">
+																			Remove
+																		</button>
+																	</div>
+																</div>
+															</div>
+														</Dialog>
 													</TableCell>
 												</TableRow>
 											))

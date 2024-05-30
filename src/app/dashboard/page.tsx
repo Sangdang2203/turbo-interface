@@ -226,7 +226,7 @@ const Dashboard = () => {
 				<Loading />
 			) : (
 				<>
-					{/* Linechart show the number of customers who registered contact form */}
+					{/* Linechart show the number of customers who registered contact */}
 					<div className="my-10">
 						<div className=" post_card max-h-[500px] shadow-sm my-3">
 							<div className=" flex justify-between px-4">
@@ -247,8 +247,8 @@ const Dashboard = () => {
 									<YAxis />
 									<Line
 										dataKey="Customer"
-										fill="8884d8" // Remove fill for line chart
-										strokeWidth={2} // Adjust line thickness
+										fill="#8884d8"
+										strokeWidth={2}
 										className="cursor-pointer"
 									/>
 									<Tooltip />

@@ -52,12 +52,6 @@ export default function DrawerMenu() {
 					"/dashboard/posts/create",
 					"post.create"
 				),
-				createMenu(
-					"Danh mục bài viết",
-					ClassOutlined,
-					"/dashboard/posts/categories",
-					"emp.view"
-				),
 			]
 		),
 
