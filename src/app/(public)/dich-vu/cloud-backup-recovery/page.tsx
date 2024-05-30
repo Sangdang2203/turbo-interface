@@ -14,6 +14,7 @@ import {
 	Typography,
 } from "@mui/material";
 import Image from "next/image";
+import ContactPopup from "@/components/ContactPopup";
 
 const CloudBackupPage = () => {
 	return (
@@ -185,8 +186,8 @@ const CloudBackupPage = () => {
 							<Box
 								textAlign="center"
 								my={3}>
-								<Typography className="text-[4rem] text-sky-600">
-									+100%
+								<Typography className="text-[4rem] font-semibold text-sky-600">
+									100%
 								</Typography>
 								<Typography className="text-xl text-gray-400">
 									an toàn dữ liệu cho doanh nghiệp
@@ -195,47 +196,31 @@ const CloudBackupPage = () => {
 
 							<Box
 								my={3}
-								display="flex"
-								justifyContent="space-around"
-								width="60%"
-								className="hidden lg:block">
-								<Box
-									sx={{
-										display: "flex",
-										flexDirection: "column",
-										justifyContent: "center",
-										alignItems: "center",
-									}}>
+								className="hidden lg:flex justify-between">
+								<Box className="flex flex-col justify-center items-center mx-5">
 									<Image
 										src={icon_01}
 										className="w-16 h-16"
-										alt=""></Image>
-									<Typography className="font-semibold">Veeam B&R</Typography>
+										alt=""
+									/>
+									<Typography className="text-[0.75rem]">Veeam B&R</Typography>
 								</Box>
 
-								<Box
-									sx={{
-										display: "flex",
-										flexDirection: "column",
-										justifyContent: "center",
-										alignItems: "center",
-									}}>
+								<Box className="flex flex-col justify-center items-center mx-5">
 									<Image
 										src={icon_02}
 										className="w-16 h-16"
-										alt=""></Image>
-									<Typography className="font-semibold">
+										alt=""
+									/>
+									<Typography className="text-[0.75rem]">
 										Cloud Backup Storage
 									</Typography>
 								</Box>
 							</Box>
 
-							<Button
-								className="btn-grad rounded-full w-1/3 my-3 hover:opacity-80"
-								href="/contact"
-								target="_blank">
-								Sử dụng ngay
-							</Button>
+							<Box className="mb-5">
+								<ContactPopup />
+							</Box>
 						</Grid>
 
 						<Grid

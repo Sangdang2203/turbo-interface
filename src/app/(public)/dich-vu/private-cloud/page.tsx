@@ -1,5 +1,6 @@
 import icon_01 from "@/app/images/privateCloud/icon_01.png";
 import icon_02 from "@/app/images/privateCloud/icon_02.png";
+import ContactPopup from "@/components/ContactPopup";
 import { ReadMoreRounded, TaskAltRounded } from "@mui/icons-material";
 import {
 	Box,
@@ -238,44 +239,31 @@ const PrivateCloud = () => {
 								display="flex"
 								justifyContent="space-around"
 								width="60%">
-								<Box
-									sx={{
-										display: "flex",
-										flexDirection: "column",
-										justifyContent: "center",
-										alignItems: "center",
-									}}>
+								<Box className="flex flex-col items-center justify-center">
 									<Image
 										src={icon_01}
 										className="w-16 h-16"
-										alt=""></Image>
+										alt=""
+									/>
 									<Typography className="font-semibold">
 										Cấu hình linh hoạt
 									</Typography>
 								</Box>
-								<Box
-									sx={{
-										display: "flex",
-										flexDirection: "column",
-										justifyContent: "center",
-										alignItems: "center",
-									}}>
+								<Box className="flex flex-col items-center justify-center">
 									<Image
 										src={icon_02}
 										className="w-16 h-16"
-										alt=""></Image>
+										alt=""
+									/>
 									<Typography className="font-semibold">
 										Hiệu năng cao
 									</Typography>
 								</Box>
 							</Box>
 
-							<Button
-								className="btn-grad rounded-full w-1/3 my-3 hover:opacity-80"
-								href="/contact"
-								target="_blank">
-								Liên hệ ngay
-							</Button>
+							<Box className="my-5">
+								<ContactPopup />
+							</Box>
 						</Grid>
 
 						<Grid
