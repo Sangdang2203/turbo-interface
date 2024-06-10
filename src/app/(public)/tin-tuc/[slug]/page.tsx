@@ -32,7 +32,7 @@ export default async function PostDetail({
 	const sanitizedContent = DOMPurify.sanitize(post?.content || "");
 
 	return (
-		<Box className="w-full">
+		<Box className="w-full bg-white">
 			<Box className="text-white themePost flex justify-center items-center">
 				<Typography className="text-xl w-3/4 leading-10 font-bold uppercase text-center text-with-shadow">
 					{post?.title}

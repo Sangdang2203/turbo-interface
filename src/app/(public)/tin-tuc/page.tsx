@@ -159,7 +159,7 @@ export default function NewsPage() {
 													key={item.id}
 													className="post_card max-h-[500px] shadow-sm hover:scale-105 hover:duration-700">
 													<div className="card-image">
-														<Link href={`news/${item.slug}`}>
+														<Link href={`tin-tuc/${item.slug}`}>
 															{item.urlImage && (
 																<Image
 																	src={
@@ -193,7 +193,7 @@ export default function NewsPage() {
 													<div className="min-h-[150px] px-1">
 														<Tooltip title={item.title}>
 															<Link
-																href={`news/${item.slug}`}
+																href={`tin-tuc/${item.slug}`}
 																className="heading no-underline line-clamp-2">
 																{item.title}
 															</Link>
