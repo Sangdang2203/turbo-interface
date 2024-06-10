@@ -1,17 +1,15 @@
 "use client";
 import { Divider, List, Toolbar } from "@mui/material";
+
 import {
-	AddCircleOutlineOutlined,
-	AppsOutlined,
-	ArticleOutlined,
-	BadgeOutlined,
-	ManageSearchRounded,
-	RecentActors,
-	ClassOutlined,
+	AddCircleOutlineOutlined, AppsOutlined, ArticleOutlined, ManageSearchRounded, RecentActors,
 } from "@mui/icons-material";
+
 import * as React from "react";
 import { OverridableComponent } from "@mui/material/OverridableComponent";
 import MenuGroup from "@/components/MenuGroup";
+import logo from "@/app/images/logoTurbo.png";
+import Image from "next/image";
 
 // @ts-ignore
 function createMenu(
@@ -60,7 +58,10 @@ export default function DrawerMenu() {
 
 	return (
 		<div>
-			<Toolbar></Toolbar>
+			<Toolbar className="flex justify-center">
+				<Image src={logo} width={100} height={50} alt="Turbo AI Solution" title="Turbo AI Solution" />
+			</Toolbar>
+
 			<Divider />
 			<List>
 				{menu.map((item, index) => (

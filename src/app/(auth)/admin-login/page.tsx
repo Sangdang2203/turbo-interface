@@ -1,7 +1,6 @@
 "use client";
 
 import { Tabs, Tab, Container } from "@mui/material";
-import { useSession } from "next-auth/react";
 import AdminLoginForm from "./AdminLoginForm";
 import React from "react";
 
@@ -13,7 +12,7 @@ export default function LoginPage() {
   };
 
   return (
-    <Container className="my-[15%]">
+    <Container>
       <Tabs
         value={value}
         onChange={handleChange}

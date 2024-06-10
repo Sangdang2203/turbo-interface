@@ -4,8 +4,6 @@ import { CustomerMessage, Post } from "@/types/interfaces";
 import { useSession } from "next-auth/react";
 import React from "react";
 import {
-	BarChart,
-	Bar,
 	XAxis,
 	YAxis,
 	Tooltip,
@@ -255,6 +253,7 @@ const Dashboard = () => {
 								</LineChart>
 							</ResponsiveContainer>
 						</div>
+
 						{/* Barchart show the amount of posts. */}
 						<div className="post_card max-h-[500px] shadow-sm my-3">
 							<div className=" flex justify-between px-4">
@@ -270,19 +269,20 @@ const Dashboard = () => {
 								width="100%"
 								height={300}
 								className="mt-5">
-								<BarChart
+								<LineChart
 									data={postsEachMonth}
 									barSize={30}
 									barGap={10}>
 									<XAxis dataKey="month" />
-									<Bar
+									<YAxis />
+									<Line
 										dataKey="Amount"
 										fill="#006769"
 										strokeWidth={2}
 										className="cursor-pointer"
 									/>
 									<Tooltip />
-								</BarChart>
+								</LineChart>
 							</ResponsiveContainer>
 						</div>
 					</div>

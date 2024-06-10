@@ -6,6 +6,12 @@ html:focus-within {
 	scroll-behavior: smooth;
 }
 
+.wrapper {
+	position: fixed;
+	top: 50%;
+	bottom: 50%;
+}
+
 .gradientText {
 	background: linear-gradient(
 		to right,

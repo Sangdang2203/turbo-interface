@@ -2,24 +2,17 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { VisibilityOff, Visibility } from "@mui/icons-material";
+
 import {
-	Box,
-	Alert,
-	AlertTitle,
-	FormControl,
-	OutlinedInput,
-	InputAdornment,
-	IconButton,
-	FormHelperText,
-	Button,
-	InputLabel,
+	Box, Alert, AlertTitle, FormControl, OutlinedInput, InputAdornment, IconButton, FormHelperText, Button, InputLabel,
 } from "@mui/material";
+
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import React from "react";
-import z from "zod";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
+import React from "react";
+import z from "zod";
 
 const schema = z.object({
 	username: z.string({
@@ -83,8 +76,8 @@ export default function AdminLoginForm() {
 			onSubmit={handleSubmit(onSubmit)}
 			sx={{
 				maxWidth: "500px",
-				margin: "auto",
 				padding: "20px",
+				margin: "auto",
 				borderRadius: "8px",
 				boxShadow: "0 4px 8px rgba(0,0,0,0.1)",
 				backgroundColor: "white",
@@ -99,7 +92,7 @@ export default function AdminLoginForm() {
 			)}
 
 			<FormControl
-				fullWidth
+				fullWidth sx={{ margin: "8px 0" }}
 				variant="outlined"
 				error={!!errors.username}>
 				<InputLabel htmlFor="username">Username</InputLabel>
@@ -119,7 +112,7 @@ export default function AdminLoginForm() {
 			</FormControl>
 
 			<FormControl
-				fullWidth
+				fullWidth sx={{ margin: "8px 0" }}
 				variant="outlined"
 				error={!!errors.password}>
 				<InputLabel htmlFor="password">Password</InputLabel>

@@ -1,28 +1,11 @@
 "use client";
 
 import {
-	Dialog,
-	Button,
-	Grid,
-	IconButton,
-	Paper,
-	Switch,
-	Table,
-	TableBody,
-	TableCell,
-	TableContainer,
-	TableHead,
-	TablePagination,
-	TableRow,
-	TextField,
-	Tooltip,
+	Dialog, Button, Grid, IconButton, Paper, Switch, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, TextField, Tooltip,
 } from "@mui/material";
 
 import {
-	SearchOutlined,
-	AddCircleOutlineRounded,
-	EditNoteRounded,
-	DeleteOutline,
+	SearchOutlined, AddCircleOutlineRounded, EditNoteRounded, DeleteOutline,
 } from "@mui/icons-material";
 
 import Loading from "@/components/Loading";
