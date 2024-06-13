@@ -47,24 +47,21 @@ export default function AboutPage() {
 				</Typography>
 			</Container>
 
-			<Container sx={{ width: "100%", my: 5 }}>
-				<ImageList
-					variant="masonry"
-					cols={3}
-					gap={8}>
-					{images.map(item => (
-						<ImageListItem key={item.img}>
-							<Image
-								className="rounded-xl"
-								width={360}
-								height={200}
-								src={item.img}
-								alt={item.img}
-								loading="lazy"
-							/>
-						</ImageListItem>
-					))}
-				</ImageList>
+			{/* list of images */}
+			<Container className="grid grid-cols-2 lg:grid-cols-3 gap-y-3">
+				{images.map(item => {
+					return (
+						<Image
+							key={item.img}
+							className="max-w-[190px] max-h-[120px] rounded-xl lg:max-w-[350px] lg:max-h-[220px]"
+							width={350}
+							height={220}
+							src={item.img}
+							alt={item.img}
+							loading="lazy"
+						/>
+					);
+				})}
 			</Container>
 
 			<Container>

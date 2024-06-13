@@ -183,7 +183,7 @@ export default function HomePage() {
 				</Grid>
 			</Container>
 
-			{/* Why clients choose us, Khách hàng nói gì về chúng tôi */}
+			{/* Why clients choose us */}
 			<Box className="themeGlobal min-h-[500px]">
 				<Box className="text-center py-10">
 					<Typography className="text-[2rem] md:text-[2.5rem]">
@@ -287,6 +287,7 @@ export default function HomePage() {
 					Khách hàng nói gì về chúng tôi
 				</Typography>
 
+				{/* Feedbacks */}
 				<Container className="grid sm:grid-cols-3 gap-x-6 gap-y-6 pb-10">
 					{feedbacks.map(item => {
 						return (

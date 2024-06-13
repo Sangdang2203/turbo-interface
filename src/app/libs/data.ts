@@ -17,7 +17,7 @@ export const homeServices = [
 		id: 2,
 		title: "Smart Cloud Camera",
 		sub: "Giải pháp Cloud Camera tích hợp A.I",
-		desc: "Nền tảng Cloud quản lý và lưu trữ Video Camera, tích hợp trí thông tin nhân tạo (AI) dùng nhận dạng vật thể, nhận dạng khuôn mặt, nhận dạng biển số, kiểm soát an ninh, giao thông…",
+		desc: "Nền tảng Cloud quản lý và lưu trữ Video Camera, tích hợp trí thông tin nhân tạo (AI) dùng nhận dạng vật thể, nhận dạng khuôn mặt, nhận dạng biển số, kiểm soát an ninh, …",
 	},
 	{
 		id: 3,
@@ -879,7 +879,7 @@ export const cloudServices = [
 		name: "Cloud Server",
 		describe:
 			"Cụm máy chủ Cloud với Firewall cùng mạng nội bộ riêng biệt, trở thành trung tâm dữ liệu ảo cho doanh nghiệp thực hiện chuyển đổi số.",
-		link: "/services/cloud-server",
+		link: "/dich-vu/cloud-server",
 		image: cloudServer,
 	},
 	{
@@ -895,7 +895,7 @@ export const cloudServices = [
 		name: "Backup & DR Site",
 		describe:
 			"Sao lưu và khôi phục dữ liệu trên Cloud. Thực hiện Disaster Recovery Site với chi phí thấp.",
-		link: "/services/cloud-backup-recovery",
+		link: "/dich-vu/cloud-backup-recovery",
 		image: Backup,
 	},
 ];
