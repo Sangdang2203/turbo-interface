@@ -48,12 +48,12 @@ export default function AboutPage() {
 			</Container>
 
 			{/* list of images */}
-			<Container className="grid grid-cols-2 lg:grid-cols-3 gap-y-3">
+			<Container className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-2">
 				{images.map(item => {
 					return (
 						<Image
 							key={item.img}
-							className="max-w-[190px] max-h-[120px] rounded-xl lg:max-w-[350px] lg:max-h-[220px]"
+							className="max-w-[11rem] max-h-[7.5rem] rounded-xl md:max-w-[235px] md:max-h-[150px] lg:max-w-[350px] lg:max-h-[220px]"
 							width={350}
 							height={220}
 							src={item.img}
