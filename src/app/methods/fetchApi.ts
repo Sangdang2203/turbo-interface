@@ -1,3 +1,5 @@
+import { environmentType } from "@/environment";
+
 export const fetchPosts = async () => {
 	const response = await fetch((environmentType === "development" ? process.env.NEXT_PUBLIC_API_URL : process.env.NEXT_API_URL) + "/posts", {
 		method: "GET",
