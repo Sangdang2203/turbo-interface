@@ -28,9 +28,8 @@ import {
 	Grid,
 } from "@mui/material";
 
+import dynamic from "next/dynamic";
 import { fetchCategories, fetchUsers } from "app/methods/method";
-import { CKEditor } from "@ckeditor/ckeditor5-react";
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { useSession } from "next-auth/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
@@ -38,6 +37,8 @@ import useS3 from "@/hooks/useS3";
 import Image from "next/image";
 
 export default function CreatePost() {
+
+	const CkEditor = dynamic(() => import("@/components/MyEditor"), { ssr: false });
 	const { data: session } = useSession();
 
 	const [categories, setCategories] = React.useState<Map<string, string>>(
@@ -54,6 +55,7 @@ export default function CreatePost() {
 		if (preview) {
 			return URL.createObjectURL(preview);
 		}
+		return null;
 	}, [preview]);
 
 	const {
@@ -302,14 +304,7 @@ export default function CreatePost() {
 							Nội dung bài viết:
 						</InputLabel>
 
-						<CKEditor
-							editor={ClassicEditor}
-							data={content}
-							onChange={(event, editor) => {
-								const data = editor.getData();
-								setContent(data);
-							}}
-						/>
+						<CkEditor content={content} setContent={setContent}></CkEditor>
 					</Box>
 
 					<Box className="flex justify-center mb-2 mt-10 mx-auto">

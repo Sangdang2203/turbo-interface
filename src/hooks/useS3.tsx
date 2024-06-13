@@ -46,7 +46,6 @@ const useS3 = () => {
 		return (
 			<Button
 				component="label"
-				role={undefined}
 				fullWidth
 				variant="contained"
 				tabIndex={-1}
