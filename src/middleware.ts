@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { withAuth } from "next-auth/middleware";
+import { environmentType } from "./environment";
 
 const url = (environmentType === "development" ? process.env.NEXT_PUBLIC_API_URL : process.env.NEXT_API_URL);
 

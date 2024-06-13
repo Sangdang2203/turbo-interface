@@ -85,7 +85,7 @@ export async function POST(req: NextRequest) {
 		return NextResponse.json({
 			ok: false,
 			status: "Server Error",
-			message: "Opps! Something went wrong while trying to add new post.",
+			message: "Opps! Something went wrong while trying to send information.",
 		});
 	}
 }

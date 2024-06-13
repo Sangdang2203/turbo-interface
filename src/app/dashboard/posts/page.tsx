@@ -25,20 +25,26 @@ export default function PostManagement() {
 	// SEARCH POST
 	function handleSearch(event: React.FormEvent<HTMLFormElement>) {
 		event.preventDefault();
-		const nameInput = document.getElementById(
-			"searchInput"
-		) as HTMLInputElement;
-		const name = nameInput.value.trim();
 
-		if (name === "") {
-			fetchPosts().then(res => setPosts(res.data.reverse()));
-		} else {
-			const filterPosts = posts
-				.reverse()
-				.filter(post => post.title.includes(name));
+		const nameInput = document.getElementById("searchInput") as HTMLInputElement;
+		const searchTerm = nameInput.value.trim().toLowerCase();
 
-			setPosts(filterPosts);
+		// Early return for empty search term:
+		if (searchTerm === "") {
+			fetchPosts().then((data) => {
+				if (data.ok) {
+					setPosts(data.data.reverse());
+				}
+			});
+			return;
 		}
+
+		const filteredPosts = posts.reverse().filter((post) => {
+			const postTitleLower = post.title.toLowerCase();
+			return postTitleLower.includes(searchTerm);
+		});
+
+		setPosts(filteredPosts);
 	}
 	// DELETE POST
 	async function handleDelete(postId: string) {

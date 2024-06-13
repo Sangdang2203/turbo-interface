@@ -29,24 +29,25 @@ export default function NewsPage() {
 
 	function handleSearch(event: React.FormEvent<HTMLFormElement>) {
 		event.preventDefault();
-		const nameInput = document.getElementById(
-			"searchInput"
-		) as HTMLInputElement;
-		const name = nameInput.value.trim();
 
-		if (name === "") {
-			fetchPosts().then((data: { ok: any; data: any[] }) => {
+		const nameInput = document.getElementById("searchInput") as HTMLInputElement;
+		const searchTerm = nameInput.value.trim().toLowerCase();
+
+		if (searchTerm === "") {
+			fetchPosts().then((data) => {
 				if (data.ok) {
 					setPosts(data.data.reverse());
 				}
 			});
-		} else {
-			const filterPosts = posts
-				.reverse()
-				.filter(post => post.title.toLowerCase().includes(name.toLowerCase()));
-
-			setPosts(filterPosts);
+			return;
 		}
+
+		const filteredPosts = posts.reverse().filter((post) => {
+			const postTitleLower = post.title.toLowerCase();
+			return postTitleLower.includes(searchTerm);
+		});
+
+		setPosts(filteredPosts);
 	}
 
 	const handleChangePage = (

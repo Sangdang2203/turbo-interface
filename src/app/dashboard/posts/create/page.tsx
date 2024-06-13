@@ -15,17 +15,7 @@ import {
 import { DoneRounded, RotateLeftRounded } from "@mui/icons-material";
 
 import {
-	Box,
-	Button,
-	Typography,
-	Paper,
-	TextField,
-	InputLabel,
-	FormControl,
-	ListItemText,
-	MenuItem,
-	Select,
-	Grid,
+	Box, Button, Typography, Paper, TextField, InputLabel, FormControl, ListItemText, MenuItem, Select, Grid,
 } from "@mui/material";
 
 import dynamic from "next/dynamic";
@@ -35,6 +25,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
 import useS3 from "@/hooks/useS3";
 import Image from "next/image";
+import uploadImage from "../../../images/uploadImage.png"
 
 export default function CreatePost() {
 
@@ -113,6 +104,7 @@ export default function CreatePost() {
 		toast.dismiss(message);
 	}
 
+	//FETCH DATA
 	React.useEffect(() => {
 		if (session) {
 			Promise.all([fetchCategories(), fetchUsers()]).then(data => {
@@ -163,9 +155,8 @@ export default function CreatePost() {
 							) : (
 								<Image
 									{...register("urlImage")}
-									src={
-										"https://dummyimage.com/500x500/c3c3c3/FFF.png&text=UploadImage"
-									}
+									src={uploadImage}
+									priority
 									alt={"preview"}
 									title={"preview"}
 									width={220}

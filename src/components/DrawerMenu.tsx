@@ -59,7 +59,7 @@ export default function DrawerMenu() {
 	return (
 		<div>
 			<Toolbar className="flex justify-center">
-				<Image src={logo} width={100} height={50} alt="Turbo AI Solution" title="Turbo AI Solution" />
+				<Image src={logo} width={100} height={40} priority alt="Turbo AI Solution" title="Turbo AI Solution" />
 			</Toolbar>
 
 			<Divider />

@@ -18,9 +18,8 @@ const uploadFileS3 = async (file: File) => {
 		}
 
 		const parsedPath = path.parse(file.name);
-		const uniqueFileName = `${moment().format("MM-YY")}/${Date.now()}_${
-			parsedPath.name
-		}.webp`;
+		const uniqueFileName = `${moment().format("MM-YY")}/${Date.now()}_${parsedPath.name
+			}.webp`;
 		const fileData = await file.arrayBuffer();
 		const convertedImage = await sharp(Buffer.from(fileData)).webp().toBuffer();
 
@@ -30,7 +29,7 @@ const uploadFileS3 = async (file: File) => {
 			Body: convertedImage,
 			ContentType: "image/webp",
 		};
-		console.log("File: ", fileParams);
+
 		await s3Client.send(new PutObjectCommand(fileParams));
 
 		return JSON.stringify({ fileLink: uniqueFileName, status: "ok" });
