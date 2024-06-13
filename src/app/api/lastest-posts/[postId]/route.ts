@@ -1,3 +1,4 @@
+import { environmentType } from "@/environment";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(
@@ -6,7 +7,7 @@ export async function GET(
 ) {
 	try {
 		const id = params.postId;
-		const res = await fetch(process.env.NEXT_PUBLIC_API_URL + `/posts/${id}`, {
+		const res = await fetch((environmentType === "development" ? process.env.NEXT_PUBLIC_API_URL : process.env.NEXT_API_URL) + `/posts/${id}`, {
 			method: "GET",
 			cache: "no-cache",
 		});
@@ -48,7 +49,7 @@ export async function PUT(
 	const updatePost = await req.json();
 	try {
 		const response = await fetch(
-			process.env.NEXT_PUBLIC_API_URL + `/posts/${id} `,
+			(environmentType === "development" ? process.env.NEXT_PUBLIC_API_URL : process.env.NEXT_API_URL) + `/posts/${id} `,
 			{
 				method: req.method,
 				headers: req.headers,
@@ -93,7 +94,7 @@ export async function DELETE(
 	try {
 		const id = params.postId;
 
-		const res = await fetch(process.env.NEXT_PUBLIC_API_URL + `/posts/${id}`, {
+		const res = await fetch((environmentType === "development" ? process.env.NEXT_PUBLIC_API_URL : process.env.NEXT_API_URL) + `/posts/${id}`, {
 			method: req.method,
 			headers: req.headers,
 			cache: "no-cache",

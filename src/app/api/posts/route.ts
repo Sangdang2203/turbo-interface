@@ -1,10 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 import { authOptions } from "../auth/[...nextauth]/authOptions";
 import { getServerSession } from "next-auth/next";
+import { environmentType } from "@/environment";
 
 export async function GET(req: NextRequest) {
 	try {
-		const response = await fetch(process.env.NEXT_PUBLIC_API_URL + "/posts", {
+		const response = await fetch((environmentType === "development" ? process.env.NEXT_PUBLIC_API_URL : process.env.NEXT_API_URL) + "/posts", {
 			method: req.method,
 			headers: req.headers,
 			cache: "no-cache",
@@ -50,7 +51,7 @@ export async function POST(req: NextRequest) {
 	}
 
 	try {
-		const response = await fetch(process.env.NEXT_PUBLIC_API_URL + "/posts", {
+		const response = await fetch((environmentType === "development" ? process.env.NEXT_PUBLIC_API_URL : process.env.NEXT_API_URL) + "/posts", {
 			method: req.method,
 			headers: {
 				"Content-Type": "application/json",

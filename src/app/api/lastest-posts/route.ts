@@ -1,8 +1,9 @@
+import { environmentType } from "@/environment";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {
 	try {
-		const response = await fetch(process.env.NEXT_PUBLIC_API_URL + "/posts", {
+		const response = await fetch((environmentType === "development" ? process.env.NEXT_PUBLIC_API_URL : process.env.NEXT_API_URL) + "/posts", {
 			method: req.method,
 			headers: req.headers,
 			cache: "no-cache",
@@ -41,7 +42,7 @@ export async function POST(req: NextRequest) {
 	console.log(post);
 
 	try {
-		const response = await fetch(process.env.NEXT_PUBLIC_API_URL + "/posts", {
+		const response = await fetch((environmentType === "development" ? process.env.NEXT_PUBLIC_API_URL : process.env.NEXT_API_URL) + "/posts", {
 			method: req.method,
 			headers: req.headers,
 			body: JSON.stringify(post),

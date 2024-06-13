@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { authOptions } from "../auth/[...nextauth]/authOptions";
 import { getServerSession } from "next-auth/next";
+import { environmentType } from "@/environment";
 
 export async function GET(req: NextRequest) {
 	const session = await getServerSession(authOptions);
@@ -15,7 +16,7 @@ export async function GET(req: NextRequest) {
 
 	try {
 		const response = await fetch(
-			process.env.NEXT_PUBLIC_API_URL + "/authorities",
+			(environmentType === "development" ? process.env.NEXT_PUBLIC_API_URL : process.env.NEXT_API_URL) + "/authorities",
 			{
 				headers: {
 					Authorization: `Bearer ${session.user.id_token}`,
@@ -57,7 +58,7 @@ export async function POST(request: Request) {
 
 	try {
 		const response = await fetch(
-			process.env.NEXT_PUBLIC_API_URL + "/authorities",
+			(environmentType === "development" ? process.env.NEXT_PUBLIC_API_URL : process.env.NEXT_API_URL) + "/authorities",
 			{
 				method: "GET",
 				headers: {

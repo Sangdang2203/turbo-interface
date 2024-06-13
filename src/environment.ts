@@ -1,0 +1,1 @@
+export const environmentType: "development" | "production" = "production";

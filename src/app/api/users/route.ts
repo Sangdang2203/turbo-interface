@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { authOptions } from "../auth/[...nextauth]/authOptions";
 import { getServerSession } from "next-auth/next";
+import { environmentType } from "@/environment";
 
 export async function GET(req: NextRequest) {
 	const session = await getServerSession(authOptions);
@@ -15,7 +16,7 @@ export async function GET(req: NextRequest) {
 
 	try {
 		const response = await fetch(
-			process.env.NEXT_PUBLIC_API_URL + "/admin/users",
+			(environmentType === "development" ? process.env.NEXT_PUBLIC_API_URL : process.env.NEXT_API_URL) + "/admin/users",
 			{
 				method: req.method,
 				headers: {
@@ -59,7 +60,7 @@ export async function POST(req: NextRequest) {
 
 	try {
 		const response = await fetch(
-			process.env.NEXT_PUBLIC_API_URL + "/admin/users",
+			(environmentType === "development" ? process.env.NEXT_PUBLIC_API_URL : process.env.NEXT_API_URL) + "/admin/users",
 			{
 				method: req.method,
 				headers: {

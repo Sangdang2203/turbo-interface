@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { authOptions } from "../../auth/[...nextauth]/authOptions";
 import { getServerSession } from "next-auth/next";
+import { environmentType } from "@/environment";
 
 export async function GET(
 	req: NextRequest,
@@ -19,7 +20,7 @@ export async function GET(
 		}
 
 		const res = await fetch(
-			process.env.NEXT_PUBLIC_API_URL + `/contacts/${id}`,
+			(environmentType === "development" ? process.env.NEXT_PUBLIC_API_URL : process.env.NEXT_API_URL) + `/contacts/${id}`,
 			{
 				method: req.method,
 				headers: {
@@ -63,7 +64,7 @@ export async function DELETE(
 		}
 
 		const res = await fetch(
-			process.env.NEXT_PUBLIC_API_URL + `/contacts/${id}`,
+			(environmentType === "development" ? process.env.NEXT_PUBLIC_API_URL : process.env.NEXT_API_URL) + `/contacts/${id}`,
 			{
 				method: req.method,
 				headers: {

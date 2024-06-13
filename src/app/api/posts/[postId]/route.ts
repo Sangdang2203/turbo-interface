@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { authOptions } from "../../auth/[...nextauth]/authOptions";
 import { getServerSession } from "next-auth/next";
+import { environmentType } from "@/environment";
 
 export async function GET(
 	req: NextRequest,
@@ -8,7 +9,7 @@ export async function GET(
 ) {
 	try {
 		const id = params.postId;
-		const res = await fetch(process.env.NEXT_PUBLIC_API_URL + `/posts/${id}`, {
+		const res = await fetch((environmentType === "development" ? process.env.NEXT_PUBLIC_API_URL : process.env.NEXT_API_URL) + `/posts/${id}`, {
 			method: "GET",
 			cache: "no-cache",
 		});
@@ -60,7 +61,7 @@ export async function PUT(
 
 	try {
 		const response = await fetch(
-			process.env.NEXT_PUBLIC_API_URL + `/posts/${id} `,
+			(environmentType === "development" ? process.env.NEXT_PUBLIC_API_URL : process.env.NEXT_API_URL) + `/posts/${id} `,
 			{
 				method: req.method,
 				headers: {
@@ -111,7 +112,7 @@ export async function DELETE(
 	}
 
 	try {
-		const res = await fetch(process.env.NEXT_PUBLIC_API_URL + `/posts/${id}`, {
+		const res = await fetch((environmentType === "development" ? process.env.NEXT_PUBLIC_API_URL : process.env.NEXT_API_URL) + `/posts/${id}`, {
 			method: req.method,
 			headers: {
 				Authorization: `Bearer ${session.user.id_token}`,

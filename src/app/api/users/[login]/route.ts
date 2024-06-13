@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { authOptions } from "../../auth/[...nextauth]/authOptions";
 import { getServerSession } from "next-auth/next";
+import { environmentType } from "@/environment";
 
 export async function DELETE(
 	req: NextRequest,
@@ -19,7 +20,7 @@ export async function DELETE(
 
 	try {
 		const res = await fetch(
-			process.env.NEXT_PUBLIC_API_URL + `/admin/users/${id}`,
+			(environmentType === "development" ? process.env.NEXT_PUBLIC_API_URL : process.env.NEXT_API_URL) + `/admin/users/${id}`,
 			{
 				method: req.method,
 				headers: {
@@ -64,7 +65,7 @@ export async function PUT(
 
 	try {
 		const response = await fetch(
-			process.env.NEXT_PUBLIC_API_URL + "/admin/users" + id,
+			(environmentType === "development" ? process.env.NEXT_PUBLIC_API_URL : process.env.NEXT_API_URL) + "/admin/users" + id,
 			{
 				method: request.method,
 				headers: request.headers,

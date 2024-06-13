@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { withAuth } from "next-auth/middleware";
 
-const url = process.env.NEXT_PUBLIC_API_URL;
+const url = (environmentType === "development" ? process.env.NEXT_PUBLIC_API_URL : process.env.NEXT_API_URL);
 
 export default withAuth(
 	// `withAuth` augments your `Request` with the user's token.

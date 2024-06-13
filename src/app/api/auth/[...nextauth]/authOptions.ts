@@ -1,5 +1,6 @@
 import CredentialsProvider from "next-auth/providers/credentials";
 import { NextAuthOptions } from "next-auth";
+import { environmentType } from "@/environment";
 
 export const authOptions: NextAuthOptions = {
 	// Configure one or more authentication providers
@@ -11,8 +12,7 @@ export const authOptions: NextAuthOptions = {
 				password: { label: "Password", type: "password" },
 			},
 			async authorize(credentials, req) {
-				const url = `${process.env.NEXT_PUBLIC_API_URL}/authenticate`;
-
+				const url = `${(environmentType === "development" ? process.env.NEXT_PUBLIC_API_URL : process.env.NEXT_API_URL)}/authenticate`;
 				try {
 					const res = await fetch(url, {
 						cache: "no-cache",
