@@ -63,7 +63,7 @@ export default function AboutPage() {
 				})}
 			</Container>
 
-			<Container className="shadow-lg rounded-2xl py-5">
+			<Container className="rounded-2xl py-5">
 				<Box className="text-center">
 					<Typography className="text-[1.5rem] md:text-[2rem] font-semibold">
 						Được hàng trăm doanh nghiệp tin dùng cho đến nay
