@@ -1,3 +1,4 @@
+"use client"
 import * as React from "react";
 import Box from "@mui/material/Box";
 import SpeedDial from "@mui/material/SpeedDial";
@@ -9,6 +10,8 @@ import {
 	MessageRounded,
 	PhoneCallbackRounded,
 } from "@mui/icons-material";
+import { IconButton } from "@mui/material";
+import PhoneInTalkIcon from '@mui/icons-material/PhoneInTalk';
 
 const actions = [
 	{
@@ -37,15 +40,24 @@ export default function BasicSpeedDial() {
 				bottom: 5,
 				zIndex: 99,
 			}}>
+
+			<Box className="block lg:hidden" >
+				<IconButton href="tel:0769999967" className="bg-white absolute bottom-4 right-4">
+					<PhoneInTalkIcon color="success" fontSize="large" className="pulse" />
+				</IconButton>
+			</Box>
+
 			<SpeedDial
 				ariaLabel="SpeedDial basic example"
+				className='hidden lg:block'
 				sx={{ position: "absolute", bottom: 8, right: 16 }}
 				icon={<SpeedDialIcon color="info" />}>
 				{actions.map(action => (
 					<SpeedDialAction
 						key={action.name}
 						icon={action.icon}
-						tooltipTitle={action.name}></SpeedDialAction>
+						tooltipTitle={action.name}>
+					</SpeedDialAction>
 				))}
 			</SpeedDial>
 		</Box>
