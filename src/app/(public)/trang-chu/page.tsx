@@ -43,7 +43,7 @@ export default function HomePage() {
 				textAlign="center"
 				my={5}
 				className="text-white themePolygonLuminary py-10">
-				<Typography className="text-[2.5rem] font-semibold uppercase ">
+				<Typography className="text-[1.5rem] lg:text-[2.5rem] font-semibold uppercase ">
 					{currentText} điện toán đám mây <br /> chất lượng hàng đầu
 				</Typography>
 				{/* <Typography className="text-[2rem] font-extralight">
