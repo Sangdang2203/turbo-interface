@@ -21,12 +21,8 @@ import {
 
 import { PublicRounded } from "@mui/icons-material";
 import logoTurbo from "@/app/images/logoTurbo.png";
-import cloudServer from "@/app/images/cloudServer.png";
-import cloudCamera from "@/app/images/cloudCamera.png";
-import Backup from "@/app/images/Backup.png";
 import promotion from "@/app/images/promotion.jpg";
 import { cloudServices, feedbacks, homeServices } from "app/libs/data";
-import { it } from "node:test";
 
 export default function HomePage() {
 	const [currentText, setCurrentText] = React.useState("Ứng dụng");
@@ -48,11 +44,11 @@ export default function HomePage() {
 				my={5}
 				className="text-white themePolygonLuminary py-10">
 				<Typography className="text-[2.5rem] font-semibold uppercase ">
-					{currentText}
+					{currentText} điện toán đám mây <br /> chất lượng hàng đầu
 				</Typography>
-				<Typography className="text-[2rem] font-extralight">
-					điện toán đám mây chất lượng hàng đầu.
-				</Typography>
+				{/* <Typography className="text-[2rem] font-extralight">
+
+				</Typography> */}
 				<Typography className="text-center text-[1rem] md:text-[1.75rem] font-light w-3/4 mx-auto my-5">
 					Công ty Turbo Solutions chung tay cùng quý doanh nghiệp thực hiện
 					chuyển đổi số bằng cách tích hợp các công nghệ thông minh 4.0, cùng
@@ -235,11 +231,11 @@ export default function HomePage() {
 							<Box className="flex items-center py-4">
 								<Typography className="py-4">Key success</Typography>
 								<Chip
-									className="mx-1 bg-sky-200 text-sky-500 font-semibold"
+									className="mx-1 bg-sky-200 text-slate-800 font-semibold"
 									label="Flexible solutions"
 								/>
 								<Chip
-									className="mx-1 bg-sky-200 text-sky-500 font-semibold"
+									className="mx-1 bg-sky-200 text-slate-800 font-semibold"
 									label="Save time"
 								/>
 							</Box>

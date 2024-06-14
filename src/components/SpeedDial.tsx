@@ -42,7 +42,7 @@ export default function BasicSpeedDial() {
 			}}>
 
 			<Box className="block lg:hidden" >
-				<IconButton href="tel:0769999967" className="bg-white absolute bottom-4 right-4">
+				<IconButton href="tel:0769999967" title="Bấm giữ để gọi" className="bg-white absolute bottom-4 right-4">
 					<PhoneInTalkIcon color="success" fontSize="large" className="pulse" />
 				</IconButton>
 			</Box>
