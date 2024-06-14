@@ -161,6 +161,7 @@ export default function CloudFlare() {
 											<Typography className="w-3/4 text-justify">
 												{item.desc}
 											</Typography>
+											<Link href={item.link} className="no-underline text-sky-600 hover:font-semibold">Tìm hiểu thêm</Link>
 										</Box>
 									</Box>
 								);

@@ -85,7 +85,7 @@ export async function POST(req: NextRequest) {
 		return NextResponse.json({
 			ok: false,
 			status: "Server Error",
-			message: "Opps! Something went wrong while trying to send information.",
+			message: "Lỗi Server! Quý khách hàng vui lòng liên hệ Hotline: 076.9999.967 để được hỗ trợ nhanh nhất.",
 		});
 	}
 }
