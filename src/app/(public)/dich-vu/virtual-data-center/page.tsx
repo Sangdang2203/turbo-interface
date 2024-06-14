@@ -161,7 +161,7 @@ export default function VirtualDataCenter() {
 						<Box
 							my={5}
 							sx={{ textAlign: "center" }}>
-							<Typography className="text-[2rem] font-semibold text-sky-900">
+							<Typography className="text-[1.25rem] md:text-[2rem] font-semibold text-sky-900">
 								Bảng giá dịch vụ Virtual Data Center
 							</Typography>
 							<Typography> * Bảng giá chưa bao gồm 10% VAT </Typography>
@@ -209,7 +209,7 @@ export default function VirtualDataCenter() {
 					</Box>
 
 					<Box className=" text-sky-900">
-						<Typography className="text-[1.75rem] font-semibold text-center py-5">
+						<Typography className="text-[1.5rem] md:text-[2rem] font-semibold text-center py-5">
 							Bảng giá tài nguyên bổ sung
 						</Typography>
 

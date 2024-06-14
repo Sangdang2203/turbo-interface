@@ -58,10 +58,52 @@ export default function AboutPage() {
 							height={220}
 							src={item.img}
 							alt={item.img}
-							loading="lazy"
 						/>
 					);
 				})}
+			</Container>
+
+			<Container className="shadow-lg rounded-2xl py-5">
+				<Box className="text-center">
+					<Typography className="text-[1.5rem] md:text-[2rem] font-semibold">
+						Được hàng trăm doanh nghiệp tin dùng cho đến nay
+					</Typography>
+					<Typography className="text-[14px] md:text-[1.25rem] pb-10 pt-3">
+						Khách hàng của chúng tôi đến từ khắp nơi trên thế giới.
+					</Typography>
+				</Box>
+				<Grid
+					container
+					className="flex justify-between items-center text-center">
+					<Grid
+						item
+						xs={6}
+						md={3}>
+						<Typography className="text-[3rem] font-bold">250+</Typography>
+						<Typography>Dự án đã triển khai</Typography>
+					</Grid>
+					<Grid
+						item
+						xs={6}
+						md={3}>
+						<Typography className="text-[3rem] font-bold">10+</Typography>
+						<Typography>Hơn 10 năm kinh nghiệm</Typography>
+					</Grid>
+					<Grid
+						item
+						xs={6}
+						md={3}>
+						<Typography className="text-[3rem] font-bold">5</Typography>
+						<Typography>Quốc gia</Typography>
+					</Grid>
+					<Grid
+						item
+						xs={6}
+						md={3}>
+						<Typography className="text-[3rem] font-bold">50+</Typography>
+						<Typography>Thành viên</Typography>
+					</Grid>
+				</Grid>
 			</Container>
 
 			<Container>

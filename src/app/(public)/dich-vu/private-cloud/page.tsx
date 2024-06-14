@@ -24,10 +24,10 @@ const PrivateCloud = () => {
 	return (
 		<Container>
 			<Box sx={{ textAlign: "center", marginX: "auto", paddingY: 5 }}>
-				<Typography className="text-[2rem] text-center text-sky-900 font-semibold">
+				<Typography className="text-[1.5rem] md:text-[2rem] text-center text-sky-900 font-semibold">
 					Nền tảng Private Cloud mạnh mẽ, ổn định & hiệu năng cao
 				</Typography>
-				<Typography className="text-[1.25rem] w-3/4 mx-auto leading-relaxed text-gray-500">
+				<Typography className="text-[1rem] md:text-[1.25rem] w-4/5 mx-auto leading-relaxed text-gray-500">
 					Sở hữu sức mạnh không giới hạn của điện toán đám mây một cách dễ dàng
 					với Private Cloud chỉ dành riêng cho doanh nghiệp của bạn.
 				</Typography>
@@ -48,7 +48,7 @@ const PrivateCloud = () => {
 					<Typography className="p-3 bg-green-50 text-green-500 uppercase w-fit rounded-full">
 						Lợi ích của private cloud
 					</Typography>
-					<Typography className="my-3 text-[2rem]">
+					<Typography className="my-3 text-[1.25rem] md:text-[2rem]">
 						Lợi ích của Private Cloud là tính linh hoạt, khả năng cung cấp tài
 						nguyên được đảm bảo, bảo mật mạnh mẽ…
 					</Typography>
@@ -159,7 +159,7 @@ const PrivateCloud = () => {
 				<Box
 					my={5}
 					sx={{ textAlign: "center" }}>
-					<Typography className="text-[2rem] font-semibold text-sky-900">
+					<Typography className="text-[1.5rem] md:text-[2rem] font-semibold text-sky-900">
 						Bảng giá dịch vụ Private Cloud
 					</Typography>
 					<Typography> * Bảng giá chưa bao gồm 10% VAT </Typography>
@@ -208,10 +208,10 @@ const PrivateCloud = () => {
 			</Box>
 
 			<Box>
-				<Typography className="text-[2rem] text-sky-900 text-center font-semibold">
+				<Typography className="text-[1.25rem] md:text-[2rem] text-sky-900 text-center font-semibold">
 					Sẵn sàng triển khai Private Cloud?
 				</Typography>
-				<Typography className="text-[1rem] md:text-[1.5rem] text-center w-5/6 mx-auto ">
+				<Typography className="text-[1rem] md:text-[1.5rem] text-center w-5/6 mx-auto pt-2 ">
 					Dịch vụ Private Cloud hoạt động giống như trung tâm dữ liệu của riêng
 					bạn, có thể kiểm soát và định cấu hình theo nhu cầu của tổ chức mình.
 				</Typography>
@@ -245,7 +245,7 @@ const PrivateCloud = () => {
 										className="w-16 h-16"
 										alt=""
 									/>
-									<Typography className="font-semibold">
+									<Typography className="font-semibold text-center">
 										Cấu hình linh hoạt
 									</Typography>
 								</Box>
@@ -255,7 +255,7 @@ const PrivateCloud = () => {
 										className="w-16 h-16"
 										alt=""
 									/>
-									<Typography className="font-semibold">
+									<Typography className="font-semibold text-center">
 										Hiệu năng cao
 									</Typography>
 								</Box>

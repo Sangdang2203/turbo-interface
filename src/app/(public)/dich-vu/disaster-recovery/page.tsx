@@ -38,7 +38,7 @@ export default function DisasterRecovery() {
 					md={6}
 					className=" text-sky-900">
 					<Box pl={2}>
-						<Typography className="text-[2rem] font-semibold">
+						<Typography className="text-[1.5rem] md:text-[2rem] font-semibold">
 							Giải pháp Disaster Recovery, dự phòng và phục hồi thảm họa của
 							EcoCloud.
 						</Typography>
@@ -54,7 +54,7 @@ export default function DisasterRecovery() {
 				</Grid>
 			</Grid>
 
-			<Box className="flex justify-between items-center py-10">
+			<Box className="flex justify-between items-center md:py-10">
 				<Image
 					src={Hyper_V}
 					alt="Hyper_V"
@@ -90,7 +90,7 @@ export default function DisasterRecovery() {
 			<Box
 				textAlign="center"
 				pb={10}>
-				<Typography className="text-[2.5rem] font-semibold text-sky-900">
+				<Typography className="text-[1.5rem] md:text-[2.5rem] font-semibold text-sky-900">
 					4 bước xác lập kế hoạch dự phòng phục hồi thảm họa
 				</Typography>
 			</Box>
@@ -161,7 +161,7 @@ export default function DisasterRecovery() {
 			<Box
 				textAlign="center"
 				py={10}>
-				<Typography className="text-[2.5rem] font-semibold text-sky-900">
+				<Typography className="text-[1.25rem] md:text-[2.5rem] font-semibold text-sky-900 pb-2">
 					Giải pháp Disaster Recovery <br /> dự phòng và khôi phục trên Cloud
 				</Typography>
 				<Typography>
@@ -172,16 +172,16 @@ export default function DisasterRecovery() {
 
 			<Grid
 				container
-				className="pb-5 rounded-2xl my-10">
+				className="pb-5 rounded-2xl my-0 md:my-10">
 				<Grid
 					item
 					xs={12}
 					md={6}
 					className=" text-sky-900">
 					<Grid pl={8}>
-						<Box sx={{ display: "flex", alignItems: "center", py: 1 }}>
+						<Box sx={{ display: "flex", alignItems: "center" }}>
 							<Box>
-								<Typography className="text-[1.3rem] font-semibold pt-5">
+								<Typography className="text-[1.3rem] font-semibold pt-0 md:pt-5">
 									Sao lưu với hạ tầng phụ trên Cloud
 								</Typography>
 								<Typography className="w-3/4 text-justify">
@@ -276,7 +276,7 @@ export default function DisasterRecovery() {
 			<Box className="container grid sm:grid-cols-2 gap-x-28 gap-y-6 pb-10">
 				<Card className="relative rounded-xl hover:shadow-lg cursor-pointer  text-sky-900">
 					<Box className="flex flex-col justify-center items-center p-3">
-						<Typography className="text-[1.5rem] font-bold">
+						<Typography className="text-[1.25rem] md:text-[1.5rem] font-bold">
 							Disaster Recovery với EcoCloud
 						</Typography>
 						<Image
@@ -284,7 +284,7 @@ export default function DisasterRecovery() {
 							className="w-52 h-auto my-5"
 							alt="Disaster Recovery với EcoCloud"
 						/>
-						<Typography className="text-center w-3/4 px-3">
+						<Typography className="text-center w-[80%] px-1">
 							Giảm chi phí triển khai, duy trì Disaster Recovery Site với Trung
 							Tâm Dữ Liệu Ảo của EcoCloud. Chỉ chi trả cho tài nguyên tối thiểu
 							để khôi phục các ứng dụng.
@@ -294,7 +294,7 @@ export default function DisasterRecovery() {
 
 				<Card className="relative rounded-xl hover:shadow-lg cursor-pointer">
 					<Box className="flex flex-col justify-center items-center p-3  text-sky-900">
-						<Typography className="text-[1.5rem] font-bold">
+						<Typography className="text-[1.25rem] md:text-[1.5rem] font-bold">
 							Disaster Recovery với Cloud Azure
 						</Typography>
 
@@ -303,7 +303,7 @@ export default function DisasterRecovery() {
 							className="w-52 h-auto my-5"
 							alt="Disaster Recovery với Cloud Azure"
 						/>
-						<Typography className="text-center w-3/4 px-3">
+						<Typography className="text-center w-[80%] px-1">
 							Chức năng khôi phục trực tiếp đến Disaster Recovery Site trên nền
 							tảng đám mây Microsoft Azure mà không cần kết nối VPN hay MPLS
 							phức tạp.

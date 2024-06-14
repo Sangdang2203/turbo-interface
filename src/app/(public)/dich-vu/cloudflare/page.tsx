@@ -129,7 +129,7 @@ export default function CloudFlare() {
 
 				<Paper className="rounded-none shadow-xl py-5">
 					<Typography className="text-[1.5rem] px-4 sm:text-[2.5rem] text-center uppercase text-orange-600 font-semibold pt-1 pb-10">
-						cloudflare và các gói tiện ích riêng
+						cloudflare <br /> và các gói tiện ích riêng
 					</Typography>
 					<Grid container>
 						<Grid

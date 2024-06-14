@@ -152,8 +152,8 @@ export default function TheHeader() {
 				<div
 					className={
 						navigation
-							? "lg:hidden absolute top-[10vh] right-0 left-0 bottom-0 bg-slate-200 w-full h-screen ease-in duration-500"
-							: "lg:hidden absolute top-[10vh] right-0 left-[-100%] bottom-0 bg-slate-200 w-full h-screen ease-in duration-500"
+							? "lg:hidden absolute top-[10vh] right-0 left-0 bottom-0 bg-slate-200 w-full h-screen ease-in duration-300"
+							: "lg:hidden absolute top-[10vh] right-0 left-[-100%] bottom-0 bg-slate-200 w-full h-screen ease-in duration-300"
 					}>
 					{/* navbar links */}
 					<ul className="text-center text-[1rem] fond-bold mt-6">

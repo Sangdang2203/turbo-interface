@@ -20,7 +20,7 @@ export default function DedicatedServer() {
 	return (
 		<>
 			<Container>
-				<Box sx={{ textAlign: "center", py: 5 }}>
+				<Box sx={{ textAlign: "center", py: 3 }}>
 					<Typography className="text-[2.5rem] font-semibold text-sky-900">
 						Dedicated Server
 					</Typography>
@@ -31,7 +31,7 @@ export default function DedicatedServer() {
 						Máy Chủ Vật Lý với năng lực xử lý vượt trội, hiệu năng cao, khả năng
 						chịu tải lớn
 					</Typography>
-					<Box my={5}>
+					<Box className='my-5'>
 						<ContactPopup />
 					</Box>
 					<Image
@@ -41,7 +41,7 @@ export default function DedicatedServer() {
 					/>
 				</Box>
 
-				<Typography className="text-[2.5rem] font-semibold text-sky-900 text-center pb-5">
+				<Typography className="text-[1.5rem] md:text-[2rem] font-semibold text-sky-900 text-center pb-5">
 					Lợi ích của Dedicated Server
 				</Typography>
 
@@ -134,10 +134,10 @@ export default function DedicatedServer() {
 												alt="99.99% Uptime"
 											/>
 											<Box>
-												<Typography className="text-[1.3rem] font-semibold ">
+												<Typography className="text-[1rem] md:text-[1.3rem] font-semibold ">
 													{item.title}
 												</Typography>
-												<Typography className="pr-5 text-justify">
+												<Typography className="pr-5 text-[0.85rem] md:text-[1rem] text-justify">
 													{item.desc}
 												</Typography>
 											</Box>
@@ -154,7 +154,7 @@ export default function DedicatedServer() {
 						<Box
 							my={5}
 							sx={{ textAlign: "center" }}>
-							<Typography className="text-[2rem] font-semibold text-sky-900">
+							<Typography className="text-[1.25rem] md:text-[2rem] font-semibold text-sky-900">
 								Bảng giá dịch vụ Dedicated Server
 							</Typography>
 							<Typography> * Bảng giá chưa bao gồm 10% VAT </Typography>

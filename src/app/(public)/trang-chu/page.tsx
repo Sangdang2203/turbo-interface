@@ -59,7 +59,7 @@ export default function HomePage() {
 					đạt mục tiêu thắng lợi.
 				</Typography>
 
-				<Container className="container grid grid-cols-2 lg:grid-cols-4 gap-6 mt-10">
+				<Container className="container grid grid-cols-1 lg:grid-cols-4 gap-6 mt-10">
 					{homeServices.map(item => {
 						return (
 							<div
@@ -131,16 +131,16 @@ export default function HomePage() {
 				</Container>
 			</Box>
 
-			<Box my={10}>
+			<Box className='lg:my-10'>
 				<Image
 					src={promotion}
 					title="Liên hệ ngay 076.9999.967 để nhận hỗ trợ tốt nhất"
 					alt="promotion"
-					className="w-full h-auto shadow-xl cursor-pointer"
+					className="w-full h-[100%] -mb-2 shadow-xl cursor-pointer"
 				/>
 			</Box>
 
-			<Container className="shadow-lg rounded-2xl py-5 my-28">
+			<Container className="hidden lg:block shadow-lg rounded-2xl py-5 mb-28">
 				<Box className="text-center">
 					<Typography className="text-[1.5rem] md:text-[2rem] font-semibold">
 						Được hàng trăm doanh nghiệp tin dùng cho đến nay

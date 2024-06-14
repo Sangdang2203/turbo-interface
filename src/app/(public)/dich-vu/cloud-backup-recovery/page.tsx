@@ -56,7 +56,7 @@ const CloudBackupPage = () => {
 									<Typography className="pt-3 lg:pt-0 text-[1.5rem] text-green-600">
 										Giải pháp số #1 để sao lưu dữ liệu quan trọng
 									</Typography>
-									<Typography className="text-lg text-sky-900">
+									<Typography className="text-[1rem] md:text-lg text-sky-900">
 										Nền tảng sao lưu đám mây dành cho tất cả các ứng dụng và dữ
 										liệu, giúp đạt được thời gian sao lưu ngắn hơn và giảm chi
 										phí hoạt động tối ưu. Thông qua bảng điều khiển quản lý với
@@ -103,7 +103,7 @@ const CloudBackupPage = () => {
 									<Typography className="text-[1.5rem] text-green-600">
 										Sao lưu dữ liệu đám mây an toàn và hiệu quả
 									</Typography>
-									<Typography className="text-lg text-sky-900">
+									<Typography className="text-[1rem] md:text-lg text-sky-900 pt-2">
 										Dễ dàng sao lưu và đồng bộ máy chủ vật lý và VM (VMware |
 										Hyper-V) mà không cần xây dựng và duy trì cơ sở hạ tầng
 										ngoài phức tạp. Veeam Cloud Connect cung cấp giải pháp tích
@@ -131,7 +131,7 @@ const CloudBackupPage = () => {
 								<Typography className="text-[1.5rem] text-green-600">
 									Khôi phục nhanh như chớp với Veeam Backup & Recovery
 								</Typography>
-								<Typography className="text-lg text-sky-900">
+								<Typography className="text-[1rem] md:text-lg text-sky-900 pt-2">
 									Khôi phục nhanh chóng các dữ liệu, máy ảo, và ứng dụng, đảm
 									bảo tiêu chuẩn thời gian khôi phục thấp. Phục hồi thảm họa
 									toàn bộ đến site phụ trên nền tảng đám mây chỉ với một vài
@@ -275,7 +275,7 @@ const CloudBackupPage = () => {
 					<Typography className="text-[2rem] text-blue-900 text-center font-semibold">
 						Bạn chưa backup dữ liệu?
 					</Typography>
-					<Typography className="text-[1.5rem] text-center mx-auto ">
+					<Typography className="text-[1.5rem] text-center mx-auto">
 						Liên hệ ngay với chúng tôi để sao lưu dữ liệu đám mây miễn phí
 					</Typography>
 					<Button
@@ -288,7 +288,7 @@ const CloudBackupPage = () => {
 			</Container>
 
 			<Paper className="mb-5 rounded-none">
-				<Typography className="text-[2rem] text-blue-900 text-center font-semibold py-5">
+				<Typography className="text-[1.25rem] md:text-[2rem] text-blue-900 text-center font-semibold py-5">
 					Giao diện quản lý Cloud Backup
 				</Typography>
 				<Container>
@@ -309,7 +309,7 @@ const CloudBackupPage = () => {
 			</Paper>
 
 			<Box className="py-10">
-				<Typography className="text-[2rem] text-sky-900 text-center font-semibold">
+				<Typography className="text-[1.5rem] md:text-[2rem] text-sky-900 text-center font-semibold mx-1">
 					Các thông tin thường gặp về Cloud Backup
 				</Typography>
 
@@ -335,6 +335,7 @@ const CloudBackupPage = () => {
 						item
 						xs={12}
 						md={6}
+						pt={2}
 						className="flex flex-col items-center justify-center text-sky-900">
 						<Typography className="w-3/4 text-xl font-semibold">
 							Cloud Backup an toàn như thế nào?
@@ -349,7 +350,7 @@ const CloudBackupPage = () => {
 
 				<Grid
 					container
-					py={5}>
+					pt={2}>
 					<Grid
 						item
 						xs={12}
@@ -369,6 +370,7 @@ const CloudBackupPage = () => {
 						item
 						xs={12}
 						md={6}
+						pt={2}
 						className="flex flex-col items-center justify-center text-sky-900">
 						<Typography className="w-3/4 text-xl font-semibold">
 							Các hạn chế dữ liệu của dịch vụ Cloud Backup là gì?
