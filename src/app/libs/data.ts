@@ -6,6 +6,17 @@ import cloudServer from "@/app/images/cloudServer.png";
 import cloudCamera from "@/app/images/cloudCamera.png";
 import Backup from "@/app/images/Backup.png";
 
+import global_icon from "@/app/images/cloudFlare/global_icon.png";
+import object_icon from "@/app/images/cloudFlare/Object_icon.png";
+import cost_icon from "@/app/images/cloudFlare/Cost_icon.png";
+import IPFS_thumbnail from "@/app/images/cloudFlare/IPFS_thumbnail.png"
+import ethereum_icon from "@/app/images/cloudFlare/ethereum_icon.png"
+
+
+import ethereumIcon_1 from '@/app/images/cloudServer/cloudServer_icon_01.png'
+import ethereumIcon_2 from '@/app/images/cloudServer/cloudServer_icon_02.png'
+import ethereumIcon_3 from '@/app/images/cloudServer/cloudServer_icon_03.png'
+
 export const homeServices = [
 	{
 		id: 1,
@@ -522,21 +533,25 @@ export const cloudflarePackage = [
 	{
 		id: 1,
 		title: "CDN",
+		link: "/dich-vu/cloudflare/cdn",
 		desc: "Phân phối nội dung tĩnh và động cực nhanh qua mạng toàn cầu, giảm chi phí băng thông, bảo vệ DDoS không giới hạn.",
 	},
 	{
 		id: 2,
 		title: "WAF",
+		link: "/dich-vu/cloudflare",
 		desc: "Bảo vệ, hiển thị và kiểm soát thông minh ở mọi quy mô hoặc kỹ thuật phức tạp, giữ tài sản Internet an toàn và nhanh chóng.",
 	},
 	{
 		id: 3,
 		title: "IPFS",
+		link: "/dich-vu/cloudflare/ipfs-gateway",
 		desc: "Người dùng dễ dàng truy cập và phân phối nội dung IPFS thông qua các miền tùy chỉnh tại hơn 100 quốc gia, tính bảo mật cao.",
 	},
 	{
 		id: 4,
 		title: "Ethereum Gateway",
+		link: "/dich-vu/cloudflare/ethereum-gateway",
 		desc: "Người dùng dễ dàng truy cập Ethereum qua HTTP tên miền cá nhân, không cần triển khai và giám sát E để thực hiện Dapps với Ethereum.",
 	},
 ];
@@ -899,3 +914,254 @@ export const cloudServices = [
 		image: Backup,
 	},
 ];
+
+export const cloudflareCDN = [
+	{
+		id: 1,
+		title: "Hỗ trợ cho HTTP/3",
+		desc: "Mạng anycast toàn cầu của Cloudflare đảm bảo phân phối video nhanh chóng, với thời gian khởi động video ngắn hơn và giảm bộ đệm, bất kể khách truy cập ở đâu.",
+	},
+	{
+		id: 2,
+		title: "Hỗ trợ cho BYOIP",
+		desc: "Cho phép khách hàng có IP riêng. Internet chỉ thấy địa chỉ IP của khách hàng chứ không phải CloudFlare API. Cho phép xoay vòng các IP khi chúng bị chặn.",
+	},
+	{
+		id: 3,
+		title: "Mạng CDN Trung Quốc",
+		desc: "EcoCloud đã ra mắt mạng lưới sẽ phát triển lên 150 địa điểm ở Trung Quốc đại lục vào cuối năm 2023. Với khả năng giảm độ trễ cho khách hàng, bảo mật ứng dụng.",
+	},
+	{
+		id: 4,
+		title: "Phân phối nội dung tĩnh và động",
+		desc: "Hỗ trợ hàng triệu thuộc tính Internet và định tuyến thông minh các yêu cầu nội dung trên mạng theo các đường dẫn nhanh nhất bằng cách sử dụng Định tuyến thông minh Argo.",
+	},
+	{
+		id: 5,
+		title: "Tăng tiết kiệm băng thông",
+		desc: "Nội dung được lưu vào bộ nhớ đệm của Cloudflare làm giảm số lượng yêu cầu đến nguồn bằng cách cung cấp nội dung tĩnh từ trung tâm dữ liệu, giúp tiết kiệm băng thông."
+	},
+	{
+		id: 6,
+		title: "CDN phù hợp cho video",
+		desc: "Mạng anycast toàn cầu của Cloudflare đảm bảo phân phối video nhanh chóng, với thời gian khởi động video ngắn hơn và giảm bộ đệm, bất kể khách truy cập ở đâu."
+	},
+];
+
+export const cloudflareCdnServices = [
+	{
+		id: 1,
+		icon: global_icon,
+		title: "Mạng toàn cầu",
+		desc: "Xây dựng mạng lưới trung tâm dữ liệu toàn cầu. Giúp lưu trữ nội dung tĩnh đến gần người dùng. Cung cấp nội dung động qua các liên kết backbone riêng tư nhanh và đáng tin cậy.",
+	},
+	{
+		id: 2,
+		icon: object_icon,
+		title: "Ưu tiên API",
+		desc: "Tự động hóa quy trình công việc với khả năng kiểm soát chi tiết nội dung được lưu trữ và chọn lọc. Dễ dàng tùy chỉnh bộ nhớ đệm dựa trên nhu cầu ứng dụng.",
+	},
+	{
+		id: 3,
+		icon: cost_icon,
+		title: "Tiết kiệm hơn",
+		desc: "Giảm nhu cầu lấy nội dung từ nguồn, giảm chi phí. Được chia sẻ tài nguyên từ các đối tác Cloudflare, hưởng phí chiết khấu cloud đáng kể với Liên băng thông.",
+	},
+];
+
+export const cloudflareCdnPackages = [
+	{
+		id: 1,
+		title: "CDN #Free",
+		details: [
+			{ id: 1, name: "DNS nhanh, dễ sử dụng" },
+			{ id: 2, name: "Giảm thiểu DDoS" },
+			{ id: 3, name: "CDN cân bằng tải toàn cầu" },
+			{ id: 4, name: "Chứng chỉ Universal SSL" },
+		]
+	},
+	{
+		id: 2,
+		title: "CDN #Pro",
+		details: [
+			{ id: 1, name: "DNS nhanh, dễ sử dụng" },
+			{ id: 2, name: "Giảm thiểu DDoS" },
+			{ id: 3, name: "CDN cân bằng tải toàn cầu" },
+			{ id: 4, name: "Chứng chỉ Universal SSL" },
+			{ id: 5, name: "WAF" },
+			{ id: 6, name: "Tối ưu hóa hình ảnh lossless" },
+			{ id: 7, name: "Tăng tốc trang di động" },
+		]
+	},
+	{
+		id: 3,
+		title: "CDN #SMB",
+		details: [
+			{ id: 1, name: "DNS nhanh, dễ sử dụng" },
+			{ id: 2, name: "Giảm thiểu DDoS" },
+			{ id: 3, name: "CDN cân bằng tải toàn cầu" },
+			{ id: 4, name: "Chứng chỉ Universal SSL" },
+			{ id: 5, name: "WAF" },
+			{ id: 6, name: "Tối ưu hóa hình ảnh lossless" },
+			{ id: 7, name: "Tăng tốc trang di động" },
+			{ id: 8, name: "Tuân thủ PCI DSS 3.2" },
+			{ id: 9, name: "100 % SLA" },
+			{ id: 10, name: "Tín dụng thời gian hoạt động" },
+		]
+	},
+	{
+		id: 4,
+		title: "CDN #ENT",
+		details: [
+			{ id: 1, name: "DNS nhanh, dễ sử dụng" },
+			{ id: 2, name: "Giảm thiểu DDoS" },
+			{ id: 3, name: "CDN cân bằng tải toàn cầu" },
+			{ id: 4, name: "Chứng chỉ Universal SSL" },
+			{ id: 5, name: "WAF" },
+			{ id: 6, name: "Tối ưu hóa hình ảnh lossless" },
+			{ id: 7, name: "Tăng tốc trang di động" },
+			{ id: 8, name: "Tuân thủ PCI DSS 3.2" },
+			{ id: 9, name: "100 % SLA" },
+			{ id: 10, name: "Tín dụng thời gian hoạt động" },
+			{ id: 11, name: "SSO" },
+			{ id: 12, name: "Ưu tiên mạng" },
+			{ id: 13, name: "Kiểm soát tài khoản" },
+		]
+	}
+]
+
+export const cloudflareEthereumPackages = [
+	{
+		id: 1,
+		title: "ETHEREUM #1",
+		image: ethereum_icon,
+		desc: "Tùy chỉnh theo từng nhu cầu dự án. Liên hệ ngay với EcoCloud để được tư vấn trực tiếp."
+	},
+	{
+		id: 2,
+		title: "ETHEREUM #2",
+		image: ethereum_icon,
+		desc: "Tùy chỉnh theo từng nhu cầu dự án. Liên hệ ngay với EcoCloud để được tư vấn trực tiếp."
+	},
+	{
+		id: 3,
+		title: "ETHEREUM #3",
+		image: ethereum_icon,
+		desc: "Tùy chỉnh theo từng nhu cầu dự án. Liên hệ ngay với EcoCloud để được tư vấn trực tiếp."
+	},
+]
+
+export const cloudflareEthereum = [
+	{
+		id: 1,
+		title: "Bảo mật và an toàn",
+		image: "",
+		desc: "Dịch vụ của EcoCloud được xây dựng trên cơ sở các chuẩn bảo mật và an ninh tiên tiến nhất hiện nay, giúp bảo vệ dữ liệu và giao dịch của người dùng trên blockchain Ethereum.",
+	},
+	{
+		id: 2,
+		title: "Giảm chi phí", image: "",
+		desc: "Cloudflare Ethereum giúp đẩy nhanh tiến trình phát triển nên làm giảm chi phí cho các nhà phát triển và các dịch vụ liên quan đến Ethereum.",
+	},
+	{
+		id: 3,
+		title: "Tích hợp dễ dàng", image: "",
+		desc: "Tích hợp nhanh chóng vào các ứng dụng và dịch vụ liên quan đến Ethereum thông qua các giao thức chuẩn như JSON-RPC, Ethereumjs,...",
+	},
+	{
+		id: 4,
+		title: "Tăng tốc độ truy cập", image: "",
+		desc: "Cloudflare Ethereum cho phép các nhà phát triển tương tác với blockchain Ethereum nhanh chóng và hiệu quả. Đồng thời, giảm độ trễ khi thực hiện các thao tác trên blockchain.",
+	},
+	{
+		id: 5,
+		title: "Đơn giản hóa việc phát triển ứng dụng Ethereum", image: "",
+		desc: "Các nhà phát triển chỉ cần tập trung vào việc phát triển các ứng dụng doanh nghiệp mà không cần quản lý nền tảng blockchain Ethereum."
+	},
+	{
+		id: 6,
+		title: "Cải thiện trải nghiệm người dùng", image: "",
+		desc: "Giúp người dùng khi tương tác với các ứng dụng hoặc dịch vụ liên quan đến blockchain Ethereum dễ dàng và hiệu quả."
+	},
+	{
+		id: 7,
+		image: ethereumIcon_1,
+		title: "Kết nối với nhiều mạng blockchain Ethereum",
+		desc: "Kết nối với nhiều mạng blockchain Ethereum: mạng chính và các mạng thử nghiệm"
+	},
+	{
+		id: 8,
+		image: ethereumIcon_2,
+		title: "Tăng tốc độ truy cập vào blockchain Ethereum",
+		desc: "Sử dụng công nghệ bộ nhớ đệm và định tuyến thông minh để giảm độ trễ khi thực hiện các hoạt động trên blockchain."
+	},
+	{
+		id: 9,
+		image: ethereumIcon_3,
+		title: "Khả năng xử lý các giao dịch thông minh",
+		desc: "Xử lý các giao dịch thông minh đọc và ghi các thông tin liên quan đến các hợp đồng trên blockchain Ethereum"
+	},
+	{
+		id: 10,
+		image: ethereumIcon_1,
+		title: "Hỗ trợ nhiều giao thức",
+		desc: "Hỗ trợ nhiều giao thức chuẩn: JSON-RPC, Web3.js và Ethereumjs giúp tương tác với blockchain Ethereum một cách đa dạng và linh hoạt"
+	},
+	{
+		id: 11,
+		image: ethereumIcon_2,
+		title: "Bảo mật và an toàn",
+		desc: "Cloudflare Ethereum được xây dựng trên cơ sở các chuẩn bảo mật và an ninh tiên tiến, giúp bảo vệ dữ liệu và giao dịch của người dùng"
+	},
+	{
+		id: 12,
+		image: ethereumIcon_3,
+		title: "Điều chỉnh cấu hình linh hoạt",
+		desc: "Người dùng linh hoạt tinh chỉnh các cấu hình để tối ưu hoá hiệu suất và đáp ứng nhu cầu sử dụng liên quan đến Ethereum"
+	}
+];
+
+export const cloudflareIpfs = [
+	{
+		id: 1,
+		title: "Tăng tốc độ truy cập vào nội dung",
+		image: "",
+		desc: "Sử dụng công nghệ bộ nhớ đệm và định tuyến thông minh để tăng tốc độ truy cập vào nội dung lưu trữ trên mạng IPFS, giảm độ trễ khi truy cập và tải về các tệp.",
+	},
+	{
+		id: 2,
+		title: "Tích hợp với các dịch vụ của Cloudflare", image: "",
+		desc: "Dễ dàng tích hợp với các dịch vụ như CDN hoặc DDoS protection để tăng tốc độ truy cập và bảo vệ trang web khỏi bị tấn công mạng.",
+	},
+	{
+		id: 3,
+		title: "Bảo mật và an toàn", image: "",
+		desc: "Cloudflare IPFS Gateway được xây dựng trên cơ sở các chuẩn bảo mật và an ninh tiên tiến nhất hiện nay, bảo vệ dữ liệu và nội dung của người dùng trên mạng IPFS.",
+	},
+	{
+		id: 4,
+		title: "Tính linh hoạt và dễ sử dụng", image: "",
+		desc: "Sử dụng bằng cách truy cập trực tiếp vào địa chỉ API, hoặc tích hợp vào các ứng dụng hoặc trang web thông qua các thư viện API có sẵn.",
+	}
+]
+
+export const cloudflareIpfsPackages = [
+	{
+		id: 1,
+		image: IPFS_thumbnail,
+		title: "IPFS #1",
+		desc: "Tùy chỉnh theo từng nhu cầu dự án. Liên hệ ngay với EcoCloud để được tư vấn trực tiếp."
+	},
+	{
+		id: 2,
+		image: IPFS_thumbnail,
+		title: "IPFS #2",
+		desc: "Tùy chỉnh theo từng nhu cầu dự án. Liên hệ ngay với EcoCloud để được tư vấn trực tiếp."
+	},
+	{
+		id: 3,
+		image: IPFS_thumbnail,
+		title: "IPFS #3",
+		desc: "Tùy chỉnh theo từng nhu cầu dự án. Liên hệ ngay với EcoCloud để được tư vấn trực tiếp."
+	},
+]

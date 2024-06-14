@@ -12,6 +12,7 @@ import {
 	cloudflareWAF,
 } from "app/libs/data";
 import CustomDialog from "@/components/ContactPopup";
+import Link from "next/link";
 
 export const metadata = {
 	title: {
@@ -154,9 +155,9 @@ export default function CloudFlare() {
 										key={item.id}
 										sx={{ display: "flex", alignItems: "center", py: 1 }}>
 										<Box>
-											<Typography className="text-[1.3rem] text-orange-600 font-semibold">
+											<Link href={item.link} title="Tìm hiểu thêm" className="text-[1.3rem] text-orange-600 font-semibold">
 												{item.title}
-											</Typography>
+											</Link>
 											<Typography className="w-3/4 text-justify">
 												{item.desc}
 											</Typography>
