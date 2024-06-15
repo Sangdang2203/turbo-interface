@@ -43,12 +43,9 @@ export default function HomePage() {
 				textAlign="center"
 				my={5}
 				className="text-white themePolygonLuminary py-10">
-				<Typography className="text-[1.5rem] lg:text-[2.5rem] font-semibold uppercase ">
+				<Typography className="text-[1.15rem] lg:text-[2.5rem] font-semibold uppercase ">
 					{currentText} điện toán đám mây <br /> chất lượng hàng đầu
 				</Typography>
-				{/* <Typography className="text-[2rem] font-extralight">
-
-				</Typography> */}
 				<Typography className="text-center text-[1rem] md:text-[1.75rem] font-light w-3/4 mx-auto my-5">
 					Công ty Turbo Solutions chung tay cùng quý doanh nghiệp thực hiện
 					chuyển đổi số bằng cách tích hợp các công nghệ thông minh 4.0, cùng

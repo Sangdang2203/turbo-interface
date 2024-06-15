@@ -829,7 +829,7 @@ export const servicesLinks = [
 	{ path: "/dich-vu/cloud-backup-recovery", name: "cloud backup & recovery" },
 ];
 
-export const solutonLinks = [
+export const solutionLinks = [
 	{
 		path: "https://v2.aivisionviet.vn/ai-video-search",
 		name: "Video Search",

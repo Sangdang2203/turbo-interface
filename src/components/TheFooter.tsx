@@ -23,7 +23,7 @@ import {
 	SendRounded,
 } from "@mui/icons-material";
 
-import { servicesLinks, solutonLinks } from "@/app/libs/data";
+import { servicesLinks, solutionLinks } from "@/app/libs/data";
 import { useForm } from "react-hook-form";
 
 export default function TheFooter() {
@@ -94,7 +94,7 @@ export default function TheFooter() {
 						<Box className="hidden lg:flex justify-center">
 							<Box mx={2}>
 								<Typography className="text-lg uppercase">giải pháp</Typography>
-								{solutonLinks.map(link => {
+								{solutionLinks.map(link => {
 									return (
 										<Box key={link.name}>
 											<Link

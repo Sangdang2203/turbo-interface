@@ -10,13 +10,12 @@ import {
 	ContactPhoneRounded,
 	BallotRounded,
 	ModelTrainingRounded,
-	NewspaperRounded,
 	InfoRounded,
 } from "@mui/icons-material";
 import EcoCloud from "../app/images/EcoCloud.png";
 import Image from "next/image";
 import { Button, Menu, MenuItem } from "@mui/material";
-import { servicesLinks, solutonLinks } from "@/app/libs/data";
+import { servicesLinks, solutionLinks } from "@/app/libs/data";
 
 export default function TheHeader() {
 	const [navigation, setNavigation] = React.useState(false);
@@ -106,7 +105,7 @@ export default function TheHeader() {
 						open={openSolution}
 						onClose={handleCloseSolution}
 						MenuListProps={{ "aria-labelledby": "basic-button" }}>
-						{solutonLinks.map(sub => {
+						{solutionLinks.map(sub => {
 							return (
 								<MenuItem key={sub.path}>
 									<Link
@@ -157,7 +156,7 @@ export default function TheHeader() {
 					}>
 					{/* navbar links */}
 					<ul className="text-center text-[1rem] fond-bold mt-6">
-						<div className="text-[1rem] flex flex-col justify-center items-start px-[25%]">
+						<li className="text-[1rem] flex flex-col justify-center items-start px-[25%]">
 							<Button
 								startIcon={
 									<HomeRounded
@@ -228,7 +227,7 @@ export default function TheHeader() {
 								open={openSolution}
 								onClose={handleCloseSolution}
 								MenuListProps={{ "aria-labelledby": "basic-button" }}>
-								{solutonLinks.map(sub => {
+								{solutionLinks.map(sub => {
 									return (
 										<MenuItem key={sub.path}>
 											<Link
@@ -252,7 +251,7 @@ export default function TheHeader() {
 								className="navLink gradientText">
 								liên hệ
 							</Button>
-						</div>
+						</li>
 					</ul>
 				</div>
 			</nav>
