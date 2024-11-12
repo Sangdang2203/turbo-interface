@@ -21,7 +21,8 @@
 		"baseUrl": "src/",
 		"paths": {
 			"@/*": ["*"],
-			"@/styles/*": ["styles/*"],
+			"@/styles/*": ["assets/styles/*"],
+			"@/images/*": ["assets/images/*"],
 			"@/components/*": ["components/*"],
 			"@/hooks/*": ["hooks/*"],
 			"@methods/*": ["app/methods/*"],

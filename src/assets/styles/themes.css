@@ -1,0 +1,41 @@
+.themePolygonLuminary {
+  background-image: url(../images/Theme_BlurryGradient.png);
+  background-size: cover;
+}
+
+.themeHeroBackground {
+  background-image: url(https://www.digitalocean.com/_next/static/media/hero-background.769bb51c.svg);
+  background-size: cover;
+  opacity: 90%;
+}
+
+.themeGlobal {
+  background-image: url(../images/map_theme.png);
+  background-size: contain;
+}
+
+.themeContact {
+  background-image: url(../images/contactBanner.jpg);
+  background-size: cover;
+  width: 100%;
+}
+
+.themePost {
+  background-image: url(../images/themePost.jpg);
+  background-size: cover;
+  width: 100%;
+  min-height: 30rem;
+}
+
+.themeVeem {
+  background-image: url(../images/veemBackup/veeam-1600x800-og-vbr.png);
+  background-size: cover;
+  width: 100%;
+  min-height: 600px;
+  border-radius: 12px;
+}
+
+.themeCard {
+  background-image: url(../images/theme_card.png);
+  background-size: cover;
+}
