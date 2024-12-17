@@ -1,5 +1,9 @@
 {
 	"CodeGPT.apiKey": "CodeGPT Plus Beta",
 	"editor.tabSize": 2,
-	"editor.fontSize": 16
+	"editor.fontSize": 16,
+	"cSpell.words": [
+		"liên",
+		"Trang"
+	]
 }

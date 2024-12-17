@@ -19,7 +19,6 @@ import { servicesLinks, solutionLinks } from "@/app/libs/data";
 
 export default function TheHeader() {
   const [navigation, setNavigation] = React.useState(false);
-  const [open, setOpen] = React.useState(false);
 
   function handleNavigation() {
     setNavigation(!navigation);
@@ -29,6 +28,7 @@ export default function TheHeader() {
   const [anchorE2, setAnchorE2] = React.useState<null | HTMLElement>(null);
   const openService = Boolean(anchorEl);
   const openSolution = Boolean(anchorE2);
+
   const handleOpenService = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };
@@ -40,10 +40,6 @@ export default function TheHeader() {
   };
   const handleCloseSolution = () => {
     setAnchorE2(null);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
   };
 
   return (
@@ -85,7 +81,13 @@ export default function TheHeader() {
           >
             {servicesLinks.map((sub) => {
               return (
-                <MenuItem key={sub.path} onClick={handleCloseService}>
+                <MenuItem
+                  key={sub.path}
+                  onClick={() => {
+                    handleCloseSolution();
+                    handleNavigation();
+                  }}
+                >
                   <Link href={sub.path} className="navSubLink">
                     {sub.name}
                   </Link>
@@ -110,7 +112,13 @@ export default function TheHeader() {
           >
             {solutionLinks.map((sub) => {
               return (
-                <MenuItem key={sub.path} onClick={handleCloseSolution}>
+                <MenuItem
+                  key={sub.path}
+                  onClick={() => {
+                    handleCloseSolution();
+                    handleNavigation();
+                  }}
+                >
                   <Link href={sub.path} className="navSubLink">
                     {sub.name}
                   </Link>
@@ -193,7 +201,13 @@ export default function TheHeader() {
               >
                 {servicesLinks.map((sub) => {
                   return (
-                    <MenuItem key={sub.path} onClick={handleCloseService}>
+                    <MenuItem
+                      key={sub.path}
+                      onClick={() => {
+                        handleCloseService();
+                        handleNavigation();
+                      }}
+                    >
                       <Link href={sub.path} className="navSubLink">
                         {sub.name}
                       </Link>
@@ -215,7 +229,10 @@ export default function TheHeader() {
                 id="services"
                 anchorEl={anchorE2}
                 open={openSolution}
-                onClick={handleCloseSolution}
+                onClick={() => {
+                  handleCloseSolution();
+                  handleNavigation();
+                }}
                 MenuListProps={{ "aria-labelledby": "basic-button" }}
               >
                 {solutionLinks.map((sub) => {
