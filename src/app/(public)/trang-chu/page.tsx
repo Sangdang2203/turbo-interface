@@ -32,10 +32,10 @@ export default function HomePage() {
     const intervalId = setInterval(() => {
       const nextTextIndex = (texts.indexOf(currentText) + 1) % texts.length;
       setCurrentText(texts[nextTextIndex]);
-    }, 2000); // 2 seconds interval
+    }, 2000);
 
-    return () => clearInterval(intervalId); // Clear on component unmount
-  }, [currentText, texts]); // Dependency array to re-run on text change
+    return () => clearInterval(intervalId);
+  }, [currentText, texts]);
 
   return (
     <Box>

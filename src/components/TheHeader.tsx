@@ -188,7 +188,7 @@ export default function TheHeader() {
                 id="services"
                 anchorEl={anchorEl}
                 open={openService}
-                onClose={handleCloseService}
+                onClick={handleCloseService}
                 MenuListProps={{ "aria-labelledby": "basic-button" }}
               >
                 {servicesLinks.map((sub) => {
@@ -215,7 +215,7 @@ export default function TheHeader() {
                 id="services"
                 anchorEl={anchorE2}
                 open={openSolution}
-                onClose={handleCloseSolution}
+                onClick={handleCloseSolution}
                 MenuListProps={{ "aria-labelledby": "basic-button" }}
               >
                 {solutionLinks.map((sub) => {
