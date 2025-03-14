@@ -22,8 +22,8 @@ import {
 import { PublicRounded } from "@mui/icons-material";
 import logoTurbo from "@/images/logoTurbo.png";
 import promotion from "@/images/promotion.jpg";
-import { cloudServices, feedbacks, homeServices } from "app/libs/data";
 import TouchCarousel from "@/components/TouchCarousel";
+import { cloudServices, feedbacks, homeServices } from "app/libs/data";
 
 export default function HomePage() {
   const [currentText, setCurrentText] = React.useState("Ứng dụng");

@@ -139,7 +139,7 @@ export default function TheHeader() {
         <div className="flex lg:hidden z-50" onClick={handleNavigation}>
           {navigation ? (
             <Close
-              fontSize="medium"
+              fontSize="large"
               className="text-[#002D62] hover:opacity-80 cursor-pointer z-50"
             />
           ) : (
