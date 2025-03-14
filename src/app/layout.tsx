@@ -11,7 +11,6 @@ import SessionProvider from "contexts/SessionProvider";
 
 export const metadata = {
   title: {
-    // absolute: "",
     default: "Turbo AI Solution",
     template: "%s | Turbo AI Solution",
   },

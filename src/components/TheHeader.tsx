@@ -2,6 +2,10 @@
 
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
+import EcoCloud from "@/images/logoTurbo.png";
+import { Button, Menu, MenuItem } from "@mui/material";
+import { servicesLinks, solutionLinks } from "@/app/libs/data";
 import {
   Close,
   MenuRounded,
@@ -12,10 +16,6 @@ import {
   ModelTrainingRounded,
   InfoRounded,
 } from "@mui/icons-material";
-import EcoCloud from "@/images/logoTurbo.png";
-import Image from "next/image";
-import { Button, Menu, MenuItem } from "@mui/material";
-import { servicesLinks, solutionLinks } from "@/app/libs/data";
 
 export default function TheHeader() {
   const [navigation, setNavigation] = React.useState(false);

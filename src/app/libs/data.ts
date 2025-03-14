@@ -15,8 +15,17 @@ import ethereum_icon from "@/images/cloudFlare/ethereum_icon.png";
 import ethereumIcon_1 from "@/images/cloudServer/cloudServer_icon_01.png";
 import ethereumIcon_2 from "@/images/cloudServer/cloudServer_icon_02.png";
 import ethereumIcon_3 from "@/images/cloudServer/cloudServer_icon_03.png";
+import {
+  AnswerQuestion,
+  CloudflareCdnService,
+  CloudFlarePackage,
+  CloudServices,
+  Feedback,
+  HomeService,
+  Package,
+} from "@/types/interfaces";
 
-export const homeServices = [
+export const homeServices: HomeService[] = [
   {
     id: 1,
     title: "Cloud Server",
@@ -369,7 +378,7 @@ export const bonusPrices = [
   },
 ];
 
-export const cloudGPUQuestions = [
+export const cloudGPUQuestions: AnswerQuestion[] = [
   {
     id: 1,
     question: "Tôi muốn dùng thử dịch vụ Cloud GPU Server?",
@@ -408,7 +417,7 @@ export const cloudGPUQuestions = [
   },
 ];
 
-export const cloudServerQuestions = [
+export const cloudServerQuestions: AnswerQuestion[] = [
   {
     id: 1,
     question: "Tôi muốn dùng thử Cloud Server trước khi sử dụng chính thức ?",
@@ -501,7 +510,7 @@ export const cloudBackupBonus = [
   },
 ];
 
-export const cloudBackupQuestions = [
+export const cloudBackupQuestions: AnswerQuestion[] = [
   {
     id: 1,
     question: "Tôi có thể hủy bất cứ lúc nào không ?",
@@ -528,7 +537,7 @@ export const cloudBackupQuestions = [
   },
 ];
 
-export const cloudflarePackage = [
+export const cloudflarePackage: CloudFlarePackage[] = [
   {
     id: 1,
     title: "CDN",
@@ -618,7 +627,7 @@ export const cloudflareWAF = [
   },
 ];
 
-export const cloudflareQuestions = [
+export const cloudflareQuestions: AnswerQuestion[] = [
   {
     id: 1,
     question: "Tốc độ",
@@ -668,7 +677,7 @@ export const dedicatedServerBenefits = [
   },
 ];
 
-export const dedicatedServerQuestions = [
+export const dedicatedServerQuestions: AnswerQuestion[] = [
   {
     id: 1,
     question: "Dedicated Server là gì? Lợi ích Dedicated Server",
@@ -730,7 +739,7 @@ export const vitualDataCenterBenefits = [
   },
 ];
 
-export const vitualDataCenterQuestions = [
+export const vitualDataCenterQuestions: AnswerQuestion[] = [
   {
     id: 1,
     question: "Tôi muốn dùng thử dịch vụ Virtual Data Center?",
@@ -769,7 +778,7 @@ export const vitualDataCenterQuestions = [
   },
 ];
 
-export const privateCloudQuestions = [
+export const privateCloudQuestions: AnswerQuestion[] = [
   {
     id: 1,
     question: "Hình thức triển khai tại trung tâm dữ liệu ? ",
@@ -860,7 +869,7 @@ export const solutionLinks = [
   },
 ];
 
-export const feedbacks = [
+export const feedbacks: Feedback[] = [
   {
     id: 1,
     name: "Mr. Tài",
@@ -887,7 +896,7 @@ export const feedbacks = [
   },
 ];
 
-export const cloudServices = [
+export const cloudServices: CloudServices[] = [
   {
     id: 1,
     name: "Cloud Server",
@@ -914,40 +923,46 @@ export const cloudServices = [
   },
 ];
 
-export const cloudflareCDN = [
+export const cloudflareCDN: Package[] = [
   {
     id: 1,
     title: "Hỗ trợ cho HTTP/3",
+    image: "",
     desc: "Mạng anycast toàn cầu của Cloudflare đảm bảo phân phối video nhanh chóng, với thời gian khởi động video ngắn hơn và giảm bộ đệm, bất kể khách truy cập ở đâu.",
   },
   {
     id: 2,
     title: "Hỗ trợ cho BYOIP",
+    image: "",
     desc: "Cho phép khách hàng có IP riêng. Internet chỉ thấy địa chỉ IP của khách hàng chứ không phải CloudFlare API. Cho phép xoay vòng các IP khi chúng bị chặn.",
   },
   {
     id: 3,
     title: "Mạng CDN Trung Quốc",
+    image: "",
     desc: "EcoCloud đã ra mắt mạng lưới sẽ phát triển lên 150 địa điểm ở Trung Quốc đại lục vào cuối năm 2023. Với khả năng giảm độ trễ cho khách hàng, bảo mật ứng dụng.",
   },
   {
     id: 4,
     title: "Phân phối nội dung tĩnh và động",
+    image: "",
     desc: "Hỗ trợ hàng triệu thuộc tính Internet và định tuyến thông minh các yêu cầu nội dung trên mạng theo các đường dẫn nhanh nhất bằng cách sử dụng Định tuyến thông minh Argo.",
   },
   {
     id: 5,
     title: "Tăng tiết kiệm băng thông",
+    image: "",
     desc: "Nội dung được lưu vào bộ nhớ đệm của Cloudflare làm giảm số lượng yêu cầu đến nguồn bằng cách cung cấp nội dung tĩnh từ trung tâm dữ liệu, giúp tiết kiệm băng thông.",
   },
   {
     id: 6,
     title: "CDN phù hợp cho video",
+    image: "",
     desc: "Mạng anycast toàn cầu của Cloudflare đảm bảo phân phối video nhanh chóng, với thời gian khởi động video ngắn hơn và giảm bộ đệm, bất kể khách truy cập ở đâu.",
   },
 ];
 
-export const cloudflareCdnServices = [
+export const cloudflareCdnServices: CloudflareCdnService[] = [
   {
     id: 1,
     icon: global_icon,
@@ -1029,7 +1044,7 @@ export const cloudflareCdnPackages = [
   },
 ];
 
-export const cloudflareEthereumPackages = [
+export const cloudflareEthereumPackages: Package[] = [
   {
     id: 1,
     title: "ETHEREUM #1",
@@ -1050,7 +1065,7 @@ export const cloudflareEthereumPackages = [
   },
 ];
 
-export const cloudflareEthereum = [
+export const cloudflareEthereum: Package[] = [
   {
     id: 1,
     title: "Bảo mật và an toàn",
@@ -1125,7 +1140,7 @@ export const cloudflareEthereum = [
   },
 ];
 
-export const cloudflareIpfs = [
+export const cloudflareIpfs: Package[] = [
   {
     id: 1,
     title: "Tăng tốc độ truy cập vào nội dung",
@@ -1152,23 +1167,23 @@ export const cloudflareIpfs = [
   },
 ];
 
-export const cloudflareIpfsPackages = [
+export const cloudflareIpfsPackages: Package[] = [
   {
     id: 1,
-    image: IPFS_thumbnail,
     title: "IPFS #1",
+    image: IPFS_thumbnail,
     desc: "Tùy chỉnh theo từng nhu cầu dự án. Liên hệ ngay với EcoCloud để được tư vấn trực tiếp.",
   },
   {
     id: 2,
-    image: IPFS_thumbnail,
     title: "IPFS #2",
+    image: IPFS_thumbnail,
     desc: "Tùy chỉnh theo từng nhu cầu dự án. Liên hệ ngay với EcoCloud để được tư vấn trực tiếp.",
   },
   {
     id: 3,
-    image: IPFS_thumbnail,
     title: "IPFS #3",
+    image: IPFS_thumbnail,
     desc: "Tùy chỉnh theo từng nhu cầu dự án. Liên hệ ngay với EcoCloud để được tư vấn trực tiếp.",
   },
 ];

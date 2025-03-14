@@ -23,10 +23,43 @@ import { PublicRounded } from "@mui/icons-material";
 import logoTurbo from "@/images/logoTurbo.png";
 import promotion from "@/images/promotion.jpg";
 import { cloudServices, feedbacks, homeServices } from "app/libs/data";
+import TouchCarousel from "@/components/TouchCarousel";
 
 export default function HomePage() {
   const [currentText, setCurrentText] = React.useState("Ứng dụng");
   const [texts] = React.useState(["Ứng dụng", "Dịch vụ", "Giải pháp"]);
+
+  const [currentSlide, setCurrentSlide] = React.useState(0);
+  const [startTouch, setStartTouch] = React.useState(0);
+  const [isMobile, setIsMobile] = React.useState(false);
+  const nextSlide = () => {
+    const newIndex = currentSlide + (isMobile ? 1 : 4);
+    const lastIndex = homeServices.length;
+    if (newIndex < lastIndex) {
+      setCurrentSlide(newIndex);
+    }
+  };
+
+  const prevSlide = () => {
+    const newIndex = currentSlide - (isMobile ? 1 : 4);
+    if (newIndex >= 0) {
+      setCurrentSlide(newIndex);
+    }
+  };
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setStartTouch(e.touches[0].clientX);
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    const currentTouch = e.touches[0].clientX;
+    if (startTouch - currentTouch > 50) {
+      console.log(startTouch - currentTouch);
+      nextSlide();
+    } else if (currentTouch - startTouch > 50) {
+      prevSlide();
+    }
+  };
 
   React.useEffect(() => {
     const intervalId = setInterval(() => {
@@ -34,7 +67,17 @@ export default function HomePage() {
       setCurrentText(texts[nextTextIndex]);
     }, 2000);
 
-    return () => clearInterval(intervalId);
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 767);
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      clearInterval(intervalId);
+    };
   }, [currentText, texts]);
 
   return (
@@ -47,32 +90,45 @@ export default function HomePage() {
         <Typography className="text-[1.15rem] lg:text-[2.5rem] font-semibold uppercase ">
           {currentText} điện toán đám mây <br /> chất lượng hàng đầu
         </Typography>
-        <Typography className="text-center text-[1rem] md:text-[1.75rem] font-light w-3/4 mx-auto my-5">
+        <Typography className="text-center text-sm md:text-xl font-light w-3/4 mx-auto my-5">
           Công ty Turbo Solutions chung tay cùng quý doanh nghiệp thực hiện
           chuyển đổi số bằng cách tích hợp các công nghệ thông minh 4.0, cùng
           đạt mục tiêu thắng lợi.
         </Typography>
 
-        <Container className="container grid grid-cols-1 lg:grid-cols-4 gap-6 mt-10">
-          {homeServices.map((item) => {
-            return (
-              <div key={item.id} className="cardBox">
-                <div className="card">
-                  <div className="h4">
-                    {item.title}
+        <div
+          className="container grid grid-cols-1 lg:grid-cols-4 gap-6 mt-10"
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+        >
+          {homeServices
+            .slice(currentSlide, currentSlide + (isMobile ? 1 : 4))
+            .map((item) => {
+              return (
+                <div key={item.id} className="cardBox">
+                  <div className="card">
+                    <div className="h4">
+                      {item.title}
 
-                    <p>...</p>
-                  </div>
+                      <p>...</p>
+                    </div>
 
-                  <div className="content">
-                    <div className="h3">{item.sub}</div>
-                    <p className="desc md:text-[1rem]">{item.desc}</p>
+                    <div className="content">
+                      <div className="h3">{item.sub}</div>
+                      <p className="desc text-sm md:text-xl">{item.desc}</p>
+                    </div>
                   </div>
                 </div>
-              </div>
-            );
-          })}
-        </Container>
+              );
+            })}
+          {isMobile && (
+            <TouchCarousel
+              data={homeServices}
+              currentIndex={currentSlide}
+              setCurrentIndex={setCurrentSlide}
+            />
+          )}
+        </div>
       </Box>
 
       <Box className="animated-element">
@@ -80,42 +136,61 @@ export default function HomePage() {
           <Typography className="py-3 px-5 bg-sky-50 text-sky-700 uppercase w-fit rounded-full">
             dịch vụ điện toán đám mây
           </Typography>
-          <Typography className="text-[1.25rem] md:text-[1.75rem] font-light w-2/3 text-center mx-auto">
+          <Typography className="text-sm md:text-xl font-light w-2/3 text-center mx-auto">
             Công ty Turbo Solutions cung cấp dịch vụ điện toán đám mây đa dạng
             và các ứng dụng số phù hợp nhiều lĩnh vực.
           </Typography>
         </Box>
 
-        <Container className="container grid sm:grid-cols-3 gap-x-6 gap-y-6 mb-10">
-          {cloudServices.map((item) => {
-            return (
-              <Card
-                key={item.id}
-                className="relative rounded-xl hover:shadow-lg cursor-pointer"
-              >
-                <CardContent className="mb-16">
-                  <Box className="flex items-start">
-                    <Image src={item.image} className="w-28 h-28" alt="" />
-                    <Box>
-                      <Typography className="text-[1.5rem]">
-                        {item.name}
-                      </Typography>
-                      <Typography>{item.describe}</Typography>
+        <div
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          className="container grid sm:grid-cols-3 gap-x-6 gap-y-6 mb-10"
+        >
+          {cloudServices
+            .slice(currentSlide, currentSlide + (isMobile ? 1 : 3))
+            .map((item) => {
+              return (
+                <Card
+                  key={item.id}
+                  className="relative rounded-xl hover:shadow-lg cursor-pointer"
+                >
+                  <CardContent className="mb-16">
+                    <Box className="flex items-start">
+                      <Image src={item.image} className="w-28 h-28" alt="" />
+                      <Box>
+                        <Typography className="text-2xl py-2">
+                          {item.name}
+                        </Typography>
+                        <Typography
+                          title={item.describe}
+                          className="overflow-hidden text-ellipsis line-clamp-3"
+                        >
+                          {item.describe}
+                        </Typography>
+                      </Box>
                     </Box>
-                  </Box>
-                </CardContent>
-                <CardActions className="absolute bottom-1 left-1">
-                  <Button href={item.link} className="fancy hover:opacity-80">
-                    <span className="top-key"></span>
-                    <span className="text">Tìm hiểu thêm</span>
-                    <span className="bottom-key-1"></span>
-                    <span className="bottom-key-2"></span>
-                  </Button>
-                </CardActions>
-              </Card>
-            );
-          })}
-        </Container>
+                  </CardContent>
+                  <CardActions className="absolute bottom-1 left-1">
+                    <Button href={item.link} className="fancy hover:opacity-80">
+                      <span className="top-key"></span>
+                      <span className="text">Tìm hiểu thêm</span>
+                      <span className="bottom-key-1"></span>
+                      <span className="bottom-key-2"></span>
+                    </Button>
+                  </CardActions>
+                </Card>
+              );
+            })}
+
+          {isMobile && (
+            <TouchCarousel
+              data={cloudServices}
+              currentIndex={currentSlide}
+              setCurrentIndex={setCurrentSlide}
+            />
+          )}
+        </div>
       </Box>
 
       <Box className="lg:my-10">
@@ -259,27 +334,41 @@ export default function HomePage() {
 
         {/* Feedbacks */}
         <Container className="grid sm:grid-cols-3 gap-x-6 gap-y-6 pb-10">
-          {feedbacks.map((item) => {
-            return (
-              <div key={item.id} className="notification">
-                <div className="notiglow"></div>
-                <div className="notiborderglow"></div>
-                <div className="notititle flex items-center">
-                  <Image
-                    src={item.avatar}
-                    alt="customer feedback"
-                    className="w-16 h-16 rounded-full mr-2"
-                  />
-                  <div>
-                    <Typography>{item.name}</Typography>
-                    <Typography>{item.position}</Typography>
+          {feedbacks
+            .slice(currentSlide, currentSlide + (isMobile ? 1 : 3))
+            .map((item) => {
+              return (
+                <div key={item.id} className="notification">
+                  <div className="notiglow"></div>
+                  <div className="notiborderglow"></div>
+                  <div className="notititle flex items-center">
+                    <Image
+                      src={item.avatar}
+                      alt="customer feedback"
+                      className="w-16 h-16 rounded-full mr-2"
+                    />
+                    <div>
+                      <Typography>{item.name}</Typography>
+                      <Typography>{item.position}</Typography>
+                    </div>
                   </div>
-                </div>
 
-                <div className="notibody">{item.feedback}</div>
-              </div>
-            );
-          })}
+                  <p
+                    title={item.feedback}
+                    className="notibody overflow-hidden text-ellipsis line-clamp-3"
+                  >
+                    {item.feedback}
+                  </p>
+                </div>
+              );
+            })}
+          {isMobile && (
+            <TouchCarousel
+              data={feedbacks}
+              currentIndex={currentSlide}
+              setCurrentIndex={setCurrentSlide}
+            />
+          )}
         </Container>
 
         <Box className="text-center pb-10">
