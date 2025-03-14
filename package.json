@@ -35,6 +35,7 @@
     "zod": "^3.22.4"
   },
   "devDependencies": {
+    "@types/jsdom": "^21.1.7",
     "@types/node": "^20",
     "@types/react": "^18.2.74",
     "@types/react-dom": "^18.2.24",
