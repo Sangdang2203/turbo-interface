@@ -29,7 +29,7 @@ export default function RootLayout(props: { children: React.ReactNode }) {
               <TheHeader />
             </header>
 
-            <main className="background-body"> {props.children} </main>
+            <div className="background-body"> {props.children} </div>
 
             <footer>
               <TheFooter />
